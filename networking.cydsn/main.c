@@ -17,14 +17,48 @@ State systemState = idleState;
 
 _Bool lowFlag = 0;
 
+//period and counter for timer
 #define COLL_PERIOD     52
 #define COLL_COUNTER    51
 #define IDLE_PERIOD     830
 #define IDLE_COUNTER    829
+//transmit timer stuff
+#define TX_PERIOD     50 //gives 0.50ms or 500us for unipolar-rz at 1000bps
+#define TX_COUNTER    49
+//serial buffer size
+#define SERIAL_BUFFER_SIZE 500
+//serial buffer
+char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
+char SERIAL_POS = 0;
+//flag to determine if the UART is connected
+int uartConnected = 0;
+
+CY_ISR(Timer_TX_ISR_HANDLER)
+{
+   	Timer_TX_STATUS; //clear TX timer
+    
+    //get data
+    char currentChar = SERIAL_BUFFER[SERIAL_POS];
+    //encode into Unipolar-RZ
+    int count = 0; //keeps track of which bit we're on
+    //Data to be transmitted. This represents one byte of data and will
+    //be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
+    for(int y = 0; y < 16; y++){
+        if(y == 0){
+            TX_Write(1);
+        }else if(y%2 != 0){
+            TX_Write(0);
+        }else{
+            TX_Write((currentChar)&(1<<count));
+            ++count;
+        }
+    }
+    ++SERIAL_POS;
+}
 
 CY_ISR(TIMER)
 {
-   	Timer_1_STATUS;
+   	Timer_1_STATUS; //clear timer
     
     if (!(lowFlag) ){
         systemState = idleState;
@@ -61,23 +95,46 @@ int main(void)
     TimerISR_StartEx(TIMER);
     INT_RISING_StartEx(RISING);
     INT_FALLING_StartEx(FALLING);
+    
+    Timer_TX_WritePeriod(TX_PERIOD);
+    Timer_TX_WriteCounter(TX_COUNTER);
+    Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
 
     while(1){
+        
+         //check if UART is connected, then set flag
+		if(UART_GetDTERate() == 57600){
+			uartConnected = 1;
+		}
+	
+		//Host can send double SET_INTERFACE request, which sounds sub-optimal for us if we don't handle that
+		if (0 != UART_IsConfigurationChanged())
+		{
+			//re-initialize device
+			if (0 != UART_GetConfiguration())
+			{
+				//Enumeration is done, allow receieving data from host
+				UART_CDC_Init();
+			}
+		}
+
+        
         switch(systemState){
+            //idle state
             case idleState :;
                 IDLE_Write(1);
                 BUSY_Write(!IDLE_Read());
                 COLLISION_Write(!IDLE_Read());
             break;
-            
+            //busy state
             case busyState:
                 BUSY_Write(1);
                 IDLE_Write(!BUSY_Read());
                 COLLISION_Write(!BUSY_Read());
             break;
-            
+            //collision state
             case collisionState:;
                 COLLISION_Write(1);
                 IDLE_Write(!COLLISION_Read());

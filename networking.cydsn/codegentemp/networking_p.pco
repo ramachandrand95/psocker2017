@@ -1,19 +1,40 @@
 dont_use_io iocell 1 0
 dont_use_io iocell 1 1
 dont_use_io iocell 1 3
-set_location "\Timer_1:TimerUDB:status_tc\" macrocell 1 3 0 0
+set_location "\Timer_1:TimerUDB:sT16:timerdp:u0\" datapathcell 1 4 2 
+set_location "\Timer_TX:TimerUDB:status_tc\" macrocell 1 5 0 0
+set_location "\Timer_TX:TimerUDB:sT16:timerdp:u1\" datapathcell 1 5 2 
+set_location "\Timer_1:TimerUDB:rstSts:stsreg\" statusicell 0 4 4 
 set_location "Net_66" macrocell 3 4 0 0
-set_location "\Timer_1:TimerUDB:sT16:timerdp:u0\" datapathcell 0 3 2 
 set_location "\EdgeDetect_RISING:last\" macrocell 3 4 0 1
+set_location "\Timer_TX:TimerUDB:sT16:timerdp:u0\" datapathcell 0 5 2 
 set_location "Net_71" macrocell 3 4 0 2
-set_location "\Timer_1:TimerUDB:sT16:timerdp:u1\" datapathcell 1 3 2 
-set_location "\Timer_1:TimerUDB:rstSts:stsreg\" statusicell 1 3 4 
-set_location "\Timer_1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 1 3 6 
+set_location "\Timer_1:TimerUDB:status_tc\" macrocell 0 4 0 0
+set_location "\Timer_1:TimerUDB:sT16:timerdp:u1\" datapathcell 0 4 2 
+set_location "\Timer_TX:TimerUDB:rstSts:stsreg\" statusicell 1 5 4 
+set_location "\UART:bus_reset\" interrupt -1 -1 23
+set_location "\Timer_1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 0 4 6 
+set_location "\Timer_TX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 1 5 6 
 set_io "Rx(0)" iocell 0 7
+set_location "\UART:USB\" usbcell -1 -1 0
+set_location "\UART:sof_int\" interrupt -1 -1 21
 set_location "INT_RISING" interrupt -1 -1 1
 set_location "INT_FALLING" interrupt -1 -1 0
+set_location "\UART:arb_int\" interrupt -1 -1 22
+# Note: port 15 is the logical name for port 8
+set_io "\UART:Dp(0)\" iocell 15 6
+set_location "\UART:Dp\" logicalport -1 -1 8
 set_location "ClockBlock" clockblockcell -1 -1 0
+set_location "\UART:ep_1\" interrupt -1 -1 4
+set_location "\UART:ep_2\" interrupt -1 -1 5
+set_location "\UART:ep_0\" interrupt -1 -1 24
+set_location "\UART:ep_3\" interrupt -1 -1 6
+set_location "\UART:dp_int\" interrupt -1 -1 12
 set_location "TimerISR" interrupt -1 -1 2
+set_location "Timer_TX_ISR" interrupt -1 -1 3
 set_io "IDLE(0)" iocell 3 2
 set_io "COLLISION(0)" iocell 3 0
 set_io "BUSY(0)" iocell 3 1
+set_io "TX(0)" iocell 3 6
+# Note: port 15 is the logical name for port 8
+set_io "\UART:Dm(0)\" iocell 15 7

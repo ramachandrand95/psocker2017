@@ -18,6 +18,12 @@ Archive member included to satisfy reference by file (symbol)
                               .\CortexM3\ARM_GCC_541\Debug\main.o (INT_RISING_StartEx)
 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
                               .\CortexM3\ARM_GCC_541\Debug\main.o (INT_FALLING_StartEx)
+.\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+                              .\CortexM3\ARM_GCC_541\Debug\main.o (Timer_TX_WritePeriod)
+.\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                              .\CortexM3\ARM_GCC_541\Debug\main.o (Timer_TX_ISR_StartEx)
+.\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+                              .\CortexM3\ARM_GCC_541\Debug\main.o (TX_Write)
 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
                               .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o (CyDelayCycles)
 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
@@ -40,6 +46,7 @@ c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.
 Allocating common symbols
 Common symbol       size              file
 
+SERIAL_BUFFER       0x1f4             .\CortexM3\ARM_GCC_541\Debug\main.o
 dieTemperature      0x2               .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
 
 Discarded input sections
@@ -359,6 +366,62 @@ Discarded input sections
                 0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
  .text.INT_FALLING_ClearPending
                 0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .bss           0x00000000        0x1 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_Enable
+                0x00000000       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_Stop
+                0x00000000       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_SetInterruptMode
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_SoftwareCapture
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_ReadStatusRegister
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_ReadControlRegister
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_WriteControlRegister
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_ReadPeriod
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_ReadCapture
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_ReadCounter
+                0x00000000       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_ClearFIFO
+                0x00000000       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_Init
+                0x00000000       0x30 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text.Timer_TX_Start
+                0x00000000       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .bss           0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_Interrupt
+                0x00000000        0x4 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_GetVector
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_GetPriority
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_GetState
+                0x00000000       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_Start
+                0x00000000       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_Stop
+                0x00000000       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_SetPending
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text.Timer_TX_ISR_ClearPending
+                0x00000000        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .bss           0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .text.TX_SetDriveMode
+                0x00000000       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .text.TX_Read  0x00000000       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .text.TX_ReadDataReg
+                0x00000000       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
  .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
  .bss           0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
  .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
@@ -508,7 +571,7 @@ END GROUP
                 0x00000800                ee_size = (CY_APPL_LOADABLE && ! (CY_EE_IN_BTLDR))?(CY_EE_SIZE / CY_APPL_MAX):CY_EE_SIZE
                 [!provide]                PROVIDE (CY_ECC_OFFSET, ecc_offset)
 
-.text           0x00000000      0x73e
+.text           0x00000000      0x846
  CREATE_OBJECT_SYMBOLS
                 0x00000000                PROVIDE (__cy_interrupt_vector, RomVectors)
  *(.romvectors)
@@ -527,223 +590,253 @@ END GROUP
  .text          0x00000028       0x5c c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
  .text.TIMER    0x00000084       0x24 .\CortexM3\ARM_GCC_541\Debug\main.o
                 0x00000084                TIMER
- .text.RISING   0x000000a8       0x28 .\CortexM3\ARM_GCC_541\Debug\main.o
-                0x000000a8                RISING
- .text.FALLING  0x000000d0       0x2c .\CortexM3\ARM_GCC_541\Debug\main.o
-                0x000000d0                FALLING
- .text.main     0x000000fc       0xa4 .\CortexM3\ARM_GCC_541\Debug\main.o
-                0x000000fc                main
+ .text.Timer_TX_ISR_HANDLER
+                0x000000a8       0x54 .\CortexM3\ARM_GCC_541\Debug\main.o
+                0x000000a8                Timer_TX_ISR_HANDLER
+ .text.RISING   0x000000fc       0x28 .\CortexM3\ARM_GCC_541\Debug\main.o
+                0x000000fc                RISING
+ .text.FALLING  0x00000124       0x2c .\CortexM3\ARM_GCC_541\Debug\main.o
+                0x00000124                FALLING
+ .text.main     0x00000150       0xb8 .\CortexM3\ARM_GCC_541\Debug\main.o
+                0x00000150                main
  .text.CyClockStartupError
-                0x000001a0        0x4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000208        0x4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.cfg_write_bytes32
-                0x000001a4       0x34 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x0000020c       0x34 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.AnalogSetDefault
-                0x000001d8       0x28 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000240       0x28 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYMEMZERO
-                0x00000200        0xc .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000268        0xc .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.ClockSetup
-                0x0000020c       0xc8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000274       0xd8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYCONFIGCPY
-                0x000002d4        0x8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x0000034c        0x8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.cyfitter_cfg
-                0x000002dc       0xec .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x000002dc                cyfitter_cfg
+                0x00000354       0xf8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000354                cyfitter_cfg
  .text.IntDefaultHandler
-                0x000003c8       0x10 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x000003c8                IntDefaultHandler
- .text.Start_c  0x000003d8       0x4c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x000003d8                Start_c
+                0x0000044c       0x10 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x0000044c                IntDefaultHandler
+ .text.Start_c  0x0000045c       0x4c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x0000045c                Start_c
  .text.initialize_psoc
-                0x00000424       0x68 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000424                initialize_psoc
+                0x000004a8       0x68 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x000004a8                initialize_psoc
  .text.TimerISR_SetVector
-                0x0000048c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
-                0x0000048c                TimerISR_SetVector
+                0x00000510        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                0x00000510                TimerISR_SetVector
  .text.TimerISR_SetPriority
-                0x00000498       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
-                0x00000498                TimerISR_SetPriority
+                0x0000051c       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                0x0000051c                TimerISR_SetPriority
  .text.TimerISR_Enable
-                0x000004a8        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
-                0x000004a8                TimerISR_Enable
+                0x0000052c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                0x0000052c                TimerISR_Enable
  .text.TimerISR_Disable
-                0x000004b4        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
-                0x000004b4                TimerISR_Disable
+                0x00000538        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                0x00000538                TimerISR_Disable
  .text.TimerISR_StartEx
-                0x000004c0       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
-                0x000004c0                TimerISR_StartEx
+                0x00000544       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                0x00000544                TimerISR_StartEx
  .text.Timer_1_Enable
-                0x000004dc       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x000004dc                Timer_1_Enable
+                0x00000560       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x00000560                Timer_1_Enable
  .text.Timer_1_SetInterruptMode
-                0x000004ec        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x000004ec                Timer_1_SetInterruptMode
+                0x00000570        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x00000570                Timer_1_SetInterruptMode
  .text.Timer_1_ReadStatusRegister
-                0x000004f8        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x000004f8                Timer_1_ReadStatusRegister
+                0x0000057c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x0000057c                Timer_1_ReadStatusRegister
  .text.Timer_1_WritePeriod
-                0x00000504        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x00000504                Timer_1_WritePeriod
+                0x00000588        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x00000588                Timer_1_WritePeriod
  .text.Timer_1_ReadCapture
-                0x00000510        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x00000510                Timer_1_ReadCapture
+                0x00000594        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x00000594                Timer_1_ReadCapture
  .text.Timer_1_WriteCounter
-                0x0000051c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x0000051c                Timer_1_WriteCounter
+                0x000005a0        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x000005a0                Timer_1_WriteCounter
  .text.Timer_1_ClearFIFO
-                0x00000528       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x00000528                Timer_1_ClearFIFO
+                0x000005ac       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x000005ac                Timer_1_ClearFIFO
  .text.Timer_1_Init
-                0x0000053c       0x30 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x0000053c                Timer_1_Init
+                0x000005c0       0x30 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x000005c0                Timer_1_Init
  .text.Timer_1_Start
-                0x0000056c       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x0000056c                Timer_1_Start
+                0x000005f0       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x000005f0                Timer_1_Start
  .text.IDLE_Write
-                0x00000588       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
-                0x00000588                IDLE_Write
+                0x0000060c       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+                0x0000060c                IDLE_Write
  .text.IDLE_Read
-                0x000005a0       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
-                0x000005a0                IDLE_Read
+                0x00000624       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+                0x00000624                IDLE_Read
  .text.COLLISION_Write
-                0x000005b0       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
-                0x000005b0                COLLISION_Write
+                0x00000634       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+                0x00000634                COLLISION_Write
  .text.COLLISION_Read
-                0x000005c8       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
-                0x000005c8                COLLISION_Read
+                0x0000064c       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+                0x0000064c                COLLISION_Read
  .text.BUSY_Write
-                0x000005d8       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
-                0x000005d8                BUSY_Write
+                0x0000065c       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+                0x0000065c                BUSY_Write
  .text.BUSY_Read
-                0x000005f0       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
-                0x000005f0                BUSY_Read
+                0x00000674       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+                0x00000674                BUSY_Read
  .text.INT_RISING_SetVector
-                0x00000600        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
-                0x00000600                INT_RISING_SetVector
+                0x00000684        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                0x00000684                INT_RISING_SetVector
  .text.INT_RISING_SetPriority
-                0x0000060c       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
-                0x0000060c                INT_RISING_SetPriority
+                0x00000690       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                0x00000690                INT_RISING_SetPriority
  .text.INT_RISING_Enable
-                0x0000061c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
-                0x0000061c                INT_RISING_Enable
+                0x000006a0        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                0x000006a0                INT_RISING_Enable
  .text.INT_RISING_Disable
-                0x00000628        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
-                0x00000628                INT_RISING_Disable
+                0x000006ac        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                0x000006ac                INT_RISING_Disable
  .text.INT_RISING_StartEx
-                0x00000634       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
-                0x00000634                INT_RISING_StartEx
+                0x000006b8       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                0x000006b8                INT_RISING_StartEx
  .text.INT_FALLING_SetVector
-                0x00000650        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
-                0x00000650                INT_FALLING_SetVector
+                0x000006d4        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                0x000006d4                INT_FALLING_SetVector
  .text.INT_FALLING_SetPriority
-                0x0000065c       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
-                0x0000065c                INT_FALLING_SetPriority
+                0x000006e0       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                0x000006e0                INT_FALLING_SetPriority
  .text.INT_FALLING_Enable
-                0x0000066c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
-                0x0000066c                INT_FALLING_Enable
+                0x000006f0        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                0x000006f0                INT_FALLING_Enable
  .text.INT_FALLING_Disable
-                0x00000678        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
-                0x00000678                INT_FALLING_Disable
+                0x000006fc        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                0x000006fc                INT_FALLING_Disable
  .text.INT_FALLING_StartEx
-                0x00000684       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
-                0x00000684                INT_FALLING_StartEx
- .text          0x000006a0       0x20 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
-                0x000006a0                CyDelayCycles
-                0x000006b0                CyEnterCriticalSection
-                0x000006b8                CyExitCriticalSection
- .text.__errno  0x000006c0        0xc c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
-                0x000006c0                __errno
+                0x00000708       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                0x00000708                INT_FALLING_StartEx
+ .text.Timer_TX_WritePeriod
+                0x00000724        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+                0x00000724                Timer_TX_WritePeriod
+ .text.Timer_TX_WriteCounter
+                0x00000730        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+                0x00000730                Timer_TX_WriteCounter
+ .text.Timer_TX_ISR_SetVector
+                0x0000073c        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                0x0000073c                Timer_TX_ISR_SetVector
+ .text.Timer_TX_ISR_SetPriority
+                0x00000748       0x10 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                0x00000748                Timer_TX_ISR_SetPriority
+ .text.Timer_TX_ISR_Enable
+                0x00000758        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                0x00000758                Timer_TX_ISR_Enable
+ .text.Timer_TX_ISR_Disable
+                0x00000764        0xc .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                0x00000764                Timer_TX_ISR_Disable
+ .text.Timer_TX_ISR_StartEx
+                0x00000770       0x1c .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                0x00000770                Timer_TX_ISR_StartEx
+ .text.TX_Write
+                0x0000078c       0x18 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+                0x0000078c                TX_Write
+ *fill*         0x000007a4        0x4 
+ .text          0x000007a8       0x20 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+                0x000007a8                CyDelayCycles
+                0x000007b8                CyEnterCriticalSection
+                0x000007c0                CyExitCriticalSection
+ .text.__errno  0x000007c8        0xc c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
+                0x000007c8                __errno
  .text.__libc_init_array
-                0x000006cc       0x4c c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
-                0x000006cc                __libc_init_array
- .text.memcpy   0x00000718       0x16 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
-                0x00000718                memcpy
- .text.memset   0x0000072e       0x10 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
-                0x0000072e                memset
+                0x000007d4       0x4c c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                0x000007d4                __libc_init_array
+ .text.memcpy   0x00000820       0x16 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+                0x00000820                memcpy
+ .text.memset   0x00000836       0x10 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                0x00000836                memset
  *(.plt)
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x0000073e        0x0 linker stubs
+ .glue_7t       0x00000846        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x0000073e        0x0 linker stubs
+ .glue_7        0x00000846        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x0000073e        0x0 linker stubs
+ .vfp11_veneer  0x00000846        0x0 linker stubs
  *(.bootloader)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.gcc_except_table)
 
-.v4_bx          0x00000740        0x0
- .v4_bx         0x00000740        0x0 linker stubs
+.v4_bx          0x00000848        0x0
+ .v4_bx         0x00000848        0x0 linker stubs
 
-.iplt           0x00000740        0x0
- .iplt          0x00000740        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.iplt           0x00000848        0x0
+ .iplt          0x00000848        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
 
-.eh_frame       0x00000740        0x4
+.eh_frame       0x00000848        0x4
  *(.eh_frame)
- .eh_frame      0x00000740        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .eh_frame      0x00000740        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
+ .eh_frame      0x00000848        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .eh_frame      0x00000848        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
                 [!provide]                PROVIDE (__exidx_start, .)
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00000744                __exidx_end = .
+                0x0000084c                __exidx_end = .
 
-.rodata         0x00000744       0x6c
+.rodata         0x0000084c       0x6c
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00000744       0x36 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .rodata        0x0000084c       0x30 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .rodata.str1.1
-                0x0000077a        0x2 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
-                0x0000077c                . = ALIGN (0x4)
+                0x0000087c        0x2 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                0x00000880                . = ALIGN (0x4)
+ *fill*         0x0000087e        0x2 
  *(.init)
- .init          0x0000077c        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x0000077c                _init
- .init          0x00000780        0x8 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x00000788                . = ALIGN (0x4)
-                0x00000788                __preinit_array_start = .
+ .init          0x00000880        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00000880                _init
+ .init          0x00000884        0x8 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x0000088c                . = ALIGN (0x4)
+                0x0000088c                __preinit_array_start = .
  *(.preinit_array)
-                0x00000788                __preinit_array_end = .
-                0x00000788                . = ALIGN (0x4)
-                0x00000788                __init_array_start = .
+                0x0000088c                __preinit_array_end = .
+                0x0000088c                . = ALIGN (0x4)
+                0x0000088c                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00000788        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .init_array    0x0000078c        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000790                __init_array_end = .
-                0x00000790                . = ALIGN (0x4)
+ .init_array    0x0000088c        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .init_array    0x00000890        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00000894                __init_array_end = .
+                0x00000894                . = ALIGN (0x4)
  *(.fini)
- .fini          0x00000790        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x00000790                _fini
- .fini          0x00000794        0x8 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x0000079c                . = ALIGN (0x4)
-                0x0000079c                __fini_array_start = .
+ .fini          0x00000894        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00000894                _fini
+ .fini          0x00000898        0x8 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x000008a0                . = ALIGN (0x4)
+                0x000008a0                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x0000079c        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .fini_array    0x000008a0        0x4 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x000007a0                __fini_array_end = .
-                0x000007a0                . = ALIGN (0x4)
+                0x000008a4                __fini_array_end = .
+                0x000008a4                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x000007a0                . = ALIGN (0x4)
+                0x000008a4                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x000007a0                . = ALIGN (0x4)
-                0x000007a0                __cy_regions = .
-                0x000007a0        0x4 LONG 0x7b0 __cy_region_init_ram
-                0x000007a4        0x4 LONG 0x1fff80c8 __cy_region_start_data
-                0x000007a8        0x4 LONG 0x68 __cy_region_init_size_ram
-                0x000007ac        0x4 LONG 0x20 __cy_region_zero_size_ram
-                0x000007b0                __cy_regions_end = .
-                0x000007b0                . = ALIGN (0x8)
-                0x000007b0                _etext = .
+                0x000008a4                . = ALIGN (0x4)
+                0x000008a4                __cy_regions = .
+                0x000008a4        0x4 LONG 0x8b8 __cy_region_init_ram
+                0x000008a8        0x4 LONG 0x1fff80c8 __cy_region_start_data
+                0x000008ac        0x4 LONG 0x68 __cy_region_init_size_ram
+                0x000008b0        0x4 LONG 0x218 __cy_region_zero_size_ram
+                0x000008b4                __cy_regions_end = .
+                0x000008b8                . = ALIGN (0x8)
+ *fill*         0x000008b4        0x4 
+                0x000008b8                _etext = .
 
 .cy_checksum_exclude
-                0x000007b0        0x0
+                0x000008b8        0x0
  *(.cy_checksum_exclude)
 
 .ramvectors     0x1fff8000       0xc0
@@ -757,7 +850,7 @@ END GROUP
  .noinit        0x1fff80c0        0x1 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
                 0x1fff80c0                CyResetStatus
 
-.data           0x1fff80c8       0x68 load address 0x000007b0
+.data           0x1fff80c8       0x68 load address 0x000008b8
                 0x1fff80c8                __cy_region_start_data = .
  *(.jcr)
  .jcr           0x1fff80c8        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
@@ -775,36 +868,39 @@ END GROUP
  *(.ram)
                 0x1fff8130                _edata = .
 
-.igot.plt       0x1fff8130        0x0 load address 0x00000818
+.igot.plt       0x1fff8130        0x0 load address 0x00000920
  .igot.plt      0x1fff8130        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.bss            0x1fff8130       0x20 load address 0x00000818
+.bss            0x1fff8130      0x218 load address 0x00000920
                 0x1fff8130                PROVIDE (__bss_start__, .)
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x1fff8130       0x1c c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .bss           0x1fff814c        0x2 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .bss           0x1fff814c        0x3 .\CortexM3\ARM_GCC_541\Debug\main.o
                 0x1fff814c                lowFlag
                 0x1fff814d                systemState
- .bss           0x1fff814e        0x1 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                0x1fff814e                Timer_1_initVar
+                0x1fff814e                SERIAL_POS
+ .bss           0x1fff814f        0x1 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x1fff814f                Timer_1_initVar
  *(COMMON)
-                0x1fff8150                . = ALIGN (0x8)
- *fill*         0x1fff814f        0x1 
+ COMMON         0x1fff8150      0x1f4 .\CortexM3\ARM_GCC_541\Debug\main.o
+                0x1fff8150                SERIAL_BUFFER
+                0x1fff8348                . = ALIGN (0x8)
+ *fill*         0x1fff8344        0x4 
  *(.ram.b)
-                0x1fff8150                _end = .
-                0x1fff8150                __end = .
-                0x1fff8150                PROVIDE (end, .)
-                0x1fff8150                PROVIDE (__bss_end__, .)
-                0x000007b0                __cy_region_init_ram = LOADADDR (.data)
+                0x1fff8348                _end = .
+                0x1fff8348                __end = .
+                0x1fff8348                PROVIDE (end, .)
+                0x1fff8348                PROVIDE (__bss_end__, .)
+                0x000008b8                __cy_region_init_ram = LOADADDR (.data)
                 0x00000068                __cy_region_init_size_ram = (_edata - ADDR (.data))
-                0x00000020                __cy_region_zero_size_ram = (_end - _edata)
+                0x00000218                __cy_region_zero_size_ram = (_end - _edata)
 
-.heap           0x1fff8150       0x80 load address 0x00000818
-                0x1fff8150                . = _end
-                0x1fff81d0                . = (. + 0x80)
- *fill*         0x1fff8150       0x80 
-                0x1fff81d0                __cy_heap_limit = .
+.heap           0x1fff8348       0x80 load address 0x00000920
+                0x1fff8348                . = _end
+                0x1fff83c8                . = (. + 0x80)
+ *fill*         0x1fff8348       0x80 
+                0x1fff83c8                __cy_heap_limit = .
 
 .stack          0x20007800      0x800
                 0x20007800                __cy_stack_limit = .
@@ -820,9 +916,9 @@ END GROUP
 .cyloadablemeta
  *(.cyloadablemeta)
 
-.cyconfigecc    0x80000000      0x128
+.cyconfigecc    0x80000000      0x238
  *(.cyconfigecc)
- .cyconfigecc   0x80000000      0x128 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .cyconfigecc   0x80000000      0x238 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
                 0x80000000                cy_meta_configecc
 
 .cycustnvl      0x90000000        0x4
@@ -851,8 +947,8 @@ END GROUP
  .cymeta        0x90500000        0xc .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
                 0x90500000                cy_metadata
 
-.rel.dyn        0x00000818        0x0 load address 0x9050000c
- .rel.iplt      0x00000818        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.rel.dyn        0x00000920        0x0 load address 0x9050000c
+ .rel.iplt      0x00000920        0x0 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .stab
  *(.stab)
@@ -872,191 +968,222 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x7f8
+.debug_aranges  0x00000000      0x948
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x38 .\CortexM3\ARM_GCC_541\Debug\main.o
+                0x00000000       0x40 .\CortexM3\ARM_GCC_541\Debug\main.o
  .debug_aranges
-                0x00000038       0x58 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000040       0x58 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .debug_aranges
-                0x00000090       0x18 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+                0x00000098       0x18 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
  .debug_aranges
-                0x000000a8       0x48 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x000000b0       0x48 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
  .debug_aranges
-                0x000000f0      0x2a0 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+                0x000000f8      0x2a0 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
  .debug_aranges
-                0x00000390       0x98 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+                0x00000398       0x98 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
  .debug_aranges
-                0x00000428       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                0x00000430       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
  .debug_aranges
-                0x000004a8       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                0x000004b0       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
  .debug_aranges
-                0x00000538       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+                0x00000540       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
  .debug_aranges
-                0x00000570       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+                0x00000578       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
  .debug_aranges
-                0x000005a8       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+                0x000005b0       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
  .debug_aranges
-                0x000005e0       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                0x000005e8       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
  .debug_aranges
-                0x00000660       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                0x00000668       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
  .debug_aranges
-                0x000006e0       0x20 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+                0x000006e8       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
  .debug_aranges
-                0x00000700       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+                0x00000778       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
  .debug_aranges
-                0x00000780       0x78 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+                0x000007f8       0x38 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_aranges
+                0x00000830       0x20 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+ .debug_aranges
+                0x00000850       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_aranges
+                0x000008d0       0x78 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x44aa
+.debug_info     0x00000000     0x4ce5
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x353 .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_info    0x00000353      0x4c9 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_info    0x0000081c      0x135 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
- .debug_info    0x00000951      0x3bb .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_info    0x00000d0c     0x1374 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
- .debug_info    0x00002080      0xa2a .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
- .debug_info    0x00002aaa      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
- .debug_info    0x00002d7c      0x2ec .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
- .debug_info    0x00003068      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
- .debug_info    0x00003187      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
- .debug_info    0x000032a6      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
- .debug_info    0x000033c5      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
- .debug_info    0x00003697      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
- .debug_info    0x00003969       0xa0 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
- .debug_info    0x00003a09      0x5b8 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
- .debug_info    0x00003fc1      0x4e9 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+ .debug_info    0x00000000      0x473 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_info    0x00000473      0x4ee .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_info    0x00000961      0x135 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .debug_info    0x00000a96      0x3bb .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_info    0x00000e51     0x1374 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+ .debug_info    0x000021c5      0xa2a .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+ .debug_info    0x00002bef      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+ .debug_info    0x00002ec1      0x2ec .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+ .debug_info    0x000031ad      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+ .debug_info    0x000032cc      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_info    0x000033eb      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+ .debug_info    0x0000350a      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+ .debug_info    0x000037dc      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .debug_info    0x00003aae      0x2ec .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .debug_info    0x00003d9a      0x2d2 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .debug_info    0x0000406c      0x11f .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_info    0x0000418b       0xb9 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+ .debug_info    0x00004244      0x5b8 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_info    0x000047fc      0x4e9 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
-.debug_abbrev   0x00000000     0x13cc
+.debug_abbrev   0x00000000     0x173c
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x10d .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_abbrev  0x0000010d      0x1fe .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_abbrev  0x0000030b       0x66 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
- .debug_abbrev  0x00000371      0x1e8 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_abbrev  0x00000559      0x254 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
- .debug_abbrev  0x000007ad      0x1ab .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
- .debug_abbrev  0x00000958      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
- .debug_abbrev  0x00000acb      0x12b .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
- .debug_abbrev  0x00000bf6       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
- .debug_abbrev  0x00000c86       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
- .debug_abbrev  0x00000d16       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
- .debug_abbrev  0x00000da6      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
- .debug_abbrev  0x00000f19      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
- .debug_abbrev  0x0000108c       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
- .debug_abbrev  0x000010a0      0x198 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
- .debug_abbrev  0x00001238      0x194 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+ .debug_abbrev  0x00000000      0x14f .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_abbrev  0x0000014f      0x1fe .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_abbrev  0x0000034d       0x66 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .debug_abbrev  0x000003b3      0x1e8 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_abbrev  0x0000059b      0x254 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+ .debug_abbrev  0x000007ef      0x1ab .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+ .debug_abbrev  0x0000099a      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+ .debug_abbrev  0x00000b0d      0x12b .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+ .debug_abbrev  0x00000c38       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+ .debug_abbrev  0x00000cc8       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_abbrev  0x00000d58       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+ .debug_abbrev  0x00000de8      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+ .debug_abbrev  0x00000f5b      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .debug_abbrev  0x000010ce      0x12b .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .debug_abbrev  0x000011f9      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .debug_abbrev  0x0000136c       0x90 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_abbrev  0x000013fc       0x14 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+ .debug_abbrev  0x00001410      0x198 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_abbrev  0x000015a8      0x194 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
-.debug_line     0x00000000     0x1e36
+.debug_line     0x00000000     0x21cc
  *(.debug_line)
- .debug_line    0x00000000      0x212 .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_line    0x00000212      0x1d9 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_line    0x000003eb      0x141 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
- .debug_line    0x0000052c      0x234 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_line    0x00000760      0x816 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
- .debug_line    0x00000f76      0x367 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
- .debug_line    0x000012dd      0x135 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
- .debug_line    0x00001412      0x172 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
- .debug_line    0x00001584       0x91 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
- .debug_line    0x00001615       0x96 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
- .debug_line    0x000016ab       0x91 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
- .debug_line    0x0000173c      0x137 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
- .debug_line    0x00001873      0x138 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
- .debug_line    0x000019ab       0x66 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
- .debug_line    0x00001a11      0x1e9 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
- .debug_line    0x00001bfa      0x23c .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+ .debug_line    0x00000000      0x26b .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_line    0x0000026b      0x1db .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_line    0x00000446      0x141 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .debug_line    0x00000587      0x234 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_line    0x000007bb      0x816 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+ .debug_line    0x00000fd1      0x367 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+ .debug_line    0x00001338      0x135 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+ .debug_line    0x0000146d      0x172 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+ .debug_line    0x000015df       0x91 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+ .debug_line    0x00001670       0x96 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_line    0x00001706       0x91 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+ .debug_line    0x00001797      0x137 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+ .debug_line    0x000018ce      0x138 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .debug_line    0x00001a06      0x173 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .debug_line    0x00001b79      0x139 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .debug_line    0x00001cb2       0x8f .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_line    0x00001d41       0x66 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+ .debug_line    0x00001da7      0x1e9 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_line    0x00001f90      0x23c .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
-.debug_frame    0x00000000     0x13f0
+.debug_frame    0x00000000     0x1688
  *(.debug_frame)
- .debug_frame   0x00000000       0x74 .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_frame   0x00000074       0xe4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_frame   0x00000158       0xb8 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_frame   0x00000210      0x738 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
- .debug_frame   0x00000948      0x1f8 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
- .debug_frame   0x00000b40      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
- .debug_frame   0x00000c44      0x124 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
- .debug_frame   0x00000d68       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
- .debug_frame   0x00000db8       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
- .debug_frame   0x00000e08       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
- .debug_frame   0x00000e58      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
- .debug_frame   0x00000f5c      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
- .debug_frame   0x00001060      0x174 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
- .debug_frame   0x000011d4      0x160 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
- .debug_frame   0x00001334       0x20 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
- .debug_frame   0x00001354       0x28 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
- .debug_frame   0x0000137c       0x2c c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
- .debug_frame   0x000013a8       0x28 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x000013d0       0x20 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000       0x94 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_frame   0x00000094       0xe4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_frame   0x00000178       0xb8 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_frame   0x00000230      0x738 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+ .debug_frame   0x00000968      0x1f8 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+ .debug_frame   0x00000b60      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+ .debug_frame   0x00000c64      0x124 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+ .debug_frame   0x00000d88       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+ .debug_frame   0x00000dd8       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_frame   0x00000e28       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+ .debug_frame   0x00000e78      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+ .debug_frame   0x00000f7c      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .debug_frame   0x00001080      0x124 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .debug_frame   0x000011a4      0x104 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .debug_frame   0x000012a8       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_frame   0x000012f8      0x174 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_frame   0x0000146c      0x160 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+ .debug_frame   0x000015cc       0x20 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
+ .debug_frame   0x000015ec       0x28 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .debug_frame   0x00001614       0x2c c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+ .debug_frame   0x00001640       0x28 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00001668       0x20 c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
 
-.debug_str      0x00000000     0x1937
+.debug_str      0x00000000     0x1caa
  *(.debug_str)
- .debug_str     0x00000000      0x289 .\CortexM3\ARM_GCC_541\Debug\main.o
-                                0x2d7 (size before relaxing)
- .debug_str     0x00000289      0x17c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                                0x31f (size before relaxing)
- .debug_str     0x00000405       0x7f .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
-                                0x1f4 (size before relaxing)
- .debug_str     0x00000484      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                                0x31a (size before relaxing)
- .debug_str     0x000005c8      0x83f .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
-                                0xa57 (size before relaxing)
- .debug_str     0x00000e07      0x365 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
-                                0x743 (size before relaxing)
- .debug_str     0x0000116c       0xff .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
-                                0x2e0 (size before relaxing)
- .debug_str     0x0000126b      0x168 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
-                                0x36f (size before relaxing)
- .debug_str     0x000013d3       0x4c .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
-                                0x1ed (size before relaxing)
- .debug_str     0x0000141f       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_str     0x00000000      0x32b .\CortexM3\ARM_GCC_541\Debug\main.o
+                                0x379 (size before relaxing)
+ .debug_str     0x0000032b      0x176 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                                0x338 (size before relaxing)
+ .debug_str     0x000004a1       0x7f .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+                                0x20d (size before relaxing)
+ .debug_str     0x00000520      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                                0x333 (size before relaxing)
+ .debug_str     0x00000664      0x83f .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+                                0xa70 (size before relaxing)
+ .debug_str     0x00000ea3      0x365 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+                                0x75c (size before relaxing)
+ .debug_str     0x00001208       0xff .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+                                0x2f9 (size before relaxing)
+ .debug_str     0x00001307      0x168 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+                                0x388 (size before relaxing)
+ .debug_str     0x0000146f       0x4c .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
                                 0x206 (size before relaxing)
- .debug_str     0x0000146f       0x41 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
-                                0x1ed (size before relaxing)
- .debug_str     0x000014b0      0x119 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
-                                0x2fc (size before relaxing)
- .debug_str     0x000015c9      0x126 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
-                                0x30a (size before relaxing)
- .debug_str     0x000016ef      0x19c .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
-                                0x3b1 (size before relaxing)
- .debug_str     0x0000188b       0xac .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
-                                0x33a (size before relaxing)
+ .debug_str     0x000014bb       0x50 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+                                0x21f (size before relaxing)
+ .debug_str     0x0000150b       0x41 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+                                0x206 (size before relaxing)
+ .debug_str     0x0000154c      0x119 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+                                0x315 (size before relaxing)
+ .debug_str     0x00001665      0x126 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+                                0x323 (size before relaxing)
+ .debug_str     0x0000178b      0x161 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+                                0x39a (size before relaxing)
+ .debug_str     0x000018ec      0x133 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+                                0x331 (size before relaxing)
+ .debug_str     0x00001a1f       0x43 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+                                0x1fc (size before relaxing)
+ .debug_str     0x00001a62      0x19c .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+                                0x3ca (size before relaxing)
+ .debug_str     0x00001bfe       0xac .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+                                0x353 (size before relaxing)
 
-.debug_loc      0x00000000     0x1a2a
+.debug_loc      0x00000000     0x1b26
  *(.debug_loc)
- .debug_loc     0x00000000      0x1d7 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_loc     0x000001d7      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_loc     0x0000031b      0xa11 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
- .debug_loc     0x00000d2c      0x1e4 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
- .debug_loc     0x00000f10       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
- .debug_loc     0x00000f66       0x13 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
- .debug_loc     0x00000f79       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
- .debug_loc     0x00000fbb       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
- .debug_loc     0x00000ffd       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
- .debug_loc     0x0000103f       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
- .debug_loc     0x00001095       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
- .debug_loc     0x000010eb      0x2f2 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
- .debug_loc     0x000013dd      0x64d .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+ .debug_loc     0x00000000       0x51 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_loc     0x00000051      0x1d7 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_loc     0x00000228      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_loc     0x0000036c      0xa11 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+ .debug_loc     0x00000d7d      0x1e4 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+ .debug_loc     0x00000f61       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+ .debug_loc     0x00000fb7       0x13 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+ .debug_loc     0x00000fca       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+ .debug_loc     0x0000100c       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_loc     0x0000104e       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+ .debug_loc     0x00001090       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+ .debug_loc     0x000010e6       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .debug_loc     0x0000113c       0x13 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .debug_loc     0x0000114f       0x56 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .debug_loc     0x000011a5       0x42 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_loc     0x000011e7      0x2f2 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_loc     0x000014d9      0x64d .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
 .debug_macinfo
  *(.debug_macinfo)
 
-.debug_ranges   0x00000000      0x6e0
+.debug_ranges   0x00000000      0x818
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x28 .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_ranges  0x00000028       0x48 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_ranges  0x00000070       0x38 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_ranges  0x000000a8      0x290 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
- .debug_ranges  0x00000338       0x88 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
- .debug_ranges  0x000003c0       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
- .debug_ranges  0x00000430       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
- .debug_ranges  0x000004b0       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
- .debug_ranges  0x000004d8       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
- .debug_ranges  0x00000500       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
- .debug_ranges  0x00000528       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
- .debug_ranges  0x00000598       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
- .debug_ranges  0x00000608       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
- .debug_ranges  0x00000678       0x68 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+ .debug_ranges  0x00000000       0x48 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_ranges  0x00000048       0x48 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_ranges  0x00000090       0x38 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_ranges  0x000000c8      0x290 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyLib.o)
+ .debug_ranges  0x00000358       0x88 .\CortexM3\ARM_GCC_541\Debug\networking.a(cyPm.o)
+ .debug_ranges  0x000003e0       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(TimerISR.o)
+ .debug_ranges  0x00000450       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_1.o)
+ .debug_ranges  0x000004d0       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(IDLE.o)
+ .debug_ranges  0x000004f8       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(COLLISION.o)
+ .debug_ranges  0x00000520       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
+ .debug_ranges  0x00000548       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
+ .debug_ranges  0x000005b8       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .debug_ranges  0x00000628       0x80 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .debug_ranges  0x000006a8       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .debug_ranges  0x00000718       0x28 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
+ .debug_ranges  0x00000740       0x70 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+ .debug_ranges  0x000007b0       0x68 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
 .comment        0x00000000       0x6e
  .comment       0x00000000       0x6e .\CortexM3\ARM_GCC_541\Debug\main.o
@@ -1073,6 +1200,9 @@ END GROUP
  .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(BUSY.o)
  .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_RISING.o)
  .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
+ .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
+ .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
+ .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
  .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
  .comment       0x0000006e       0x6f .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
 
@@ -1127,28 +1257,34 @@ END GROUP
  .ARM.attributes
                 0x000002c9       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(INT_FALLING.o)
  .ARM.attributes
-                0x000002fc       0x21 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
+                0x000002fc       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX.o)
  .ARM.attributes
-                0x0000031d       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
+                0x0000032f       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(Timer_TX_ISR.o)
  .ARM.attributes
-                0x00000350       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
+                0x00000362       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(TX.o)
  .ARM.attributes
-                0x00000383       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
+                0x00000395       0x21 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyBootAsmGnu.o)
  .ARM.attributes
-                0x000003b0       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+                0x000003b6       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(CyFlash.o)
  .ARM.attributes
-                0x000003dd       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                0x000003e9       0x33 .\CortexM3\ARM_GCC_541\Debug\networking.a(CySpc.o)
  .ARM.attributes
-                0x0000040a       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                0x0000041c       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
  .ARM.attributes
-                0x00000437       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+                0x00000449       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
  .ARM.attributes
-                0x00000464       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                0x00000476       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000491       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
+                0x000004a3       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
  .ARM.attributes
-                0x000004be       0x1d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x000004d0       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x000004fd       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000052a       0x2d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
+ .ARM.attributes
+                0x00000557       0x1d c:/program files (x86)/cypress/psoc creator/4.1/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
 
 /DISCARD/
  *(.note.GNU-stack)
-OUTPUT(C:\Users\qureshis\Documents\CE 4950\attep5000\networking-project\networking.cydsn\CortexM3\ARM_GCC_541\Debug\networking.elf elf32-littlearm)
+OUTPUT(C:\Users\marlowea\Google Drive\BACKUP\docs\2017-2018\sem2year4\CE4950\Project\psocker2017\networking.cydsn\CortexM3\ARM_GCC_541\Debug\networking.elf elf32-littlearm)
