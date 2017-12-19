@@ -1,0 +1,1354 @@
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.TIMER,"ax",%progbits
+  20              		.align	2
+  21              		.global	TIMER
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	TIMER, %function
+  25              	TIMER:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** 
+  14:main.c        **** typedef enum state {idleState, collisionState, busyState} State;
+  15:main.c        **** 
+  16:main.c        **** State systemState = idleState;
+  17:main.c        **** 
+  18:main.c        **** _Bool lowFlag = 0;
+  19:main.c        **** 
+  20:main.c        **** #define COLL_PERIOD     52
+  21:main.c        **** #define COLL_COUNTER    51
+  22:main.c        **** #define IDLE_PERIOD     830
+  23:main.c        **** #define IDLE_COUNTER    829
+  24:main.c        **** 
+  25:main.c        **** CY_ISR(TIMER)
+  26:main.c        **** {
+  28              		.loc 1 26 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 2
+
+
+  32              		@ link register save eliminated.
+  27:main.c        ****    	Timer_1_STATUS;
+  33              		.loc 1 27 0
+  34 0000 064B     		ldr	r3, .L4
+  35 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  28:main.c        ****     
+  29:main.c        ****     if (!(lowFlag) ){
+  36              		.loc 1 29 0
+  37 0004 064B     		ldr	r3, .L4+4
+  38 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  39 0008 1BB9     		cbnz	r3, .L2
+  30:main.c        ****         systemState = idleState;
+  40              		.loc 1 30 0
+  41 000a 0022     		movs	r2, #0
+  42 000c 044B     		ldr	r3, .L4+4
+  43 000e 5A70     		strb	r2, [r3, #1]
+  44 0010 7047     		bx	lr
+  45              	.L2:
+  31:main.c        ****     } else {
+  32:main.c        ****         systemState = collisionState;
+  46              		.loc 1 32 0
+  47 0012 0122     		movs	r2, #1
+  48 0014 024B     		ldr	r3, .L4+4
+  49 0016 5A70     		strb	r2, [r3, #1]
+  50 0018 7047     		bx	lr
+  51              	.L5:
+  52 001a 00BF     		.align	2
+  53              	.L4:
+  54 001c 6B640040 		.word	1073767531
+  55 0020 00000000 		.word	.LANCHOR0
+  56              		.cfi_endproc
+  57              	.LFE63:
+  58              		.size	TIMER, .-TIMER
+  59              		.section	.text.RISING,"ax",%progbits
+  60              		.align	2
+  61              		.global	RISING
+  62              		.thumb
+  63              		.thumb_func
+  64              		.type	RISING, %function
+  65              	RISING:
+  66              	.LFB64:
+  33:main.c        ****     }
+  34:main.c        **** }
+  35:main.c        **** 
+  36:main.c        **** CY_ISR(RISING)
+  37:main.c        **** {
+  67              		.loc 1 37 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 08B5     		push	{r3, lr}
+  72              		.cfi_def_cfa_offset 8
+  73              		.cfi_offset 3, -8
+  74              		.cfi_offset 14, -4
+  38:main.c        ****     if ((!lowFlag)){
+  75              		.loc 1 38 0
+  76 0002 084B     		ldr	r3, .L9
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 3
+
+
+  77 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  78 0006 63B9     		cbnz	r3, .L6
+  39:main.c        ****         Timer_1_WritePeriod(COLL_PERIOD);
+  79              		.loc 1 39 0
+  80 0008 3420     		movs	r0, #52
+  81 000a FFF7FEFF 		bl	Timer_1_WritePeriod
+  82              	.LVL0:
+  40:main.c        ****         Timer_1_WriteCounter(COLL_COUNTER);
+  83              		.loc 1 40 0
+  84 000e 3320     		movs	r0, #51
+  85 0010 FFF7FEFF 		bl	Timer_1_WriteCounter
+  86              	.LVL1:
+  41:main.c        ****         Timer_1_Start();
+  87              		.loc 1 41 0
+  88 0014 FFF7FEFF 		bl	Timer_1_Start
+  89              	.LVL2:
+  42:main.c        ****         lowFlag = 1;
+  90              		.loc 1 42 0
+  91 0018 024B     		ldr	r3, .L9
+  92 001a 0122     		movs	r2, #1
+  93 001c 1A70     		strb	r2, [r3]
+  43:main.c        ****         systemState = busyState;
+  94              		.loc 1 43 0
+  95 001e 0222     		movs	r2, #2
+  96 0020 5A70     		strb	r2, [r3, #1]
+  97              	.L6:
+  98 0022 08BD     		pop	{r3, pc}
+  99              	.L10:
+ 100              		.align	2
+ 101              	.L9:
+ 102 0024 00000000 		.word	.LANCHOR0
+ 103              		.cfi_endproc
+ 104              	.LFE64:
+ 105              		.size	RISING, .-RISING
+ 106              		.section	.text.FALLING,"ax",%progbits
+ 107              		.align	2
+ 108              		.global	FALLING
+ 109              		.thumb
+ 110              		.thumb_func
+ 111              		.type	FALLING, %function
+ 112              	FALLING:
+ 113              	.LFB65:
+  44:main.c        ****     }
+  45:main.c        **** }
+  46:main.c        ****  
+  47:main.c        **** CY_ISR(FALLING)
+  48:main.c        **** {
+ 114              		.loc 1 48 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118 0000 08B5     		push	{r3, lr}
+ 119              		.cfi_def_cfa_offset 8
+ 120              		.cfi_offset 3, -8
+ 121              		.cfi_offset 14, -4
+  49:main.c        ****     if (lowFlag){
+ 122              		.loc 1 49 0
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 4
+
+
+ 123 0002 094B     		ldr	r3, .L14
+ 124 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 125 0006 73B1     		cbz	r3, .L11
+  50:main.c        ****         Timer_1_WritePeriod(IDLE_PERIOD);
+ 126              		.loc 1 50 0
+ 127 0008 40F23E30 		movw	r0, #830
+ 128 000c FFF7FEFF 		bl	Timer_1_WritePeriod
+ 129              	.LVL3:
+  51:main.c        ****         Timer_1_WriteCounter(IDLE_COUNTER);
+ 130              		.loc 1 51 0
+ 131 0010 40F23D30 		movw	r0, #829
+ 132 0014 FFF7FEFF 		bl	Timer_1_WriteCounter
+ 133              	.LVL4:
+  52:main.c        ****         Timer_1_Start();
+ 134              		.loc 1 52 0
+ 135 0018 FFF7FEFF 		bl	Timer_1_Start
+ 136              	.LVL5:
+  53:main.c        ****         lowFlag = 0;
+ 137              		.loc 1 53 0
+ 138 001c 024B     		ldr	r3, .L14
+ 139 001e 0022     		movs	r2, #0
+ 140 0020 1A70     		strb	r2, [r3]
+  54:main.c        ****         systemState = busyState;
+ 141              		.loc 1 54 0
+ 142 0022 0222     		movs	r2, #2
+ 143 0024 5A70     		strb	r2, [r3, #1]
+ 144              	.L11:
+ 145 0026 08BD     		pop	{r3, pc}
+ 146              	.L15:
+ 147              		.align	2
+ 148              	.L14:
+ 149 0028 00000000 		.word	.LANCHOR0
+ 150              		.cfi_endproc
+ 151              	.LFE65:
+ 152              		.size	FALLING, .-FALLING
+ 153              		.section	.text.main,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	main
+ 156              		.thumb
+ 157              		.thumb_func
+ 158              		.type	main, %function
+ 159              	main:
+ 160              	.LFB66:
+  55:main.c        ****     }
+  56:main.c        **** }
+  57:main.c        **** 
+  58:main.c        **** int main(void)
+  59:main.c        **** {
+ 161              		.loc 1 59 0
+ 162              		.cfi_startproc
+ 163              		@ Volatile: function does not return.
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166 0000 08B5     		push	{r3, lr}
+ 167              		.cfi_def_cfa_offset 8
+ 168              		.cfi_offset 3, -8
+ 169              		.cfi_offset 14, -4
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 5
+
+
+  60:main.c        ****     CyGlobalIntEnable;
+ 170              		.loc 1 60 0
+ 171              		.syntax unified
+ 172              	@ 60 "main.c" 1
+ 173 0002 62B6     		CPSIE   i
+ 174              	@ 0 "" 2
+  61:main.c        ****     TimerISR_StartEx(TIMER);
+ 175              		.loc 1 61 0
+ 176              		.thumb
+ 177              		.syntax unified
+ 178 0004 2348     		ldr	r0, .L24
+ 179 0006 FFF7FEFF 		bl	TimerISR_StartEx
+ 180              	.LVL6:
+  62:main.c        ****     INT_RISING_StartEx(RISING);
+ 181              		.loc 1 62 0
+ 182 000a 2348     		ldr	r0, .L24+4
+ 183 000c FFF7FEFF 		bl	INT_RISING_StartEx
+ 184              	.LVL7:
+  63:main.c        ****     INT_FALLING_StartEx(FALLING);
+ 185              		.loc 1 63 0
+ 186 0010 2248     		ldr	r0, .L24+8
+ 187 0012 FFF7FEFF 		bl	INT_FALLING_StartEx
+ 188              	.LVL8:
+ 189              	.L18:
+  64:main.c        **** 
+  65:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  66:main.c        **** 
+  67:main.c        ****     while(1){
+  68:main.c        ****         switch(systemState){
+ 190              		.loc 1 68 0
+ 191 0016 224B     		ldr	r3, .L24+12
+ 192 0018 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 193 001a 012B     		cmp	r3, #1
+ 194 001c 27D0     		beq	.L19
+ 195 001e 13B1     		cbz	r3, .L20
+ 196 0020 022B     		cmp	r3, #2
+ 197 0022 12D0     		beq	.L21
+ 198 0024 F7E7     		b	.L18
+ 199              	.L20:
+  69:main.c        ****             case idleState :;
+  70:main.c        ****                 IDLE_Write(1);
+ 200              		.loc 1 70 0
+ 201 0026 0120     		movs	r0, #1
+ 202 0028 FFF7FEFF 		bl	IDLE_Write
+ 203              	.LVL9:
+  71:main.c        ****                 BUSY_Write(!IDLE_Read());
+ 204              		.loc 1 71 0
+ 205 002c FFF7FEFF 		bl	IDLE_Read
+ 206              	.LVL10:
+ 207 0030 B0FA80F0 		clz	r0, r0
+ 208 0034 4009     		lsrs	r0, r0, #5
+ 209 0036 FFF7FEFF 		bl	BUSY_Write
+ 210              	.LVL11:
+  72:main.c        ****                 COLLISION_Write(!IDLE_Read());
+ 211              		.loc 1 72 0
+ 212 003a FFF7FEFF 		bl	IDLE_Read
+ 213              	.LVL12:
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 6
+
+
+ 214 003e B0FA80F0 		clz	r0, r0
+ 215 0042 4009     		lsrs	r0, r0, #5
+ 216 0044 FFF7FEFF 		bl	COLLISION_Write
+ 217              	.LVL13:
+  73:main.c        ****             break;
+ 218              		.loc 1 73 0
+ 219 0048 E5E7     		b	.L18
+ 220              	.L21:
+  74:main.c        ****             
+  75:main.c        ****             case busyState:
+  76:main.c        ****                 BUSY_Write(1);
+ 221              		.loc 1 76 0
+ 222 004a 0120     		movs	r0, #1
+ 223 004c FFF7FEFF 		bl	BUSY_Write
+ 224              	.LVL14:
+  77:main.c        ****                 IDLE_Write(!BUSY_Read());
+ 225              		.loc 1 77 0
+ 226 0050 FFF7FEFF 		bl	BUSY_Read
+ 227              	.LVL15:
+ 228 0054 B0FA80F0 		clz	r0, r0
+ 229 0058 4009     		lsrs	r0, r0, #5
+ 230 005a FFF7FEFF 		bl	IDLE_Write
+ 231              	.LVL16:
+  78:main.c        ****                 COLLISION_Write(!BUSY_Read());
+ 232              		.loc 1 78 0
+ 233 005e FFF7FEFF 		bl	BUSY_Read
+ 234              	.LVL17:
+ 235 0062 B0FA80F0 		clz	r0, r0
+ 236 0066 4009     		lsrs	r0, r0, #5
+ 237 0068 FFF7FEFF 		bl	COLLISION_Write
+ 238              	.LVL18:
+  79:main.c        ****             break;
+ 239              		.loc 1 79 0
+ 240 006c D3E7     		b	.L18
+ 241              	.L19:
+  80:main.c        ****             
+  81:main.c        ****             case collisionState:;
+  82:main.c        ****                 COLLISION_Write(1);
+ 242              		.loc 1 82 0
+ 243 006e 0120     		movs	r0, #1
+ 244 0070 FFF7FEFF 		bl	COLLISION_Write
+ 245              	.LVL19:
+  83:main.c        ****                 IDLE_Write(!COLLISION_Read());
+ 246              		.loc 1 83 0
+ 247 0074 FFF7FEFF 		bl	COLLISION_Read
+ 248              	.LVL20:
+ 249 0078 B0FA80F0 		clz	r0, r0
+ 250 007c 4009     		lsrs	r0, r0, #5
+ 251 007e FFF7FEFF 		bl	IDLE_Write
+ 252              	.LVL21:
+  84:main.c        ****                 BUSY_Write(!COLLISION_Read());
+ 253              		.loc 1 84 0
+ 254 0082 FFF7FEFF 		bl	COLLISION_Read
+ 255              	.LVL22:
+ 256 0086 B0FA80F0 		clz	r0, r0
+ 257 008a 4009     		lsrs	r0, r0, #5
+ 258 008c FFF7FEFF 		bl	BUSY_Write
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 7
+
+
+ 259              	.LVL23:
+  85:main.c        ****             break;
+ 260              		.loc 1 85 0
+ 261 0090 C1E7     		b	.L18
+ 262              	.L25:
+ 263 0092 00BF     		.align	2
+ 264              	.L24:
+ 265 0094 00000000 		.word	TIMER
+ 266 0098 00000000 		.word	RISING
+ 267 009c 00000000 		.word	FALLING
+ 268 00a0 00000000 		.word	.LANCHOR0
+ 269              		.cfi_endproc
+ 270              	.LFE66:
+ 271              		.size	main, .-main
+ 272              		.global	lowFlag
+ 273              		.global	systemState
+ 274              		.bss
+ 275              		.set	.LANCHOR0,. + 0
+ 276              		.type	lowFlag, %object
+ 277              		.size	lowFlag, 1
+ 278              	lowFlag:
+ 279 0000 00       		.space	1
+ 280              		.type	systemState, %object
+ 281              		.size	systemState, 1
+ 282              	systemState:
+ 283 0001 00       		.space	1
+ 284              		.text
+ 285              	.Letext0:
+ 286              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 287              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 288              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 289              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 290              		.file 6 "Generated_Source\\PSoC5/Timer_1.h"
+ 291              		.file 7 "Generated_Source\\PSoC5/TimerISR.h"
+ 292              		.file 8 "Generated_Source\\PSoC5/INT_RISING.h"
+ 293              		.file 9 "Generated_Source\\PSoC5/INT_FALLING.h"
+ 294              		.file 10 "Generated_Source\\PSoC5/IDLE.h"
+ 295              		.file 11 "Generated_Source\\PSoC5/BUSY.h"
+ 296              		.file 12 "Generated_Source\\PSoC5/COLLISION.h"
+ 297              		.section	.debug_info,"",%progbits
+ 298              	.Ldebug_info0:
+ 299 0000 4F030000 		.4byte	0x34f
+ 300 0004 0400     		.2byte	0x4
+ 301 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 302 000a 04       		.byte	0x4
+ 303 000b 01       		.uleb128 0x1
+ 304 000c D7000000 		.4byte	.LASF40
+ 305 0010 0C       		.byte	0xc
+ 306 0011 69020000 		.4byte	.LASF41
+ 307 0015 58000000 		.4byte	.LASF42
+ 308 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 309 001d 00000000 		.4byte	0
+ 310 0021 00000000 		.4byte	.Ldebug_line0
+ 311 0025 02       		.uleb128 0x2
+ 312 0026 01       		.byte	0x1
+ 313 0027 06       		.byte	0x6
+ 314 0028 AB020000 		.4byte	.LASF0
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 8
+
+
+ 315 002c 02       		.uleb128 0x2
+ 316 002d 01       		.byte	0x1
+ 317 002e 08       		.byte	0x8
+ 318 002f C9000000 		.4byte	.LASF1
+ 319 0033 02       		.uleb128 0x2
+ 320 0034 02       		.byte	0x2
+ 321 0035 05       		.byte	0x5
+ 322 0036 75020000 		.4byte	.LASF2
+ 323 003a 02       		.uleb128 0x2
+ 324 003b 02       		.byte	0x2
+ 325 003c 07       		.byte	0x7
+ 326 003d 91010000 		.4byte	.LASF3
+ 327 0041 03       		.uleb128 0x3
+ 328 0042 4E000000 		.4byte	.LASF9
+ 329 0046 02       		.byte	0x2
+ 330 0047 3F       		.byte	0x3f
+ 331 0048 4C000000 		.4byte	0x4c
+ 332 004c 02       		.uleb128 0x2
+ 333 004d 04       		.byte	0x4
+ 334 004e 05       		.byte	0x5
+ 335 004f 96020000 		.4byte	.LASF4
+ 336 0053 02       		.uleb128 0x2
+ 337 0054 04       		.byte	0x4
+ 338 0055 07       		.byte	0x7
+ 339 0056 75010000 		.4byte	.LASF5
+ 340 005a 02       		.uleb128 0x2
+ 341 005b 08       		.byte	0x8
+ 342 005c 05       		.byte	0x5
+ 343 005d 5B020000 		.4byte	.LASF6
+ 344 0061 02       		.uleb128 0x2
+ 345 0062 08       		.byte	0x8
+ 346 0063 07       		.byte	0x7
+ 347 0064 06020000 		.4byte	.LASF7
+ 348 0068 04       		.uleb128 0x4
+ 349 0069 04       		.byte	0x4
+ 350 006a 05       		.byte	0x5
+ 351 006b 696E7400 		.ascii	"int\000"
+ 352 006f 02       		.uleb128 0x2
+ 353 0070 04       		.byte	0x4
+ 354 0071 07       		.byte	0x7
+ 355 0072 F9010000 		.4byte	.LASF8
+ 356 0076 03       		.uleb128 0x3
+ 357 0077 4A020000 		.4byte	.LASF10
+ 358 007b 03       		.byte	0x3
+ 359 007c 2C       		.byte	0x2c
+ 360 007d 41000000 		.4byte	0x41
+ 361 0081 05       		.uleb128 0x5
+ 362 0082 7F020000 		.4byte	.LASF11
+ 363 0086 04       		.byte	0x4
+ 364 0087 9201     		.2byte	0x192
+ 365 0089 2C000000 		.4byte	0x2c
+ 366 008d 02       		.uleb128 0x2
+ 367 008e 04       		.byte	0x4
+ 368 008f 04       		.byte	0x4
+ 369 0090 C3000000 		.4byte	.LASF12
+ 370 0094 02       		.uleb128 0x2
+ 371 0095 08       		.byte	0x8
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 9
+
+
+ 372 0096 04       		.byte	0x4
+ 373 0097 AA000000 		.4byte	.LASF13
+ 374 009b 02       		.uleb128 0x2
+ 375 009c 01       		.byte	0x1
+ 376 009d 08       		.byte	0x8
+ 377 009e 70020000 		.4byte	.LASF14
+ 378 00a2 05       		.uleb128 0x5
+ 379 00a3 65010000 		.4byte	.LASF15
+ 380 00a7 04       		.byte	0x4
+ 381 00a8 3C02     		.2byte	0x23c
+ 382 00aa AE000000 		.4byte	0xae
+ 383 00ae 06       		.uleb128 0x6
+ 384 00af 81000000 		.4byte	0x81
+ 385 00b3 02       		.uleb128 0x2
+ 386 00b4 08       		.byte	0x8
+ 387 00b5 04       		.byte	0x4
+ 388 00b6 9F020000 		.4byte	.LASF16
+ 389 00ba 02       		.uleb128 0x2
+ 390 00bb 04       		.byte	0x4
+ 391 00bc 07       		.byte	0x7
+ 392 00bd 52020000 		.4byte	.LASF17
+ 393 00c1 07       		.uleb128 0x7
+ 394 00c2 39000000 		.4byte	.LASF43
+ 395 00c6 01       		.byte	0x1
+ 396 00c7 2C000000 		.4byte	0x2c
+ 397 00cb 01       		.byte	0x1
+ 398 00cc 0E       		.byte	0xe
+ 399 00cd E4000000 		.4byte	0xe4
+ 400 00d1 08       		.uleb128 0x8
+ 401 00d2 C7010000 		.4byte	.LASF18
+ 402 00d6 00       		.byte	0
+ 403 00d7 08       		.uleb128 0x8
+ 404 00d8 00000000 		.4byte	.LASF19
+ 405 00dc 01       		.byte	0x1
+ 406 00dd 08       		.uleb128 0x8
+ 407 00de EF010000 		.4byte	.LASF20
+ 408 00e2 02       		.byte	0x2
+ 409 00e3 00       		.byte	0
+ 410 00e4 03       		.uleb128 0x3
+ 411 00e5 CB020000 		.4byte	.LASF21
+ 412 00e9 01       		.byte	0x1
+ 413 00ea 0E       		.byte	0xe
+ 414 00eb C1000000 		.4byte	0xc1
+ 415 00ef 09       		.uleb128 0x9
+ 416 00f0 32020000 		.4byte	.LASF44
+ 417 00f4 01       		.byte	0x1
+ 418 00f5 19       		.byte	0x19
+ 419 00f6 00000000 		.4byte	.LFB63
+ 420 00fa 24000000 		.4byte	.LFE63-.LFB63
+ 421 00fe 01       		.uleb128 0x1
+ 422 00ff 9C       		.byte	0x9c
+ 423 0100 0A       		.uleb128 0xa
+ 424 0101 B1000000 		.4byte	.LASF22
+ 425 0105 01       		.byte	0x1
+ 426 0106 24       		.byte	0x24
+ 427 0107 00000000 		.4byte	.LFB64
+ 428 010b 28000000 		.4byte	.LFE64-.LFB64
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 10
+
+
+ 429 010f 01       		.uleb128 0x1
+ 430 0110 9C       		.byte	0x9c
+ 431 0111 47010000 		.4byte	0x147
+ 432 0115 0B       		.uleb128 0xb
+ 433 0116 0E000000 		.4byte	.LVL0
+ 434 011a CE020000 		.4byte	0x2ce
+ 435 011e 29010000 		.4byte	0x129
+ 436 0122 0C       		.uleb128 0xc
+ 437 0123 01       		.uleb128 0x1
+ 438 0124 50       		.byte	0x50
+ 439 0125 02       		.uleb128 0x2
+ 440 0126 08       		.byte	0x8
+ 441 0127 34       		.byte	0x34
+ 442 0128 00       		.byte	0
+ 443 0129 0B       		.uleb128 0xb
+ 444 012a 14000000 		.4byte	.LVL1
+ 445 012e D9020000 		.4byte	0x2d9
+ 446 0132 3D010000 		.4byte	0x13d
+ 447 0136 0C       		.uleb128 0xc
+ 448 0137 01       		.uleb128 0x1
+ 449 0138 50       		.byte	0x50
+ 450 0139 02       		.uleb128 0x2
+ 451 013a 08       		.byte	0x8
+ 452 013b 33       		.byte	0x33
+ 453 013c 00       		.byte	0
+ 454 013d 0D       		.uleb128 0xd
+ 455 013e 18000000 		.4byte	.LVL2
+ 456 0142 E4020000 		.4byte	0x2e4
+ 457 0146 00       		.byte	0
+ 458 0147 0A       		.uleb128 0xa
+ 459 0148 42020000 		.4byte	.LASF23
+ 460 014c 01       		.byte	0x1
+ 461 014d 2F       		.byte	0x2f
+ 462 014e 00000000 		.4byte	.LFB65
+ 463 0152 2C000000 		.4byte	.LFE65-.LFB65
+ 464 0156 01       		.uleb128 0x1
+ 465 0157 9C       		.byte	0x9c
+ 466 0158 90010000 		.4byte	0x190
+ 467 015c 0B       		.uleb128 0xb
+ 468 015d 10000000 		.4byte	.LVL3
+ 469 0161 CE020000 		.4byte	0x2ce
+ 470 0165 71010000 		.4byte	0x171
+ 471 0169 0C       		.uleb128 0xc
+ 472 016a 01       		.uleb128 0x1
+ 473 016b 50       		.byte	0x50
+ 474 016c 03       		.uleb128 0x3
+ 475 016d 0A       		.byte	0xa
+ 476 016e 3E03     		.2byte	0x33e
+ 477 0170 00       		.byte	0
+ 478 0171 0B       		.uleb128 0xb
+ 479 0172 18000000 		.4byte	.LVL4
+ 480 0176 D9020000 		.4byte	0x2d9
+ 481 017a 86010000 		.4byte	0x186
+ 482 017e 0C       		.uleb128 0xc
+ 483 017f 01       		.uleb128 0x1
+ 484 0180 50       		.byte	0x50
+ 485 0181 03       		.uleb128 0x3
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 11
+
+
+ 486 0182 0A       		.byte	0xa
+ 487 0183 3D03     		.2byte	0x33d
+ 488 0185 00       		.byte	0
+ 489 0186 0D       		.uleb128 0xd
+ 490 0187 1C000000 		.4byte	.LVL5
+ 491 018b E4020000 		.4byte	0x2e4
+ 492 018f 00       		.byte	0
+ 493 0190 0E       		.uleb128 0xe
+ 494 0191 DD010000 		.4byte	.LASF45
+ 495 0195 01       		.byte	0x1
+ 496 0196 3A       		.byte	0x3a
+ 497 0197 68000000 		.4byte	0x68
+ 498 019b 00000000 		.4byte	.LFB66
+ 499 019f A4000000 		.4byte	.LFE66-.LFB66
+ 500 01a3 01       		.uleb128 0x1
+ 501 01a4 9C       		.byte	0x9c
+ 502 01a5 94020000 		.4byte	0x294
+ 503 01a9 0B       		.uleb128 0xb
+ 504 01aa 0A000000 		.4byte	.LVL6
+ 505 01ae EF020000 		.4byte	0x2ef
+ 506 01b2 C0010000 		.4byte	0x1c0
+ 507 01b6 0C       		.uleb128 0xc
+ 508 01b7 01       		.uleb128 0x1
+ 509 01b8 50       		.byte	0x50
+ 510 01b9 05       		.uleb128 0x5
+ 511 01ba 03       		.byte	0x3
+ 512 01bb 00000000 		.4byte	TIMER
+ 513 01bf 00       		.byte	0
+ 514 01c0 0B       		.uleb128 0xb
+ 515 01c1 10000000 		.4byte	.LVL7
+ 516 01c5 FA020000 		.4byte	0x2fa
+ 517 01c9 D7010000 		.4byte	0x1d7
+ 518 01cd 0C       		.uleb128 0xc
+ 519 01ce 01       		.uleb128 0x1
+ 520 01cf 50       		.byte	0x50
+ 521 01d0 05       		.uleb128 0x5
+ 522 01d1 03       		.byte	0x3
+ 523 01d2 00000000 		.4byte	RISING
+ 524 01d6 00       		.byte	0
+ 525 01d7 0B       		.uleb128 0xb
+ 526 01d8 16000000 		.4byte	.LVL8
+ 527 01dc 05030000 		.4byte	0x305
+ 528 01e0 EE010000 		.4byte	0x1ee
+ 529 01e4 0C       		.uleb128 0xc
+ 530 01e5 01       		.uleb128 0x1
+ 531 01e6 50       		.byte	0x50
+ 532 01e7 05       		.uleb128 0x5
+ 533 01e8 03       		.byte	0x3
+ 534 01e9 00000000 		.4byte	FALLING
+ 535 01ed 00       		.byte	0
+ 536 01ee 0B       		.uleb128 0xb
+ 537 01ef 2C000000 		.4byte	.LVL9
+ 538 01f3 10030000 		.4byte	0x310
+ 539 01f7 01020000 		.4byte	0x201
+ 540 01fb 0C       		.uleb128 0xc
+ 541 01fc 01       		.uleb128 0x1
+ 542 01fd 50       		.byte	0x50
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 12
+
+
+ 543 01fe 01       		.uleb128 0x1
+ 544 01ff 31       		.byte	0x31
+ 545 0200 00       		.byte	0
+ 546 0201 0D       		.uleb128 0xd
+ 547 0202 30000000 		.4byte	.LVL10
+ 548 0206 1B030000 		.4byte	0x31b
+ 549 020a 0D       		.uleb128 0xd
+ 550 020b 3A000000 		.4byte	.LVL11
+ 551 020f 26030000 		.4byte	0x326
+ 552 0213 0D       		.uleb128 0xd
+ 553 0214 3E000000 		.4byte	.LVL12
+ 554 0218 1B030000 		.4byte	0x31b
+ 555 021c 0D       		.uleb128 0xd
+ 556 021d 48000000 		.4byte	.LVL13
+ 557 0221 31030000 		.4byte	0x331
+ 558 0225 0B       		.uleb128 0xb
+ 559 0226 50000000 		.4byte	.LVL14
+ 560 022a 26030000 		.4byte	0x326
+ 561 022e 38020000 		.4byte	0x238
+ 562 0232 0C       		.uleb128 0xc
+ 563 0233 01       		.uleb128 0x1
+ 564 0234 50       		.byte	0x50
+ 565 0235 01       		.uleb128 0x1
+ 566 0236 31       		.byte	0x31
+ 567 0237 00       		.byte	0
+ 568 0238 0D       		.uleb128 0xd
+ 569 0239 54000000 		.4byte	.LVL15
+ 570 023d 3C030000 		.4byte	0x33c
+ 571 0241 0D       		.uleb128 0xd
+ 572 0242 5E000000 		.4byte	.LVL16
+ 573 0246 10030000 		.4byte	0x310
+ 574 024a 0D       		.uleb128 0xd
+ 575 024b 62000000 		.4byte	.LVL17
+ 576 024f 3C030000 		.4byte	0x33c
+ 577 0253 0D       		.uleb128 0xd
+ 578 0254 6C000000 		.4byte	.LVL18
+ 579 0258 31030000 		.4byte	0x331
+ 580 025c 0B       		.uleb128 0xb
+ 581 025d 74000000 		.4byte	.LVL19
+ 582 0261 31030000 		.4byte	0x331
+ 583 0265 6F020000 		.4byte	0x26f
+ 584 0269 0C       		.uleb128 0xc
+ 585 026a 01       		.uleb128 0x1
+ 586 026b 50       		.byte	0x50
+ 587 026c 01       		.uleb128 0x1
+ 588 026d 31       		.byte	0x31
+ 589 026e 00       		.byte	0
+ 590 026f 0D       		.uleb128 0xd
+ 591 0270 78000000 		.4byte	.LVL20
+ 592 0274 47030000 		.4byte	0x347
+ 593 0278 0D       		.uleb128 0xd
+ 594 0279 82000000 		.4byte	.LVL21
+ 595 027d 10030000 		.4byte	0x310
+ 596 0281 0D       		.uleb128 0xd
+ 597 0282 86000000 		.4byte	.LVL22
+ 598 0286 47030000 		.4byte	0x347
+ 599 028a 0D       		.uleb128 0xd
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 13
+
+
+ 600 028b 90000000 		.4byte	.LVL23
+ 601 028f 26030000 		.4byte	0x326
+ 602 0293 00       		.byte	0
+ 603 0294 0F       		.uleb128 0xf
+ 604 0295 E2010000 		.4byte	.LASF24
+ 605 0299 05       		.byte	0x5
+ 606 029a 1207     		.2byte	0x712
+ 607 029c A0020000 		.4byte	0x2a0
+ 608 02a0 06       		.uleb128 0x6
+ 609 02a1 76000000 		.4byte	0x76
+ 610 02a5 10       		.uleb128 0x10
+ 611 02a6 D1010000 		.4byte	.LASF25
+ 612 02aa 01       		.byte	0x1
+ 613 02ab 10       		.byte	0x10
+ 614 02ac E4000000 		.4byte	0xe4
+ 615 02b0 05       		.uleb128 0x5
+ 616 02b1 03       		.byte	0x3
+ 617 02b2 00000000 		.4byte	systemState
+ 618 02b6 10       		.uleb128 0x10
+ 619 02b7 0F000000 		.4byte	.LASF26
+ 620 02bb 01       		.byte	0x1
+ 621 02bc 12       		.byte	0x12
+ 622 02bd C7020000 		.4byte	0x2c7
+ 623 02c1 05       		.uleb128 0x5
+ 624 02c2 03       		.byte	0x3
+ 625 02c3 00000000 		.4byte	lowFlag
+ 626 02c7 02       		.uleb128 0x2
+ 627 02c8 01       		.byte	0x1
+ 628 02c9 02       		.byte	0x2
+ 629 02ca D1020000 		.4byte	.LASF27
+ 630 02ce 11       		.uleb128 0x11
+ 631 02cf 25000000 		.4byte	.LASF28
+ 632 02d3 25000000 		.4byte	.LASF28
+ 633 02d7 06       		.byte	0x6
+ 634 02d8 68       		.byte	0x68
+ 635 02d9 11       		.uleb128 0x11
+ 636 02da 1D020000 		.4byte	.LASF29
+ 637 02de 1D020000 		.4byte	.LASF29
+ 638 02e2 06       		.byte	0x6
+ 639 02e3 6A       		.byte	0x6a
+ 640 02e4 11       		.uleb128 0x11
+ 641 02e5 17000000 		.4byte	.LASF30
+ 642 02e9 17000000 		.4byte	.LASF30
+ 643 02ed 06       		.byte	0x6
+ 644 02ee 5A       		.byte	0x5a
+ 645 02ef 11       		.uleb128 0x11
+ 646 02f0 85020000 		.4byte	.LASF31
+ 647 02f4 85020000 		.4byte	.LASF31
+ 648 02f8 07       		.byte	0x7
+ 649 02f9 18       		.byte	0x18
+ 650 02fa 11       		.uleb128 0x11
+ 651 02fb A4010000 		.4byte	.LASF32
+ 652 02ff A4010000 		.4byte	.LASF32
+ 653 0303 08       		.byte	0x8
+ 654 0304 18       		.byte	0x18
+ 655 0305 11       		.uleb128 0x11
+ 656 0306 B7020000 		.4byte	.LASF33
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 14
+
+
+ 657 030a B7020000 		.4byte	.LASF33
+ 658 030e 09       		.byte	0x9
+ 659 030f 18       		.byte	0x18
+ 660 0310 11       		.uleb128 0x11
+ 661 0311 6A010000 		.4byte	.LASF34
+ 662 0315 6A010000 		.4byte	.LASF34
+ 663 0319 0A       		.byte	0xa
+ 664 031a 26       		.byte	0x26
+ 665 031b 11       		.uleb128 0x11
+ 666 031c 87010000 		.4byte	.LASF35
+ 667 0320 87010000 		.4byte	.LASF35
+ 668 0324 0A       		.byte	0xa
+ 669 0325 29       		.byte	0x29
+ 670 0326 11       		.uleb128 0x11
+ 671 0327 B8000000 		.4byte	.LASF36
+ 672 032b B8000000 		.4byte	.LASF36
+ 673 032f 0B       		.byte	0xb
+ 674 0330 26       		.byte	0x26
+ 675 0331 11       		.uleb128 0x11
+ 676 0332 B7010000 		.4byte	.LASF37
+ 677 0336 B7010000 		.4byte	.LASF37
+ 678 033a 0C       		.byte	0xc
+ 679 033b 26       		.byte	0x26
+ 680 033c 11       		.uleb128 0x11
+ 681 033d 38020000 		.4byte	.LASF38
+ 682 0341 38020000 		.4byte	.LASF38
+ 683 0345 0B       		.byte	0xb
+ 684 0346 29       		.byte	0x29
+ 685 0347 11       		.uleb128 0x11
+ 686 0348 3F000000 		.4byte	.LASF39
+ 687 034c 3F000000 		.4byte	.LASF39
+ 688 0350 0C       		.byte	0xc
+ 689 0351 29       		.byte	0x29
+ 690 0352 00       		.byte	0
+ 691              		.section	.debug_abbrev,"",%progbits
+ 692              	.Ldebug_abbrev0:
+ 693 0000 01       		.uleb128 0x1
+ 694 0001 11       		.uleb128 0x11
+ 695 0002 01       		.byte	0x1
+ 696 0003 25       		.uleb128 0x25
+ 697 0004 0E       		.uleb128 0xe
+ 698 0005 13       		.uleb128 0x13
+ 699 0006 0B       		.uleb128 0xb
+ 700 0007 03       		.uleb128 0x3
+ 701 0008 0E       		.uleb128 0xe
+ 702 0009 1B       		.uleb128 0x1b
+ 703 000a 0E       		.uleb128 0xe
+ 704 000b 55       		.uleb128 0x55
+ 705 000c 17       		.uleb128 0x17
+ 706 000d 11       		.uleb128 0x11
+ 707 000e 01       		.uleb128 0x1
+ 708 000f 10       		.uleb128 0x10
+ 709 0010 17       		.uleb128 0x17
+ 710 0011 00       		.byte	0
+ 711 0012 00       		.byte	0
+ 712 0013 02       		.uleb128 0x2
+ 713 0014 24       		.uleb128 0x24
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 15
+
+
+ 714 0015 00       		.byte	0
+ 715 0016 0B       		.uleb128 0xb
+ 716 0017 0B       		.uleb128 0xb
+ 717 0018 3E       		.uleb128 0x3e
+ 718 0019 0B       		.uleb128 0xb
+ 719 001a 03       		.uleb128 0x3
+ 720 001b 0E       		.uleb128 0xe
+ 721 001c 00       		.byte	0
+ 722 001d 00       		.byte	0
+ 723 001e 03       		.uleb128 0x3
+ 724 001f 16       		.uleb128 0x16
+ 725 0020 00       		.byte	0
+ 726 0021 03       		.uleb128 0x3
+ 727 0022 0E       		.uleb128 0xe
+ 728 0023 3A       		.uleb128 0x3a
+ 729 0024 0B       		.uleb128 0xb
+ 730 0025 3B       		.uleb128 0x3b
+ 731 0026 0B       		.uleb128 0xb
+ 732 0027 49       		.uleb128 0x49
+ 733 0028 13       		.uleb128 0x13
+ 734 0029 00       		.byte	0
+ 735 002a 00       		.byte	0
+ 736 002b 04       		.uleb128 0x4
+ 737 002c 24       		.uleb128 0x24
+ 738 002d 00       		.byte	0
+ 739 002e 0B       		.uleb128 0xb
+ 740 002f 0B       		.uleb128 0xb
+ 741 0030 3E       		.uleb128 0x3e
+ 742 0031 0B       		.uleb128 0xb
+ 743 0032 03       		.uleb128 0x3
+ 744 0033 08       		.uleb128 0x8
+ 745 0034 00       		.byte	0
+ 746 0035 00       		.byte	0
+ 747 0036 05       		.uleb128 0x5
+ 748 0037 16       		.uleb128 0x16
+ 749 0038 00       		.byte	0
+ 750 0039 03       		.uleb128 0x3
+ 751 003a 0E       		.uleb128 0xe
+ 752 003b 3A       		.uleb128 0x3a
+ 753 003c 0B       		.uleb128 0xb
+ 754 003d 3B       		.uleb128 0x3b
+ 755 003e 05       		.uleb128 0x5
+ 756 003f 49       		.uleb128 0x49
+ 757 0040 13       		.uleb128 0x13
+ 758 0041 00       		.byte	0
+ 759 0042 00       		.byte	0
+ 760 0043 06       		.uleb128 0x6
+ 761 0044 35       		.uleb128 0x35
+ 762 0045 00       		.byte	0
+ 763 0046 49       		.uleb128 0x49
+ 764 0047 13       		.uleb128 0x13
+ 765 0048 00       		.byte	0
+ 766 0049 00       		.byte	0
+ 767 004a 07       		.uleb128 0x7
+ 768 004b 04       		.uleb128 0x4
+ 769 004c 01       		.byte	0x1
+ 770 004d 03       		.uleb128 0x3
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 16
+
+
+ 771 004e 0E       		.uleb128 0xe
+ 772 004f 0B       		.uleb128 0xb
+ 773 0050 0B       		.uleb128 0xb
+ 774 0051 49       		.uleb128 0x49
+ 775 0052 13       		.uleb128 0x13
+ 776 0053 3A       		.uleb128 0x3a
+ 777 0054 0B       		.uleb128 0xb
+ 778 0055 3B       		.uleb128 0x3b
+ 779 0056 0B       		.uleb128 0xb
+ 780 0057 01       		.uleb128 0x1
+ 781 0058 13       		.uleb128 0x13
+ 782 0059 00       		.byte	0
+ 783 005a 00       		.byte	0
+ 784 005b 08       		.uleb128 0x8
+ 785 005c 28       		.uleb128 0x28
+ 786 005d 00       		.byte	0
+ 787 005e 03       		.uleb128 0x3
+ 788 005f 0E       		.uleb128 0xe
+ 789 0060 1C       		.uleb128 0x1c
+ 790 0061 0B       		.uleb128 0xb
+ 791 0062 00       		.byte	0
+ 792 0063 00       		.byte	0
+ 793 0064 09       		.uleb128 0x9
+ 794 0065 2E       		.uleb128 0x2e
+ 795 0066 00       		.byte	0
+ 796 0067 3F       		.uleb128 0x3f
+ 797 0068 19       		.uleb128 0x19
+ 798 0069 03       		.uleb128 0x3
+ 799 006a 0E       		.uleb128 0xe
+ 800 006b 3A       		.uleb128 0x3a
+ 801 006c 0B       		.uleb128 0xb
+ 802 006d 3B       		.uleb128 0x3b
+ 803 006e 0B       		.uleb128 0xb
+ 804 006f 27       		.uleb128 0x27
+ 805 0070 19       		.uleb128 0x19
+ 806 0071 11       		.uleb128 0x11
+ 807 0072 01       		.uleb128 0x1
+ 808 0073 12       		.uleb128 0x12
+ 809 0074 06       		.uleb128 0x6
+ 810 0075 40       		.uleb128 0x40
+ 811 0076 18       		.uleb128 0x18
+ 812 0077 9742     		.uleb128 0x2117
+ 813 0079 19       		.uleb128 0x19
+ 814 007a 00       		.byte	0
+ 815 007b 00       		.byte	0
+ 816 007c 0A       		.uleb128 0xa
+ 817 007d 2E       		.uleb128 0x2e
+ 818 007e 01       		.byte	0x1
+ 819 007f 3F       		.uleb128 0x3f
+ 820 0080 19       		.uleb128 0x19
+ 821 0081 03       		.uleb128 0x3
+ 822 0082 0E       		.uleb128 0xe
+ 823 0083 3A       		.uleb128 0x3a
+ 824 0084 0B       		.uleb128 0xb
+ 825 0085 3B       		.uleb128 0x3b
+ 826 0086 0B       		.uleb128 0xb
+ 827 0087 27       		.uleb128 0x27
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 17
+
+
+ 828 0088 19       		.uleb128 0x19
+ 829 0089 11       		.uleb128 0x11
+ 830 008a 01       		.uleb128 0x1
+ 831 008b 12       		.uleb128 0x12
+ 832 008c 06       		.uleb128 0x6
+ 833 008d 40       		.uleb128 0x40
+ 834 008e 18       		.uleb128 0x18
+ 835 008f 9742     		.uleb128 0x2117
+ 836 0091 19       		.uleb128 0x19
+ 837 0092 01       		.uleb128 0x1
+ 838 0093 13       		.uleb128 0x13
+ 839 0094 00       		.byte	0
+ 840 0095 00       		.byte	0
+ 841 0096 0B       		.uleb128 0xb
+ 842 0097 898201   		.uleb128 0x4109
+ 843 009a 01       		.byte	0x1
+ 844 009b 11       		.uleb128 0x11
+ 845 009c 01       		.uleb128 0x1
+ 846 009d 31       		.uleb128 0x31
+ 847 009e 13       		.uleb128 0x13
+ 848 009f 01       		.uleb128 0x1
+ 849 00a0 13       		.uleb128 0x13
+ 850 00a1 00       		.byte	0
+ 851 00a2 00       		.byte	0
+ 852 00a3 0C       		.uleb128 0xc
+ 853 00a4 8A8201   		.uleb128 0x410a
+ 854 00a7 00       		.byte	0
+ 855 00a8 02       		.uleb128 0x2
+ 856 00a9 18       		.uleb128 0x18
+ 857 00aa 9142     		.uleb128 0x2111
+ 858 00ac 18       		.uleb128 0x18
+ 859 00ad 00       		.byte	0
+ 860 00ae 00       		.byte	0
+ 861 00af 0D       		.uleb128 0xd
+ 862 00b0 898201   		.uleb128 0x4109
+ 863 00b3 00       		.byte	0
+ 864 00b4 11       		.uleb128 0x11
+ 865 00b5 01       		.uleb128 0x1
+ 866 00b6 31       		.uleb128 0x31
+ 867 00b7 13       		.uleb128 0x13
+ 868 00b8 00       		.byte	0
+ 869 00b9 00       		.byte	0
+ 870 00ba 0E       		.uleb128 0xe
+ 871 00bb 2E       		.uleb128 0x2e
+ 872 00bc 01       		.byte	0x1
+ 873 00bd 3F       		.uleb128 0x3f
+ 874 00be 19       		.uleb128 0x19
+ 875 00bf 03       		.uleb128 0x3
+ 876 00c0 0E       		.uleb128 0xe
+ 877 00c1 3A       		.uleb128 0x3a
+ 878 00c2 0B       		.uleb128 0xb
+ 879 00c3 3B       		.uleb128 0x3b
+ 880 00c4 0B       		.uleb128 0xb
+ 881 00c5 27       		.uleb128 0x27
+ 882 00c6 19       		.uleb128 0x19
+ 883 00c7 49       		.uleb128 0x49
+ 884 00c8 13       		.uleb128 0x13
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 18
+
+
+ 885 00c9 8701     		.uleb128 0x87
+ 886 00cb 19       		.uleb128 0x19
+ 887 00cc 11       		.uleb128 0x11
+ 888 00cd 01       		.uleb128 0x1
+ 889 00ce 12       		.uleb128 0x12
+ 890 00cf 06       		.uleb128 0x6
+ 891 00d0 40       		.uleb128 0x40
+ 892 00d1 18       		.uleb128 0x18
+ 893 00d2 9742     		.uleb128 0x2117
+ 894 00d4 19       		.uleb128 0x19
+ 895 00d5 01       		.uleb128 0x1
+ 896 00d6 13       		.uleb128 0x13
+ 897 00d7 00       		.byte	0
+ 898 00d8 00       		.byte	0
+ 899 00d9 0F       		.uleb128 0xf
+ 900 00da 34       		.uleb128 0x34
+ 901 00db 00       		.byte	0
+ 902 00dc 03       		.uleb128 0x3
+ 903 00dd 0E       		.uleb128 0xe
+ 904 00de 3A       		.uleb128 0x3a
+ 905 00df 0B       		.uleb128 0xb
+ 906 00e0 3B       		.uleb128 0x3b
+ 907 00e1 05       		.uleb128 0x5
+ 908 00e2 49       		.uleb128 0x49
+ 909 00e3 13       		.uleb128 0x13
+ 910 00e4 3F       		.uleb128 0x3f
+ 911 00e5 19       		.uleb128 0x19
+ 912 00e6 3C       		.uleb128 0x3c
+ 913 00e7 19       		.uleb128 0x19
+ 914 00e8 00       		.byte	0
+ 915 00e9 00       		.byte	0
+ 916 00ea 10       		.uleb128 0x10
+ 917 00eb 34       		.uleb128 0x34
+ 918 00ec 00       		.byte	0
+ 919 00ed 03       		.uleb128 0x3
+ 920 00ee 0E       		.uleb128 0xe
+ 921 00ef 3A       		.uleb128 0x3a
+ 922 00f0 0B       		.uleb128 0xb
+ 923 00f1 3B       		.uleb128 0x3b
+ 924 00f2 0B       		.uleb128 0xb
+ 925 00f3 49       		.uleb128 0x49
+ 926 00f4 13       		.uleb128 0x13
+ 927 00f5 3F       		.uleb128 0x3f
+ 928 00f6 19       		.uleb128 0x19
+ 929 00f7 02       		.uleb128 0x2
+ 930 00f8 18       		.uleb128 0x18
+ 931 00f9 00       		.byte	0
+ 932 00fa 00       		.byte	0
+ 933 00fb 11       		.uleb128 0x11
+ 934 00fc 2E       		.uleb128 0x2e
+ 935 00fd 00       		.byte	0
+ 936 00fe 3F       		.uleb128 0x3f
+ 937 00ff 19       		.uleb128 0x19
+ 938 0100 3C       		.uleb128 0x3c
+ 939 0101 19       		.uleb128 0x19
+ 940 0102 6E       		.uleb128 0x6e
+ 941 0103 0E       		.uleb128 0xe
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 19
+
+
+ 942 0104 03       		.uleb128 0x3
+ 943 0105 0E       		.uleb128 0xe
+ 944 0106 3A       		.uleb128 0x3a
+ 945 0107 0B       		.uleb128 0xb
+ 946 0108 3B       		.uleb128 0x3b
+ 947 0109 0B       		.uleb128 0xb
+ 948 010a 00       		.byte	0
+ 949 010b 00       		.byte	0
+ 950 010c 00       		.byte	0
+ 951              		.section	.debug_aranges,"",%progbits
+ 952 0000 34000000 		.4byte	0x34
+ 953 0004 0200     		.2byte	0x2
+ 954 0006 00000000 		.4byte	.Ldebug_info0
+ 955 000a 04       		.byte	0x4
+ 956 000b 00       		.byte	0
+ 957 000c 0000     		.2byte	0
+ 958 000e 0000     		.2byte	0
+ 959 0010 00000000 		.4byte	.LFB63
+ 960 0014 24000000 		.4byte	.LFE63-.LFB63
+ 961 0018 00000000 		.4byte	.LFB64
+ 962 001c 28000000 		.4byte	.LFE64-.LFB64
+ 963 0020 00000000 		.4byte	.LFB65
+ 964 0024 2C000000 		.4byte	.LFE65-.LFB65
+ 965 0028 00000000 		.4byte	.LFB66
+ 966 002c A4000000 		.4byte	.LFE66-.LFB66
+ 967 0030 00000000 		.4byte	0
+ 968 0034 00000000 		.4byte	0
+ 969              		.section	.debug_ranges,"",%progbits
+ 970              	.Ldebug_ranges0:
+ 971 0000 00000000 		.4byte	.LFB63
+ 972 0004 24000000 		.4byte	.LFE63
+ 973 0008 00000000 		.4byte	.LFB64
+ 974 000c 28000000 		.4byte	.LFE64
+ 975 0010 00000000 		.4byte	.LFB65
+ 976 0014 2C000000 		.4byte	.LFE65
+ 977 0018 00000000 		.4byte	.LFB66
+ 978 001c A4000000 		.4byte	.LFE66
+ 979 0020 00000000 		.4byte	0
+ 980 0024 00000000 		.4byte	0
+ 981              		.section	.debug_line,"",%progbits
+ 982              	.Ldebug_line0:
+ 983 0000 0E020000 		.section	.debug_str,"MS",%progbits,1
+ 983      0200AB01 
+ 983      00000201 
+ 983      FB0E0D00 
+ 983      01010101 
+ 984              	.LASF19:
+ 985 0000 636F6C6C 		.ascii	"collisionState\000"
+ 985      6973696F 
+ 985      6E537461 
+ 985      746500
+ 986              	.LASF26:
+ 987 000f 6C6F7746 		.ascii	"lowFlag\000"
+ 987      6C616700 
+ 988              	.LASF30:
+ 989 0017 54696D65 		.ascii	"Timer_1_Start\000"
+ 989      725F315F 
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 20
+
+
+ 989      53746172 
+ 989      7400
+ 990              	.LASF28:
+ 991 0025 54696D65 		.ascii	"Timer_1_WritePeriod\000"
+ 991      725F315F 
+ 991      57726974 
+ 991      65506572 
+ 991      696F6400 
+ 992              	.LASF43:
+ 993 0039 73746174 		.ascii	"state\000"
+ 993      6500
+ 994              	.LASF39:
+ 995 003f 434F4C4C 		.ascii	"COLLISION_Read\000"
+ 995      4953494F 
+ 995      4E5F5265 
+ 995      616400
+ 996              	.LASF9:
+ 997 004e 5F5F696E 		.ascii	"__int32_t\000"
+ 997      7433325F 
+ 997      7400
+ 998              	.LASF42:
+ 999 0058 433A5C55 		.ascii	"C:\\Users\\qureshis\\Documents\\CE 4950\\attep5000\\"
+ 999      73657273 
+ 999      5C717572 
+ 999      65736869 
+ 999      735C446F 
+ 1000 0086 6E657477 		.ascii	"networking-project\\networking.cydsn\000"
+ 1000      6F726B69 
+ 1000      6E672D70 
+ 1000      726F6A65 
+ 1000      63745C6E 
+ 1001              	.LASF13:
+ 1002 00aa 646F7562 		.ascii	"double\000"
+ 1002      6C6500
+ 1003              	.LASF22:
+ 1004 00b1 52495349 		.ascii	"RISING\000"
+ 1004      4E4700
+ 1005              	.LASF36:
+ 1006 00b8 42555359 		.ascii	"BUSY_Write\000"
+ 1006      5F577269 
+ 1006      746500
+ 1007              	.LASF12:
+ 1008 00c3 666C6F61 		.ascii	"float\000"
+ 1008      7400
+ 1009              	.LASF1:
+ 1010 00c9 756E7369 		.ascii	"unsigned char\000"
+ 1010      676E6564 
+ 1010      20636861 
+ 1010      7200
+ 1011              	.LASF40:
+ 1012 00d7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1012      43313120 
+ 1012      352E342E 
+ 1012      31203230 
+ 1012      31363036 
+ 1013 010a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1013      20726576 
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 21
+
+
+ 1013      6973696F 
+ 1013      6E203233 
+ 1013      37373135 
+ 1014 013d 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1014      66756E63 
+ 1014      74696F6E 
+ 1014      2D736563 
+ 1014      74696F6E 
+ 1015              	.LASF15:
+ 1016 0165 72656738 		.ascii	"reg8\000"
+ 1016      00
+ 1017              	.LASF34:
+ 1018 016a 49444C45 		.ascii	"IDLE_Write\000"
+ 1018      5F577269 
+ 1018      746500
+ 1019              	.LASF5:
+ 1020 0175 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1020      20756E73 
+ 1020      69676E65 
+ 1020      6420696E 
+ 1020      7400
+ 1021              	.LASF35:
+ 1022 0187 49444C45 		.ascii	"IDLE_Read\000"
+ 1022      5F526561 
+ 1022      6400
+ 1023              	.LASF3:
+ 1024 0191 73686F72 		.ascii	"short unsigned int\000"
+ 1024      7420756E 
+ 1024      7369676E 
+ 1024      65642069 
+ 1024      6E7400
+ 1025              	.LASF32:
+ 1026 01a4 494E545F 		.ascii	"INT_RISING_StartEx\000"
+ 1026      52495349 
+ 1026      4E475F53 
+ 1026      74617274 
+ 1026      457800
+ 1027              	.LASF37:
+ 1028 01b7 434F4C4C 		.ascii	"COLLISION_Write\000"
+ 1028      4953494F 
+ 1028      4E5F5772 
+ 1028      69746500 
+ 1029              	.LASF18:
+ 1030 01c7 69646C65 		.ascii	"idleState\000"
+ 1030      53746174 
+ 1030      6500
+ 1031              	.LASF25:
+ 1032 01d1 73797374 		.ascii	"systemState\000"
+ 1032      656D5374 
+ 1032      61746500 
+ 1033              	.LASF45:
+ 1034 01dd 6D61696E 		.ascii	"main\000"
+ 1034      00
+ 1035              	.LASF24:
+ 1036 01e2 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1036      52784275 
+ 1036      66666572 
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 22
+
+
+ 1036      00
+ 1037              	.LASF20:
+ 1038 01ef 62757379 		.ascii	"busyState\000"
+ 1038      53746174 
+ 1038      6500
+ 1039              	.LASF8:
+ 1040 01f9 756E7369 		.ascii	"unsigned int\000"
+ 1040      676E6564 
+ 1040      20696E74 
+ 1040      00
+ 1041              	.LASF7:
+ 1042 0206 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1042      206C6F6E 
+ 1042      6720756E 
+ 1042      7369676E 
+ 1042      65642069 
+ 1043              	.LASF29:
+ 1044 021d 54696D65 		.ascii	"Timer_1_WriteCounter\000"
+ 1044      725F315F 
+ 1044      57726974 
+ 1044      65436F75 
+ 1044      6E746572 
+ 1045              	.LASF44:
+ 1046 0232 54494D45 		.ascii	"TIMER\000"
+ 1046      5200
+ 1047              	.LASF38:
+ 1048 0238 42555359 		.ascii	"BUSY_Read\000"
+ 1048      5F526561 
+ 1048      6400
+ 1049              	.LASF23:
+ 1050 0242 46414C4C 		.ascii	"FALLING\000"
+ 1050      494E4700 
+ 1051              	.LASF10:
+ 1052 024a 696E7433 		.ascii	"int32_t\000"
+ 1052      325F7400 
+ 1053              	.LASF17:
+ 1054 0252 73697A65 		.ascii	"sizetype\000"
+ 1054      74797065 
+ 1054      00
+ 1055              	.LASF6:
+ 1056 025b 6C6F6E67 		.ascii	"long long int\000"
+ 1056      206C6F6E 
+ 1056      6720696E 
+ 1056      7400
+ 1057              	.LASF41:
+ 1058 0269 6D61696E 		.ascii	"main.c\000"
+ 1058      2E6300
+ 1059              	.LASF14:
+ 1060 0270 63686172 		.ascii	"char\000"
+ 1060      00
+ 1061              	.LASF2:
+ 1062 0275 73686F72 		.ascii	"short int\000"
+ 1062      7420696E 
+ 1062      7400
+ 1063              	.LASF11:
+ 1064 027f 75696E74 		.ascii	"uint8\000"
+ 1064      3800
+ARM GAS  C:\Users\qureshis\AppData\Local\Temp\ccHYuGvK.s 			page 23
+
+
+ 1065              	.LASF31:
+ 1066 0285 54696D65 		.ascii	"TimerISR_StartEx\000"
+ 1066      72495352 
+ 1066      5F537461 
+ 1066      72744578 
+ 1066      00
+ 1067              	.LASF4:
+ 1068 0296 6C6F6E67 		.ascii	"long int\000"
+ 1068      20696E74 
+ 1068      00
+ 1069              	.LASF16:
+ 1070 029f 6C6F6E67 		.ascii	"long double\000"
+ 1070      20646F75 
+ 1070      626C6500 
+ 1071              	.LASF0:
+ 1072 02ab 7369676E 		.ascii	"signed char\000"
+ 1072      65642063 
+ 1072      68617200 
+ 1073              	.LASF33:
+ 1074 02b7 494E545F 		.ascii	"INT_FALLING_StartEx\000"
+ 1074      46414C4C 
+ 1074      494E475F 
+ 1074      53746172 
+ 1074      74457800 
+ 1075              	.LASF21:
+ 1076 02cb 53746174 		.ascii	"State\000"
+ 1076      6500
+ 1077              	.LASF27:
+ 1078 02d1 5F426F6F 		.ascii	"_Bool\000"
+ 1078      6C00
+ 1079              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

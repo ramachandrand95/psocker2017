@@ -1,0 +1,6 @@
+C:\Users\qureshis\Documents\CE 4950\attep5000\networking-project\networking.cydsn\networking.cyprj|b93059b6-33fb-4173-be4c-6ec3cfa6cfee
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|6017af0d-5845-4bd0-8141-76a61bfbc119
+C:\Users\qureshis\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|ca6b56d3-2b2c-4579-a025-bec99c0caeef
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|6cfadcb3-fbd0-4fc4-89f1-c2f6825689fc
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|5ff46ad0-4bb0-4a16-83ae-f367b4f8ec51
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|230aedf2-2a3e-401d-8780-32e9e398b1dd
