@@ -29,7 +29,7 @@ _Bool lowFlag = 0;
 #define SERIAL_BUFFER_SIZE 500
 //serial buffer
 char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
-char SERIAL_POS = 0;
+int SERIAL_POS = 0;
 //flag to determine if the UART is connected
 int uartConnected = 0;
 

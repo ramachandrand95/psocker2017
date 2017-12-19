@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 1
 
 
    1              		.syntax unified
@@ -58,69 +58,71 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
   28:main.c        **** //serial buffer size
   29:main.c        **** #define SERIAL_BUFFER_SIZE 500
   30:main.c        **** //serial buffer
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 2
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 2
 
 
   31:main.c        **** char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
-  32:main.c        **** char SERIAL_POS = 0;
-  33:main.c        **** 
-  34:main.c        **** CY_ISR(Timer_TX_ISR_HANDLER)
-  35:main.c        **** {
-  36:main.c        ****    	Timer_TX_STATUS; //clear TX timer
-  37:main.c        ****     
-  38:main.c        ****     //get data
-  39:main.c        ****     char currentChar = SERIAL_BUFFER[SERIAL_POS];
-  40:main.c        ****     //encode into Unipolar-RZ
-  41:main.c        ****     int count = 0; //keeps track of which bit we're on
-  42:main.c        ****     //Data to be transmitted. This represents one byte of data and will
-  43:main.c        ****     //be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
-  44:main.c        ****     for(int y = 0; y < 16; y++){
-  45:main.c        ****         if(y == 0){
-  46:main.c        ****             TX_Write(1);
-  47:main.c        ****         }else if(y%2 != 0){
-  48:main.c        ****             TX_Write(0);
-  49:main.c        ****         }else{
-  50:main.c        ****             TX_Write((currentChar)&(1<<count));
-  51:main.c        ****             ++count;
-  52:main.c        ****         }
-  53:main.c        ****     }
-  54:main.c        ****     ++SERIAL_POS;
-  55:main.c        **** }
-  56:main.c        **** 
-  57:main.c        **** CY_ISR(TIMER)
-  58:main.c        **** {
-  28              		.loc 1 58 0
+  32:main.c        **** int SERIAL_POS = 0;
+  33:main.c        **** //flag to determine if the UART is connected
+  34:main.c        **** int uartConnected = 0;
+  35:main.c        **** 
+  36:main.c        **** CY_ISR(Timer_TX_ISR_HANDLER)
+  37:main.c        **** {
+  38:main.c        ****    	Timer_TX_STATUS; //clear TX timer
+  39:main.c        ****     
+  40:main.c        ****     //get data
+  41:main.c        ****     char currentChar = SERIAL_BUFFER[SERIAL_POS];
+  42:main.c        ****     //encode into Unipolar-RZ
+  43:main.c        ****     int count = 0; //keeps track of which bit we're on
+  44:main.c        ****     //Data to be transmitted. This represents one byte of data and will
+  45:main.c        ****     //be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
+  46:main.c        ****     for(int y = 0; y < 16; y++){
+  47:main.c        ****         if(y == 0){
+  48:main.c        ****             TX_Write(1);
+  49:main.c        ****         }else if(y%2 != 0){
+  50:main.c        ****             TX_Write(0);
+  51:main.c        ****         }else{
+  52:main.c        ****             TX_Write((currentChar)&(1<<count));
+  53:main.c        ****             ++count;
+  54:main.c        ****         }
+  55:main.c        ****     }
+  56:main.c        ****     ++SERIAL_POS;
+  57:main.c        **** }
+  58:main.c        **** 
+  59:main.c        **** CY_ISR(TIMER)
+  60:main.c        **** {
+  28              		.loc 1 60 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
-  59:main.c        ****    	Timer_1_STATUS; //clear timer
-  33              		.loc 1 59 0
+  61:main.c        ****    	Timer_1_STATUS; //clear timer
+  33              		.loc 1 61 0
   34 0000 064B     		ldr	r3, .L4
   35 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  60:main.c        ****     
-  61:main.c        ****     if (!(lowFlag) ){
-  36              		.loc 1 61 0
+  62:main.c        ****     
+  63:main.c        ****     if (!(lowFlag) ){
+  36              		.loc 1 63 0
   37 0004 064B     		ldr	r3, .L4+4
   38 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
   39 0008 1BB9     		cbnz	r3, .L2
-  62:main.c        ****         systemState = idleState;
-  40              		.loc 1 62 0
+  64:main.c        ****         systemState = idleState;
+  40              		.loc 1 64 0
   41 000a 0022     		movs	r2, #0
   42 000c 044B     		ldr	r3, .L4+4
   43 000e 5A70     		strb	r2, [r3, #1]
   44 0010 7047     		bx	lr
   45              	.L2:
-  63:main.c        ****     } else {
-  64:main.c        ****         systemState = collisionState;
-  46              		.loc 1 64 0
+  65:main.c        ****     } else {
+  66:main.c        ****         systemState = collisionState;
+  46              		.loc 1 66 0
   47 0012 0122     		movs	r2, #1
   48 0014 024B     		ldr	r3, .L4+4
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 3
+
+
   49 0016 5A70     		strb	r2, [r3, #1]
   50 0018 7047     		bx	lr
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 3
-
-
   51              	.L5:
   52 001a 00BF     		.align	2
   53              	.L4:
@@ -137,8 +139,8 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
   64              		.type	Timer_TX_ISR_HANDLER, %function
   65              	Timer_TX_ISR_HANDLER:
   66              	.LFB63:
-  35:main.c        ****    	Timer_TX_STATUS; //clear TX timer
-  67              		.loc 1 35 0
+  37:main.c        ****    	Timer_TX_STATUS; //clear TX timer
+  67              		.loc 1 37 0
   68              		.cfi_startproc
   69              		@ args = 0, pretend = 0, frame = 0
   70              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -148,83 +150,83 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
   74              		.cfi_offset 5, -12
   75              		.cfi_offset 6, -8
   76              		.cfi_offset 14, -4
-  36:main.c        ****     
-  77              		.loc 1 36 0
+  38:main.c        ****     
+  77              		.loc 1 38 0
   78 0002 114B     		ldr	r3, .L13
   79 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  39:main.c        ****     //encode into Unipolar-RZ
-  80              		.loc 1 39 0
+  41:main.c        ****     //encode into Unipolar-RZ
+  80              		.loc 1 41 0
   81 0006 114B     		ldr	r3, .L13+4
-  82 0008 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+  82 0008 5B68     		ldr	r3, [r3, #4]
   83 000a 114A     		ldr	r2, .L13+8
   84 000c D65C     		ldrb	r6, [r2, r3]	@ zero_extendqisi2
   85              	.LVL0:
   86              	.LBB2:
-  44:main.c        ****         if(y == 0){
-  87              		.loc 1 44 0
+  46:main.c        ****         if(y == 0){
+  87              		.loc 1 46 0
   88 000e 0024     		movs	r4, #0
   89              	.LBE2:
-  41:main.c        ****     //Data to be transmitted. This represents one byte of data and will
-  90              		.loc 1 41 0
+  43:main.c        ****     //Data to be transmitted. This represents one byte of data and will
+  90              		.loc 1 43 0
   91 0010 2546     		mov	r5, r4
   92              	.LBB3:
-  44:main.c        ****         if(y == 0){
-  93              		.loc 1 44 0
+  46:main.c        ****         if(y == 0){
+  93              		.loc 1 46 0
   94 0012 12E0     		b	.L7
   95              	.LVL1:
   96              	.L11:
-  45:main.c        ****             TX_Write(1);
-  97              		.loc 1 45 0
+  47:main.c        ****             TX_Write(1);
+  97              		.loc 1 47 0
   98 0014 1CB9     		cbnz	r4, .L8
-  46:main.c        ****         }else if(y%2 != 0){
-  99              		.loc 1 46 0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 4
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 4
 
 
+  48:main.c        ****         }else if(y%2 != 0){
+  99              		.loc 1 48 0
  100 0016 0120     		movs	r0, #1
  101 0018 FFF7FEFF 		bl	TX_Write
  102              	.LVL2:
  103 001c 0CE0     		b	.L9
  104              	.L8:
-  47:main.c        ****             TX_Write(0);
- 105              		.loc 1 47 0
+  49:main.c        ****             TX_Write(0);
+ 105              		.loc 1 49 0
  106 001e 14F0010F 		tst	r4, #1
  107 0022 03D0     		beq	.L10
-  48:main.c        ****         }else{
- 108              		.loc 1 48 0
+  50:main.c        ****         }else{
+ 108              		.loc 1 50 0
  109 0024 0020     		movs	r0, #0
  110 0026 FFF7FEFF 		bl	TX_Write
  111              	.LVL3:
  112 002a 05E0     		b	.L9
  113              	.L10:
-  50:main.c        ****             ++count;
- 114              		.loc 1 50 0
+  52:main.c        ****             ++count;
+ 114              		.loc 1 52 0
  115 002c 0120     		movs	r0, #1
  116 002e A840     		lsls	r0, r0, r5
  117 0030 3040     		ands	r0, r0, r6
  118 0032 FFF7FEFF 		bl	TX_Write
  119              	.LVL4:
-  51:main.c        ****         }
- 120              		.loc 1 51 0
+  53:main.c        ****         }
+ 120              		.loc 1 53 0
  121 0036 0135     		adds	r5, r5, #1
  122              	.LVL5:
  123              	.L9:
-  44:main.c        ****         if(y == 0){
- 124              		.loc 1 44 0 discriminator 2
+  46:main.c        ****         if(y == 0){
+ 124              		.loc 1 46 0 discriminator 2
  125 0038 0134     		adds	r4, r4, #1
  126              	.LVL6:
  127              	.L7:
-  44:main.c        ****         if(y == 0){
- 128              		.loc 1 44 0 is_stmt 0 discriminator 1
+  46:main.c        ****         if(y == 0){
+ 128              		.loc 1 46 0 is_stmt 0 discriminator 1
  129 003a 0F2C     		cmp	r4, #15
  130 003c EADD     		ble	.L11
  131              	.LBE3:
-  54:main.c        **** }
- 132              		.loc 1 54 0 is_stmt 1
+  56:main.c        **** }
+ 132              		.loc 1 56 0 is_stmt 1
  133 003e 034A     		ldr	r2, .L13+4
- 134 0040 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
+ 134 0040 5368     		ldr	r3, [r2, #4]
  135 0042 0133     		adds	r3, r3, #1
- 136 0044 9370     		strb	r3, [r2, #2]
+ 136 0044 5360     		str	r3, [r2, #4]
  137 0046 70BD     		pop	{r4, r5, r6, pc}
  138              	.LVL7:
  139              	.L14:
@@ -236,23 +238,23 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  145              		.cfi_endproc
  146              	.LFE63:
  147              		.size	Timer_TX_ISR_HANDLER, .-Timer_TX_ISR_HANDLER
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 5
+
+
  148              		.section	.text.RISING,"ax",%progbits
  149              		.align	2
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 5
-
-
  150              		.global	RISING
  151              		.thumb
  152              		.thumb_func
  153              		.type	RISING, %function
  154              	RISING:
  155              	.LFB65:
-  65:main.c        ****     }
-  66:main.c        **** }
-  67:main.c        **** 
-  68:main.c        **** CY_ISR(RISING)
-  69:main.c        **** {
- 156              		.loc 1 69 0
+  67:main.c        ****     }
+  68:main.c        **** }
+  69:main.c        **** 
+  70:main.c        **** CY_ISR(RISING)
+  71:main.c        **** {
+ 156              		.loc 1 71 0
  157              		.cfi_startproc
  158              		@ args = 0, pretend = 0, frame = 0
  159              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -260,32 +262,32 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  161              		.cfi_def_cfa_offset 8
  162              		.cfi_offset 3, -8
  163              		.cfi_offset 14, -4
-  70:main.c        ****     if ((!lowFlag)){
- 164              		.loc 1 70 0
+  72:main.c        ****     if ((!lowFlag)){
+ 164              		.loc 1 72 0
  165 0002 084B     		ldr	r3, .L18
  166 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  167 0006 63B9     		cbnz	r3, .L15
-  71:main.c        ****         Timer_1_WritePeriod(COLL_PERIOD);
- 168              		.loc 1 71 0
+  73:main.c        ****         Timer_1_WritePeriod(COLL_PERIOD);
+ 168              		.loc 1 73 0
  169 0008 3420     		movs	r0, #52
  170 000a FFF7FEFF 		bl	Timer_1_WritePeriod
  171              	.LVL8:
-  72:main.c        ****         Timer_1_WriteCounter(COLL_COUNTER);
- 172              		.loc 1 72 0
+  74:main.c        ****         Timer_1_WriteCounter(COLL_COUNTER);
+ 172              		.loc 1 74 0
  173 000e 3320     		movs	r0, #51
  174 0010 FFF7FEFF 		bl	Timer_1_WriteCounter
  175              	.LVL9:
-  73:main.c        ****         Timer_1_Start();
- 176              		.loc 1 73 0
+  75:main.c        ****         Timer_1_Start();
+ 176              		.loc 1 75 0
  177 0014 FFF7FEFF 		bl	Timer_1_Start
  178              	.LVL10:
-  74:main.c        ****         lowFlag = 1;
- 179              		.loc 1 74 0
+  76:main.c        ****         lowFlag = 1;
+ 179              		.loc 1 76 0
  180 0018 024B     		ldr	r3, .L18
  181 001a 0122     		movs	r2, #1
  182 001c 1A70     		strb	r2, [r3]
-  75:main.c        ****         systemState = busyState;
- 183              		.loc 1 75 0
+  77:main.c        ****         systemState = busyState;
+ 183              		.loc 1 77 0
  184 001e 0222     		movs	r2, #2
  185 0020 5A70     		strb	r2, [r3, #1]
  186              	.L15:
@@ -296,11 +298,11 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  191 0024 00000000 		.word	.LANCHOR0
  192              		.cfi_endproc
  193              	.LFE65:
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 6
+
+
  194              		.size	RISING, .-RISING
  195              		.section	.text.FALLING,"ax",%progbits
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 6
-
-
  196              		.align	2
  197              		.global	FALLING
  198              		.thumb
@@ -308,12 +310,12 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  200              		.type	FALLING, %function
  201              	FALLING:
  202              	.LFB66:
-  76:main.c        ****     }
-  77:main.c        **** }
-  78:main.c        ****  
-  79:main.c        **** CY_ISR(FALLING)
-  80:main.c        **** {
- 203              		.loc 1 80 0
+  78:main.c        ****     }
+  79:main.c        **** }
+  80:main.c        ****  
+  81:main.c        **** CY_ISR(FALLING)
+  82:main.c        **** {
+ 203              		.loc 1 82 0
  204              		.cfi_startproc
  205              		@ args = 0, pretend = 0, frame = 0
  206              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -321,32 +323,32 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  208              		.cfi_def_cfa_offset 8
  209              		.cfi_offset 3, -8
  210              		.cfi_offset 14, -4
-  81:main.c        ****     if (lowFlag){
- 211              		.loc 1 81 0
+  83:main.c        ****     if (lowFlag){
+ 211              		.loc 1 83 0
  212 0002 094B     		ldr	r3, .L23
  213 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  214 0006 73B1     		cbz	r3, .L20
-  82:main.c        ****         Timer_1_WritePeriod(IDLE_PERIOD);
- 215              		.loc 1 82 0
+  84:main.c        ****         Timer_1_WritePeriod(IDLE_PERIOD);
+ 215              		.loc 1 84 0
  216 0008 40F23E30 		movw	r0, #830
  217 000c FFF7FEFF 		bl	Timer_1_WritePeriod
  218              	.LVL11:
-  83:main.c        ****         Timer_1_WriteCounter(IDLE_COUNTER);
- 219              		.loc 1 83 0
+  85:main.c        ****         Timer_1_WriteCounter(IDLE_COUNTER);
+ 219              		.loc 1 85 0
  220 0010 40F23D30 		movw	r0, #829
  221 0014 FFF7FEFF 		bl	Timer_1_WriteCounter
  222              	.LVL12:
-  84:main.c        ****         Timer_1_Start();
- 223              		.loc 1 84 0
+  86:main.c        ****         Timer_1_Start();
+ 223              		.loc 1 86 0
  224 0018 FFF7FEFF 		bl	Timer_1_Start
  225              	.LVL13:
-  85:main.c        ****         lowFlag = 0;
- 226              		.loc 1 85 0
+  87:main.c        ****         lowFlag = 0;
+ 226              		.loc 1 87 0
  227 001c 024B     		ldr	r3, .L23
  228 001e 0022     		movs	r2, #0
  229 0020 1A70     		strb	r2, [r3]
-  86:main.c        ****         systemState = busyState;
- 230              		.loc 1 86 0
+  88:main.c        ****         systemState = busyState;
+ 230              		.loc 1 88 0
  231 0022 0222     		movs	r2, #2
  232 0024 5A70     		strb	r2, [r3, #1]
  233              	.L20:
@@ -356,11 +358,11 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  237              	.L23:
  238 0028 00000000 		.word	.LANCHOR0
  239              		.cfi_endproc
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 7
+
+
  240              	.LFE66:
  241              		.size	FALLING, .-FALLING
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 7
-
-
  242              		.section	.text.main,"ax",%progbits
  243              		.align	2
  244              		.global	main
@@ -369,12 +371,12 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  247              		.type	main, %function
  248              	main:
  249              	.LFB67:
-  87:main.c        ****     }
-  88:main.c        **** }
-  89:main.c        **** 
-  90:main.c        **** int main(void)
-  91:main.c        **** {
- 250              		.loc 1 91 0
+  89:main.c        ****     }
+  90:main.c        **** }
+  91:main.c        **** 
+  92:main.c        **** int main(void)
+  93:main.c        **** {
+ 250              		.loc 1 93 0
  251              		.cfi_startproc
  252              		@ Volatile: function does not return.
  253              		@ args = 0, pretend = 0, frame = 0
@@ -383,1456 +385,1595 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 1
  256              		.cfi_def_cfa_offset 8
  257              		.cfi_offset 3, -8
  258              		.cfi_offset 14, -4
-  92:main.c        ****     CyGlobalIntEnable;
- 259              		.loc 1 92 0
+  94:main.c        ****     CyGlobalIntEnable;
+ 259              		.loc 1 94 0
  260              		.syntax unified
- 261              	@ 92 "main.c" 1
+ 261              	@ 94 "main.c" 1
  262 0002 62B6     		CPSIE   i
  263              	@ 0 "" 2
-  93:main.c        ****     TimerISR_StartEx(TIMER);
- 264              		.loc 1 93 0
+  95:main.c        ****     TimerISR_StartEx(TIMER);
+ 264              		.loc 1 95 0
  265              		.thumb
  266              		.syntax unified
- 267 0004 2748     		ldr	r0, .L33
+ 267 0004 2F48     		ldr	r0, .L35
  268 0006 FFF7FEFF 		bl	TimerISR_StartEx
  269              	.LVL14:
-  94:main.c        ****     INT_RISING_StartEx(RISING);
- 270              		.loc 1 94 0
- 271 000a 2748     		ldr	r0, .L33+4
+  96:main.c        ****     INT_RISING_StartEx(RISING);
+ 270              		.loc 1 96 0
+ 271 000a 2F48     		ldr	r0, .L35+4
  272 000c FFF7FEFF 		bl	INT_RISING_StartEx
  273              	.LVL15:
-  95:main.c        ****     INT_FALLING_StartEx(FALLING);
- 274              		.loc 1 95 0
- 275 0010 2648     		ldr	r0, .L33+8
+  97:main.c        ****     INT_FALLING_StartEx(FALLING);
+ 274              		.loc 1 97 0
+ 275 0010 2E48     		ldr	r0, .L35+8
  276 0012 FFF7FEFF 		bl	INT_FALLING_StartEx
  277              	.LVL16:
-  96:main.c        ****     
-  97:main.c        ****     Timer_TX_WritePeriod(TX_PERIOD);
- 278              		.loc 1 97 0
+  98:main.c        ****     
+  99:main.c        ****     Timer_TX_WritePeriod(TX_PERIOD);
+ 278              		.loc 1 99 0
  279 0016 3220     		movs	r0, #50
  280 0018 FFF7FEFF 		bl	Timer_TX_WritePeriod
  281              	.LVL17:
-  98:main.c        ****     Timer_TX_WriteCounter(TX_COUNTER);
- 282              		.loc 1 98 0
+ 100:main.c        ****     Timer_TX_WriteCounter(TX_COUNTER);
+ 282              		.loc 1 100 0
  283 001c 3120     		movs	r0, #49
  284 001e FFF7FEFF 		bl	Timer_TX_WriteCounter
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 8
+
+
  285              	.LVL18:
-  99:main.c        ****     Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 8
-
-
- 286              		.loc 1 99 0
- 287 0022 2348     		ldr	r0, .L33+12
+ 101:main.c        ****     Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
+ 286              		.loc 1 101 0
+ 287 0022 2B48     		ldr	r0, .L35+12
  288 0024 FFF7FEFF 		bl	Timer_TX_ISR_StartEx
  289              	.LVL19:
  290              	.L27:
- 100:main.c        **** 
- 101:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
  102:main.c        **** 
- 103:main.c        ****     while(1){
- 104:main.c        ****         switch(systemState){
- 291              		.loc 1 104 0
- 292 0028 224B     		ldr	r3, .L33+16
- 293 002a 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
- 294 002c 012B     		cmp	r3, #1
- 295 002e 27D0     		beq	.L28
- 296 0030 13B1     		cbz	r3, .L29
- 297 0032 022B     		cmp	r3, #2
- 298 0034 12D0     		beq	.L30
- 299 0036 F7E7     		b	.L27
- 300              	.L29:
- 105:main.c        ****             //idle state
- 106:main.c        ****             case idleState :;
- 107:main.c        ****                 IDLE_Write(1);
- 301              		.loc 1 107 0
- 302 0038 0120     		movs	r0, #1
- 303 003a FFF7FEFF 		bl	IDLE_Write
- 304              	.LVL20:
- 108:main.c        ****                 BUSY_Write(!IDLE_Read());
- 305              		.loc 1 108 0
- 306 003e FFF7FEFF 		bl	IDLE_Read
- 307              	.LVL21:
- 308 0042 B0FA80F0 		clz	r0, r0
- 309 0046 4009     		lsrs	r0, r0, #5
- 310 0048 FFF7FEFF 		bl	BUSY_Write
- 311              	.LVL22:
- 109:main.c        ****                 COLLISION_Write(!IDLE_Read());
- 312              		.loc 1 109 0
- 313 004c FFF7FEFF 		bl	IDLE_Read
- 314              	.LVL23:
- 315 0050 B0FA80F0 		clz	r0, r0
- 316 0054 4009     		lsrs	r0, r0, #5
- 317 0056 FFF7FEFF 		bl	COLLISION_Write
- 318              	.LVL24:
- 110:main.c        ****             break;
- 319              		.loc 1 110 0
- 320 005a E5E7     		b	.L27
- 321              	.L30:
- 111:main.c        ****             //busy state
- 112:main.c        ****             case busyState:
- 113:main.c        ****                 BUSY_Write(1);
- 322              		.loc 1 113 0
- 323 005c 0120     		movs	r0, #1
- 324 005e FFF7FEFF 		bl	BUSY_Write
- 325              	.LVL25:
- 114:main.c        ****                 IDLE_Write(!BUSY_Read());
- 326              		.loc 1 114 0
- 327 0062 FFF7FEFF 		bl	BUSY_Read
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 9
+ 103:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+ 104:main.c        **** 
+ 105:main.c        ****     while(1){
+ 106:main.c        ****         
+ 107:main.c        ****          //check if UART is connected, then set flag
+ 108:main.c        **** 		if(UART_GetDTERate() == 57600){
+ 291              		.loc 1 108 0
+ 292 0028 FFF7FEFF 		bl	UART_GetDTERate
+ 293              	.LVL20:
+ 294 002c B0F5614F 		cmp	r0, #57600
+ 295 0030 02D1     		bne	.L28
+ 109:main.c        **** 			uartConnected = 1;
+ 296              		.loc 1 109 0
+ 297 0032 0122     		movs	r2, #1
+ 298 0034 274B     		ldr	r3, .L35+16
+ 299 0036 9A60     		str	r2, [r3, #8]
+ 300              	.L28:
+ 110:main.c        **** 		}
+ 111:main.c        **** 	
+ 112:main.c        **** 		//Host can send double SET_INTERFACE request, which sounds sub-optimal for us if we don't handle 
+ 113:main.c        **** 		if (0 != UART_IsConfigurationChanged())
+ 301              		.loc 1 113 0
+ 302 0038 FFF7FEFF 		bl	UART_IsConfigurationChanged
+ 303              	.LVL21:
+ 304 003c 20B1     		cbz	r0, .L29
+ 114:main.c        **** 		{
+ 115:main.c        **** 			//re-initialize device
+ 116:main.c        **** 			if (0 != UART_GetConfiguration())
+ 305              		.loc 1 116 0
+ 306 003e FFF7FEFF 		bl	UART_GetConfiguration
+ 307              	.LVL22:
+ 308 0042 08B1     		cbz	r0, .L29
+ 117:main.c        **** 			{
+ 118:main.c        **** 				//Enumeration is done, allow receieving data from host
+ 119:main.c        **** 				UART_CDC_Init();
+ 309              		.loc 1 119 0
+ 310 0044 FFF7FEFF 		bl	UART_CDC_Init
+ 311              	.LVL23:
+ 312              	.L29:
+ 120:main.c        **** 			}
+ 121:main.c        **** 		}
+ 122:main.c        **** 
+ 123:main.c        ****         
+ 124:main.c        ****         switch(systemState){
+ 313              		.loc 1 124 0
+ 314 0048 224B     		ldr	r3, .L35+16
+ 315 004a 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 316 004c 012B     		cmp	r3, #1
+ 317 004e 27D0     		beq	.L30
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 9
 
 
- 328              	.LVL26:
- 329 0066 B0FA80F0 		clz	r0, r0
- 330 006a 4009     		lsrs	r0, r0, #5
- 331 006c FFF7FEFF 		bl	IDLE_Write
- 332              	.LVL27:
- 115:main.c        ****                 COLLISION_Write(!BUSY_Read());
- 333              		.loc 1 115 0
- 334 0070 FFF7FEFF 		bl	BUSY_Read
- 335              	.LVL28:
- 336 0074 B0FA80F0 		clz	r0, r0
- 337 0078 4009     		lsrs	r0, r0, #5
- 338 007a FFF7FEFF 		bl	COLLISION_Write
- 339              	.LVL29:
- 116:main.c        ****             break;
- 340              		.loc 1 116 0
- 341 007e D3E7     		b	.L27
- 342              	.L28:
- 117:main.c        ****             //collision state
- 118:main.c        ****             case collisionState:;
- 119:main.c        ****                 COLLISION_Write(1);
- 343              		.loc 1 119 0
- 344 0080 0120     		movs	r0, #1
- 345 0082 FFF7FEFF 		bl	COLLISION_Write
- 346              	.LVL30:
- 120:main.c        ****                 IDLE_Write(!COLLISION_Read());
- 347              		.loc 1 120 0
- 348 0086 FFF7FEFF 		bl	COLLISION_Read
- 349              	.LVL31:
- 350 008a B0FA80F0 		clz	r0, r0
- 351 008e 4009     		lsrs	r0, r0, #5
- 352 0090 FFF7FEFF 		bl	IDLE_Write
- 353              	.LVL32:
- 121:main.c        ****                 BUSY_Write(!COLLISION_Read());
- 354              		.loc 1 121 0
- 355 0094 FFF7FEFF 		bl	COLLISION_Read
- 356              	.LVL33:
- 357 0098 B0FA80F0 		clz	r0, r0
- 358 009c 4009     		lsrs	r0, r0, #5
- 359 009e FFF7FEFF 		bl	BUSY_Write
- 360              	.LVL34:
- 122:main.c        ****             break;
- 361              		.loc 1 122 0
- 362 00a2 C1E7     		b	.L27
- 363              	.L34:
- 364              		.align	2
- 365              	.L33:
- 366 00a4 00000000 		.word	TIMER
- 367 00a8 00000000 		.word	RISING
- 368 00ac 00000000 		.word	FALLING
- 369 00b0 00000000 		.word	Timer_TX_ISR_HANDLER
- 370 00b4 00000000 		.word	.LANCHOR0
- 371              		.cfi_endproc
- 372              	.LFE67:
- 373              		.size	main, .-main
- 374              		.global	SERIAL_POS
- 375              		.comm	SERIAL_BUFFER,500,4
- 376              		.global	lowFlag
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 10
+ 318 0050 13B1     		cbz	r3, .L31
+ 319 0052 022B     		cmp	r3, #2
+ 320 0054 12D0     		beq	.L32
+ 321 0056 E7E7     		b	.L27
+ 322              	.L31:
+ 125:main.c        ****             //idle state
+ 126:main.c        ****             case idleState :;
+ 127:main.c        ****                 IDLE_Write(1);
+ 323              		.loc 1 127 0
+ 324 0058 0120     		movs	r0, #1
+ 325 005a FFF7FEFF 		bl	IDLE_Write
+ 326              	.LVL24:
+ 128:main.c        ****                 BUSY_Write(!IDLE_Read());
+ 327              		.loc 1 128 0
+ 328 005e FFF7FEFF 		bl	IDLE_Read
+ 329              	.LVL25:
+ 330 0062 B0FA80F0 		clz	r0, r0
+ 331 0066 4009     		lsrs	r0, r0, #5
+ 332 0068 FFF7FEFF 		bl	BUSY_Write
+ 333              	.LVL26:
+ 129:main.c        ****                 COLLISION_Write(!IDLE_Read());
+ 334              		.loc 1 129 0
+ 335 006c FFF7FEFF 		bl	IDLE_Read
+ 336              	.LVL27:
+ 337 0070 B0FA80F0 		clz	r0, r0
+ 338 0074 4009     		lsrs	r0, r0, #5
+ 339 0076 FFF7FEFF 		bl	COLLISION_Write
+ 340              	.LVL28:
+ 130:main.c        ****             break;
+ 341              		.loc 1 130 0
+ 342 007a D5E7     		b	.L27
+ 343              	.L32:
+ 131:main.c        ****             //busy state
+ 132:main.c        ****             case busyState:
+ 133:main.c        ****                 BUSY_Write(1);
+ 344              		.loc 1 133 0
+ 345 007c 0120     		movs	r0, #1
+ 346 007e FFF7FEFF 		bl	BUSY_Write
+ 347              	.LVL29:
+ 134:main.c        ****                 IDLE_Write(!BUSY_Read());
+ 348              		.loc 1 134 0
+ 349 0082 FFF7FEFF 		bl	BUSY_Read
+ 350              	.LVL30:
+ 351 0086 B0FA80F0 		clz	r0, r0
+ 352 008a 4009     		lsrs	r0, r0, #5
+ 353 008c FFF7FEFF 		bl	IDLE_Write
+ 354              	.LVL31:
+ 135:main.c        ****                 COLLISION_Write(!BUSY_Read());
+ 355              		.loc 1 135 0
+ 356 0090 FFF7FEFF 		bl	BUSY_Read
+ 357              	.LVL32:
+ 358 0094 B0FA80F0 		clz	r0, r0
+ 359 0098 4009     		lsrs	r0, r0, #5
+ 360 009a FFF7FEFF 		bl	COLLISION_Write
+ 361              	.LVL33:
+ 136:main.c        ****             break;
+ 362              		.loc 1 136 0
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 10
 
 
- 377              		.global	systemState
- 378              		.bss
- 379              		.set	.LANCHOR0,. + 0
- 380              		.type	lowFlag, %object
- 381              		.size	lowFlag, 1
- 382              	lowFlag:
- 383 0000 00       		.space	1
- 384              		.type	systemState, %object
- 385              		.size	systemState, 1
- 386              	systemState:
- 387 0001 00       		.space	1
- 388              		.type	SERIAL_POS, %object
- 389              		.size	SERIAL_POS, 1
- 390              	SERIAL_POS:
- 391 0002 00       		.space	1
- 392              		.text
- 393              	.Letext0:
- 394              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 395              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 396              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
- 397              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
- 398              		.file 6 "Generated_Source\\PSoC5/TX.h"
- 399              		.file 7 "Generated_Source\\PSoC5/Timer_1.h"
- 400              		.file 8 "Generated_Source\\PSoC5/TimerISR.h"
- 401              		.file 9 "Generated_Source\\PSoC5/INT_RISING.h"
- 402              		.file 10 "Generated_Source\\PSoC5/INT_FALLING.h"
- 403              		.file 11 "Generated_Source\\PSoC5/Timer_TX.h"
- 404              		.file 12 "Generated_Source\\PSoC5/Timer_TX_ISR.h"
- 405              		.file 13 "Generated_Source\\PSoC5/IDLE.h"
- 406              		.file 14 "Generated_Source\\PSoC5/BUSY.h"
- 407              		.file 15 "Generated_Source\\PSoC5/COLLISION.h"
- 408              		.section	.debug_info,"",%progbits
- 409              	.Ldebug_info0:
- 410 0000 6F040000 		.4byte	0x46f
- 411 0004 0400     		.2byte	0x4
- 412 0006 00000000 		.4byte	.Ldebug_abbrev0
- 413 000a 04       		.byte	0x4
- 414 000b 01       		.uleb128 0x1
- 415 000c DC000000 		.4byte	.LASF49
- 416 0010 0C       		.byte	0xc
- 417 0011 F2020000 		.4byte	.LASF50
- 418 0015 60020000 		.4byte	.LASF51
- 419 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
- 420 001d 00000000 		.4byte	0
- 421 0021 00000000 		.4byte	.Ldebug_line0
- 422 0025 02       		.uleb128 0x2
- 423 0026 01       		.byte	0x1
- 424 0027 06       		.byte	0x6
- 425 0028 C2000000 		.4byte	.LASF0
- 426 002c 02       		.uleb128 0x2
- 427 002d 01       		.byte	0x1
- 428 002e 08       		.byte	0x8
- 429 002f CE000000 		.4byte	.LASF1
- 430 0033 02       		.uleb128 0x2
- 431 0034 02       		.byte	0x2
- 432 0035 05       		.byte	0x5
- 433 0036 04030000 		.4byte	.LASF2
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 11
+ 363 009e C3E7     		b	.L27
+ 364              	.L30:
+ 137:main.c        ****             //collision state
+ 138:main.c        ****             case collisionState:;
+ 139:main.c        ****                 COLLISION_Write(1);
+ 365              		.loc 1 139 0
+ 366 00a0 0120     		movs	r0, #1
+ 367 00a2 FFF7FEFF 		bl	COLLISION_Write
+ 368              	.LVL34:
+ 140:main.c        ****                 IDLE_Write(!COLLISION_Read());
+ 369              		.loc 1 140 0
+ 370 00a6 FFF7FEFF 		bl	COLLISION_Read
+ 371              	.LVL35:
+ 372 00aa B0FA80F0 		clz	r0, r0
+ 373 00ae 4009     		lsrs	r0, r0, #5
+ 374 00b0 FFF7FEFF 		bl	IDLE_Write
+ 375              	.LVL36:
+ 141:main.c        ****                 BUSY_Write(!COLLISION_Read());
+ 376              		.loc 1 141 0
+ 377 00b4 FFF7FEFF 		bl	COLLISION_Read
+ 378              	.LVL37:
+ 379 00b8 B0FA80F0 		clz	r0, r0
+ 380 00bc 4009     		lsrs	r0, r0, #5
+ 381 00be FFF7FEFF 		bl	BUSY_Write
+ 382              	.LVL38:
+ 142:main.c        ****             break;
+ 383              		.loc 1 142 0
+ 384 00c2 B1E7     		b	.L27
+ 385              	.L36:
+ 386              		.align	2
+ 387              	.L35:
+ 388 00c4 00000000 		.word	TIMER
+ 389 00c8 00000000 		.word	RISING
+ 390 00cc 00000000 		.word	FALLING
+ 391 00d0 00000000 		.word	Timer_TX_ISR_HANDLER
+ 392 00d4 00000000 		.word	.LANCHOR0
+ 393              		.cfi_endproc
+ 394              	.LFE67:
+ 395              		.size	main, .-main
+ 396              		.global	uartConnected
+ 397              		.global	SERIAL_POS
+ 398              		.comm	SERIAL_BUFFER,500,4
+ 399              		.global	lowFlag
+ 400              		.global	systemState
+ 401              		.bss
+ 402              		.align	2
+ 403              		.set	.LANCHOR0,. + 0
+ 404              		.type	lowFlag, %object
+ 405              		.size	lowFlag, 1
+ 406              	lowFlag:
+ 407 0000 00       		.space	1
+ 408              		.type	systemState, %object
+ 409              		.size	systemState, 1
+ 410              	systemState:
+ 411 0001 00       		.space	1
+ 412 0002 0000     		.space	2
+ 413              		.type	SERIAL_POS, %object
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 11
 
 
- 434 003a 02       		.uleb128 0x2
- 435 003b 02       		.byte	0x2
- 436 003c 07       		.byte	0x7
- 437 003d 79000000 		.4byte	.LASF3
- 438 0041 03       		.uleb128 0x3
- 439 0042 6F000000 		.4byte	.LASF9
- 440 0046 02       		.byte	0x2
- 441 0047 3F       		.byte	0x3f
- 442 0048 4C000000 		.4byte	0x4c
- 443 004c 02       		.uleb128 0x2
- 444 004d 04       		.byte	0x4
- 445 004e 05       		.byte	0x5
- 446 004f 25030000 		.4byte	.LASF4
- 447 0053 02       		.uleb128 0x2
- 448 0054 04       		.byte	0x4
- 449 0055 07       		.byte	0x7
- 450 0056 7A010000 		.4byte	.LASF5
- 451 005a 02       		.uleb128 0x2
- 452 005b 08       		.byte	0x8
- 453 005c 05       		.byte	0x5
- 454 005d E4020000 		.4byte	.LASF6
- 455 0061 02       		.uleb128 0x2
- 456 0062 08       		.byte	0x8
- 457 0063 07       		.byte	0x7
- 458 0064 19020000 		.4byte	.LASF7
- 459 0068 04       		.uleb128 0x4
- 460 0069 04       		.byte	0x4
- 461 006a 05       		.byte	0x5
- 462 006b 696E7400 		.ascii	"int\000"
- 463 006f 02       		.uleb128 0x2
- 464 0070 04       		.byte	0x4
- 465 0071 07       		.byte	0x7
- 466 0072 0C020000 		.4byte	.LASF8
- 467 0076 03       		.uleb128 0x3
- 468 0077 D3020000 		.4byte	.LASF10
- 469 007b 03       		.byte	0x3
- 470 007c 2C       		.byte	0x2c
- 471 007d 41000000 		.4byte	0x41
- 472 0081 05       		.uleb128 0x5
- 473 0082 0E030000 		.4byte	.LASF11
- 474 0086 04       		.byte	0x4
- 475 0087 9201     		.2byte	0x192
- 476 0089 2C000000 		.4byte	0x2c
- 477 008d 02       		.uleb128 0x2
- 478 008e 04       		.byte	0x4
- 479 008f 04       		.byte	0x4
- 480 0090 AE000000 		.4byte	.LASF12
- 481 0094 02       		.uleb128 0x2
- 482 0095 08       		.byte	0x8
- 483 0096 04       		.byte	0x4
- 484 0097 8C000000 		.4byte	.LASF13
- 485 009b 02       		.uleb128 0x2
- 486 009c 01       		.byte	0x1
- 487 009d 08       		.byte	0x8
- 488 009e F9020000 		.4byte	.LASF14
- 489 00a2 05       		.uleb128 0x5
- 490 00a3 6A010000 		.4byte	.LASF15
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 12
+ 414              		.size	SERIAL_POS, 4
+ 415              	SERIAL_POS:
+ 416 0004 00000000 		.space	4
+ 417              		.type	uartConnected, %object
+ 418              		.size	uartConnected, 4
+ 419              	uartConnected:
+ 420 0008 00000000 		.space	4
+ 421              		.text
+ 422              	.Letext0:
+ 423              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 424              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 425              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 426              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 427              		.file 6 "Generated_Source\\PSoC5/TX.h"
+ 428              		.file 7 "Generated_Source\\PSoC5/Timer_1.h"
+ 429              		.file 8 "Generated_Source\\PSoC5/TimerISR.h"
+ 430              		.file 9 "Generated_Source\\PSoC5/INT_RISING.h"
+ 431              		.file 10 "Generated_Source\\PSoC5/INT_FALLING.h"
+ 432              		.file 11 "Generated_Source\\PSoC5/Timer_TX.h"
+ 433              		.file 12 "Generated_Source\\PSoC5/Timer_TX_ISR.h"
+ 434              		.file 13 "Generated_Source\\PSoC5/UART_cdc.h"
+ 435              		.file 14 "Generated_Source\\PSoC5/UART.h"
+ 436              		.file 15 "Generated_Source\\PSoC5/IDLE.h"
+ 437              		.file 16 "Generated_Source\\PSoC5/BUSY.h"
+ 438              		.file 17 "Generated_Source\\PSoC5/COLLISION.h"
+ 439              		.section	.debug_info,"",%progbits
+ 440              	.Ldebug_info0:
+ 441 0000 D2040000 		.4byte	0x4d2
+ 442 0004 0400     		.2byte	0x4
+ 443 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 444 000a 04       		.byte	0x4
+ 445 000b 01       		.uleb128 0x1
+ 446 000c 0C010000 		.4byte	.LASF54
+ 447 0010 0C       		.byte	0xc
+ 448 0011 50030000 		.4byte	.LASF55
+ 449 0015 B1020000 		.4byte	.LASF56
+ 450 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 451 001d 00000000 		.4byte	0
+ 452 0021 00000000 		.4byte	.Ldebug_line0
+ 453 0025 02       		.uleb128 0x2
+ 454 0026 01       		.byte	0x1
+ 455 0027 06       		.byte	0x6
+ 456 0028 F2000000 		.4byte	.LASF0
+ 457 002c 02       		.uleb128 0x2
+ 458 002d 01       		.byte	0x1
+ 459 002e 08       		.byte	0x8
+ 460 002f FE000000 		.4byte	.LASF1
+ 461 0033 02       		.uleb128 0x2
+ 462 0034 02       		.byte	0x2
+ 463 0035 05       		.byte	0x5
+ 464 0036 62030000 		.4byte	.LASF2
+ 465 003a 02       		.uleb128 0x2
+ 466 003b 02       		.byte	0x2
+ 467 003c 07       		.byte	0x7
+ 468 003d A9000000 		.4byte	.LASF3
+ 469 0041 03       		.uleb128 0x3
+ 470 0042 9F000000 		.4byte	.LASF9
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 12
 
 
- 491 00a7 04       		.byte	0x4
- 492 00a8 3C02     		.2byte	0x23c
- 493 00aa AE000000 		.4byte	0xae
- 494 00ae 06       		.uleb128 0x6
- 495 00af 81000000 		.4byte	0x81
- 496 00b3 02       		.uleb128 0x2
- 497 00b4 08       		.byte	0x8
- 498 00b5 04       		.byte	0x4
- 499 00b6 2E030000 		.4byte	.LASF16
- 500 00ba 02       		.uleb128 0x2
- 501 00bb 04       		.byte	0x4
- 502 00bc 07       		.byte	0x7
- 503 00bd DB020000 		.4byte	.LASF17
- 504 00c1 07       		.uleb128 0x7
- 505 00c2 5A000000 		.4byte	.LASF52
- 506 00c6 01       		.byte	0x1
- 507 00c7 2C000000 		.4byte	0x2c
- 508 00cb 01       		.byte	0x1
- 509 00cc 0E       		.byte	0xe
- 510 00cd E4000000 		.4byte	0xe4
- 511 00d1 08       		.uleb128 0x8
- 512 00d2 DA010000 		.4byte	.LASF18
- 513 00d6 00       		.byte	0
- 514 00d7 08       		.uleb128 0x8
- 515 00d8 00000000 		.4byte	.LASF19
- 516 00dc 01       		.byte	0x1
- 517 00dd 08       		.uleb128 0x8
- 518 00de 02020000 		.4byte	.LASF20
- 519 00e2 02       		.byte	0x2
- 520 00e3 00       		.byte	0
- 521 00e4 03       		.uleb128 0x3
- 522 00e5 6D030000 		.4byte	.LASF21
- 523 00e9 01       		.byte	0x1
- 524 00ea 0E       		.byte	0xe
- 525 00eb C1000000 		.4byte	0xc1
- 526 00ef 09       		.uleb128 0x9
- 527 00f0 45020000 		.4byte	.LASF53
- 528 00f4 01       		.byte	0x1
- 529 00f5 39       		.byte	0x39
- 530 00f6 00000000 		.4byte	.LFB64
- 531 00fa 24000000 		.4byte	.LFE64-.LFB64
- 532 00fe 01       		.uleb128 0x1
- 533 00ff 9C       		.byte	0x9c
- 534 0100 0A       		.uleb128 0xa
- 535 0101 96010000 		.4byte	.LASF24
- 536 0105 01       		.byte	0x1
- 537 0106 22       		.byte	0x22
- 538 0107 00000000 		.4byte	.LFB63
- 539 010b 54000000 		.4byte	.LFE63-.LFB63
- 540 010f 01       		.uleb128 0x1
- 541 0110 9C       		.byte	0x9c
- 542 0111 82010000 		.4byte	0x182
- 543 0115 0B       		.uleb128 0xb
- 544 0116 CE010000 		.4byte	.LASF22
- 545 011a 01       		.byte	0x1
- 546 011b 27       		.byte	0x27
- 547 011c 9B000000 		.4byte	0x9b
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 13
+ 471 0046 02       		.byte	0x2
+ 472 0047 3F       		.byte	0x3f
+ 473 0048 4C000000 		.4byte	0x4c
+ 474 004c 02       		.uleb128 0x2
+ 475 004d 04       		.byte	0x4
+ 476 004e 05       		.byte	0x5
+ 477 004f 83030000 		.4byte	.LASF4
+ 478 0053 02       		.uleb128 0x2
+ 479 0054 04       		.byte	0x4
+ 480 0055 07       		.byte	0x7
+ 481 0056 AA010000 		.4byte	.LASF5
+ 482 005a 02       		.uleb128 0x2
+ 483 005b 08       		.byte	0x8
+ 484 005c 05       		.byte	0x5
+ 485 005d 42030000 		.4byte	.LASF6
+ 486 0061 02       		.uleb128 0x2
+ 487 0062 08       		.byte	0x8
+ 488 0063 07       		.byte	0x7
+ 489 0064 52020000 		.4byte	.LASF7
+ 490 0068 04       		.uleb128 0x4
+ 491 0069 04       		.byte	0x4
+ 492 006a 05       		.byte	0x5
+ 493 006b 696E7400 		.ascii	"int\000"
+ 494 006f 02       		.uleb128 0x2
+ 495 0070 04       		.byte	0x4
+ 496 0071 07       		.byte	0x7
+ 497 0072 45020000 		.4byte	.LASF8
+ 498 0076 03       		.uleb128 0x3
+ 499 0077 31030000 		.4byte	.LASF10
+ 500 007b 03       		.byte	0x3
+ 501 007c 2C       		.byte	0x2c
+ 502 007d 41000000 		.4byte	0x41
+ 503 0081 05       		.uleb128 0x5
+ 504 0082 6C030000 		.4byte	.LASF11
+ 505 0086 04       		.byte	0x4
+ 506 0087 9201     		.2byte	0x192
+ 507 0089 2C000000 		.4byte	0x2c
+ 508 008d 02       		.uleb128 0x2
+ 509 008e 04       		.byte	0x4
+ 510 008f 04       		.byte	0x4
+ 511 0090 DE000000 		.4byte	.LASF12
+ 512 0094 02       		.uleb128 0x2
+ 513 0095 08       		.byte	0x8
+ 514 0096 04       		.byte	0x4
+ 515 0097 BC000000 		.4byte	.LASF13
+ 516 009b 02       		.uleb128 0x2
+ 517 009c 01       		.byte	0x1
+ 518 009d 08       		.byte	0x8
+ 519 009e 57030000 		.4byte	.LASF14
+ 520 00a2 05       		.uleb128 0x5
+ 521 00a3 9A010000 		.4byte	.LASF15
+ 522 00a7 04       		.byte	0x4
+ 523 00a8 3C02     		.2byte	0x23c
+ 524 00aa AE000000 		.4byte	0xae
+ 525 00ae 06       		.uleb128 0x6
+ 526 00af 81000000 		.4byte	0x81
+ 527 00b3 02       		.uleb128 0x2
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 13
 
 
- 548 0120 00000000 		.4byte	.LLST0
- 549 0124 0B       		.uleb128 0xb
- 550 0125 FE020000 		.4byte	.LASF23
- 551 0129 01       		.byte	0x1
- 552 012a 29       		.byte	0x29
- 553 012b 68000000 		.4byte	0x68
- 554 012f 13000000 		.4byte	.LLST1
- 555 0133 0C       		.uleb128 0xc
- 556 0134 00000000 		.4byte	.Ldebug_ranges0+0
- 557 0138 0D       		.uleb128 0xd
- 558 0139 7900     		.ascii	"y\000"
- 559 013b 01       		.byte	0x1
- 560 013c 2C       		.byte	0x2c
- 561 013d 68000000 		.4byte	0x68
- 562 0141 32000000 		.4byte	.LLST2
- 563 0145 0E       		.uleb128 0xe
- 564 0146 1C000000 		.4byte	.LVL2
- 565 014a C2030000 		.4byte	0x3c2
- 566 014e 58010000 		.4byte	0x158
- 567 0152 0F       		.uleb128 0xf
- 568 0153 01       		.uleb128 0x1
- 569 0154 50       		.byte	0x50
- 570 0155 01       		.uleb128 0x1
- 571 0156 31       		.byte	0x31
- 572 0157 00       		.byte	0
- 573 0158 0E       		.uleb128 0xe
- 574 0159 2A000000 		.4byte	.LVL3
- 575 015d C2030000 		.4byte	0x3c2
- 576 0161 6B010000 		.4byte	0x16b
- 577 0165 0F       		.uleb128 0xf
- 578 0166 01       		.uleb128 0x1
- 579 0167 50       		.byte	0x50
- 580 0168 01       		.uleb128 0x1
- 581 0169 30       		.byte	0x30
- 582 016a 00       		.byte	0
- 583 016b 10       		.uleb128 0x10
- 584 016c 36000000 		.4byte	.LVL4
- 585 0170 C2030000 		.4byte	0x3c2
- 586 0174 0F       		.uleb128 0xf
- 587 0175 01       		.uleb128 0x1
- 588 0176 50       		.byte	0x50
- 589 0177 07       		.uleb128 0x7
- 590 0178 31       		.byte	0x31
- 591 0179 75       		.byte	0x75
- 592 017a 00       		.sleb128 0
- 593 017b 24       		.byte	0x24
- 594 017c 76       		.byte	0x76
- 595 017d 00       		.sleb128 0
- 596 017e 1A       		.byte	0x1a
- 597 017f 00       		.byte	0
- 598 0180 00       		.byte	0
- 599 0181 00       		.byte	0
- 600 0182 0A       		.uleb128 0xa
- 601 0183 93000000 		.4byte	.LASF25
- 602 0187 01       		.byte	0x1
- 603 0188 44       		.byte	0x44
- 604 0189 00000000 		.4byte	.LFB65
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 14
+ 528 00b4 08       		.byte	0x8
+ 529 00b5 04       		.byte	0x4
+ 530 00b6 8C030000 		.4byte	.LASF16
+ 531 00ba 02       		.uleb128 0x2
+ 532 00bb 04       		.byte	0x4
+ 533 00bc 07       		.byte	0x7
+ 534 00bd 39030000 		.4byte	.LASF17
+ 535 00c1 07       		.uleb128 0x7
+ 536 00c2 5A000000 		.4byte	.LASF57
+ 537 00c6 01       		.byte	0x1
+ 538 00c7 2C000000 		.4byte	0x2c
+ 539 00cb 01       		.byte	0x1
+ 540 00cc 0E       		.byte	0xe
+ 541 00cd E4000000 		.4byte	0xe4
+ 542 00d1 08       		.uleb128 0x8
+ 543 00d2 0A020000 		.4byte	.LASF18
+ 544 00d6 00       		.byte	0
+ 545 00d7 08       		.uleb128 0x8
+ 546 00d8 00000000 		.4byte	.LASF19
+ 547 00dc 01       		.byte	0x1
+ 548 00dd 08       		.uleb128 0x8
+ 549 00de 3B020000 		.4byte	.LASF20
+ 550 00e2 02       		.byte	0x2
+ 551 00e3 00       		.byte	0
+ 552 00e4 03       		.uleb128 0x3
+ 553 00e5 CB030000 		.4byte	.LASF21
+ 554 00e9 01       		.byte	0x1
+ 555 00ea 0E       		.byte	0xe
+ 556 00eb C1000000 		.4byte	0xc1
+ 557 00ef 09       		.uleb128 0x9
+ 558 00f0 6E000000 		.4byte	.LASF58
+ 559 00f4 01       		.byte	0x1
+ 560 00f5 3B       		.byte	0x3b
+ 561 00f6 00000000 		.4byte	.LFB64
+ 562 00fa 24000000 		.4byte	.LFE64-.LFB64
+ 563 00fe 01       		.uleb128 0x1
+ 564 00ff 9C       		.byte	0x9c
+ 565 0100 0A       		.uleb128 0xa
+ 566 0101 C6010000 		.4byte	.LASF24
+ 567 0105 01       		.byte	0x1
+ 568 0106 24       		.byte	0x24
+ 569 0107 00000000 		.4byte	.LFB63
+ 570 010b 54000000 		.4byte	.LFE63-.LFB63
+ 571 010f 01       		.uleb128 0x1
+ 572 0110 9C       		.byte	0x9c
+ 573 0111 82010000 		.4byte	0x182
+ 574 0115 0B       		.uleb128 0xb
+ 575 0116 FE010000 		.4byte	.LASF22
+ 576 011a 01       		.byte	0x1
+ 577 011b 29       		.byte	0x29
+ 578 011c 9B000000 		.4byte	0x9b
+ 579 0120 00000000 		.4byte	.LLST0
+ 580 0124 0B       		.uleb128 0xb
+ 581 0125 5C030000 		.4byte	.LASF23
+ 582 0129 01       		.byte	0x1
+ 583 012a 2B       		.byte	0x2b
+ 584 012b 68000000 		.4byte	0x68
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 14
 
 
- 605 018d 28000000 		.4byte	.LFE65-.LFB65
- 606 0191 01       		.uleb128 0x1
- 607 0192 9C       		.byte	0x9c
- 608 0193 C9010000 		.4byte	0x1c9
- 609 0197 0E       		.uleb128 0xe
- 610 0198 0E000000 		.4byte	.LVL8
- 611 019c CD030000 		.4byte	0x3cd
- 612 01a0 AB010000 		.4byte	0x1ab
- 613 01a4 0F       		.uleb128 0xf
- 614 01a5 01       		.uleb128 0x1
- 615 01a6 50       		.byte	0x50
- 616 01a7 02       		.uleb128 0x2
- 617 01a8 08       		.byte	0x8
- 618 01a9 34       		.byte	0x34
- 619 01aa 00       		.byte	0
- 620 01ab 0E       		.uleb128 0xe
- 621 01ac 14000000 		.4byte	.LVL9
- 622 01b0 D8030000 		.4byte	0x3d8
- 623 01b4 BF010000 		.4byte	0x1bf
- 624 01b8 0F       		.uleb128 0xf
- 625 01b9 01       		.uleb128 0x1
- 626 01ba 50       		.byte	0x50
- 627 01bb 02       		.uleb128 0x2
- 628 01bc 08       		.byte	0x8
- 629 01bd 33       		.byte	0x33
- 630 01be 00       		.byte	0
- 631 01bf 11       		.uleb128 0x11
- 632 01c0 18000000 		.4byte	.LVL10
- 633 01c4 E3030000 		.4byte	0x3e3
- 634 01c8 00       		.byte	0
- 635 01c9 0A       		.uleb128 0xa
- 636 01ca CB020000 		.4byte	.LASF26
- 637 01ce 01       		.byte	0x1
- 638 01cf 4F       		.byte	0x4f
- 639 01d0 00000000 		.4byte	.LFB66
- 640 01d4 2C000000 		.4byte	.LFE66-.LFB66
- 641 01d8 01       		.uleb128 0x1
- 642 01d9 9C       		.byte	0x9c
- 643 01da 12020000 		.4byte	0x212
- 644 01de 0E       		.uleb128 0xe
- 645 01df 10000000 		.4byte	.LVL11
- 646 01e3 CD030000 		.4byte	0x3cd
- 647 01e7 F3010000 		.4byte	0x1f3
- 648 01eb 0F       		.uleb128 0xf
- 649 01ec 01       		.uleb128 0x1
- 650 01ed 50       		.byte	0x50
- 651 01ee 03       		.uleb128 0x3
- 652 01ef 0A       		.byte	0xa
- 653 01f0 3E03     		.2byte	0x33e
- 654 01f2 00       		.byte	0
- 655 01f3 0E       		.uleb128 0xe
- 656 01f4 18000000 		.4byte	.LVL12
- 657 01f8 D8030000 		.4byte	0x3d8
- 658 01fc 08020000 		.4byte	0x208
- 659 0200 0F       		.uleb128 0xf
- 660 0201 01       		.uleb128 0x1
- 661 0202 50       		.byte	0x50
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 15
+ 585 012f 13000000 		.4byte	.LLST1
+ 586 0133 0C       		.uleb128 0xc
+ 587 0134 00000000 		.4byte	.Ldebug_ranges0+0
+ 588 0138 0D       		.uleb128 0xd
+ 589 0139 7900     		.ascii	"y\000"
+ 590 013b 01       		.byte	0x1
+ 591 013c 2E       		.byte	0x2e
+ 592 013d 68000000 		.4byte	0x68
+ 593 0141 32000000 		.4byte	.LLST2
+ 594 0145 0E       		.uleb128 0xe
+ 595 0146 1C000000 		.4byte	.LVL2
+ 596 014a F7030000 		.4byte	0x3f7
+ 597 014e 58010000 		.4byte	0x158
+ 598 0152 0F       		.uleb128 0xf
+ 599 0153 01       		.uleb128 0x1
+ 600 0154 50       		.byte	0x50
+ 601 0155 01       		.uleb128 0x1
+ 602 0156 31       		.byte	0x31
+ 603 0157 00       		.byte	0
+ 604 0158 0E       		.uleb128 0xe
+ 605 0159 2A000000 		.4byte	.LVL3
+ 606 015d F7030000 		.4byte	0x3f7
+ 607 0161 6B010000 		.4byte	0x16b
+ 608 0165 0F       		.uleb128 0xf
+ 609 0166 01       		.uleb128 0x1
+ 610 0167 50       		.byte	0x50
+ 611 0168 01       		.uleb128 0x1
+ 612 0169 30       		.byte	0x30
+ 613 016a 00       		.byte	0
+ 614 016b 10       		.uleb128 0x10
+ 615 016c 36000000 		.4byte	.LVL4
+ 616 0170 F7030000 		.4byte	0x3f7
+ 617 0174 0F       		.uleb128 0xf
+ 618 0175 01       		.uleb128 0x1
+ 619 0176 50       		.byte	0x50
+ 620 0177 07       		.uleb128 0x7
+ 621 0178 31       		.byte	0x31
+ 622 0179 75       		.byte	0x75
+ 623 017a 00       		.sleb128 0
+ 624 017b 24       		.byte	0x24
+ 625 017c 76       		.byte	0x76
+ 626 017d 00       		.sleb128 0
+ 627 017e 1A       		.byte	0x1a
+ 628 017f 00       		.byte	0
+ 629 0180 00       		.byte	0
+ 630 0181 00       		.byte	0
+ 631 0182 0A       		.uleb128 0xa
+ 632 0183 C3000000 		.4byte	.LASF25
+ 633 0187 01       		.byte	0x1
+ 634 0188 46       		.byte	0x46
+ 635 0189 00000000 		.4byte	.LFB65
+ 636 018d 28000000 		.4byte	.LFE65-.LFB65
+ 637 0191 01       		.uleb128 0x1
+ 638 0192 9C       		.byte	0x9c
+ 639 0193 C9010000 		.4byte	0x1c9
+ 640 0197 0E       		.uleb128 0xe
+ 641 0198 0E000000 		.4byte	.LVL8
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 15
 
 
- 662 0203 03       		.uleb128 0x3
- 663 0204 0A       		.byte	0xa
- 664 0205 3D03     		.2byte	0x33d
- 665 0207 00       		.byte	0
- 666 0208 11       		.uleb128 0x11
- 667 0209 1C000000 		.4byte	.LVL13
- 668 020d E3030000 		.4byte	0x3e3
- 669 0211 00       		.byte	0
- 670 0212 12       		.uleb128 0x12
- 671 0213 F0010000 		.4byte	.LASF54
- 672 0217 01       		.byte	0x1
- 673 0218 5A       		.byte	0x5a
- 674 0219 68000000 		.4byte	0x68
- 675 021d 00000000 		.4byte	.LFB67
- 676 0221 B8000000 		.4byte	.LFE67-.LFB67
- 677 0225 01       		.uleb128 0x1
- 678 0226 9C       		.byte	0x9c
- 679 0227 55030000 		.4byte	0x355
- 680 022b 0E       		.uleb128 0xe
- 681 022c 0A000000 		.4byte	.LVL14
- 682 0230 EE030000 		.4byte	0x3ee
- 683 0234 42020000 		.4byte	0x242
- 684 0238 0F       		.uleb128 0xf
- 685 0239 01       		.uleb128 0x1
- 686 023a 50       		.byte	0x50
- 687 023b 05       		.uleb128 0x5
- 688 023c 03       		.byte	0x3
- 689 023d 00000000 		.4byte	TIMER
- 690 0241 00       		.byte	0
- 691 0242 0E       		.uleb128 0xe
- 692 0243 10000000 		.4byte	.LVL15
- 693 0247 F9030000 		.4byte	0x3f9
- 694 024b 59020000 		.4byte	0x259
- 695 024f 0F       		.uleb128 0xf
- 696 0250 01       		.uleb128 0x1
- 697 0251 50       		.byte	0x50
- 698 0252 05       		.uleb128 0x5
- 699 0253 03       		.byte	0x3
- 700 0254 00000000 		.4byte	RISING
- 701 0258 00       		.byte	0
- 702 0259 0E       		.uleb128 0xe
- 703 025a 16000000 		.4byte	.LVL16
- 704 025e 04040000 		.4byte	0x404
- 705 0262 70020000 		.4byte	0x270
- 706 0266 0F       		.uleb128 0xf
- 707 0267 01       		.uleb128 0x1
- 708 0268 50       		.byte	0x50
- 709 0269 05       		.uleb128 0x5
- 710 026a 03       		.byte	0x3
- 711 026b 00000000 		.4byte	FALLING
- 712 026f 00       		.byte	0
- 713 0270 0E       		.uleb128 0xe
- 714 0271 1C000000 		.4byte	.LVL17
- 715 0275 0F040000 		.4byte	0x40f
- 716 0279 84020000 		.4byte	0x284
- 717 027d 0F       		.uleb128 0xf
- 718 027e 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 16
+ 642 019c 02040000 		.4byte	0x402
+ 643 01a0 AB010000 		.4byte	0x1ab
+ 644 01a4 0F       		.uleb128 0xf
+ 645 01a5 01       		.uleb128 0x1
+ 646 01a6 50       		.byte	0x50
+ 647 01a7 02       		.uleb128 0x2
+ 648 01a8 08       		.byte	0x8
+ 649 01a9 34       		.byte	0x34
+ 650 01aa 00       		.byte	0
+ 651 01ab 0E       		.uleb128 0xe
+ 652 01ac 14000000 		.4byte	.LVL9
+ 653 01b0 0D040000 		.4byte	0x40d
+ 654 01b4 BF010000 		.4byte	0x1bf
+ 655 01b8 0F       		.uleb128 0xf
+ 656 01b9 01       		.uleb128 0x1
+ 657 01ba 50       		.byte	0x50
+ 658 01bb 02       		.uleb128 0x2
+ 659 01bc 08       		.byte	0x8
+ 660 01bd 33       		.byte	0x33
+ 661 01be 00       		.byte	0
+ 662 01bf 11       		.uleb128 0x11
+ 663 01c0 18000000 		.4byte	.LVL10
+ 664 01c4 18040000 		.4byte	0x418
+ 665 01c8 00       		.byte	0
+ 666 01c9 0A       		.uleb128 0xa
+ 667 01ca 1C030000 		.4byte	.LASF26
+ 668 01ce 01       		.byte	0x1
+ 669 01cf 51       		.byte	0x51
+ 670 01d0 00000000 		.4byte	.LFB66
+ 671 01d4 2C000000 		.4byte	.LFE66-.LFB66
+ 672 01d8 01       		.uleb128 0x1
+ 673 01d9 9C       		.byte	0x9c
+ 674 01da 12020000 		.4byte	0x212
+ 675 01de 0E       		.uleb128 0xe
+ 676 01df 10000000 		.4byte	.LVL11
+ 677 01e3 02040000 		.4byte	0x402
+ 678 01e7 F3010000 		.4byte	0x1f3
+ 679 01eb 0F       		.uleb128 0xf
+ 680 01ec 01       		.uleb128 0x1
+ 681 01ed 50       		.byte	0x50
+ 682 01ee 03       		.uleb128 0x3
+ 683 01ef 0A       		.byte	0xa
+ 684 01f0 3E03     		.2byte	0x33e
+ 685 01f2 00       		.byte	0
+ 686 01f3 0E       		.uleb128 0xe
+ 687 01f4 18000000 		.4byte	.LVL12
+ 688 01f8 0D040000 		.4byte	0x40d
+ 689 01fc 08020000 		.4byte	0x208
+ 690 0200 0F       		.uleb128 0xf
+ 691 0201 01       		.uleb128 0x1
+ 692 0202 50       		.byte	0x50
+ 693 0203 03       		.uleb128 0x3
+ 694 0204 0A       		.byte	0xa
+ 695 0205 3D03     		.2byte	0x33d
+ 696 0207 00       		.byte	0
+ 697 0208 11       		.uleb128 0x11
+ 698 0209 1C000000 		.4byte	.LVL13
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 16
 
 
- 719 027f 50       		.byte	0x50
- 720 0280 02       		.uleb128 0x2
- 721 0281 08       		.byte	0x8
- 722 0282 32       		.byte	0x32
- 723 0283 00       		.byte	0
- 724 0284 0E       		.uleb128 0xe
- 725 0285 22000000 		.4byte	.LVL18
- 726 0289 1A040000 		.4byte	0x41a
- 727 028d 98020000 		.4byte	0x298
- 728 0291 0F       		.uleb128 0xf
- 729 0292 01       		.uleb128 0x1
- 730 0293 50       		.byte	0x50
- 731 0294 02       		.uleb128 0x2
- 732 0295 08       		.byte	0x8
- 733 0296 31       		.byte	0x31
- 734 0297 00       		.byte	0
- 735 0298 0E       		.uleb128 0xe
- 736 0299 28000000 		.4byte	.LVL19
- 737 029d 25040000 		.4byte	0x425
- 738 02a1 AF020000 		.4byte	0x2af
- 739 02a5 0F       		.uleb128 0xf
- 740 02a6 01       		.uleb128 0x1
- 741 02a7 50       		.byte	0x50
- 742 02a8 05       		.uleb128 0x5
- 743 02a9 03       		.byte	0x3
- 744 02aa 00000000 		.4byte	Timer_TX_ISR_HANDLER
- 745 02ae 00       		.byte	0
- 746 02af 0E       		.uleb128 0xe
- 747 02b0 3E000000 		.4byte	.LVL20
- 748 02b4 30040000 		.4byte	0x430
- 749 02b8 C2020000 		.4byte	0x2c2
- 750 02bc 0F       		.uleb128 0xf
- 751 02bd 01       		.uleb128 0x1
- 752 02be 50       		.byte	0x50
- 753 02bf 01       		.uleb128 0x1
- 754 02c0 31       		.byte	0x31
- 755 02c1 00       		.byte	0
- 756 02c2 11       		.uleb128 0x11
- 757 02c3 42000000 		.4byte	.LVL21
- 758 02c7 3B040000 		.4byte	0x43b
- 759 02cb 11       		.uleb128 0x11
- 760 02cc 4C000000 		.4byte	.LVL22
- 761 02d0 46040000 		.4byte	0x446
- 762 02d4 11       		.uleb128 0x11
- 763 02d5 50000000 		.4byte	.LVL23
- 764 02d9 3B040000 		.4byte	0x43b
- 765 02dd 11       		.uleb128 0x11
- 766 02de 5A000000 		.4byte	.LVL24
- 767 02e2 51040000 		.4byte	0x451
- 768 02e6 0E       		.uleb128 0xe
- 769 02e7 62000000 		.4byte	.LVL25
- 770 02eb 46040000 		.4byte	0x446
- 771 02ef F9020000 		.4byte	0x2f9
- 772 02f3 0F       		.uleb128 0xf
- 773 02f4 01       		.uleb128 0x1
- 774 02f5 50       		.byte	0x50
- 775 02f6 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 17
+ 699 020d 18040000 		.4byte	0x418
+ 700 0211 00       		.byte	0
+ 701 0212 12       		.uleb128 0x12
+ 702 0213 20020000 		.4byte	.LASF59
+ 703 0217 01       		.byte	0x1
+ 704 0218 5C       		.byte	0x5c
+ 705 0219 68000000 		.4byte	0x68
+ 706 021d 00000000 		.4byte	.LFB67
+ 707 0221 D8000000 		.4byte	.LFE67-.LFB67
+ 708 0225 01       		.uleb128 0x1
+ 709 0226 9C       		.byte	0x9c
+ 710 0227 79030000 		.4byte	0x379
+ 711 022b 0E       		.uleb128 0xe
+ 712 022c 0A000000 		.4byte	.LVL14
+ 713 0230 23040000 		.4byte	0x423
+ 714 0234 42020000 		.4byte	0x242
+ 715 0238 0F       		.uleb128 0xf
+ 716 0239 01       		.uleb128 0x1
+ 717 023a 50       		.byte	0x50
+ 718 023b 05       		.uleb128 0x5
+ 719 023c 03       		.byte	0x3
+ 720 023d 00000000 		.4byte	TIMER
+ 721 0241 00       		.byte	0
+ 722 0242 0E       		.uleb128 0xe
+ 723 0243 10000000 		.4byte	.LVL15
+ 724 0247 2E040000 		.4byte	0x42e
+ 725 024b 59020000 		.4byte	0x259
+ 726 024f 0F       		.uleb128 0xf
+ 727 0250 01       		.uleb128 0x1
+ 728 0251 50       		.byte	0x50
+ 729 0252 05       		.uleb128 0x5
+ 730 0253 03       		.byte	0x3
+ 731 0254 00000000 		.4byte	RISING
+ 732 0258 00       		.byte	0
+ 733 0259 0E       		.uleb128 0xe
+ 734 025a 16000000 		.4byte	.LVL16
+ 735 025e 39040000 		.4byte	0x439
+ 736 0262 70020000 		.4byte	0x270
+ 737 0266 0F       		.uleb128 0xf
+ 738 0267 01       		.uleb128 0x1
+ 739 0268 50       		.byte	0x50
+ 740 0269 05       		.uleb128 0x5
+ 741 026a 03       		.byte	0x3
+ 742 026b 00000000 		.4byte	FALLING
+ 743 026f 00       		.byte	0
+ 744 0270 0E       		.uleb128 0xe
+ 745 0271 1C000000 		.4byte	.LVL17
+ 746 0275 44040000 		.4byte	0x444
+ 747 0279 84020000 		.4byte	0x284
+ 748 027d 0F       		.uleb128 0xf
+ 749 027e 01       		.uleb128 0x1
+ 750 027f 50       		.byte	0x50
+ 751 0280 02       		.uleb128 0x2
+ 752 0281 08       		.byte	0x8
+ 753 0282 32       		.byte	0x32
+ 754 0283 00       		.byte	0
+ 755 0284 0E       		.uleb128 0xe
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 17
 
 
- 776 02f7 31       		.byte	0x31
- 777 02f8 00       		.byte	0
- 778 02f9 11       		.uleb128 0x11
- 779 02fa 66000000 		.4byte	.LVL26
- 780 02fe 5C040000 		.4byte	0x45c
- 781 0302 11       		.uleb128 0x11
- 782 0303 70000000 		.4byte	.LVL27
- 783 0307 30040000 		.4byte	0x430
- 784 030b 11       		.uleb128 0x11
- 785 030c 74000000 		.4byte	.LVL28
- 786 0310 5C040000 		.4byte	0x45c
- 787 0314 11       		.uleb128 0x11
- 788 0315 7E000000 		.4byte	.LVL29
- 789 0319 51040000 		.4byte	0x451
- 790 031d 0E       		.uleb128 0xe
- 791 031e 86000000 		.4byte	.LVL30
- 792 0322 51040000 		.4byte	0x451
- 793 0326 30030000 		.4byte	0x330
- 794 032a 0F       		.uleb128 0xf
- 795 032b 01       		.uleb128 0x1
- 796 032c 50       		.byte	0x50
- 797 032d 01       		.uleb128 0x1
- 798 032e 31       		.byte	0x31
- 799 032f 00       		.byte	0
- 800 0330 11       		.uleb128 0x11
- 801 0331 8A000000 		.4byte	.LVL31
- 802 0335 67040000 		.4byte	0x467
- 803 0339 11       		.uleb128 0x11
- 804 033a 94000000 		.4byte	.LVL32
- 805 033e 30040000 		.4byte	0x430
- 806 0342 11       		.uleb128 0x11
- 807 0343 98000000 		.4byte	.LVL33
- 808 0347 67040000 		.4byte	0x467
- 809 034b 11       		.uleb128 0x11
- 810 034c A2000000 		.4byte	.LVL34
- 811 0350 46040000 		.4byte	0x446
- 812 0354 00       		.byte	0
- 813 0355 13       		.uleb128 0x13
- 814 0356 F5010000 		.4byte	.LASF27
- 815 035a 05       		.byte	0x5
- 816 035b 1207     		.2byte	0x712
- 817 035d 61030000 		.4byte	0x361
- 818 0361 06       		.uleb128 0x6
- 819 0362 76000000 		.4byte	0x76
- 820 0366 14       		.uleb128 0x14
- 821 0367 E4010000 		.4byte	.LASF28
- 822 036b 01       		.byte	0x1
- 823 036c 10       		.byte	0x10
- 824 036d E4000000 		.4byte	0xe4
- 825 0371 05       		.uleb128 0x5
- 826 0372 03       		.byte	0x3
- 827 0373 00000000 		.4byte	systemState
- 828 0377 14       		.uleb128 0x14
- 829 0378 0F000000 		.4byte	.LASF29
- 830 037c 01       		.byte	0x1
- 831 037d 12       		.byte	0x12
- 832 037e 88030000 		.4byte	0x388
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 18
+ 756 0285 22000000 		.4byte	.LVL18
+ 757 0289 4F040000 		.4byte	0x44f
+ 758 028d 98020000 		.4byte	0x298
+ 759 0291 0F       		.uleb128 0xf
+ 760 0292 01       		.uleb128 0x1
+ 761 0293 50       		.byte	0x50
+ 762 0294 02       		.uleb128 0x2
+ 763 0295 08       		.byte	0x8
+ 764 0296 31       		.byte	0x31
+ 765 0297 00       		.byte	0
+ 766 0298 0E       		.uleb128 0xe
+ 767 0299 28000000 		.4byte	.LVL19
+ 768 029d 5A040000 		.4byte	0x45a
+ 769 02a1 AF020000 		.4byte	0x2af
+ 770 02a5 0F       		.uleb128 0xf
+ 771 02a6 01       		.uleb128 0x1
+ 772 02a7 50       		.byte	0x50
+ 773 02a8 05       		.uleb128 0x5
+ 774 02a9 03       		.byte	0x3
+ 775 02aa 00000000 		.4byte	Timer_TX_ISR_HANDLER
+ 776 02ae 00       		.byte	0
+ 777 02af 11       		.uleb128 0x11
+ 778 02b0 2C000000 		.4byte	.LVL20
+ 779 02b4 65040000 		.4byte	0x465
+ 780 02b8 11       		.uleb128 0x11
+ 781 02b9 3C000000 		.4byte	.LVL21
+ 782 02bd 70040000 		.4byte	0x470
+ 783 02c1 11       		.uleb128 0x11
+ 784 02c2 42000000 		.4byte	.LVL22
+ 785 02c6 7C040000 		.4byte	0x47c
+ 786 02ca 11       		.uleb128 0x11
+ 787 02cb 48000000 		.4byte	.LVL23
+ 788 02cf 88040000 		.4byte	0x488
+ 789 02d3 0E       		.uleb128 0xe
+ 790 02d4 5E000000 		.4byte	.LVL24
+ 791 02d8 93040000 		.4byte	0x493
+ 792 02dc E6020000 		.4byte	0x2e6
+ 793 02e0 0F       		.uleb128 0xf
+ 794 02e1 01       		.uleb128 0x1
+ 795 02e2 50       		.byte	0x50
+ 796 02e3 01       		.uleb128 0x1
+ 797 02e4 31       		.byte	0x31
+ 798 02e5 00       		.byte	0
+ 799 02e6 11       		.uleb128 0x11
+ 800 02e7 62000000 		.4byte	.LVL25
+ 801 02eb 9E040000 		.4byte	0x49e
+ 802 02ef 11       		.uleb128 0x11
+ 803 02f0 6C000000 		.4byte	.LVL26
+ 804 02f4 A9040000 		.4byte	0x4a9
+ 805 02f8 11       		.uleb128 0x11
+ 806 02f9 70000000 		.4byte	.LVL27
+ 807 02fd 9E040000 		.4byte	0x49e
+ 808 0301 11       		.uleb128 0x11
+ 809 0302 7A000000 		.4byte	.LVL28
+ 810 0306 B4040000 		.4byte	0x4b4
+ 811 030a 0E       		.uleb128 0xe
+ 812 030b 82000000 		.4byte	.LVL29
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 18
 
 
- 833 0382 05       		.uleb128 0x5
- 834 0383 03       		.byte	0x3
- 835 0384 00000000 		.4byte	lowFlag
- 836 0388 02       		.uleb128 0x2
- 837 0389 01       		.byte	0x1
- 838 038a 02       		.byte	0x2
- 839 038b 73030000 		.4byte	.LASF30
- 840 038f 15       		.uleb128 0x15
- 841 0390 9B000000 		.4byte	0x9b
- 842 0394 A0030000 		.4byte	0x3a0
- 843 0398 16       		.uleb128 0x16
- 844 0399 BA000000 		.4byte	0xba
- 845 039d F301     		.2byte	0x1f3
- 846 039f 00       		.byte	0
- 847 03a0 14       		.uleb128 0x14
- 848 03a1 38000000 		.4byte	.LASF31
- 849 03a5 01       		.byte	0x1
- 850 03a6 1F       		.byte	0x1f
- 851 03a7 8F030000 		.4byte	0x38f
- 852 03ab 05       		.uleb128 0x5
- 853 03ac 03       		.byte	0x3
- 854 03ad 00000000 		.4byte	SERIAL_BUFFER
- 855 03b1 14       		.uleb128 0x14
- 856 03b2 17000000 		.4byte	.LASF32
- 857 03b6 01       		.byte	0x1
- 858 03b7 20       		.byte	0x20
- 859 03b8 9B000000 		.4byte	0x9b
- 860 03bc 05       		.uleb128 0x5
- 861 03bd 03       		.byte	0x3
- 862 03be 00000000 		.4byte	SERIAL_POS
- 863 03c2 17       		.uleb128 0x17
- 864 03c3 A5000000 		.4byte	.LASF33
- 865 03c7 A5000000 		.4byte	.LASF33
- 866 03cb 06       		.byte	0x6
- 867 03cc 26       		.byte	0x26
- 868 03cd 17       		.uleb128 0x17
- 869 03ce 46000000 		.4byte	.LASF34
- 870 03d2 46000000 		.4byte	.LASF34
- 871 03d6 07       		.byte	0x7
- 872 03d7 68       		.byte	0x68
- 873 03d8 17       		.uleb128 0x17
- 874 03d9 30020000 		.4byte	.LASF35
- 875 03dd 30020000 		.4byte	.LASF35
- 876 03e1 07       		.byte	0x7
- 877 03e2 6A       		.byte	0x6a
- 878 03e3 17       		.uleb128 0x17
- 879 03e4 B4000000 		.4byte	.LASF36
- 880 03e8 B4000000 		.4byte	.LASF36
- 881 03ec 07       		.byte	0x7
- 882 03ed 5A       		.byte	0x5a
- 883 03ee 17       		.uleb128 0x17
- 884 03ef 14030000 		.4byte	.LASF37
- 885 03f3 14030000 		.4byte	.LASF37
- 886 03f7 08       		.byte	0x8
- 887 03f8 18       		.byte	0x18
- 888 03f9 17       		.uleb128 0x17
- 889 03fa AB010000 		.4byte	.LASF38
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 19
+ 813 030f A9040000 		.4byte	0x4a9
+ 814 0313 1D030000 		.4byte	0x31d
+ 815 0317 0F       		.uleb128 0xf
+ 816 0318 01       		.uleb128 0x1
+ 817 0319 50       		.byte	0x50
+ 818 031a 01       		.uleb128 0x1
+ 819 031b 31       		.byte	0x31
+ 820 031c 00       		.byte	0
+ 821 031d 11       		.uleb128 0x11
+ 822 031e 86000000 		.4byte	.LVL30
+ 823 0322 BF040000 		.4byte	0x4bf
+ 824 0326 11       		.uleb128 0x11
+ 825 0327 90000000 		.4byte	.LVL31
+ 826 032b 93040000 		.4byte	0x493
+ 827 032f 11       		.uleb128 0x11
+ 828 0330 94000000 		.4byte	.LVL32
+ 829 0334 BF040000 		.4byte	0x4bf
+ 830 0338 11       		.uleb128 0x11
+ 831 0339 9E000000 		.4byte	.LVL33
+ 832 033d B4040000 		.4byte	0x4b4
+ 833 0341 0E       		.uleb128 0xe
+ 834 0342 A6000000 		.4byte	.LVL34
+ 835 0346 B4040000 		.4byte	0x4b4
+ 836 034a 54030000 		.4byte	0x354
+ 837 034e 0F       		.uleb128 0xf
+ 838 034f 01       		.uleb128 0x1
+ 839 0350 50       		.byte	0x50
+ 840 0351 01       		.uleb128 0x1
+ 841 0352 31       		.byte	0x31
+ 842 0353 00       		.byte	0
+ 843 0354 11       		.uleb128 0x11
+ 844 0355 AA000000 		.4byte	.LVL35
+ 845 0359 CA040000 		.4byte	0x4ca
+ 846 035d 11       		.uleb128 0x11
+ 847 035e B4000000 		.4byte	.LVL36
+ 848 0362 93040000 		.4byte	0x493
+ 849 0366 11       		.uleb128 0x11
+ 850 0367 B8000000 		.4byte	.LVL37
+ 851 036b CA040000 		.4byte	0x4ca
+ 852 036f 11       		.uleb128 0x11
+ 853 0370 C2000000 		.4byte	.LVL38
+ 854 0374 A9040000 		.4byte	0x4a9
+ 855 0378 00       		.byte	0
+ 856 0379 13       		.uleb128 0x13
+ 857 037a 24030000 		.4byte	.LASF27
+ 858 037e 05       		.byte	0x5
+ 859 037f 1207     		.2byte	0x712
+ 860 0381 85030000 		.4byte	0x385
+ 861 0385 06       		.uleb128 0x6
+ 862 0386 76000000 		.4byte	0x76
+ 863 038a 14       		.uleb128 0x14
+ 864 038b 14020000 		.4byte	.LASF28
+ 865 038f 01       		.byte	0x1
+ 866 0390 10       		.byte	0x10
+ 867 0391 E4000000 		.4byte	0xe4
+ 868 0395 05       		.uleb128 0x5
+ 869 0396 03       		.byte	0x3
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 19
 
 
- 890 03fe AB010000 		.4byte	.LASF38
- 891 0402 09       		.byte	0x9
- 892 0403 18       		.byte	0x18
- 893 0404 17       		.uleb128 0x17
- 894 0405 4F030000 		.4byte	.LASF39
- 895 0409 4F030000 		.4byte	.LASF39
- 896 040d 0A       		.byte	0xa
- 897 040e 18       		.byte	0x18
- 898 040f 17       		.uleb128 0x17
- 899 0410 4B020000 		.4byte	.LASF40
- 900 0414 4B020000 		.4byte	.LASF40
- 901 0418 0B       		.byte	0xb
- 902 0419 68       		.byte	0x68
- 903 041a 17       		.uleb128 0x17
- 904 041b 22000000 		.4byte	.LASF41
- 905 041f 22000000 		.4byte	.LASF41
- 906 0423 0B       		.byte	0xb
- 907 0424 6A       		.byte	0x6a
- 908 0425 17       		.uleb128 0x17
- 909 0426 3A030000 		.4byte	.LASF42
- 910 042a 3A030000 		.4byte	.LASF42
- 911 042e 0C       		.byte	0xc
- 912 042f 18       		.byte	0x18
- 913 0430 17       		.uleb128 0x17
- 914 0431 6F010000 		.4byte	.LASF43
- 915 0435 6F010000 		.4byte	.LASF43
- 916 0439 0D       		.byte	0xd
- 917 043a 26       		.byte	0x26
- 918 043b 17       		.uleb128 0x17
- 919 043c 8C010000 		.4byte	.LASF44
- 920 0440 8C010000 		.4byte	.LASF44
- 921 0444 0D       		.byte	0xd
- 922 0445 29       		.byte	0x29
- 923 0446 17       		.uleb128 0x17
- 924 0447 9A000000 		.4byte	.LASF45
- 925 044b 9A000000 		.4byte	.LASF45
- 926 044f 0E       		.byte	0xe
- 927 0450 26       		.byte	0x26
- 928 0451 17       		.uleb128 0x17
- 929 0452 BE010000 		.4byte	.LASF46
- 930 0456 BE010000 		.4byte	.LASF46
- 931 045a 0F       		.byte	0xf
- 932 045b 26       		.byte	0x26
- 933 045c 17       		.uleb128 0x17
- 934 045d 63030000 		.4byte	.LASF47
- 935 0461 63030000 		.4byte	.LASF47
- 936 0465 0E       		.byte	0xe
- 937 0466 29       		.byte	0x29
- 938 0467 17       		.uleb128 0x17
- 939 0468 60000000 		.4byte	.LASF48
- 940 046c 60000000 		.4byte	.LASF48
- 941 0470 0F       		.byte	0xf
- 942 0471 29       		.byte	0x29
- 943 0472 00       		.byte	0
- 944              		.section	.debug_abbrev,"",%progbits
- 945              	.Ldebug_abbrev0:
- 946 0000 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 20
+ 870 0397 00000000 		.4byte	systemState
+ 871 039b 14       		.uleb128 0x14
+ 872 039c 0F000000 		.4byte	.LASF29
+ 873 03a0 01       		.byte	0x1
+ 874 03a1 12       		.byte	0x12
+ 875 03a2 AC030000 		.4byte	0x3ac
+ 876 03a6 05       		.uleb128 0x5
+ 877 03a7 03       		.byte	0x3
+ 878 03a8 00000000 		.4byte	lowFlag
+ 879 03ac 02       		.uleb128 0x2
+ 880 03ad 01       		.byte	0x1
+ 881 03ae 02       		.byte	0x2
+ 882 03af D1030000 		.4byte	.LASF30
+ 883 03b3 15       		.uleb128 0x15
+ 884 03b4 9B000000 		.4byte	0x9b
+ 885 03b8 C4030000 		.4byte	0x3c4
+ 886 03bc 16       		.uleb128 0x16
+ 887 03bd BA000000 		.4byte	0xba
+ 888 03c1 F301     		.2byte	0x1f3
+ 889 03c3 00       		.byte	0
+ 890 03c4 14       		.uleb128 0x14
+ 891 03c5 38000000 		.4byte	.LASF31
+ 892 03c9 01       		.byte	0x1
+ 893 03ca 1F       		.byte	0x1f
+ 894 03cb B3030000 		.4byte	0x3b3
+ 895 03cf 05       		.uleb128 0x5
+ 896 03d0 03       		.byte	0x3
+ 897 03d1 00000000 		.4byte	SERIAL_BUFFER
+ 898 03d5 14       		.uleb128 0x14
+ 899 03d6 17000000 		.4byte	.LASF32
+ 900 03da 01       		.byte	0x1
+ 901 03db 20       		.byte	0x20
+ 902 03dc 68000000 		.4byte	0x68
+ 903 03e0 05       		.uleb128 0x5
+ 904 03e1 03       		.byte	0x3
+ 905 03e2 00000000 		.4byte	SERIAL_POS
+ 906 03e6 14       		.uleb128 0x14
+ 907 03e7 60000000 		.4byte	.LASF33
+ 908 03eb 01       		.byte	0x1
+ 909 03ec 22       		.byte	0x22
+ 910 03ed 68000000 		.4byte	0x68
+ 911 03f1 05       		.uleb128 0x5
+ 912 03f2 03       		.byte	0x3
+ 913 03f3 00000000 		.4byte	uartConnected
+ 914 03f7 17       		.uleb128 0x17
+ 915 03f8 D5000000 		.4byte	.LASF34
+ 916 03fc D5000000 		.4byte	.LASF34
+ 917 0400 06       		.byte	0x6
+ 918 0401 26       		.byte	0x26
+ 919 0402 17       		.uleb128 0x17
+ 920 0403 46000000 		.4byte	.LASF35
+ 921 0407 46000000 		.4byte	.LASF35
+ 922 040b 07       		.byte	0x7
+ 923 040c 68       		.byte	0x68
+ 924 040d 17       		.uleb128 0x17
+ 925 040e 69020000 		.4byte	.LASF36
+ 926 0412 69020000 		.4byte	.LASF36
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 20
 
 
- 947 0001 11       		.uleb128 0x11
- 948 0002 01       		.byte	0x1
- 949 0003 25       		.uleb128 0x25
- 950 0004 0E       		.uleb128 0xe
- 951 0005 13       		.uleb128 0x13
- 952 0006 0B       		.uleb128 0xb
- 953 0007 03       		.uleb128 0x3
- 954 0008 0E       		.uleb128 0xe
- 955 0009 1B       		.uleb128 0x1b
- 956 000a 0E       		.uleb128 0xe
- 957 000b 55       		.uleb128 0x55
- 958 000c 17       		.uleb128 0x17
- 959 000d 11       		.uleb128 0x11
- 960 000e 01       		.uleb128 0x1
- 961 000f 10       		.uleb128 0x10
- 962 0010 17       		.uleb128 0x17
- 963 0011 00       		.byte	0
- 964 0012 00       		.byte	0
- 965 0013 02       		.uleb128 0x2
- 966 0014 24       		.uleb128 0x24
- 967 0015 00       		.byte	0
- 968 0016 0B       		.uleb128 0xb
- 969 0017 0B       		.uleb128 0xb
- 970 0018 3E       		.uleb128 0x3e
- 971 0019 0B       		.uleb128 0xb
- 972 001a 03       		.uleb128 0x3
- 973 001b 0E       		.uleb128 0xe
- 974 001c 00       		.byte	0
- 975 001d 00       		.byte	0
- 976 001e 03       		.uleb128 0x3
- 977 001f 16       		.uleb128 0x16
- 978 0020 00       		.byte	0
- 979 0021 03       		.uleb128 0x3
- 980 0022 0E       		.uleb128 0xe
- 981 0023 3A       		.uleb128 0x3a
- 982 0024 0B       		.uleb128 0xb
- 983 0025 3B       		.uleb128 0x3b
- 984 0026 0B       		.uleb128 0xb
- 985 0027 49       		.uleb128 0x49
- 986 0028 13       		.uleb128 0x13
- 987 0029 00       		.byte	0
- 988 002a 00       		.byte	0
- 989 002b 04       		.uleb128 0x4
- 990 002c 24       		.uleb128 0x24
- 991 002d 00       		.byte	0
- 992 002e 0B       		.uleb128 0xb
- 993 002f 0B       		.uleb128 0xb
- 994 0030 3E       		.uleb128 0x3e
- 995 0031 0B       		.uleb128 0xb
- 996 0032 03       		.uleb128 0x3
- 997 0033 08       		.uleb128 0x8
- 998 0034 00       		.byte	0
- 999 0035 00       		.byte	0
- 1000 0036 05       		.uleb128 0x5
- 1001 0037 16       		.uleb128 0x16
- 1002 0038 00       		.byte	0
- 1003 0039 03       		.uleb128 0x3
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 21
+ 927 0416 07       		.byte	0x7
+ 928 0417 6A       		.byte	0x6a
+ 929 0418 17       		.uleb128 0x17
+ 930 0419 E4000000 		.4byte	.LASF37
+ 931 041d E4000000 		.4byte	.LASF37
+ 932 0421 07       		.byte	0x7
+ 933 0422 5A       		.byte	0x5a
+ 934 0423 17       		.uleb128 0x17
+ 935 0424 72030000 		.4byte	.LASF38
+ 936 0428 72030000 		.4byte	.LASF38
+ 937 042c 08       		.byte	0x8
+ 938 042d 18       		.byte	0x18
+ 939 042e 17       		.uleb128 0x17
+ 940 042f DB010000 		.4byte	.LASF39
+ 941 0433 DB010000 		.4byte	.LASF39
+ 942 0437 09       		.byte	0x9
+ 943 0438 18       		.byte	0x18
+ 944 0439 17       		.uleb128 0x17
+ 945 043a AD030000 		.4byte	.LASF40
+ 946 043e AD030000 		.4byte	.LASF40
+ 947 0442 0A       		.byte	0xa
+ 948 0443 18       		.byte	0x18
+ 949 0444 17       		.uleb128 0x17
+ 950 0445 9C020000 		.4byte	.LASF41
+ 951 0449 9C020000 		.4byte	.LASF41
+ 952 044d 0B       		.byte	0xb
+ 953 044e 68       		.byte	0x68
+ 954 044f 17       		.uleb128 0x17
+ 955 0450 22000000 		.4byte	.LASF42
+ 956 0454 22000000 		.4byte	.LASF42
+ 957 0458 0B       		.byte	0xb
+ 958 0459 6A       		.byte	0x6a
+ 959 045a 17       		.uleb128 0x17
+ 960 045b 98030000 		.4byte	.LASF43
+ 961 045f 98030000 		.4byte	.LASF43
+ 962 0463 0C       		.byte	0xc
+ 963 0464 18       		.byte	0x18
+ 964 0465 17       		.uleb128 0x17
+ 965 0466 8C020000 		.4byte	.LASF44
+ 966 046a 8C020000 		.4byte	.LASF44
+ 967 046e 0D       		.byte	0xd
+ 968 046f 2E       		.byte	0x2e
+ 969 0470 18       		.uleb128 0x18
+ 970 0471 74000000 		.4byte	.LASF45
+ 971 0475 74000000 		.4byte	.LASF45
+ 972 0479 0E       		.byte	0xe
+ 973 047a 2E01     		.2byte	0x12e
+ 974 047c 18       		.uleb128 0x18
+ 975 047d 25020000 		.4byte	.LASF46
+ 976 0481 25020000 		.4byte	.LASF46
+ 977 0485 0E       		.byte	0xe
+ 978 0486 2D01     		.2byte	0x12d
+ 979 0488 17       		.uleb128 0x17
+ 980 0489 7E020000 		.4byte	.LASF47
+ 981 048d 7E020000 		.4byte	.LASF47
+ 982 0491 0D       		.byte	0xd
+ 983 0492 22       		.byte	0x22
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 21
 
 
- 1004 003a 0E       		.uleb128 0xe
- 1005 003b 3A       		.uleb128 0x3a
- 1006 003c 0B       		.uleb128 0xb
- 1007 003d 3B       		.uleb128 0x3b
- 1008 003e 05       		.uleb128 0x5
- 1009 003f 49       		.uleb128 0x49
- 1010 0040 13       		.uleb128 0x13
- 1011 0041 00       		.byte	0
- 1012 0042 00       		.byte	0
- 1013 0043 06       		.uleb128 0x6
- 1014 0044 35       		.uleb128 0x35
- 1015 0045 00       		.byte	0
- 1016 0046 49       		.uleb128 0x49
- 1017 0047 13       		.uleb128 0x13
- 1018 0048 00       		.byte	0
- 1019 0049 00       		.byte	0
- 1020 004a 07       		.uleb128 0x7
- 1021 004b 04       		.uleb128 0x4
- 1022 004c 01       		.byte	0x1
- 1023 004d 03       		.uleb128 0x3
- 1024 004e 0E       		.uleb128 0xe
- 1025 004f 0B       		.uleb128 0xb
- 1026 0050 0B       		.uleb128 0xb
- 1027 0051 49       		.uleb128 0x49
- 1028 0052 13       		.uleb128 0x13
- 1029 0053 3A       		.uleb128 0x3a
- 1030 0054 0B       		.uleb128 0xb
- 1031 0055 3B       		.uleb128 0x3b
- 1032 0056 0B       		.uleb128 0xb
- 1033 0057 01       		.uleb128 0x1
- 1034 0058 13       		.uleb128 0x13
- 1035 0059 00       		.byte	0
- 1036 005a 00       		.byte	0
- 1037 005b 08       		.uleb128 0x8
- 1038 005c 28       		.uleb128 0x28
- 1039 005d 00       		.byte	0
- 1040 005e 03       		.uleb128 0x3
- 1041 005f 0E       		.uleb128 0xe
- 1042 0060 1C       		.uleb128 0x1c
- 1043 0061 0B       		.uleb128 0xb
- 1044 0062 00       		.byte	0
- 1045 0063 00       		.byte	0
- 1046 0064 09       		.uleb128 0x9
- 1047 0065 2E       		.uleb128 0x2e
- 1048 0066 00       		.byte	0
- 1049 0067 3F       		.uleb128 0x3f
- 1050 0068 19       		.uleb128 0x19
- 1051 0069 03       		.uleb128 0x3
- 1052 006a 0E       		.uleb128 0xe
- 1053 006b 3A       		.uleb128 0x3a
- 1054 006c 0B       		.uleb128 0xb
- 1055 006d 3B       		.uleb128 0x3b
- 1056 006e 0B       		.uleb128 0xb
- 1057 006f 27       		.uleb128 0x27
- 1058 0070 19       		.uleb128 0x19
- 1059 0071 11       		.uleb128 0x11
- 1060 0072 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 22
+ 984 0493 17       		.uleb128 0x17
+ 985 0494 9F010000 		.4byte	.LASF48
+ 986 0498 9F010000 		.4byte	.LASF48
+ 987 049c 0F       		.byte	0xf
+ 988 049d 26       		.byte	0x26
+ 989 049e 17       		.uleb128 0x17
+ 990 049f BC010000 		.4byte	.LASF49
+ 991 04a3 BC010000 		.4byte	.LASF49
+ 992 04a7 0F       		.byte	0xf
+ 993 04a8 29       		.byte	0x29
+ 994 04a9 17       		.uleb128 0x17
+ 995 04aa CA000000 		.4byte	.LASF50
+ 996 04ae CA000000 		.4byte	.LASF50
+ 997 04b2 10       		.byte	0x10
+ 998 04b3 26       		.byte	0x26
+ 999 04b4 17       		.uleb128 0x17
+ 1000 04b5 EE010000 		.4byte	.LASF51
+ 1001 04b9 EE010000 		.4byte	.LASF51
+ 1002 04bd 11       		.byte	0x11
+ 1003 04be 26       		.byte	0x26
+ 1004 04bf 17       		.uleb128 0x17
+ 1005 04c0 C1030000 		.4byte	.LASF52
+ 1006 04c4 C1030000 		.4byte	.LASF52
+ 1007 04c8 10       		.byte	0x10
+ 1008 04c9 29       		.byte	0x29
+ 1009 04ca 17       		.uleb128 0x17
+ 1010 04cb 90000000 		.4byte	.LASF53
+ 1011 04cf 90000000 		.4byte	.LASF53
+ 1012 04d3 11       		.byte	0x11
+ 1013 04d4 29       		.byte	0x29
+ 1014 04d5 00       		.byte	0
+ 1015              		.section	.debug_abbrev,"",%progbits
+ 1016              	.Ldebug_abbrev0:
+ 1017 0000 01       		.uleb128 0x1
+ 1018 0001 11       		.uleb128 0x11
+ 1019 0002 01       		.byte	0x1
+ 1020 0003 25       		.uleb128 0x25
+ 1021 0004 0E       		.uleb128 0xe
+ 1022 0005 13       		.uleb128 0x13
+ 1023 0006 0B       		.uleb128 0xb
+ 1024 0007 03       		.uleb128 0x3
+ 1025 0008 0E       		.uleb128 0xe
+ 1026 0009 1B       		.uleb128 0x1b
+ 1027 000a 0E       		.uleb128 0xe
+ 1028 000b 55       		.uleb128 0x55
+ 1029 000c 17       		.uleb128 0x17
+ 1030 000d 11       		.uleb128 0x11
+ 1031 000e 01       		.uleb128 0x1
+ 1032 000f 10       		.uleb128 0x10
+ 1033 0010 17       		.uleb128 0x17
+ 1034 0011 00       		.byte	0
+ 1035 0012 00       		.byte	0
+ 1036 0013 02       		.uleb128 0x2
+ 1037 0014 24       		.uleb128 0x24
+ 1038 0015 00       		.byte	0
+ 1039 0016 0B       		.uleb128 0xb
+ 1040 0017 0B       		.uleb128 0xb
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 22
 
 
- 1061 0073 12       		.uleb128 0x12
- 1062 0074 06       		.uleb128 0x6
- 1063 0075 40       		.uleb128 0x40
- 1064 0076 18       		.uleb128 0x18
- 1065 0077 9742     		.uleb128 0x2117
- 1066 0079 19       		.uleb128 0x19
- 1067 007a 00       		.byte	0
- 1068 007b 00       		.byte	0
- 1069 007c 0A       		.uleb128 0xa
- 1070 007d 2E       		.uleb128 0x2e
- 1071 007e 01       		.byte	0x1
- 1072 007f 3F       		.uleb128 0x3f
- 1073 0080 19       		.uleb128 0x19
- 1074 0081 03       		.uleb128 0x3
- 1075 0082 0E       		.uleb128 0xe
- 1076 0083 3A       		.uleb128 0x3a
- 1077 0084 0B       		.uleb128 0xb
- 1078 0085 3B       		.uleb128 0x3b
- 1079 0086 0B       		.uleb128 0xb
- 1080 0087 27       		.uleb128 0x27
- 1081 0088 19       		.uleb128 0x19
- 1082 0089 11       		.uleb128 0x11
- 1083 008a 01       		.uleb128 0x1
- 1084 008b 12       		.uleb128 0x12
- 1085 008c 06       		.uleb128 0x6
- 1086 008d 40       		.uleb128 0x40
- 1087 008e 18       		.uleb128 0x18
- 1088 008f 9742     		.uleb128 0x2117
- 1089 0091 19       		.uleb128 0x19
- 1090 0092 01       		.uleb128 0x1
- 1091 0093 13       		.uleb128 0x13
- 1092 0094 00       		.byte	0
- 1093 0095 00       		.byte	0
- 1094 0096 0B       		.uleb128 0xb
- 1095 0097 34       		.uleb128 0x34
- 1096 0098 00       		.byte	0
- 1097 0099 03       		.uleb128 0x3
- 1098 009a 0E       		.uleb128 0xe
- 1099 009b 3A       		.uleb128 0x3a
- 1100 009c 0B       		.uleb128 0xb
- 1101 009d 3B       		.uleb128 0x3b
- 1102 009e 0B       		.uleb128 0xb
- 1103 009f 49       		.uleb128 0x49
- 1104 00a0 13       		.uleb128 0x13
- 1105 00a1 02       		.uleb128 0x2
- 1106 00a2 17       		.uleb128 0x17
- 1107 00a3 00       		.byte	0
- 1108 00a4 00       		.byte	0
- 1109 00a5 0C       		.uleb128 0xc
- 1110 00a6 0B       		.uleb128 0xb
- 1111 00a7 01       		.byte	0x1
- 1112 00a8 55       		.uleb128 0x55
- 1113 00a9 17       		.uleb128 0x17
- 1114 00aa 00       		.byte	0
- 1115 00ab 00       		.byte	0
- 1116 00ac 0D       		.uleb128 0xd
- 1117 00ad 34       		.uleb128 0x34
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 23
+ 1041 0018 3E       		.uleb128 0x3e
+ 1042 0019 0B       		.uleb128 0xb
+ 1043 001a 03       		.uleb128 0x3
+ 1044 001b 0E       		.uleb128 0xe
+ 1045 001c 00       		.byte	0
+ 1046 001d 00       		.byte	0
+ 1047 001e 03       		.uleb128 0x3
+ 1048 001f 16       		.uleb128 0x16
+ 1049 0020 00       		.byte	0
+ 1050 0021 03       		.uleb128 0x3
+ 1051 0022 0E       		.uleb128 0xe
+ 1052 0023 3A       		.uleb128 0x3a
+ 1053 0024 0B       		.uleb128 0xb
+ 1054 0025 3B       		.uleb128 0x3b
+ 1055 0026 0B       		.uleb128 0xb
+ 1056 0027 49       		.uleb128 0x49
+ 1057 0028 13       		.uleb128 0x13
+ 1058 0029 00       		.byte	0
+ 1059 002a 00       		.byte	0
+ 1060 002b 04       		.uleb128 0x4
+ 1061 002c 24       		.uleb128 0x24
+ 1062 002d 00       		.byte	0
+ 1063 002e 0B       		.uleb128 0xb
+ 1064 002f 0B       		.uleb128 0xb
+ 1065 0030 3E       		.uleb128 0x3e
+ 1066 0031 0B       		.uleb128 0xb
+ 1067 0032 03       		.uleb128 0x3
+ 1068 0033 08       		.uleb128 0x8
+ 1069 0034 00       		.byte	0
+ 1070 0035 00       		.byte	0
+ 1071 0036 05       		.uleb128 0x5
+ 1072 0037 16       		.uleb128 0x16
+ 1073 0038 00       		.byte	0
+ 1074 0039 03       		.uleb128 0x3
+ 1075 003a 0E       		.uleb128 0xe
+ 1076 003b 3A       		.uleb128 0x3a
+ 1077 003c 0B       		.uleb128 0xb
+ 1078 003d 3B       		.uleb128 0x3b
+ 1079 003e 05       		.uleb128 0x5
+ 1080 003f 49       		.uleb128 0x49
+ 1081 0040 13       		.uleb128 0x13
+ 1082 0041 00       		.byte	0
+ 1083 0042 00       		.byte	0
+ 1084 0043 06       		.uleb128 0x6
+ 1085 0044 35       		.uleb128 0x35
+ 1086 0045 00       		.byte	0
+ 1087 0046 49       		.uleb128 0x49
+ 1088 0047 13       		.uleb128 0x13
+ 1089 0048 00       		.byte	0
+ 1090 0049 00       		.byte	0
+ 1091 004a 07       		.uleb128 0x7
+ 1092 004b 04       		.uleb128 0x4
+ 1093 004c 01       		.byte	0x1
+ 1094 004d 03       		.uleb128 0x3
+ 1095 004e 0E       		.uleb128 0xe
+ 1096 004f 0B       		.uleb128 0xb
+ 1097 0050 0B       		.uleb128 0xb
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 23
 
 
- 1118 00ae 00       		.byte	0
- 1119 00af 03       		.uleb128 0x3
- 1120 00b0 08       		.uleb128 0x8
- 1121 00b1 3A       		.uleb128 0x3a
- 1122 00b2 0B       		.uleb128 0xb
- 1123 00b3 3B       		.uleb128 0x3b
- 1124 00b4 0B       		.uleb128 0xb
- 1125 00b5 49       		.uleb128 0x49
- 1126 00b6 13       		.uleb128 0x13
- 1127 00b7 02       		.uleb128 0x2
- 1128 00b8 17       		.uleb128 0x17
- 1129 00b9 00       		.byte	0
- 1130 00ba 00       		.byte	0
- 1131 00bb 0E       		.uleb128 0xe
- 1132 00bc 898201   		.uleb128 0x4109
- 1133 00bf 01       		.byte	0x1
- 1134 00c0 11       		.uleb128 0x11
- 1135 00c1 01       		.uleb128 0x1
- 1136 00c2 31       		.uleb128 0x31
- 1137 00c3 13       		.uleb128 0x13
- 1138 00c4 01       		.uleb128 0x1
- 1139 00c5 13       		.uleb128 0x13
- 1140 00c6 00       		.byte	0
- 1141 00c7 00       		.byte	0
- 1142 00c8 0F       		.uleb128 0xf
- 1143 00c9 8A8201   		.uleb128 0x410a
- 1144 00cc 00       		.byte	0
- 1145 00cd 02       		.uleb128 0x2
- 1146 00ce 18       		.uleb128 0x18
- 1147 00cf 9142     		.uleb128 0x2111
- 1148 00d1 18       		.uleb128 0x18
- 1149 00d2 00       		.byte	0
- 1150 00d3 00       		.byte	0
- 1151 00d4 10       		.uleb128 0x10
- 1152 00d5 898201   		.uleb128 0x4109
- 1153 00d8 01       		.byte	0x1
- 1154 00d9 11       		.uleb128 0x11
- 1155 00da 01       		.uleb128 0x1
- 1156 00db 31       		.uleb128 0x31
- 1157 00dc 13       		.uleb128 0x13
- 1158 00dd 00       		.byte	0
- 1159 00de 00       		.byte	0
- 1160 00df 11       		.uleb128 0x11
- 1161 00e0 898201   		.uleb128 0x4109
- 1162 00e3 00       		.byte	0
- 1163 00e4 11       		.uleb128 0x11
- 1164 00e5 01       		.uleb128 0x1
- 1165 00e6 31       		.uleb128 0x31
- 1166 00e7 13       		.uleb128 0x13
- 1167 00e8 00       		.byte	0
- 1168 00e9 00       		.byte	0
- 1169 00ea 12       		.uleb128 0x12
- 1170 00eb 2E       		.uleb128 0x2e
- 1171 00ec 01       		.byte	0x1
- 1172 00ed 3F       		.uleb128 0x3f
- 1173 00ee 19       		.uleb128 0x19
- 1174 00ef 03       		.uleb128 0x3
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 24
+ 1098 0051 49       		.uleb128 0x49
+ 1099 0052 13       		.uleb128 0x13
+ 1100 0053 3A       		.uleb128 0x3a
+ 1101 0054 0B       		.uleb128 0xb
+ 1102 0055 3B       		.uleb128 0x3b
+ 1103 0056 0B       		.uleb128 0xb
+ 1104 0057 01       		.uleb128 0x1
+ 1105 0058 13       		.uleb128 0x13
+ 1106 0059 00       		.byte	0
+ 1107 005a 00       		.byte	0
+ 1108 005b 08       		.uleb128 0x8
+ 1109 005c 28       		.uleb128 0x28
+ 1110 005d 00       		.byte	0
+ 1111 005e 03       		.uleb128 0x3
+ 1112 005f 0E       		.uleb128 0xe
+ 1113 0060 1C       		.uleb128 0x1c
+ 1114 0061 0B       		.uleb128 0xb
+ 1115 0062 00       		.byte	0
+ 1116 0063 00       		.byte	0
+ 1117 0064 09       		.uleb128 0x9
+ 1118 0065 2E       		.uleb128 0x2e
+ 1119 0066 00       		.byte	0
+ 1120 0067 3F       		.uleb128 0x3f
+ 1121 0068 19       		.uleb128 0x19
+ 1122 0069 03       		.uleb128 0x3
+ 1123 006a 0E       		.uleb128 0xe
+ 1124 006b 3A       		.uleb128 0x3a
+ 1125 006c 0B       		.uleb128 0xb
+ 1126 006d 3B       		.uleb128 0x3b
+ 1127 006e 0B       		.uleb128 0xb
+ 1128 006f 27       		.uleb128 0x27
+ 1129 0070 19       		.uleb128 0x19
+ 1130 0071 11       		.uleb128 0x11
+ 1131 0072 01       		.uleb128 0x1
+ 1132 0073 12       		.uleb128 0x12
+ 1133 0074 06       		.uleb128 0x6
+ 1134 0075 40       		.uleb128 0x40
+ 1135 0076 18       		.uleb128 0x18
+ 1136 0077 9742     		.uleb128 0x2117
+ 1137 0079 19       		.uleb128 0x19
+ 1138 007a 00       		.byte	0
+ 1139 007b 00       		.byte	0
+ 1140 007c 0A       		.uleb128 0xa
+ 1141 007d 2E       		.uleb128 0x2e
+ 1142 007e 01       		.byte	0x1
+ 1143 007f 3F       		.uleb128 0x3f
+ 1144 0080 19       		.uleb128 0x19
+ 1145 0081 03       		.uleb128 0x3
+ 1146 0082 0E       		.uleb128 0xe
+ 1147 0083 3A       		.uleb128 0x3a
+ 1148 0084 0B       		.uleb128 0xb
+ 1149 0085 3B       		.uleb128 0x3b
+ 1150 0086 0B       		.uleb128 0xb
+ 1151 0087 27       		.uleb128 0x27
+ 1152 0088 19       		.uleb128 0x19
+ 1153 0089 11       		.uleb128 0x11
+ 1154 008a 01       		.uleb128 0x1
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 24
 
 
- 1175 00f0 0E       		.uleb128 0xe
- 1176 00f1 3A       		.uleb128 0x3a
- 1177 00f2 0B       		.uleb128 0xb
- 1178 00f3 3B       		.uleb128 0x3b
- 1179 00f4 0B       		.uleb128 0xb
- 1180 00f5 27       		.uleb128 0x27
- 1181 00f6 19       		.uleb128 0x19
- 1182 00f7 49       		.uleb128 0x49
- 1183 00f8 13       		.uleb128 0x13
- 1184 00f9 8701     		.uleb128 0x87
- 1185 00fb 19       		.uleb128 0x19
- 1186 00fc 11       		.uleb128 0x11
- 1187 00fd 01       		.uleb128 0x1
- 1188 00fe 12       		.uleb128 0x12
- 1189 00ff 06       		.uleb128 0x6
- 1190 0100 40       		.uleb128 0x40
- 1191 0101 18       		.uleb128 0x18
- 1192 0102 9742     		.uleb128 0x2117
- 1193 0104 19       		.uleb128 0x19
- 1194 0105 01       		.uleb128 0x1
- 1195 0106 13       		.uleb128 0x13
- 1196 0107 00       		.byte	0
- 1197 0108 00       		.byte	0
- 1198 0109 13       		.uleb128 0x13
- 1199 010a 34       		.uleb128 0x34
- 1200 010b 00       		.byte	0
- 1201 010c 03       		.uleb128 0x3
- 1202 010d 0E       		.uleb128 0xe
- 1203 010e 3A       		.uleb128 0x3a
- 1204 010f 0B       		.uleb128 0xb
- 1205 0110 3B       		.uleb128 0x3b
- 1206 0111 05       		.uleb128 0x5
- 1207 0112 49       		.uleb128 0x49
- 1208 0113 13       		.uleb128 0x13
- 1209 0114 3F       		.uleb128 0x3f
- 1210 0115 19       		.uleb128 0x19
- 1211 0116 3C       		.uleb128 0x3c
- 1212 0117 19       		.uleb128 0x19
- 1213 0118 00       		.byte	0
- 1214 0119 00       		.byte	0
- 1215 011a 14       		.uleb128 0x14
- 1216 011b 34       		.uleb128 0x34
- 1217 011c 00       		.byte	0
- 1218 011d 03       		.uleb128 0x3
- 1219 011e 0E       		.uleb128 0xe
- 1220 011f 3A       		.uleb128 0x3a
- 1221 0120 0B       		.uleb128 0xb
- 1222 0121 3B       		.uleb128 0x3b
- 1223 0122 0B       		.uleb128 0xb
- 1224 0123 49       		.uleb128 0x49
- 1225 0124 13       		.uleb128 0x13
- 1226 0125 3F       		.uleb128 0x3f
- 1227 0126 19       		.uleb128 0x19
- 1228 0127 02       		.uleb128 0x2
- 1229 0128 18       		.uleb128 0x18
- 1230 0129 00       		.byte	0
- 1231 012a 00       		.byte	0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 25
+ 1155 008b 12       		.uleb128 0x12
+ 1156 008c 06       		.uleb128 0x6
+ 1157 008d 40       		.uleb128 0x40
+ 1158 008e 18       		.uleb128 0x18
+ 1159 008f 9742     		.uleb128 0x2117
+ 1160 0091 19       		.uleb128 0x19
+ 1161 0092 01       		.uleb128 0x1
+ 1162 0093 13       		.uleb128 0x13
+ 1163 0094 00       		.byte	0
+ 1164 0095 00       		.byte	0
+ 1165 0096 0B       		.uleb128 0xb
+ 1166 0097 34       		.uleb128 0x34
+ 1167 0098 00       		.byte	0
+ 1168 0099 03       		.uleb128 0x3
+ 1169 009a 0E       		.uleb128 0xe
+ 1170 009b 3A       		.uleb128 0x3a
+ 1171 009c 0B       		.uleb128 0xb
+ 1172 009d 3B       		.uleb128 0x3b
+ 1173 009e 0B       		.uleb128 0xb
+ 1174 009f 49       		.uleb128 0x49
+ 1175 00a0 13       		.uleb128 0x13
+ 1176 00a1 02       		.uleb128 0x2
+ 1177 00a2 17       		.uleb128 0x17
+ 1178 00a3 00       		.byte	0
+ 1179 00a4 00       		.byte	0
+ 1180 00a5 0C       		.uleb128 0xc
+ 1181 00a6 0B       		.uleb128 0xb
+ 1182 00a7 01       		.byte	0x1
+ 1183 00a8 55       		.uleb128 0x55
+ 1184 00a9 17       		.uleb128 0x17
+ 1185 00aa 00       		.byte	0
+ 1186 00ab 00       		.byte	0
+ 1187 00ac 0D       		.uleb128 0xd
+ 1188 00ad 34       		.uleb128 0x34
+ 1189 00ae 00       		.byte	0
+ 1190 00af 03       		.uleb128 0x3
+ 1191 00b0 08       		.uleb128 0x8
+ 1192 00b1 3A       		.uleb128 0x3a
+ 1193 00b2 0B       		.uleb128 0xb
+ 1194 00b3 3B       		.uleb128 0x3b
+ 1195 00b4 0B       		.uleb128 0xb
+ 1196 00b5 49       		.uleb128 0x49
+ 1197 00b6 13       		.uleb128 0x13
+ 1198 00b7 02       		.uleb128 0x2
+ 1199 00b8 17       		.uleb128 0x17
+ 1200 00b9 00       		.byte	0
+ 1201 00ba 00       		.byte	0
+ 1202 00bb 0E       		.uleb128 0xe
+ 1203 00bc 898201   		.uleb128 0x4109
+ 1204 00bf 01       		.byte	0x1
+ 1205 00c0 11       		.uleb128 0x11
+ 1206 00c1 01       		.uleb128 0x1
+ 1207 00c2 31       		.uleb128 0x31
+ 1208 00c3 13       		.uleb128 0x13
+ 1209 00c4 01       		.uleb128 0x1
+ 1210 00c5 13       		.uleb128 0x13
+ 1211 00c6 00       		.byte	0
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 25
 
 
- 1232 012b 15       		.uleb128 0x15
- 1233 012c 01       		.uleb128 0x1
- 1234 012d 01       		.byte	0x1
- 1235 012e 49       		.uleb128 0x49
- 1236 012f 13       		.uleb128 0x13
- 1237 0130 01       		.uleb128 0x1
- 1238 0131 13       		.uleb128 0x13
- 1239 0132 00       		.byte	0
- 1240 0133 00       		.byte	0
- 1241 0134 16       		.uleb128 0x16
- 1242 0135 21       		.uleb128 0x21
- 1243 0136 00       		.byte	0
- 1244 0137 49       		.uleb128 0x49
- 1245 0138 13       		.uleb128 0x13
- 1246 0139 2F       		.uleb128 0x2f
- 1247 013a 05       		.uleb128 0x5
- 1248 013b 00       		.byte	0
- 1249 013c 00       		.byte	0
- 1250 013d 17       		.uleb128 0x17
- 1251 013e 2E       		.uleb128 0x2e
- 1252 013f 00       		.byte	0
- 1253 0140 3F       		.uleb128 0x3f
- 1254 0141 19       		.uleb128 0x19
- 1255 0142 3C       		.uleb128 0x3c
- 1256 0143 19       		.uleb128 0x19
- 1257 0144 6E       		.uleb128 0x6e
- 1258 0145 0E       		.uleb128 0xe
- 1259 0146 03       		.uleb128 0x3
- 1260 0147 0E       		.uleb128 0xe
- 1261 0148 3A       		.uleb128 0x3a
- 1262 0149 0B       		.uleb128 0xb
- 1263 014a 3B       		.uleb128 0x3b
- 1264 014b 0B       		.uleb128 0xb
- 1265 014c 00       		.byte	0
- 1266 014d 00       		.byte	0
- 1267 014e 00       		.byte	0
- 1268              		.section	.debug_loc,"",%progbits
- 1269              	.Ldebug_loc0:
- 1270              	.LLST0:
- 1271 0000 0E000000 		.4byte	.LVL0
- 1272 0004 48000000 		.4byte	.LVL7
- 1273 0008 0100     		.2byte	0x1
- 1274 000a 56       		.byte	0x56
- 1275 000b 00000000 		.4byte	0
- 1276 000f 00000000 		.4byte	0
- 1277              	.LLST1:
- 1278 0013 0E000000 		.4byte	.LVL0
- 1279 0017 14000000 		.4byte	.LVL1
- 1280 001b 0200     		.2byte	0x2
- 1281 001d 30       		.byte	0x30
- 1282 001e 9F       		.byte	0x9f
- 1283 001f 14000000 		.4byte	.LVL1
- 1284 0023 48000000 		.4byte	.LVL7
- 1285 0027 0100     		.2byte	0x1
- 1286 0029 55       		.byte	0x55
- 1287 002a 00000000 		.4byte	0
- 1288 002e 00000000 		.4byte	0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 26
+ 1212 00c7 00       		.byte	0
+ 1213 00c8 0F       		.uleb128 0xf
+ 1214 00c9 8A8201   		.uleb128 0x410a
+ 1215 00cc 00       		.byte	0
+ 1216 00cd 02       		.uleb128 0x2
+ 1217 00ce 18       		.uleb128 0x18
+ 1218 00cf 9142     		.uleb128 0x2111
+ 1219 00d1 18       		.uleb128 0x18
+ 1220 00d2 00       		.byte	0
+ 1221 00d3 00       		.byte	0
+ 1222 00d4 10       		.uleb128 0x10
+ 1223 00d5 898201   		.uleb128 0x4109
+ 1224 00d8 01       		.byte	0x1
+ 1225 00d9 11       		.uleb128 0x11
+ 1226 00da 01       		.uleb128 0x1
+ 1227 00db 31       		.uleb128 0x31
+ 1228 00dc 13       		.uleb128 0x13
+ 1229 00dd 00       		.byte	0
+ 1230 00de 00       		.byte	0
+ 1231 00df 11       		.uleb128 0x11
+ 1232 00e0 898201   		.uleb128 0x4109
+ 1233 00e3 00       		.byte	0
+ 1234 00e4 11       		.uleb128 0x11
+ 1235 00e5 01       		.uleb128 0x1
+ 1236 00e6 31       		.uleb128 0x31
+ 1237 00e7 13       		.uleb128 0x13
+ 1238 00e8 00       		.byte	0
+ 1239 00e9 00       		.byte	0
+ 1240 00ea 12       		.uleb128 0x12
+ 1241 00eb 2E       		.uleb128 0x2e
+ 1242 00ec 01       		.byte	0x1
+ 1243 00ed 3F       		.uleb128 0x3f
+ 1244 00ee 19       		.uleb128 0x19
+ 1245 00ef 03       		.uleb128 0x3
+ 1246 00f0 0E       		.uleb128 0xe
+ 1247 00f1 3A       		.uleb128 0x3a
+ 1248 00f2 0B       		.uleb128 0xb
+ 1249 00f3 3B       		.uleb128 0x3b
+ 1250 00f4 0B       		.uleb128 0xb
+ 1251 00f5 27       		.uleb128 0x27
+ 1252 00f6 19       		.uleb128 0x19
+ 1253 00f7 49       		.uleb128 0x49
+ 1254 00f8 13       		.uleb128 0x13
+ 1255 00f9 8701     		.uleb128 0x87
+ 1256 00fb 19       		.uleb128 0x19
+ 1257 00fc 11       		.uleb128 0x11
+ 1258 00fd 01       		.uleb128 0x1
+ 1259 00fe 12       		.uleb128 0x12
+ 1260 00ff 06       		.uleb128 0x6
+ 1261 0100 40       		.uleb128 0x40
+ 1262 0101 18       		.uleb128 0x18
+ 1263 0102 9742     		.uleb128 0x2117
+ 1264 0104 19       		.uleb128 0x19
+ 1265 0105 01       		.uleb128 0x1
+ 1266 0106 13       		.uleb128 0x13
+ 1267 0107 00       		.byte	0
+ 1268 0108 00       		.byte	0
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 26
 
 
- 1289              	.LLST2:
- 1290 0032 0E000000 		.4byte	.LVL0
- 1291 0036 14000000 		.4byte	.LVL1
- 1292 003a 0200     		.2byte	0x2
- 1293 003c 30       		.byte	0x30
- 1294 003d 9F       		.byte	0x9f
- 1295 003e 14000000 		.4byte	.LVL1
- 1296 0042 48000000 		.4byte	.LVL7
- 1297 0046 0100     		.2byte	0x1
- 1298 0048 54       		.byte	0x54
- 1299 0049 00000000 		.4byte	0
- 1300 004d 00000000 		.4byte	0
- 1301              		.section	.debug_aranges,"",%progbits
- 1302 0000 3C000000 		.4byte	0x3c
- 1303 0004 0200     		.2byte	0x2
- 1304 0006 00000000 		.4byte	.Ldebug_info0
- 1305 000a 04       		.byte	0x4
- 1306 000b 00       		.byte	0
- 1307 000c 0000     		.2byte	0
- 1308 000e 0000     		.2byte	0
- 1309 0010 00000000 		.4byte	.LFB64
- 1310 0014 24000000 		.4byte	.LFE64-.LFB64
- 1311 0018 00000000 		.4byte	.LFB63
- 1312 001c 54000000 		.4byte	.LFE63-.LFB63
- 1313 0020 00000000 		.4byte	.LFB65
- 1314 0024 28000000 		.4byte	.LFE65-.LFB65
- 1315 0028 00000000 		.4byte	.LFB66
- 1316 002c 2C000000 		.4byte	.LFE66-.LFB66
- 1317 0030 00000000 		.4byte	.LFB67
- 1318 0034 B8000000 		.4byte	.LFE67-.LFB67
- 1319 0038 00000000 		.4byte	0
- 1320 003c 00000000 		.4byte	0
- 1321              		.section	.debug_ranges,"",%progbits
- 1322              	.Ldebug_ranges0:
- 1323 0000 0E000000 		.4byte	.LBB2
- 1324 0004 10000000 		.4byte	.LBE2
- 1325 0008 12000000 		.4byte	.LBB3
- 1326 000c 3E000000 		.4byte	.LBE3
- 1327 0010 00000000 		.4byte	0
- 1328 0014 00000000 		.4byte	0
- 1329 0018 00000000 		.4byte	.LFB64
- 1330 001c 24000000 		.4byte	.LFE64
- 1331 0020 00000000 		.4byte	.LFB63
- 1332 0024 54000000 		.4byte	.LFE63
- 1333 0028 00000000 		.4byte	.LFB65
- 1334 002c 28000000 		.4byte	.LFE65
- 1335 0030 00000000 		.4byte	.LFB66
- 1336 0034 2C000000 		.4byte	.LFE66
- 1337 0038 00000000 		.4byte	.LFB67
- 1338 003c B8000000 		.4byte	.LFE67
- 1339 0040 00000000 		.4byte	0
- 1340 0044 00000000 		.4byte	0
- 1341              		.section	.debug_line,"",%progbits
- 1342              	.Ldebug_line0:
- 1343 0000 67020000 		.section	.debug_str,"MS",%progbits,1
- 1343      0200D301 
- 1343      00000201 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 27
+ 1269 0109 13       		.uleb128 0x13
+ 1270 010a 34       		.uleb128 0x34
+ 1271 010b 00       		.byte	0
+ 1272 010c 03       		.uleb128 0x3
+ 1273 010d 0E       		.uleb128 0xe
+ 1274 010e 3A       		.uleb128 0x3a
+ 1275 010f 0B       		.uleb128 0xb
+ 1276 0110 3B       		.uleb128 0x3b
+ 1277 0111 05       		.uleb128 0x5
+ 1278 0112 49       		.uleb128 0x49
+ 1279 0113 13       		.uleb128 0x13
+ 1280 0114 3F       		.uleb128 0x3f
+ 1281 0115 19       		.uleb128 0x19
+ 1282 0116 3C       		.uleb128 0x3c
+ 1283 0117 19       		.uleb128 0x19
+ 1284 0118 00       		.byte	0
+ 1285 0119 00       		.byte	0
+ 1286 011a 14       		.uleb128 0x14
+ 1287 011b 34       		.uleb128 0x34
+ 1288 011c 00       		.byte	0
+ 1289 011d 03       		.uleb128 0x3
+ 1290 011e 0E       		.uleb128 0xe
+ 1291 011f 3A       		.uleb128 0x3a
+ 1292 0120 0B       		.uleb128 0xb
+ 1293 0121 3B       		.uleb128 0x3b
+ 1294 0122 0B       		.uleb128 0xb
+ 1295 0123 49       		.uleb128 0x49
+ 1296 0124 13       		.uleb128 0x13
+ 1297 0125 3F       		.uleb128 0x3f
+ 1298 0126 19       		.uleb128 0x19
+ 1299 0127 02       		.uleb128 0x2
+ 1300 0128 18       		.uleb128 0x18
+ 1301 0129 00       		.byte	0
+ 1302 012a 00       		.byte	0
+ 1303 012b 15       		.uleb128 0x15
+ 1304 012c 01       		.uleb128 0x1
+ 1305 012d 01       		.byte	0x1
+ 1306 012e 49       		.uleb128 0x49
+ 1307 012f 13       		.uleb128 0x13
+ 1308 0130 01       		.uleb128 0x1
+ 1309 0131 13       		.uleb128 0x13
+ 1310 0132 00       		.byte	0
+ 1311 0133 00       		.byte	0
+ 1312 0134 16       		.uleb128 0x16
+ 1313 0135 21       		.uleb128 0x21
+ 1314 0136 00       		.byte	0
+ 1315 0137 49       		.uleb128 0x49
+ 1316 0138 13       		.uleb128 0x13
+ 1317 0139 2F       		.uleb128 0x2f
+ 1318 013a 05       		.uleb128 0x5
+ 1319 013b 00       		.byte	0
+ 1320 013c 00       		.byte	0
+ 1321 013d 17       		.uleb128 0x17
+ 1322 013e 2E       		.uleb128 0x2e
+ 1323 013f 00       		.byte	0
+ 1324 0140 3F       		.uleb128 0x3f
+ 1325 0141 19       		.uleb128 0x19
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 27
 
 
- 1343      FB0E0D00 
- 1343      01010101 
- 1344              	.LASF19:
- 1345 0000 636F6C6C 		.ascii	"collisionState\000"
- 1345      6973696F 
- 1345      6E537461 
- 1345      746500
- 1346              	.LASF29:
- 1347 000f 6C6F7746 		.ascii	"lowFlag\000"
- 1347      6C616700 
- 1348              	.LASF32:
- 1349 0017 53455249 		.ascii	"SERIAL_POS\000"
- 1349      414C5F50 
- 1349      4F5300
- 1350              	.LASF41:
- 1351 0022 54696D65 		.ascii	"Timer_TX_WriteCounter\000"
- 1351      725F5458 
- 1351      5F577269 
- 1351      7465436F 
- 1351      756E7465 
- 1352              	.LASF31:
- 1353 0038 53455249 		.ascii	"SERIAL_BUFFER\000"
- 1353      414C5F42 
- 1353      55464645 
- 1353      5200
- 1354              	.LASF34:
- 1355 0046 54696D65 		.ascii	"Timer_1_WritePeriod\000"
- 1355      725F315F 
- 1355      57726974 
- 1355      65506572 
- 1355      696F6400 
- 1356              	.LASF52:
- 1357 005a 73746174 		.ascii	"state\000"
- 1357      6500
- 1358              	.LASF48:
- 1359 0060 434F4C4C 		.ascii	"COLLISION_Read\000"
- 1359      4953494F 
- 1359      4E5F5265 
- 1359      616400
- 1360              	.LASF9:
- 1361 006f 5F5F696E 		.ascii	"__int32_t\000"
- 1361      7433325F 
- 1361      7400
- 1362              	.LASF3:
- 1363 0079 73686F72 		.ascii	"short unsigned int\000"
- 1363      7420756E 
- 1363      7369676E 
- 1363      65642069 
- 1363      6E7400
- 1364              	.LASF13:
- 1365 008c 646F7562 		.ascii	"double\000"
- 1365      6C6500
- 1366              	.LASF25:
- 1367 0093 52495349 		.ascii	"RISING\000"
- 1367      4E4700
- 1368              	.LASF45:
- 1369 009a 42555359 		.ascii	"BUSY_Write\000"
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 28
+ 1326 0142 3C       		.uleb128 0x3c
+ 1327 0143 19       		.uleb128 0x19
+ 1328 0144 6E       		.uleb128 0x6e
+ 1329 0145 0E       		.uleb128 0xe
+ 1330 0146 03       		.uleb128 0x3
+ 1331 0147 0E       		.uleb128 0xe
+ 1332 0148 3A       		.uleb128 0x3a
+ 1333 0149 0B       		.uleb128 0xb
+ 1334 014a 3B       		.uleb128 0x3b
+ 1335 014b 0B       		.uleb128 0xb
+ 1336 014c 00       		.byte	0
+ 1337 014d 00       		.byte	0
+ 1338 014e 18       		.uleb128 0x18
+ 1339 014f 2E       		.uleb128 0x2e
+ 1340 0150 00       		.byte	0
+ 1341 0151 3F       		.uleb128 0x3f
+ 1342 0152 19       		.uleb128 0x19
+ 1343 0153 3C       		.uleb128 0x3c
+ 1344 0154 19       		.uleb128 0x19
+ 1345 0155 6E       		.uleb128 0x6e
+ 1346 0156 0E       		.uleb128 0xe
+ 1347 0157 03       		.uleb128 0x3
+ 1348 0158 0E       		.uleb128 0xe
+ 1349 0159 3A       		.uleb128 0x3a
+ 1350 015a 0B       		.uleb128 0xb
+ 1351 015b 3B       		.uleb128 0x3b
+ 1352 015c 05       		.uleb128 0x5
+ 1353 015d 00       		.byte	0
+ 1354 015e 00       		.byte	0
+ 1355 015f 00       		.byte	0
+ 1356              		.section	.debug_loc,"",%progbits
+ 1357              	.Ldebug_loc0:
+ 1358              	.LLST0:
+ 1359 0000 0E000000 		.4byte	.LVL0
+ 1360 0004 48000000 		.4byte	.LVL7
+ 1361 0008 0100     		.2byte	0x1
+ 1362 000a 56       		.byte	0x56
+ 1363 000b 00000000 		.4byte	0
+ 1364 000f 00000000 		.4byte	0
+ 1365              	.LLST1:
+ 1366 0013 0E000000 		.4byte	.LVL0
+ 1367 0017 14000000 		.4byte	.LVL1
+ 1368 001b 0200     		.2byte	0x2
+ 1369 001d 30       		.byte	0x30
+ 1370 001e 9F       		.byte	0x9f
+ 1371 001f 14000000 		.4byte	.LVL1
+ 1372 0023 48000000 		.4byte	.LVL7
+ 1373 0027 0100     		.2byte	0x1
+ 1374 0029 55       		.byte	0x55
+ 1375 002a 00000000 		.4byte	0
+ 1376 002e 00000000 		.4byte	0
+ 1377              	.LLST2:
+ 1378 0032 0E000000 		.4byte	.LVL0
+ 1379 0036 14000000 		.4byte	.LVL1
+ 1380 003a 0200     		.2byte	0x2
+ 1381 003c 30       		.byte	0x30
+ 1382 003d 9F       		.byte	0x9f
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 28
 
 
- 1369      5F577269 
- 1369      746500
- 1370              	.LASF33:
- 1371 00a5 54585F57 		.ascii	"TX_Write\000"
- 1371      72697465 
- 1371      00
- 1372              	.LASF12:
- 1373 00ae 666C6F61 		.ascii	"float\000"
- 1373      7400
- 1374              	.LASF36:
- 1375 00b4 54696D65 		.ascii	"Timer_1_Start\000"
- 1375      725F315F 
- 1375      53746172 
- 1375      7400
- 1376              	.LASF0:
- 1377 00c2 7369676E 		.ascii	"signed char\000"
- 1377      65642063 
- 1377      68617200 
- 1378              	.LASF1:
- 1379 00ce 756E7369 		.ascii	"unsigned char\000"
- 1379      676E6564 
- 1379      20636861 
- 1379      7200
- 1380              	.LASF49:
- 1381 00dc 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1381      43313120 
- 1381      352E342E 
- 1381      31203230 
- 1381      31363036 
- 1382 010f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1382      20726576 
- 1382      6973696F 
- 1382      6E203233 
- 1382      37373135 
- 1383 0142 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1383      66756E63 
- 1383      74696F6E 
- 1383      2D736563 
- 1383      74696F6E 
- 1384              	.LASF15:
- 1385 016a 72656738 		.ascii	"reg8\000"
- 1385      00
- 1386              	.LASF43:
- 1387 016f 49444C45 		.ascii	"IDLE_Write\000"
- 1387      5F577269 
- 1387      746500
- 1388              	.LASF5:
- 1389 017a 6C6F6E67 		.ascii	"long unsigned int\000"
- 1389      20756E73 
- 1389      69676E65 
- 1389      6420696E 
- 1389      7400
- 1390              	.LASF44:
- 1391 018c 49444C45 		.ascii	"IDLE_Read\000"
- 1391      5F526561 
- 1391      6400
- 1392              	.LASF24:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 29
+ 1383 003e 14000000 		.4byte	.LVL1
+ 1384 0042 48000000 		.4byte	.LVL7
+ 1385 0046 0100     		.2byte	0x1
+ 1386 0048 54       		.byte	0x54
+ 1387 0049 00000000 		.4byte	0
+ 1388 004d 00000000 		.4byte	0
+ 1389              		.section	.debug_aranges,"",%progbits
+ 1390 0000 3C000000 		.4byte	0x3c
+ 1391 0004 0200     		.2byte	0x2
+ 1392 0006 00000000 		.4byte	.Ldebug_info0
+ 1393 000a 04       		.byte	0x4
+ 1394 000b 00       		.byte	0
+ 1395 000c 0000     		.2byte	0
+ 1396 000e 0000     		.2byte	0
+ 1397 0010 00000000 		.4byte	.LFB64
+ 1398 0014 24000000 		.4byte	.LFE64-.LFB64
+ 1399 0018 00000000 		.4byte	.LFB63
+ 1400 001c 54000000 		.4byte	.LFE63-.LFB63
+ 1401 0020 00000000 		.4byte	.LFB65
+ 1402 0024 28000000 		.4byte	.LFE65-.LFB65
+ 1403 0028 00000000 		.4byte	.LFB66
+ 1404 002c 2C000000 		.4byte	.LFE66-.LFB66
+ 1405 0030 00000000 		.4byte	.LFB67
+ 1406 0034 D8000000 		.4byte	.LFE67-.LFB67
+ 1407 0038 00000000 		.4byte	0
+ 1408 003c 00000000 		.4byte	0
+ 1409              		.section	.debug_ranges,"",%progbits
+ 1410              	.Ldebug_ranges0:
+ 1411 0000 0E000000 		.4byte	.LBB2
+ 1412 0004 10000000 		.4byte	.LBE2
+ 1413 0008 12000000 		.4byte	.LBB3
+ 1414 000c 3E000000 		.4byte	.LBE3
+ 1415 0010 00000000 		.4byte	0
+ 1416 0014 00000000 		.4byte	0
+ 1417 0018 00000000 		.4byte	.LFB64
+ 1418 001c 24000000 		.4byte	.LFE64
+ 1419 0020 00000000 		.4byte	.LFB63
+ 1420 0024 54000000 		.4byte	.LFE63
+ 1421 0028 00000000 		.4byte	.LFB65
+ 1422 002c 28000000 		.4byte	.LFE65
+ 1423 0030 00000000 		.4byte	.LFB66
+ 1424 0034 2C000000 		.4byte	.LFE66
+ 1425 0038 00000000 		.4byte	.LFB67
+ 1426 003c D8000000 		.4byte	.LFE67
+ 1427 0040 00000000 		.4byte	0
+ 1428 0044 00000000 		.4byte	0
+ 1429              		.section	.debug_line,"",%progbits
+ 1430              	.Ldebug_line0:
+ 1431 0000 84020000 		.section	.debug_str,"MS",%progbits,1
+ 1431      0200EB01 
+ 1431      00000201 
+ 1431      FB0E0D00 
+ 1431      01010101 
+ 1432              	.LASF19:
+ 1433 0000 636F6C6C 		.ascii	"collisionState\000"
+ 1433      6973696F 
+ 1433      6E537461 
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 29
 
 
- 1393 0196 54696D65 		.ascii	"Timer_TX_ISR_HANDLER\000"
- 1393      725F5458 
- 1393      5F495352 
- 1393      5F48414E 
- 1393      444C4552 
- 1394              	.LASF38:
- 1395 01ab 494E545F 		.ascii	"INT_RISING_StartEx\000"
- 1395      52495349 
- 1395      4E475F53 
- 1395      74617274 
- 1395      457800
- 1396              	.LASF46:
- 1397 01be 434F4C4C 		.ascii	"COLLISION_Write\000"
- 1397      4953494F 
- 1397      4E5F5772 
- 1397      69746500 
- 1398              	.LASF22:
- 1399 01ce 63757272 		.ascii	"currentChar\000"
- 1399      656E7443 
- 1399      68617200 
- 1400              	.LASF18:
- 1401 01da 69646C65 		.ascii	"idleState\000"
- 1401      53746174 
- 1401      6500
- 1402              	.LASF28:
- 1403 01e4 73797374 		.ascii	"systemState\000"
- 1403      656D5374 
- 1403      61746500 
- 1404              	.LASF54:
- 1405 01f0 6D61696E 		.ascii	"main\000"
- 1405      00
- 1406              	.LASF27:
- 1407 01f5 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1407      52784275 
- 1407      66666572 
- 1407      00
- 1408              	.LASF20:
- 1409 0202 62757379 		.ascii	"busyState\000"
- 1409      53746174 
- 1409      6500
- 1410              	.LASF8:
- 1411 020c 756E7369 		.ascii	"unsigned int\000"
- 1411      676E6564 
- 1411      20696E74 
- 1411      00
- 1412              	.LASF7:
- 1413 0219 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1413      206C6F6E 
- 1413      6720756E 
- 1413      7369676E 
- 1413      65642069 
- 1414              	.LASF35:
- 1415 0230 54696D65 		.ascii	"Timer_1_WriteCounter\000"
- 1415      725F315F 
- 1415      57726974 
- 1415      65436F75 
- 1415      6E746572 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 30
+ 1433      746500
+ 1434              	.LASF29:
+ 1435 000f 6C6F7746 		.ascii	"lowFlag\000"
+ 1435      6C616700 
+ 1436              	.LASF32:
+ 1437 0017 53455249 		.ascii	"SERIAL_POS\000"
+ 1437      414C5F50 
+ 1437      4F5300
+ 1438              	.LASF42:
+ 1439 0022 54696D65 		.ascii	"Timer_TX_WriteCounter\000"
+ 1439      725F5458 
+ 1439      5F577269 
+ 1439      7465436F 
+ 1439      756E7465 
+ 1440              	.LASF31:
+ 1441 0038 53455249 		.ascii	"SERIAL_BUFFER\000"
+ 1441      414C5F42 
+ 1441      55464645 
+ 1441      5200
+ 1442              	.LASF35:
+ 1443 0046 54696D65 		.ascii	"Timer_1_WritePeriod\000"
+ 1443      725F315F 
+ 1443      57726974 
+ 1443      65506572 
+ 1443      696F6400 
+ 1444              	.LASF57:
+ 1445 005a 73746174 		.ascii	"state\000"
+ 1445      6500
+ 1446              	.LASF33:
+ 1447 0060 75617274 		.ascii	"uartConnected\000"
+ 1447      436F6E6E 
+ 1447      65637465 
+ 1447      6400
+ 1448              	.LASF58:
+ 1449 006e 54494D45 		.ascii	"TIMER\000"
+ 1449      5200
+ 1450              	.LASF45:
+ 1451 0074 55415254 		.ascii	"UART_IsConfigurationChanged\000"
+ 1451      5F497343 
+ 1451      6F6E6669 
+ 1451      67757261 
+ 1451      74696F6E 
+ 1452              	.LASF53:
+ 1453 0090 434F4C4C 		.ascii	"COLLISION_Read\000"
+ 1453      4953494F 
+ 1453      4E5F5265 
+ 1453      616400
+ 1454              	.LASF9:
+ 1455 009f 5F5F696E 		.ascii	"__int32_t\000"
+ 1455      7433325F 
+ 1455      7400
+ 1456              	.LASF3:
+ 1457 00a9 73686F72 		.ascii	"short unsigned int\000"
+ 1457      7420756E 
+ 1457      7369676E 
+ 1457      65642069 
+ 1457      6E7400
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 30
 
 
- 1416              	.LASF53:
- 1417 0245 54494D45 		.ascii	"TIMER\000"
- 1417      5200
- 1418              	.LASF40:
- 1419 024b 54696D65 		.ascii	"Timer_TX_WritePeriod\000"
- 1419      725F5458 
- 1419      5F577269 
- 1419      74655065 
- 1419      72696F64 
- 1420              	.LASF51:
- 1421 0260 433A5C55 		.ascii	"C:\\Users\\marlowea\\Google Drive\\BACKUP\\docs\\20"
- 1421      73657273 
- 1421      5C6D6172 
- 1421      6C6F7765 
- 1421      615C476F 
- 1422 028d 31372D32 		.ascii	"17-2018\\sem2year4\\CE4950\\Project\\psocker2017\\n"
- 1422      3031385C 
- 1422      73656D32 
- 1422      79656172 
- 1422      345C4345 
- 1423 02bb 6574776F 		.ascii	"etworking.cydsn\000"
- 1423      726B696E 
- 1423      672E6379 
- 1423      64736E00 
- 1424              	.LASF26:
- 1425 02cb 46414C4C 		.ascii	"FALLING\000"
- 1425      494E4700 
- 1426              	.LASF10:
- 1427 02d3 696E7433 		.ascii	"int32_t\000"
- 1427      325F7400 
- 1428              	.LASF17:
- 1429 02db 73697A65 		.ascii	"sizetype\000"
- 1429      74797065 
- 1429      00
- 1430              	.LASF6:
- 1431 02e4 6C6F6E67 		.ascii	"long long int\000"
- 1431      206C6F6E 
- 1431      6720696E 
- 1431      7400
- 1432              	.LASF50:
- 1433 02f2 6D61696E 		.ascii	"main.c\000"
- 1433      2E6300
- 1434              	.LASF14:
- 1435 02f9 63686172 		.ascii	"char\000"
- 1435      00
- 1436              	.LASF23:
- 1437 02fe 636F756E 		.ascii	"count\000"
- 1437      7400
- 1438              	.LASF2:
- 1439 0304 73686F72 		.ascii	"short int\000"
- 1439      7420696E 
- 1439      7400
- 1440              	.LASF11:
- 1441 030e 75696E74 		.ascii	"uint8\000"
- 1441      3800
- 1442              	.LASF37:
- 1443 0314 54696D65 		.ascii	"TimerISR_StartEx\000"
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckvbt6l.s 			page 31
+ 1458              	.LASF13:
+ 1459 00bc 646F7562 		.ascii	"double\000"
+ 1459      6C6500
+ 1460              	.LASF25:
+ 1461 00c3 52495349 		.ascii	"RISING\000"
+ 1461      4E4700
+ 1462              	.LASF50:
+ 1463 00ca 42555359 		.ascii	"BUSY_Write\000"
+ 1463      5F577269 
+ 1463      746500
+ 1464              	.LASF34:
+ 1465 00d5 54585F57 		.ascii	"TX_Write\000"
+ 1465      72697465 
+ 1465      00
+ 1466              	.LASF12:
+ 1467 00de 666C6F61 		.ascii	"float\000"
+ 1467      7400
+ 1468              	.LASF37:
+ 1469 00e4 54696D65 		.ascii	"Timer_1_Start\000"
+ 1469      725F315F 
+ 1469      53746172 
+ 1469      7400
+ 1470              	.LASF0:
+ 1471 00f2 7369676E 		.ascii	"signed char\000"
+ 1471      65642063 
+ 1471      68617200 
+ 1472              	.LASF1:
+ 1473 00fe 756E7369 		.ascii	"unsigned char\000"
+ 1473      676E6564 
+ 1473      20636861 
+ 1473      7200
+ 1474              	.LASF54:
+ 1475 010c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1475      43313120 
+ 1475      352E342E 
+ 1475      31203230 
+ 1475      31363036 
+ 1476 013f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1476      20726576 
+ 1476      6973696F 
+ 1476      6E203233 
+ 1476      37373135 
+ 1477 0172 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1477      66756E63 
+ 1477      74696F6E 
+ 1477      2D736563 
+ 1477      74696F6E 
+ 1478              	.LASF15:
+ 1479 019a 72656738 		.ascii	"reg8\000"
+ 1479      00
+ 1480              	.LASF48:
+ 1481 019f 49444C45 		.ascii	"IDLE_Write\000"
+ 1481      5F577269 
+ 1481      746500
+ 1482              	.LASF5:
+ 1483 01aa 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1483      20756E73 
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 31
 
 
- 1443      72495352 
- 1443      5F537461 
- 1443      72744578 
- 1443      00
- 1444              	.LASF4:
- 1445 0325 6C6F6E67 		.ascii	"long int\000"
- 1445      20696E74 
- 1445      00
- 1446              	.LASF16:
- 1447 032e 6C6F6E67 		.ascii	"long double\000"
- 1447      20646F75 
- 1447      626C6500 
- 1448              	.LASF42:
- 1449 033a 54696D65 		.ascii	"Timer_TX_ISR_StartEx\000"
- 1449      725F5458 
- 1449      5F495352 
- 1449      5F537461 
- 1449      72744578 
- 1450              	.LASF39:
- 1451 034f 494E545F 		.ascii	"INT_FALLING_StartEx\000"
- 1451      46414C4C 
- 1451      494E475F 
- 1451      53746172 
- 1451      74457800 
- 1452              	.LASF47:
- 1453 0363 42555359 		.ascii	"BUSY_Read\000"
- 1453      5F526561 
- 1453      6400
- 1454              	.LASF21:
- 1455 036d 53746174 		.ascii	"State\000"
- 1455      6500
- 1456              	.LASF30:
- 1457 0373 5F426F6F 		.ascii	"_Bool\000"
- 1457      6C00
- 1458              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1483      69676E65 
+ 1483      6420696E 
+ 1483      7400
+ 1484              	.LASF49:
+ 1485 01bc 49444C45 		.ascii	"IDLE_Read\000"
+ 1485      5F526561 
+ 1485      6400
+ 1486              	.LASF24:
+ 1487 01c6 54696D65 		.ascii	"Timer_TX_ISR_HANDLER\000"
+ 1487      725F5458 
+ 1487      5F495352 
+ 1487      5F48414E 
+ 1487      444C4552 
+ 1488              	.LASF39:
+ 1489 01db 494E545F 		.ascii	"INT_RISING_StartEx\000"
+ 1489      52495349 
+ 1489      4E475F53 
+ 1489      74617274 
+ 1489      457800
+ 1490              	.LASF51:
+ 1491 01ee 434F4C4C 		.ascii	"COLLISION_Write\000"
+ 1491      4953494F 
+ 1491      4E5F5772 
+ 1491      69746500 
+ 1492              	.LASF22:
+ 1493 01fe 63757272 		.ascii	"currentChar\000"
+ 1493      656E7443 
+ 1493      68617200 
+ 1494              	.LASF18:
+ 1495 020a 69646C65 		.ascii	"idleState\000"
+ 1495      53746174 
+ 1495      6500
+ 1496              	.LASF28:
+ 1497 0214 73797374 		.ascii	"systemState\000"
+ 1497      656D5374 
+ 1497      61746500 
+ 1498              	.LASF59:
+ 1499 0220 6D61696E 		.ascii	"main\000"
+ 1499      00
+ 1500              	.LASF46:
+ 1501 0225 55415254 		.ascii	"UART_GetConfiguration\000"
+ 1501      5F476574 
+ 1501      436F6E66 
+ 1501      69677572 
+ 1501      6174696F 
+ 1502              	.LASF20:
+ 1503 023b 62757379 		.ascii	"busyState\000"
+ 1503      53746174 
+ 1503      6500
+ 1504              	.LASF8:
+ 1505 0245 756E7369 		.ascii	"unsigned int\000"
+ 1505      676E6564 
+ 1505      20696E74 
+ 1505      00
+ 1506              	.LASF7:
+ 1507 0252 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1507      206C6F6E 
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 32
+
+
+ 1507      6720756E 
+ 1507      7369676E 
+ 1507      65642069 
+ 1508              	.LASF36:
+ 1509 0269 54696D65 		.ascii	"Timer_1_WriteCounter\000"
+ 1509      725F315F 
+ 1509      57726974 
+ 1509      65436F75 
+ 1509      6E746572 
+ 1510              	.LASF47:
+ 1511 027e 55415254 		.ascii	"UART_CDC_Init\000"
+ 1511      5F434443 
+ 1511      5F496E69 
+ 1511      7400
+ 1512              	.LASF44:
+ 1513 028c 55415254 		.ascii	"UART_GetDTERate\000"
+ 1513      5F476574 
+ 1513      44544552 
+ 1513      61746500 
+ 1514              	.LASF41:
+ 1515 029c 54696D65 		.ascii	"Timer_TX_WritePeriod\000"
+ 1515      725F5458 
+ 1515      5F577269 
+ 1515      74655065 
+ 1515      72696F64 
+ 1516              	.LASF56:
+ 1517 02b1 433A5C55 		.ascii	"C:\\Users\\marlowea\\Google Drive\\BACKUP\\docs\\20"
+ 1517      73657273 
+ 1517      5C6D6172 
+ 1517      6C6F7765 
+ 1517      615C476F 
+ 1518 02de 31372D32 		.ascii	"17-2018\\sem2year4\\CE4950\\Project\\psocker2017\\n"
+ 1518      3031385C 
+ 1518      73656D32 
+ 1518      79656172 
+ 1518      345C4345 
+ 1519 030c 6574776F 		.ascii	"etworking.cydsn\000"
+ 1519      726B696E 
+ 1519      672E6379 
+ 1519      64736E00 
+ 1520              	.LASF26:
+ 1521 031c 46414C4C 		.ascii	"FALLING\000"
+ 1521      494E4700 
+ 1522              	.LASF27:
+ 1523 0324 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1523      52784275 
+ 1523      66666572 
+ 1523      00
+ 1524              	.LASF10:
+ 1525 0331 696E7433 		.ascii	"int32_t\000"
+ 1525      325F7400 
+ 1526              	.LASF17:
+ 1527 0339 73697A65 		.ascii	"sizetype\000"
+ 1527      74797065 
+ 1527      00
+ 1528              	.LASF6:
+ 1529 0342 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cckniPRd.s 			page 33
+
+
+ 1529      206C6F6E 
+ 1529      6720696E 
+ 1529      7400
+ 1530              	.LASF55:
+ 1531 0350 6D61696E 		.ascii	"main.c\000"
+ 1531      2E6300
+ 1532              	.LASF14:
+ 1533 0357 63686172 		.ascii	"char\000"
+ 1533      00
+ 1534              	.LASF23:
+ 1535 035c 636F756E 		.ascii	"count\000"
+ 1535      7400
+ 1536              	.LASF2:
+ 1537 0362 73686F72 		.ascii	"short int\000"
+ 1537      7420696E 
+ 1537      7400
+ 1538              	.LASF11:
+ 1539 036c 75696E74 		.ascii	"uint8\000"
+ 1539      3800
+ 1540              	.LASF38:
+ 1541 0372 54696D65 		.ascii	"TimerISR_StartEx\000"
+ 1541      72495352 
+ 1541      5F537461 
+ 1541      72744578 
+ 1541      00
+ 1542              	.LASF4:
+ 1543 0383 6C6F6E67 		.ascii	"long int\000"
+ 1543      20696E74 
+ 1543      00
+ 1544              	.LASF16:
+ 1545 038c 6C6F6E67 		.ascii	"long double\000"
+ 1545      20646F75 
+ 1545      626C6500 
+ 1546              	.LASF43:
+ 1547 0398 54696D65 		.ascii	"Timer_TX_ISR_StartEx\000"
+ 1547      725F5458 
+ 1547      5F495352 
+ 1547      5F537461 
+ 1547      72744578 
+ 1548              	.LASF40:
+ 1549 03ad 494E545F 		.ascii	"INT_FALLING_StartEx\000"
+ 1549      46414C4C 
+ 1549      494E475F 
+ 1549      53746172 
+ 1549      74457800 
+ 1550              	.LASF52:
+ 1551 03c1 42555359 		.ascii	"BUSY_Read\000"
+ 1551      5F526561 
+ 1551      6400
+ 1552              	.LASF21:
+ 1553 03cb 53746174 		.ascii	"State\000"
+ 1553      6500
+ 1554              	.LASF30:
+ 1555 03d1 5F426F6F 		.ascii	"_Bool\000"
+ 1555      6C00
+ 1556              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
