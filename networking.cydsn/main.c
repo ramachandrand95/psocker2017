@@ -28,17 +28,26 @@ _Bool lowFlag = 0;
 //serial buffer size
 #define SERIAL_BUFFER_SIZE 500
 //serial buffer
-char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
+unsigned char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
 int SERIAL_POS = 0;
 //flag to determine if the UART is connected
 int uartConnected = 0;
+//data cache for later use
+unsigned char CONVERTED_DATA[16];
+int dataConvertedReadOutCount = 0;
 
 CY_ISR(Timer_TX_ISR_HANDLER)
 {
    	Timer_TX_STATUS; //clear TX timer
-    
     //get data
     char currentChar = SERIAL_BUFFER[SERIAL_POS];
+    
+    //reset buffer if we are at the end
+    if(currentChar == 0){
+     SERIAL_POS = 0;   
+     currentChar = SERIAL_BUFFER[SERIAL_POS];
+    }
+    
     //encode into Unipolar-RZ
     int count = 0; //keeps track of which bit we're on
     //Data to be transmitted. This represents one byte of data and will
@@ -46,10 +55,20 @@ CY_ISR(Timer_TX_ISR_HANDLER)
     for(int y = 0; y < 16; y++){
         if(y == 0){
             TX_Write(1);
+            CONVERTED_DATA[y] = 0x31;
         }else if(y%2 != 0){
             TX_Write(0);
+            CONVERTED_DATA[y] = 0x30;
         }else{
-            TX_Write((currentChar)&(1<<count));
+            //see if a 1 exists at the bit of the char, otherwise write a 0 out
+            //this should transmit MSB first
+            if(currentChar & (1<<(6-count))){
+                TX_Write(1);
+                CONVERTED_DATA[y] = 0x31;
+            }else{
+                TX_Write(0);
+                CONVERTED_DATA[y] = 0x30;   
+            }
             ++count;
         }
     }
@@ -99,8 +118,10 @@ int main(void)
     Timer_TX_WritePeriod(TX_PERIOD);
     Timer_TX_WriteCounter(TX_COUNTER);
     Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
+    Timer_TX_Start();
+    
+    UART_Start(UART_device,UART_5V_OPERATION);
 
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
 
     while(1){
         
@@ -119,7 +140,23 @@ int main(void)
 				UART_CDC_Init();
 			}
 		}
-
+        //check if the UART has data, then place in buffer
+        if(UART_DataIsReady() != 0){
+            UART_GetAll(SERIAL_BUFFER);
+            dataConvertedReadOutCount = 0;
+        }
+        //write converted data to UART
+        if(UART_CDCIsReady() != 0){
+            if(dataConvertedReadOutCount < 16){
+              UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount]);
+              
+              ++dataConvertedReadOutCount;
+             
+            }else if(dataConvertedReadOutCount == 16){
+                UART_PutCRLF(); 
+                ++dataConvertedReadOutCount;                
+            }
+        }
         
         switch(systemState){
             //idle state
