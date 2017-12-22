@@ -234,7 +234,18 @@
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
-<OpenDocs />
+<OpenDocs>
+<name v=".\main.c" />
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\networking.cydwr" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1437, 711" SelectedTabbedMdiWindow="17180cd5-a790-4b09-a9a7-8850cc6bf373"><DocumentWindow Key="C:\Users\marlowea\Google Drive\BACKUP\docs\2017-2018\sem2year4\CE4950\Project\psocker2017\networking.cydsn\main.c" Guid="17180cd5-a790-4b09-a9a7-8850cc6bf373" /><DocumentWindow Key="C:\Users\marlowea\Google Drive\BACKUP\docs\2017-2018\sem2year4\CE4950\Project\psocker2017\networking.cydsn\TopDesign\TopDesign.cysch" Guid="a735cbad-e9c7-413c-893f-bdb5d5e09c0d" /><DocumentWindow Key="C:\Users\marlowea\Google Drive\BACKUP\docs\2017-2018\sem2year4\CE4950\Project\psocker2017\networking.cydsn\networking.cydwr" Guid="46181bfe-c479-4e43-bb5b-725ae9804757" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
