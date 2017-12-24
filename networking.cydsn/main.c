@@ -37,7 +37,8 @@ unsigned char CONVERTED_DATA[SERIAL_BUFFER_SIZE][16];
 int dataConvertedReadOutCount = 0;
 char currentChar;
 int dataSize;
-
+int TX_Bit_Counter = 0; //keeps track of what would be a for loop in the ISR
+int count = 0; //keeps track of which bit we're on
 
 CY_ISR(Timer_TX_ISR_HANDLER)
 {
@@ -47,31 +48,38 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 
 	if(SERIAL_POS < dataSize){ 
 	//encode into Unipolar-RZ
-	int count = 0; //keeps track of which bit we're on
+	
 	//Data to be transmitted. This represents one byte of data and will
 	//be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
-	for(int y = 0; y < 16; y++){
-		if(y == 0){
+	
+		if(TX_Bit_Counter == 0){
 			TX_Write(1);
-			CONVERTED_DATA[SERIAL_POS][y] = 0x31;
-		}else if(y%2 != 0){
+			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+		}else if(TX_Bit_Counter%2 != 0){
 			TX_Write(0);
-			CONVERTED_DATA[SERIAL_POS][y] = 0x30;
+			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;
 		}else{
 			//see if a 1 exists at the bit of the char, otherwise write a 0 out
 			//this should transmit MSB first
 			if(currentChar & (1<<(6-count))){
 				TX_Write(1);
-				CONVERTED_DATA[SERIAL_POS][y] = 0x31;
+				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
 			}else{
 				TX_Write(0);
-				CONVERTED_DATA[SERIAL_POS][y] = 0x30;   
+				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;   
 			}
 				++count;
-			}
 		}
-		++SERIAL_POS;
-    }
+        ++TX_Bit_Counter;
+        if(TX_Bit_Counter >= 16){
+		    ++SERIAL_POS;
+		    count = 0;
+		    TX_Bit_Counter = 0;
+        }
+ 
+  }
+	
+
 }
 
 CY_ISR(TIMER)
@@ -149,7 +157,7 @@ int main(void)
         //write converted data to UART
 
         if(UART_CDCIsReady() != 0){
-            if(dataConvertedReadOutCount < dataSize){
+            if(dataConvertedReadOutCount < dataSize && SERIAL_POS == dataSize){
                 for(int y = 0; y < 16; y++){
                  while(!UART_CDCIsReady());
                  UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount][y]); 
