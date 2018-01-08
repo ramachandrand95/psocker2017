@@ -23,8 +23,8 @@ _Bool lowFlag = 0;
 #define IDLE_PERIOD     830
 #define IDLE_COUNTER    829
 //transmit timer stuff
-#define TX_PERIOD     50 //gives 0.50ms or 500us for unipolar-rz at 1000bps
-#define TX_COUNTER    49
+#define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
+#define TX_COUNTER    46 //empirically tuned...
 //serial buffer size
 #define SERIAL_BUFFER_SIZE 500
 //serial buffer
@@ -70,11 +70,13 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 			}
 				++count;
 		}
+        CyDelayUs(495);
         ++TX_Bit_Counter;
         if(TX_Bit_Counter >= 16){
 		    ++SERIAL_POS;
 		    count = 0;
 		    TX_Bit_Counter = 0;
+            TX_Write(0);
         }
  
   }
@@ -122,11 +124,12 @@ int main(void)
     INT_RISING_StartEx(RISING);
     INT_FALLING_StartEx(FALLING);
     
+    Timer_TX_Start();
     Timer_TX_WritePeriod(TX_PERIOD);
     Timer_TX_WriteCounter(TX_COUNTER);
     Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
-    Timer_TX_Start();
     
+
     UART_Start(UART_device,UART_5V_OPERATION);
 
     while(1){
