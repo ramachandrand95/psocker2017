@@ -45,95 +45,109 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 	Timer_TX_STATUS; //clear TX timer
 	//get data
 	currentChar = SERIAL_BUFFER[SERIAL_POS];
+	if(systemState == idleState){
+    	if(SERIAL_POS < dataSize){ 
+    	//encode into Unipolar-RZ
+    	
+    	//Data to be transmitted. This represents one byte of data and will
+    	//be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
+    	
+    		if(TX_Bit_Counter == 0){
+    			TX_Write(1);
+    			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+    		}else if(TX_Bit_Counter%2 != 0){
+    			TX_Write(0);
+    			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;
+    		}else{
+    			//see if a 1 exists at the bit of the char, otherwise write a 0 out
+    			//this should transmit MSB first
+    			if(currentChar & (1<<(6-count))){
+    				TX_Write(1);
+    				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+    			}else{
+    				TX_Write(0);
+    				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;   
+    			}
+    				++count;
+    		}
+    		CyDelayUs(495);
+    		++TX_Bit_Counter;
+    		if(TX_Bit_Counter >= 16){
+    			++SERIAL_POS;
+    			count = 0;
+    			TX_Bit_Counter = 0;
+    			TX_Write(0);
+    		}
 
-	if(SERIAL_POS < dataSize){ 
-	//encode into Unipolar-RZ
-	
-	//Data to be transmitted. This represents one byte of data and will
-	//be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
-	
-		if(TX_Bit_Counter == 0){
-			TX_Write(1);
-			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
-		}else if(TX_Bit_Counter%2 != 0){
-			TX_Write(0);
-			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;
-		}else{
-			//see if a 1 exists at the bit of the char, otherwise write a 0 out
-			//this should transmit MSB first
-			if(currentChar & (1<<(6-count))){
-				TX_Write(1);
-				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
-			}else{
-				TX_Write(0);
-				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;   
-			}
-				++count;
-		}
-        CyDelayUs(495);
-        ++TX_Bit_Counter;
-        if(TX_Bit_Counter >= 16){
-		    ++SERIAL_POS;
-		    count = 0;
-		    TX_Bit_Counter = 0;
-            TX_Write(0);
         }
- 
-  }
 	
+    }else if(systemState == collisionState){
+	    int backoff = 0;
+	    //reset current byte transmission 
+	    count = 0;
+	    TX_Bit_Counter = 0;
+	    //generate sudo-random backoff, normally distributed between backoff/128 seconds, where N is an int between 0 and 128
+	    backoff = (PRS_Read()+1);
+	    CyDelay((backoff/128)*1000); //use cydelay for now, which takes millis
+	
+    }else{
+    //we're in the busy state here   
+    }
 
 }
 
 CY_ISR(TIMER)
 {
-   	Timer_1_STATUS; //clear timer
-    
-    if (!(lowFlag) ){
-        systemState = idleState;
-    } else {
-        systemState = collisionState;
-    }
+	Timer_1_STATUS; //clear timer
+	
+	if (!(lowFlag) ){
+		systemState = idleState;
+	} else {
+		systemState = collisionState;
+	}
 }
 
 CY_ISR(RISING)
 {
-    if ((!lowFlag)){
-        Timer_1_WritePeriod(COLL_PERIOD);
-        Timer_1_WriteCounter(COLL_COUNTER);
-        Timer_1_Start();
-        lowFlag = 1;
-        systemState = busyState;
-    }
+	if ((!lowFlag)){
+		Timer_1_WritePeriod(COLL_PERIOD);
+		Timer_1_WriteCounter(COLL_COUNTER);
+		Timer_1_Start();
+		lowFlag = 1;
+		systemState = busyState;
+	}
 }
- 
+
 CY_ISR(FALLING)
 {
-    if (lowFlag){
-        Timer_1_WritePeriod(IDLE_PERIOD);
-        Timer_1_WriteCounter(IDLE_COUNTER);
-        Timer_1_Start();
-        lowFlag = 0;
-        systemState = busyState;
-    }
+	if (lowFlag){
+		Timer_1_WritePeriod(IDLE_PERIOD);
+		Timer_1_WriteCounter(IDLE_COUNTER);
+		Timer_1_Start();
+		lowFlag = 0;
+		systemState = busyState;
+	}
 }
 
 int main(void)
 {
-    CyGlobalIntEnable;
-    TimerISR_StartEx(TIMER);
-    INT_RISING_StartEx(RISING);
-    INT_FALLING_StartEx(FALLING);
-    
-    Timer_TX_Start();
-    Timer_TX_WritePeriod(TX_PERIOD);
-    Timer_TX_WriteCounter(TX_COUNTER);
-    Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
-    
+	CyGlobalIntEnable;
+	TimerISR_StartEx(TIMER);
+	INT_RISING_StartEx(RISING);
+	INT_FALLING_StartEx(FALLING);
+	
+	Timer_TX_Start();
+	Timer_TX_WritePeriod(TX_PERIOD);
+	Timer_TX_WriteCounter(TX_COUNTER);
+	Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
+	
+	PRS_Start();
+	
 
-    UART_Start(UART_device,UART_5V_OPERATION);
+	UART_Start(UART_device,UART_5V_OPERATION);
 
-    while(1){
-         //check if UART is connected, then set flag
+	while(1){
+		 //check if UART is connected, then set flag
 		if(UART_GetDTERate() == 57600){
 			uartConnected = 1;
 		}
@@ -148,50 +162,50 @@ int main(void)
 				UART_CDC_Init();
 			}
 		}
-                
-        //check if the UART has data, then place in buffer
-        if(UART_DataIsReady() != 0){
-            dataSize = UART_GetAll(SERIAL_BUFFER);
-            while(!UART_CDCIsReady());
-            UART_PutCRLF();
-            dataConvertedReadOutCount = 0;            
-            SERIAL_POS = 0;
-        }
-        //write converted data to UART
+				
+		//check if the UART has data, then place in buffer
+		if(UART_DataIsReady() != 0){
+			dataSize = UART_GetAll(SERIAL_BUFFER);
+			while(!UART_CDCIsReady());
+			UART_PutCRLF();
+			dataConvertedReadOutCount = 0;            
+			SERIAL_POS = 0;
+		}
+		//write converted data to UART
 
-        if(UART_CDCIsReady() != 0){
-            if(dataConvertedReadOutCount < dataSize && SERIAL_POS == dataSize){
-                for(int y = 0; y < 16; y++){
-                 while(!UART_CDCIsReady());
-                 UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount][y]); 
-                }
-                ++dataConvertedReadOutCount;
-                while(!UART_CDCIsReady());
-                UART_PutCRLF();
-            }
-        }
-        
-        switch(systemState){
-            //idle state
-            case idleState :;
-                IDLE_Write(1);
-                BUSY_Write(!IDLE_Read());
-                COLLISION_Write(!IDLE_Read());
-            break;
-            //busy state
-            case busyState:
-                BUSY_Write(1);
-                IDLE_Write(!BUSY_Read());
-                COLLISION_Write(!BUSY_Read());
-            break;
-            //collision state
-            case collisionState:;
-                COLLISION_Write(1);
-                IDLE_Write(!COLLISION_Read());
-                BUSY_Write(!COLLISION_Read());
-            break;
-        }
-    }
+		if(UART_CDCIsReady() != 0){
+			if(dataConvertedReadOutCount < dataSize && SERIAL_POS == dataSize){
+				for(int y = 0; y < 16; y++){
+				 while(!UART_CDCIsReady());
+				 UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount][y]); 
+				}
+				++dataConvertedReadOutCount;
+				while(!UART_CDCIsReady());
+				UART_PutCRLF();
+			}
+		}
+		
+		switch(systemState){
+			//idle state
+			case idleState :;
+				IDLE_Write(1);
+				BUSY_Write(!IDLE_Read());
+				COLLISION_Write(!IDLE_Read());
+			break;
+			//busy state
+			case busyState:
+				BUSY_Write(1);
+				IDLE_Write(!BUSY_Read());
+				COLLISION_Write(!BUSY_Read());
+			break;
+			//collision state
+			case collisionState:;
+				COLLISION_Write(1);
+				IDLE_Write(!COLLISION_Read());
+				BUSY_Write(!COLLISION_Read());
+			break;
+		}
+	}
 }
 
 /* [] END OF FILE */

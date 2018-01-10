@@ -46,6 +46,7 @@
 #include "UART_pvt.h"
 #include "UART_cydmac.h"
 #include "UART_msc.h"
+#include "PRS.h"
 #include "UART_Dm_aliases.h"
 #include "UART_Dm.h"
 #include "UART_Dp_aliases.h"

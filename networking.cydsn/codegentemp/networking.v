@@ -1,6 +1,6 @@
 // ======================================================================
 // networking.v generated from TopDesign.cysch
-// 01/08/2018 at 11:40
+// 01/09/2018 at 20:35
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -667,9 +667,37 @@ module USBFS_v3_10_2 (
 
 endmodule
 
+// Component: PRS_v2_40
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40\PRS_v2_40.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40\PRS_v2_40.v"
+`endif
+
+// Component: cy_constant_v1_0
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
+`endif
+
 // top
 module top ;
 
+          wire  Net_40;
+          wire  Net_38;
           wire  Net_37;
           wire  Net_36;
           wire  Net_35;
@@ -678,7 +706,6 @@ module top ;
           wire  Net_30;
           wire  Net_29;
           wire  Net_28;
-          wire  Net_26;
           wire  Net_25;
           wire  Net_15;
           wire  Net_14;
@@ -687,6 +714,7 @@ module top ;
           wire  Net_12;
           wire  Net_20;
           wire  Net_11;
+          wire  Net_26;
           wire  Net_33;
           wire  Net_27;
           wire  Net_255;
@@ -1190,6 +1218,18 @@ module top ;
         .sof(Net_36),
         .vbusdet(1'b0));
     defparam UART.epDMAautoOptimization = 0;
+
+    PRS_v2_40 PRS (
+        .enable(Net_38),
+        .clock(Net_33),
+        .bitstream(Net_40),
+        .reset(Net_26));
+    defparam PRS.Resolution = 7;
+    defparam PRS.RunMode = 0;
+    defparam PRS.TimeMultiplexing = 0;
+    defparam PRS.WakeupBehaviour = 1;
+
+    assign Net_38 = 1'h1;
 
 
 
