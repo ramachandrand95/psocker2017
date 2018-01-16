@@ -23,8 +23,8 @@ _Bool lowFlag = 0;
 #define IDLE_PERIOD     830
 #define IDLE_COUNTER    829
 //transmit timer stuff
-#define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
-#define TX_COUNTER    46 //empirically tuned...
+#define TX_PERIOD     50 //gives 0.50ms or 500us for unipolar-rz at 1000bps
+#define TX_COUNTER    49 //empirically tuned...
 //serial buffer size
 #define SERIAL_BUFFER_SIZE 500
 //serial buffer
@@ -39,6 +39,17 @@ char currentChar;
 int dataSize;
 int TX_Bit_Counter = 0; //keeps track of what would be a for loop in the ISR
 int count = 0; //keeps track of which bit we're on
+int colCount = 0;
+
+CY_ISR(COLL){
+    TIMER_RZ_Stop();
+    TIMER_RZ_STATUS;
+    TX_Write(0);
+    systemState = idleState;
+
+    TIMER_RZ_Start();
+    
+}
 
 CY_ISR(Timer_TX_ISR_HANDLER)
 {
@@ -70,7 +81,8 @@ CY_ISR(Timer_TX_ISR_HANDLER)
     			}
     				++count;
     		}
-    		CyDelayUs(495);
+    		//Timer_1_Stop();
+            CyDelayUs(495);
     		++TX_Bit_Counter;
     		if(TX_Bit_Counter >= 16){
     			++SERIAL_POS;
@@ -84,12 +96,14 @@ CY_ISR(Timer_TX_ISR_HANDLER)
     }else if(systemState == collisionState){
 	    int backoff = 0;
 	    //reset current byte transmission 
-	    count = 0;
-	    TX_Bit_Counter = 0;
+	    
+        
 	    //generate sudo-random backoff, normally distributed between backoff/128 seconds, where N is an int between 0 and 128
 	    backoff = (PRS_Read()+1);
-	    CyDelay((backoff/128)*1000); //use cydelay for now, which takes millis
-	
+	    //CyDelay((double)(backoff/128.0)*1000); //use cydelay for now, which takes millis
+        TIMER_RZ_WritePeriod((backoff/128)*1000);
+        TIMER_RZ_WriteCounter(((backoff/128)*1000)-1);
+	    TIMER_RZ_Start();
     }else{
     //we're in the busy state here   
     }
@@ -129,9 +143,21 @@ CY_ISR(FALLING)
 	}
 }
 
+CY_ISR(COLL_GEN){
+    COLL_GEN_TIMER_STATUS;
+    
+    if(colCount % 2 == 0){
+        COLL_OUT_Write(1);
+    }else{
+        COLL_OUT_Write(0);
+    }
+    ++colCount;
+}
+
 int main(void)
 {
 	CyGlobalIntEnable;
+    RZ_ISR_StartEx(COLL);
 	TimerISR_StartEx(TIMER);
 	INT_RISING_StartEx(RISING);
 	INT_FALLING_StartEx(FALLING);
@@ -140,13 +166,13 @@ int main(void)
 	Timer_TX_WritePeriod(TX_PERIOD);
 	Timer_TX_WriteCounter(TX_COUNTER);
 	Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
-	
 	PRS_Start();
-	
-
+	//COLL_GEN_TIMER_Start();
+    //COLL_ISR_StartEx(COLL_GEN);
 	UART_Start(UART_device,UART_5V_OPERATION);
 
 	while(1){
+        Timer_1_Start();
 		 //check if UART is connected, then set flag
 		if(UART_GetDTERate() == 57600){
 			uartConnected = 1;
