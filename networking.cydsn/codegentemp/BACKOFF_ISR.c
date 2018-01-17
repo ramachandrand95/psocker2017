@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: COLL_ISR.c  
+* File Name: BACKOFF_ISR.c  
 * Version 1.70
 *
 *  Description:
@@ -18,15 +18,15 @@
 
 #include <cydevice_trm.h>
 #include <CyLib.h>
-#include <COLL_ISR.h>
+#include <BACKOFF_ISR.h>
 #include "cyapicallbacks.h"
 
-#if !defined(COLL_ISR__REMOVED) /* Check for removal by optimization */
+#if !defined(BACKOFF_ISR__REMOVED) /* Check for removal by optimization */
 
 /*******************************************************************************
 *  Place your includes, defines and code here 
 ********************************************************************************/
-/* `#START COLL_ISR_intc` */
+/* `#START BACKOFF_ISR_intc` */
 
 /* `#END` */
 
@@ -42,7 +42,7 @@ CY_ISR_PROTO(IntDefaultHandler);
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_Start
+* Function Name: BACKOFF_ISR_Start
 ********************************************************************************
 *
 * Summary:
@@ -58,24 +58,24 @@ CY_ISR_PROTO(IntDefaultHandler);
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_Start(void)
+void BACKOFF_ISR_Start(void)
 {
     /* For all we know the interrupt is active. */
-    COLL_ISR_Disable();
+    BACKOFF_ISR_Disable();
 
-    /* Set the ISR to point to the COLL_ISR Interrupt. */
-    COLL_ISR_SetVector(&COLL_ISR_Interrupt);
+    /* Set the ISR to point to the BACKOFF_ISR Interrupt. */
+    BACKOFF_ISR_SetVector(&BACKOFF_ISR_Interrupt);
 
     /* Set the priority. */
-    COLL_ISR_SetPriority((uint8)COLL_ISR_INTC_PRIOR_NUMBER);
+    BACKOFF_ISR_SetPriority((uint8)BACKOFF_ISR_INTC_PRIOR_NUMBER);
 
     /* Enable it. */
-    COLL_ISR_Enable();
+    BACKOFF_ISR_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_StartEx
+* Function Name: BACKOFF_ISR_StartEx
 ********************************************************************************
 *
 * Summary:
@@ -101,24 +101,24 @@ void COLL_ISR_Start(void)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_StartEx(cyisraddress address)
+void BACKOFF_ISR_StartEx(cyisraddress address)
 {
     /* For all we know the interrupt is active. */
-    COLL_ISR_Disable();
+    BACKOFF_ISR_Disable();
 
-    /* Set the ISR to point to the COLL_ISR Interrupt. */
-    COLL_ISR_SetVector(address);
+    /* Set the ISR to point to the BACKOFF_ISR Interrupt. */
+    BACKOFF_ISR_SetVector(address);
 
     /* Set the priority. */
-    COLL_ISR_SetPriority((uint8)COLL_ISR_INTC_PRIOR_NUMBER);
+    BACKOFF_ISR_SetPriority((uint8)BACKOFF_ISR_INTC_PRIOR_NUMBER);
 
     /* Enable it. */
-    COLL_ISR_Enable();
+    BACKOFF_ISR_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_Stop
+* Function Name: BACKOFF_ISR_Stop
 ********************************************************************************
 *
 * Summary:
@@ -131,22 +131,22 @@ void COLL_ISR_StartEx(cyisraddress address)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_Stop(void)
+void BACKOFF_ISR_Stop(void)
 {
     /* Disable this interrupt. */
-    COLL_ISR_Disable();
+    BACKOFF_ISR_Disable();
 
     /* Set the ISR to point to the passive one. */
-    COLL_ISR_SetVector(&IntDefaultHandler);
+    BACKOFF_ISR_SetVector(&IntDefaultHandler);
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_Interrupt
+* Function Name: BACKOFF_ISR_Interrupt
 ********************************************************************************
 *
 * Summary:
-*   The default Interrupt Service Routine for COLL_ISR.
+*   The default Interrupt Service Routine for BACKOFF_ISR.
 *
 *   Add custom code between the coments to keep the next version of this file
 *   from over writting your code.
@@ -157,27 +157,27 @@ void COLL_ISR_Stop(void)
 *   None
 *
 *******************************************************************************/
-CY_ISR(COLL_ISR_Interrupt)
+CY_ISR(BACKOFF_ISR_Interrupt)
 {
-    #ifdef COLL_ISR_INTERRUPT_INTERRUPT_CALLBACK
-        COLL_ISR_Interrupt_InterruptCallback();
-    #endif /* COLL_ISR_INTERRUPT_INTERRUPT_CALLBACK */ 
+    #ifdef BACKOFF_ISR_INTERRUPT_INTERRUPT_CALLBACK
+        BACKOFF_ISR_Interrupt_InterruptCallback();
+    #endif /* BACKOFF_ISR_INTERRUPT_INTERRUPT_CALLBACK */ 
 
     /*  Place your Interrupt code here. */
-    /* `#START COLL_ISR_Interrupt` */
+    /* `#START BACKOFF_ISR_Interrupt` */
 
     /* `#END` */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_SetVector
+* Function Name: BACKOFF_ISR_SetVector
 ********************************************************************************
 *
 * Summary:
-*   Change the ISR vector for the Interrupt. Note calling COLL_ISR_Start
+*   Change the ISR vector for the Interrupt. Note calling BACKOFF_ISR_Start
 *   will override any effect this method would have had. To set the vector 
-*   before the component has been started use COLL_ISR_StartEx instead.
+*   before the component has been started use BACKOFF_ISR_StartEx instead.
 * 
 *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
 *   used to provide consistent definition across compilers:
@@ -197,18 +197,18 @@ CY_ISR(COLL_ISR_Interrupt)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_SetVector(cyisraddress address)
+void BACKOFF_ISR_SetVector(cyisraddress address)
 {
     cyisraddress * ramVectorTable;
 
     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
 
-    ramVectorTable[CYINT_IRQ_BASE + (uint32)COLL_ISR__INTC_NUMBER] = address;
+    ramVectorTable[CYINT_IRQ_BASE + (uint32)BACKOFF_ISR__INTC_NUMBER] = address;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_GetVector
+* Function Name: BACKOFF_ISR_GetVector
 ********************************************************************************
 *
 * Summary:
@@ -221,26 +221,26 @@ void COLL_ISR_SetVector(cyisraddress address)
 *   Address of the ISR in the interrupt vector table.
 *
 *******************************************************************************/
-cyisraddress COLL_ISR_GetVector(void)
+cyisraddress BACKOFF_ISR_GetVector(void)
 {
     cyisraddress * ramVectorTable;
 
     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
 
-    return ramVectorTable[CYINT_IRQ_BASE + (uint32)COLL_ISR__INTC_NUMBER];
+    return ramVectorTable[CYINT_IRQ_BASE + (uint32)BACKOFF_ISR__INTC_NUMBER];
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_SetPriority
+* Function Name: BACKOFF_ISR_SetPriority
 ********************************************************************************
 *
 * Summary:
 *   Sets the Priority of the Interrupt. 
 *
-*   Note calling COLL_ISR_Start or COLL_ISR_StartEx will 
+*   Note calling BACKOFF_ISR_Start or BACKOFF_ISR_StartEx will 
 *   override any effect this API would have had. This API should only be called
-*   after COLL_ISR_Start or COLL_ISR_StartEx has been called. 
+*   after BACKOFF_ISR_Start or BACKOFF_ISR_StartEx has been called. 
 *   To set the initial priority for the component, use the Design-Wide Resources
 *   Interrupt Editor.
 *
@@ -255,14 +255,14 @@ cyisraddress COLL_ISR_GetVector(void)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_SetPriority(uint8 priority)
+void BACKOFF_ISR_SetPriority(uint8 priority)
 {
-    *COLL_ISR_INTC_PRIOR = priority << 5;
+    *BACKOFF_ISR_INTC_PRIOR = priority << 5;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_GetPriority
+* Function Name: BACKOFF_ISR_GetPriority
 ********************************************************************************
 *
 * Summary:
@@ -277,19 +277,19 @@ void COLL_ISR_SetPriority(uint8 priority)
 *    PSoC 4: Priority is from 0 to 3.
 *
 *******************************************************************************/
-uint8 COLL_ISR_GetPriority(void)
+uint8 BACKOFF_ISR_GetPriority(void)
 {
     uint8 priority;
 
 
-    priority = *COLL_ISR_INTC_PRIOR >> 5;
+    priority = *BACKOFF_ISR_INTC_PRIOR >> 5;
 
     return priority;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_Enable
+* Function Name: BACKOFF_ISR_Enable
 ********************************************************************************
 *
 * Summary:
@@ -304,15 +304,15 @@ uint8 COLL_ISR_GetPriority(void)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_Enable(void)
+void BACKOFF_ISR_Enable(void)
 {
     /* Enable the general interrupt. */
-    *COLL_ISR_INTC_SET_EN = COLL_ISR__INTC_MASK;
+    *BACKOFF_ISR_INTC_SET_EN = BACKOFF_ISR__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_GetState
+* Function Name: BACKOFF_ISR_GetState
 ********************************************************************************
 *
 * Summary:
@@ -325,15 +325,15 @@ void COLL_ISR_Enable(void)
 *   1 if enabled, 0 if disabled.
 *
 *******************************************************************************/
-uint8 COLL_ISR_GetState(void)
+uint8 BACKOFF_ISR_GetState(void)
 {
     /* Get the state of the general interrupt. */
-    return ((*COLL_ISR_INTC_SET_EN & (uint32)COLL_ISR__INTC_MASK) != 0u) ? 1u:0u;
+    return ((*BACKOFF_ISR_INTC_SET_EN & (uint32)BACKOFF_ISR__INTC_MASK) != 0u) ? 1u:0u;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_Disable
+* Function Name: BACKOFF_ISR_Disable
 ********************************************************************************
 *
 * Summary:
@@ -346,15 +346,15 @@ uint8 COLL_ISR_GetState(void)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_Disable(void)
+void BACKOFF_ISR_Disable(void)
 {
     /* Disable the general interrupt. */
-    *COLL_ISR_INTC_CLR_EN = COLL_ISR__INTC_MASK;
+    *BACKOFF_ISR_INTC_CLR_EN = BACKOFF_ISR__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_SetPending
+* Function Name: BACKOFF_ISR_SetPending
 ********************************************************************************
 *
 * Summary:
@@ -373,14 +373,14 @@ void COLL_ISR_Disable(void)
 *   interrupts).
 *
 *******************************************************************************/
-void COLL_ISR_SetPending(void)
+void BACKOFF_ISR_SetPending(void)
 {
-    *COLL_ISR_INTC_SET_PD = COLL_ISR__INTC_MASK;
+    *BACKOFF_ISR_INTC_SET_PD = BACKOFF_ISR__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_ISR_ClearPending
+* Function Name: BACKOFF_ISR_ClearPending
 ********************************************************************************
 *
 * Summary:
@@ -398,9 +398,9 @@ void COLL_ISR_SetPending(void)
 *   None
 *
 *******************************************************************************/
-void COLL_ISR_ClearPending(void)
+void BACKOFF_ISR_ClearPending(void)
 {
-    *COLL_ISR_INTC_CLR_PD = COLL_ISR__INTC_MASK;
+    *BACKOFF_ISR_INTC_CLR_PD = BACKOFF_ISR__INTC_MASK;
 }
 
 #endif /* End check for removal by optimization */

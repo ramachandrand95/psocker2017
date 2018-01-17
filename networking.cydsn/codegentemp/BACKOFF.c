@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: COLL_GEN_TIMER.c
+* File Name: BACKOFF.c
 * Version 2.70
 *
 * Description:
@@ -21,13 +21,13 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "COLL_GEN_TIMER.h"
+#include "BACKOFF.h"
 
-uint8 COLL_GEN_TIMER_initVar = 0u;
+uint8 BACKOFF_initVar = 0u;
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_Init
+* Function Name: BACKOFF_Init
 ********************************************************************************
 *
 * Summary:
@@ -40,131 +40,131 @@ uint8 COLL_GEN_TIMER_initVar = 0u;
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_Init(void) 
+void BACKOFF_Init(void) 
 {
-    #if(!COLL_GEN_TIMER_UsingFixedFunction)
+    #if(!BACKOFF_UsingFixedFunction)
             /* Interrupt State Backup for Critical Region*/
-            uint8 COLL_GEN_TIMER_interruptState;
+            uint8 BACKOFF_interruptState;
     #endif /* Interrupt state back up for Fixed Function only */
 
-    #if (COLL_GEN_TIMER_UsingFixedFunction)
+    #if (BACKOFF_UsingFixedFunction)
         /* Clear all bits but the enable bit (if it's already set) for Timer operation */
-        COLL_GEN_TIMER_CONTROL &= COLL_GEN_TIMER_CTRL_ENABLE;
+        BACKOFF_CONTROL &= BACKOFF_CTRL_ENABLE;
 
         /* Clear the mode bits for continuous run mode */
         #if (CY_PSOC5A)
-            COLL_GEN_TIMER_CONTROL2 &= ((uint8)(~COLL_GEN_TIMER_CTRL_MODE_MASK));
+            BACKOFF_CONTROL2 &= ((uint8)(~BACKOFF_CTRL_MODE_MASK));
         #endif /* Clear bits in CONTROL2 only in PSOC5A */
 
         #if (CY_PSOC3 || CY_PSOC5LP)
-            COLL_GEN_TIMER_CONTROL3 &= ((uint8)(~COLL_GEN_TIMER_CTRL_MODE_MASK));
+            BACKOFF_CONTROL3 &= ((uint8)(~BACKOFF_CTRL_MODE_MASK));
         #endif /* CONTROL3 register exists only in PSoC3 OR PSoC5LP */
 
         /* Check if One Shot mode is enabled i.e. RunMode !=0*/
-        #if (COLL_GEN_TIMER_RunModeUsed != 0x0u)
+        #if (BACKOFF_RunModeUsed != 0x0u)
             /* Set 3rd bit of Control register to enable one shot mode */
-            COLL_GEN_TIMER_CONTROL |= 0x04u;
+            BACKOFF_CONTROL |= 0x04u;
         #endif /* One Shot enabled only when RunModeUsed is not Continuous*/
 
-        #if (COLL_GEN_TIMER_RunModeUsed == 2)
+        #if (BACKOFF_RunModeUsed == 2)
             #if (CY_PSOC5A)
                 /* Set last 2 bits of control2 register if one shot(halt on
                 interrupt) is enabled*/
-                COLL_GEN_TIMER_CONTROL2 |= 0x03u;
+                BACKOFF_CONTROL2 |= 0x03u;
             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL2 for PSoC5A */
 
             #if (CY_PSOC3 || CY_PSOC5LP)
                 /* Set last 2 bits of control3 register if one shot(halt on
                 interrupt) is enabled*/
-                COLL_GEN_TIMER_CONTROL3 |= 0x03u;
+                BACKOFF_CONTROL3 |= 0x03u;
             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL3 for PSoC3 or PSoC5LP */
 
         #endif /* Remove section if One Shot Halt on Interrupt is not enabled */
 
-        #if (COLL_GEN_TIMER_UsingHWEnable != 0)
+        #if (BACKOFF_UsingHWEnable != 0)
             #if (CY_PSOC5A)
                 /* Set the default Run Mode of the Timer to Continuous */
-                COLL_GEN_TIMER_CONTROL2 |= COLL_GEN_TIMER_CTRL_MODE_PULSEWIDTH;
+                BACKOFF_CONTROL2 |= BACKOFF_CTRL_MODE_PULSEWIDTH;
             #endif /* Set Continuous Run Mode in CONTROL2 for PSoC5A */
 
             #if (CY_PSOC3 || CY_PSOC5LP)
                 /* Clear and Set ROD and COD bits of CFG2 register */
-                COLL_GEN_TIMER_CONTROL3 &= ((uint8)(~COLL_GEN_TIMER_CTRL_RCOD_MASK));
-                COLL_GEN_TIMER_CONTROL3 |= COLL_GEN_TIMER_CTRL_RCOD;
+                BACKOFF_CONTROL3 &= ((uint8)(~BACKOFF_CTRL_RCOD_MASK));
+                BACKOFF_CONTROL3 |= BACKOFF_CTRL_RCOD;
 
                 /* Clear and Enable the HW enable bit in CFG2 register */
-                COLL_GEN_TIMER_CONTROL3 &= ((uint8)(~COLL_GEN_TIMER_CTRL_ENBL_MASK));
-                COLL_GEN_TIMER_CONTROL3 |= COLL_GEN_TIMER_CTRL_ENBL;
+                BACKOFF_CONTROL3 &= ((uint8)(~BACKOFF_CTRL_ENBL_MASK));
+                BACKOFF_CONTROL3 |= BACKOFF_CTRL_ENBL;
 
                 /* Set the default Run Mode of the Timer to Continuous */
-                COLL_GEN_TIMER_CONTROL3 |= COLL_GEN_TIMER_CTRL_MODE_CONTINUOUS;
+                BACKOFF_CONTROL3 |= BACKOFF_CTRL_MODE_CONTINUOUS;
             #endif /* Set Continuous Run Mode in CONTROL3 for PSoC3ES3 or PSoC5A */
 
         #endif /* Configure Run Mode with hardware enable */
 
         /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
-        COLL_GEN_TIMER_RT1 &= ((uint8)(~COLL_GEN_TIMER_RT1_MASK));
-        COLL_GEN_TIMER_RT1 |= COLL_GEN_TIMER_SYNC;
+        BACKOFF_RT1 &= ((uint8)(~BACKOFF_RT1_MASK));
+        BACKOFF_RT1 |= BACKOFF_SYNC;
 
         /*Enable DSI Sync all all inputs of the Timer*/
-        COLL_GEN_TIMER_RT1 &= ((uint8)(~COLL_GEN_TIMER_SYNCDSI_MASK));
-        COLL_GEN_TIMER_RT1 |= COLL_GEN_TIMER_SYNCDSI_EN;
+        BACKOFF_RT1 &= ((uint8)(~BACKOFF_SYNCDSI_MASK));
+        BACKOFF_RT1 |= BACKOFF_SYNCDSI_EN;
 
         /* Set the IRQ to use the status register interrupts */
-        COLL_GEN_TIMER_CONTROL2 |= COLL_GEN_TIMER_CTRL2_IRQ_SEL;
+        BACKOFF_CONTROL2 |= BACKOFF_CTRL2_IRQ_SEL;
     #endif /* Configuring registers of fixed function implementation */
 
     /* Set Initial values from Configuration */
-    COLL_GEN_TIMER_WritePeriod(COLL_GEN_TIMER_INIT_PERIOD);
-    COLL_GEN_TIMER_WriteCounter(COLL_GEN_TIMER_INIT_PERIOD);
+    BACKOFF_WritePeriod(BACKOFF_INIT_PERIOD);
+    BACKOFF_WriteCounter(BACKOFF_INIT_PERIOD);
 
-    #if (COLL_GEN_TIMER_UsingHWCaptureCounter)/* Capture counter is enabled */
-        COLL_GEN_TIMER_CAPTURE_COUNT_CTRL |= COLL_GEN_TIMER_CNTR_ENABLE;
-        COLL_GEN_TIMER_SetCaptureCount(COLL_GEN_TIMER_INIT_CAPTURE_COUNT);
+    #if (BACKOFF_UsingHWCaptureCounter)/* Capture counter is enabled */
+        BACKOFF_CAPTURE_COUNT_CTRL |= BACKOFF_CNTR_ENABLE;
+        BACKOFF_SetCaptureCount(BACKOFF_INIT_CAPTURE_COUNT);
     #endif /* Configure capture counter value */
 
-    #if (!COLL_GEN_TIMER_UsingFixedFunction)
-        #if (COLL_GEN_TIMER_SoftwareCaptureMode)
-            COLL_GEN_TIMER_SetCaptureMode(COLL_GEN_TIMER_INIT_CAPTURE_MODE);
+    #if (!BACKOFF_UsingFixedFunction)
+        #if (BACKOFF_SoftwareCaptureMode)
+            BACKOFF_SetCaptureMode(BACKOFF_INIT_CAPTURE_MODE);
         #endif /* Set Capture Mode for UDB implementation if capture mode is software controlled */
 
-        #if (COLL_GEN_TIMER_SoftwareTriggerMode)
-            #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
-                if (0u == (COLL_GEN_TIMER_CONTROL & COLL_GEN_TIMER__B_TIMER__TM_SOFTWARE))
+        #if (BACKOFF_SoftwareTriggerMode)
+            #if (!BACKOFF_UDB_CONTROL_REG_REMOVED)
+                if (0u == (BACKOFF_CONTROL & BACKOFF__B_TIMER__TM_SOFTWARE))
                 {
-                    COLL_GEN_TIMER_SetTriggerMode(COLL_GEN_TIMER_INIT_TRIGGER_MODE);
+                    BACKOFF_SetTriggerMode(BACKOFF_INIT_TRIGGER_MODE);
                 }
-            #endif /* (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) */
+            #endif /* (!BACKOFF_UDB_CONTROL_REG_REMOVED) */
         #endif /* Set trigger mode for UDB Implementation if trigger mode is software controlled */
 
         /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region critical*/
         /* Enter Critical Region*/
-        COLL_GEN_TIMER_interruptState = CyEnterCriticalSection();
+        BACKOFF_interruptState = CyEnterCriticalSection();
 
         /* Use the interrupt output of the status register for IRQ output */
-        COLL_GEN_TIMER_STATUS_AUX_CTRL |= COLL_GEN_TIMER_STATUS_ACTL_INT_EN_MASK;
+        BACKOFF_STATUS_AUX_CTRL |= BACKOFF_STATUS_ACTL_INT_EN_MASK;
 
         /* Exit Critical Region*/
-        CyExitCriticalSection(COLL_GEN_TIMER_interruptState);
+        CyExitCriticalSection(BACKOFF_interruptState);
 
-        #if (COLL_GEN_TIMER_EnableTriggerMode)
-            COLL_GEN_TIMER_EnableTrigger();
+        #if (BACKOFF_EnableTriggerMode)
+            BACKOFF_EnableTrigger();
         #endif /* Set Trigger enable bit for UDB implementation in the control register*/
 		
 		
-        #if (COLL_GEN_TIMER_InterruptOnCaptureCount && !COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
-            COLL_GEN_TIMER_SetInterruptCount(COLL_GEN_TIMER_INIT_INT_CAPTURE_COUNT);
+        #if (BACKOFF_InterruptOnCaptureCount && !BACKOFF_UDB_CONTROL_REG_REMOVED)
+            BACKOFF_SetInterruptCount(BACKOFF_INIT_INT_CAPTURE_COUNT);
         #endif /* Set interrupt count in UDB implementation if interrupt count feature is checked.*/
 
-        COLL_GEN_TIMER_ClearFIFO();
+        BACKOFF_ClearFIFO();
     #endif /* Configure additional features of UDB implementation */
 
-    COLL_GEN_TIMER_SetInterruptMode(COLL_GEN_TIMER_INIT_INTERRUPT_MODE);
+    BACKOFF_SetInterruptMode(BACKOFF_INIT_INTERRUPT_MODE);
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_Enable
+* Function Name: BACKOFF_Enable
 ********************************************************************************
 *
 * Summary:
@@ -177,23 +177,23 @@ void COLL_GEN_TIMER_Init(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_Enable(void) 
+void BACKOFF_Enable(void) 
 {
     /* Globally Enable the Fixed Function Block chosen */
-    #if (COLL_GEN_TIMER_UsingFixedFunction)
-        COLL_GEN_TIMER_GLOBAL_ENABLE |= COLL_GEN_TIMER_BLOCK_EN_MASK;
-        COLL_GEN_TIMER_GLOBAL_STBY_ENABLE |= COLL_GEN_TIMER_BLOCK_STBY_EN_MASK;
+    #if (BACKOFF_UsingFixedFunction)
+        BACKOFF_GLOBAL_ENABLE |= BACKOFF_BLOCK_EN_MASK;
+        BACKOFF_GLOBAL_STBY_ENABLE |= BACKOFF_BLOCK_STBY_EN_MASK;
     #endif /* Set Enable bit for enabling Fixed function timer*/
 
     /* Remove assignment if control register is removed */
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED || COLL_GEN_TIMER_UsingFixedFunction)
-        COLL_GEN_TIMER_CONTROL |= COLL_GEN_TIMER_CTRL_ENABLE;
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED || BACKOFF_UsingFixedFunction)
+        BACKOFF_CONTROL |= BACKOFF_CTRL_ENABLE;
     #endif /* Remove assignment if control register is removed */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_Start
+* Function Name: BACKOFF_Start
 ********************************************************************************
 *
 * Summary:
@@ -208,26 +208,26 @@ void COLL_GEN_TIMER_Enable(void)
 *  void
 *
 * Global variables:
-*  COLL_GEN_TIMER_initVar: Is modified when this function is called for the
+*  BACKOFF_initVar: Is modified when this function is called for the
 *   first time. Is used to ensure that initialization happens only once.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_Start(void) 
+void BACKOFF_Start(void) 
 {
-    if(COLL_GEN_TIMER_initVar == 0u)
+    if(BACKOFF_initVar == 0u)
     {
-        COLL_GEN_TIMER_Init();
+        BACKOFF_Init();
 
-        COLL_GEN_TIMER_initVar = 1u;   /* Clear this bit for Initialization */
+        BACKOFF_initVar = 1u;   /* Clear this bit for Initialization */
     }
 
     /* Enable the Timer */
-    COLL_GEN_TIMER_Enable();
+    BACKOFF_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_Stop
+* Function Name: BACKOFF_Stop
 ********************************************************************************
 *
 * Summary:
@@ -244,23 +244,23 @@ void COLL_GEN_TIMER_Start(void)
 *               has no effect on the operation of the timer.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_Stop(void) 
+void BACKOFF_Stop(void) 
 {
     /* Disable Timer */
-    #if(!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED || COLL_GEN_TIMER_UsingFixedFunction)
-        COLL_GEN_TIMER_CONTROL &= ((uint8)(~COLL_GEN_TIMER_CTRL_ENABLE));
+    #if(!BACKOFF_UDB_CONTROL_REG_REMOVED || BACKOFF_UsingFixedFunction)
+        BACKOFF_CONTROL &= ((uint8)(~BACKOFF_CTRL_ENABLE));
     #endif /* Remove assignment if control register is removed */
 
     /* Globally disable the Fixed Function Block chosen */
-    #if (COLL_GEN_TIMER_UsingFixedFunction)
-        COLL_GEN_TIMER_GLOBAL_ENABLE &= ((uint8)(~COLL_GEN_TIMER_BLOCK_EN_MASK));
-        COLL_GEN_TIMER_GLOBAL_STBY_ENABLE &= ((uint8)(~COLL_GEN_TIMER_BLOCK_STBY_EN_MASK));
+    #if (BACKOFF_UsingFixedFunction)
+        BACKOFF_GLOBAL_ENABLE &= ((uint8)(~BACKOFF_BLOCK_EN_MASK));
+        BACKOFF_GLOBAL_STBY_ENABLE &= ((uint8)(~BACKOFF_BLOCK_STBY_EN_MASK));
     #endif /* Disable global enable for the Timer Fixed function block to stop the Timer*/
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SetInterruptMode
+* Function Name: BACKOFF_SetInterruptMode
 ********************************************************************************
 *
 * Summary:
@@ -276,14 +276,14 @@ void COLL_GEN_TIMER_Stop(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SetInterruptMode(uint8 interruptMode) 
+void BACKOFF_SetInterruptMode(uint8 interruptMode) 
 {
-    COLL_GEN_TIMER_STATUS_MASK = interruptMode;
+    BACKOFF_STATUS_MASK = interruptMode;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SoftwareCapture
+* Function Name: BACKOFF_SoftwareCapture
 ********************************************************************************
 *
 * Summary:
@@ -299,20 +299,20 @@ void COLL_GEN_TIMER_SetInterruptMode(uint8 interruptMode)
 *  An existing hardware capture could be overwritten.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SoftwareCapture(void) 
+void BACKOFF_SoftwareCapture(void) 
 {
     /* Generate a software capture by reading the counter register */
-    #if(COLL_GEN_TIMER_UsingFixedFunction)
-        (void)CY_GET_REG16(COLL_GEN_TIMER_COUNTER_LSB_PTR);
+    #if(BACKOFF_UsingFixedFunction)
+        (void)CY_GET_REG16(BACKOFF_COUNTER_LSB_PTR);
     #else
-        (void)CY_GET_REG8(COLL_GEN_TIMER_COUNTER_LSB_PTR_8BIT);
-    #endif/* (COLL_GEN_TIMER_UsingFixedFunction) */
+        (void)CY_GET_REG8(BACKOFF_COUNTER_LSB_PTR_8BIT);
+    #endif/* (BACKOFF_UsingFixedFunction) */
     /* Capture Data is now in the FIFO */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ReadStatusRegister
+* Function Name: BACKOFF_ReadStatusRegister
 ********************************************************************************
 *
 * Summary:
@@ -330,17 +330,17 @@ void COLL_GEN_TIMER_SoftwareCapture(void)
 *  Status register bits may be clear on read.
 *
 *******************************************************************************/
-uint8   COLL_GEN_TIMER_ReadStatusRegister(void) 
+uint8   BACKOFF_ReadStatusRegister(void) 
 {
-    return (COLL_GEN_TIMER_STATUS);
+    return (BACKOFF_STATUS);
 }
 
 
-#if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
+#if (!BACKOFF_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ReadControlRegister
+* Function Name: BACKOFF_ReadControlRegister
 ********************************************************************************
 *
 * Summary:
@@ -353,18 +353,18 @@ uint8   COLL_GEN_TIMER_ReadStatusRegister(void)
 *  The contents of the control register
 *
 *******************************************************************************/
-uint8 COLL_GEN_TIMER_ReadControlRegister(void) 
+uint8 BACKOFF_ReadControlRegister(void) 
 {
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) 
-        return ((uint8)COLL_GEN_TIMER_CONTROL);
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED) 
+        return ((uint8)BACKOFF_CONTROL);
     #else
         return (0);
-    #endif /* (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) */
+    #endif /* (!BACKOFF_UDB_CONTROL_REG_REMOVED) */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_WriteControlRegister
+* Function Name: BACKOFF_WriteControlRegister
 ********************************************************************************
 *
 * Summary:
@@ -376,20 +376,20 @@ uint8 COLL_GEN_TIMER_ReadControlRegister(void)
 * Return:
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_WriteControlRegister(uint8 control) 
+void BACKOFF_WriteControlRegister(uint8 control) 
 {
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) 
-        COLL_GEN_TIMER_CONTROL = control;
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED) 
+        BACKOFF_CONTROL = control;
     #else
         control = 0u;
-    #endif /* (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) */
+    #endif /* (!BACKOFF_UDB_CONTROL_REG_REMOVED) */
 }
 
 #endif /* Remove API if control register is unused */
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ReadPeriod
+* Function Name: BACKOFF_ReadPeriod
 ********************************************************************************
 *
 * Summary:
@@ -402,18 +402,18 @@ void COLL_GEN_TIMER_WriteControlRegister(uint8 control)
 *  The present value of the counter.
 *
 *******************************************************************************/
-uint16 COLL_GEN_TIMER_ReadPeriod(void) 
+uint16 BACKOFF_ReadPeriod(void) 
 {
-   #if(COLL_GEN_TIMER_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(COLL_GEN_TIMER_PERIOD_LSB_PTR));
+   #if(BACKOFF_UsingFixedFunction)
+       return ((uint16)CY_GET_REG16(BACKOFF_PERIOD_LSB_PTR));
    #else
-       return (CY_GET_REG16(COLL_GEN_TIMER_PERIOD_LSB_PTR));
-   #endif /* (COLL_GEN_TIMER_UsingFixedFunction) */
+       return (CY_GET_REG16(BACKOFF_PERIOD_LSB_PTR));
+   #endif /* (BACKOFF_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_WritePeriod
+* Function Name: BACKOFF_WritePeriod
 ********************************************************************************
 *
 * Summary:
@@ -428,19 +428,19 @@ uint16 COLL_GEN_TIMER_ReadPeriod(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_WritePeriod(uint16 period) 
+void BACKOFF_WritePeriod(uint16 period) 
 {
-    #if(COLL_GEN_TIMER_UsingFixedFunction)
+    #if(BACKOFF_UsingFixedFunction)
         uint16 period_temp = (uint16)period;
-        CY_SET_REG16(COLL_GEN_TIMER_PERIOD_LSB_PTR, period_temp);
+        CY_SET_REG16(BACKOFF_PERIOD_LSB_PTR, period_temp);
     #else
-        CY_SET_REG16(COLL_GEN_TIMER_PERIOD_LSB_PTR, period);
+        CY_SET_REG16(BACKOFF_PERIOD_LSB_PTR, period);
     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed function implementation */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ReadCapture
+* Function Name: BACKOFF_ReadCapture
 ********************************************************************************
 *
 * Summary:
@@ -453,18 +453,18 @@ void COLL_GEN_TIMER_WritePeriod(uint16 period)
 *  Present Capture value.
 *
 *******************************************************************************/
-uint16 COLL_GEN_TIMER_ReadCapture(void) 
+uint16 BACKOFF_ReadCapture(void) 
 {
-   #if(COLL_GEN_TIMER_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(COLL_GEN_TIMER_CAPTURE_LSB_PTR));
+   #if(BACKOFF_UsingFixedFunction)
+       return ((uint16)CY_GET_REG16(BACKOFF_CAPTURE_LSB_PTR));
    #else
-       return (CY_GET_REG16(COLL_GEN_TIMER_CAPTURE_LSB_PTR));
-   #endif /* (COLL_GEN_TIMER_UsingFixedFunction) */
+       return (CY_GET_REG16(BACKOFF_CAPTURE_LSB_PTR));
+   #endif /* (BACKOFF_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_WriteCounter
+* Function Name: BACKOFF_WriteCounter
 ********************************************************************************
 *
 * Summary:
@@ -477,22 +477,22 @@ uint16 COLL_GEN_TIMER_ReadCapture(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_WriteCounter(uint16 counter) 
+void BACKOFF_WriteCounter(uint16 counter) 
 {
-   #if(COLL_GEN_TIMER_UsingFixedFunction)
+   #if(BACKOFF_UsingFixedFunction)
         /* This functionality is removed until a FixedFunction HW update to
          * allow this register to be written
          */
-        CY_SET_REG16(COLL_GEN_TIMER_COUNTER_LSB_PTR, (uint16)counter);
+        CY_SET_REG16(BACKOFF_COUNTER_LSB_PTR, (uint16)counter);
         
     #else
-        CY_SET_REG16(COLL_GEN_TIMER_COUNTER_LSB_PTR, counter);
+        CY_SET_REG16(BACKOFF_COUNTER_LSB_PTR, counter);
     #endif /* Set Write Counter only for the UDB implementation (Write Counter not available in fixed function Timer */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ReadCounter
+* Function Name: BACKOFF_ReadCounter
 ********************************************************************************
 *
 * Summary:
@@ -505,27 +505,27 @@ void COLL_GEN_TIMER_WriteCounter(uint16 counter)
 *  Present compare value.
 *
 *******************************************************************************/
-uint16 COLL_GEN_TIMER_ReadCounter(void) 
+uint16 BACKOFF_ReadCounter(void) 
 {
     /* Force capture by reading Accumulator */
     /* Must first do a software capture to be able to read the counter */
     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
-    #if(COLL_GEN_TIMER_UsingFixedFunction)
-        (void)CY_GET_REG16(COLL_GEN_TIMER_COUNTER_LSB_PTR);
+    #if(BACKOFF_UsingFixedFunction)
+        (void)CY_GET_REG16(BACKOFF_COUNTER_LSB_PTR);
     #else
-        (void)CY_GET_REG8(COLL_GEN_TIMER_COUNTER_LSB_PTR_8BIT);
-    #endif/* (COLL_GEN_TIMER_UsingFixedFunction) */
+        (void)CY_GET_REG8(BACKOFF_COUNTER_LSB_PTR_8BIT);
+    #endif/* (BACKOFF_UsingFixedFunction) */
 
     /* Read the data from the FIFO (or capture register for Fixed Function)*/
-    #if(COLL_GEN_TIMER_UsingFixedFunction)
-        return ((uint16)CY_GET_REG16(COLL_GEN_TIMER_CAPTURE_LSB_PTR));
+    #if(BACKOFF_UsingFixedFunction)
+        return ((uint16)CY_GET_REG16(BACKOFF_CAPTURE_LSB_PTR));
     #else
-        return (CY_GET_REG16(COLL_GEN_TIMER_CAPTURE_LSB_PTR));
-    #endif /* (COLL_GEN_TIMER_UsingFixedFunction) */
+        return (CY_GET_REG16(BACKOFF_CAPTURE_LSB_PTR));
+    #endif /* (BACKOFF_UsingFixedFunction) */
 }
 
 
-#if(!COLL_GEN_TIMER_UsingFixedFunction) /* UDB Specific Functions */
+#if(!BACKOFF_UsingFixedFunction) /* UDB Specific Functions */
 
     
 /*******************************************************************************
@@ -534,11 +534,11 @@ uint16 COLL_GEN_TIMER_ReadCounter(void)
  ******************************************************************************/
 
 
-#if (COLL_GEN_TIMER_SoftwareCaptureMode)
+#if (BACKOFF_SoftwareCaptureMode)
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SetCaptureMode
+* Function Name: BACKOFF_SetCaptureMode
 ********************************************************************************
 *
 * Summary:
@@ -547,44 +547,44 @@ uint16 COLL_GEN_TIMER_ReadCounter(void)
 * Parameters:
 *  captureMode: This parameter sets the capture mode of the UDB capture feature
 *  The parameter values are defined using the
-*  #define COLL_GEN_TIMER__B_TIMER__CM_NONE 0
-#define COLL_GEN_TIMER__B_TIMER__CM_RISINGEDGE 1
-#define COLL_GEN_TIMER__B_TIMER__CM_FALLINGEDGE 2
-#define COLL_GEN_TIMER__B_TIMER__CM_EITHEREDGE 3
-#define COLL_GEN_TIMER__B_TIMER__CM_SOFTWARE 4
+*  #define BACKOFF__B_TIMER__CM_NONE 0
+#define BACKOFF__B_TIMER__CM_RISINGEDGE 1
+#define BACKOFF__B_TIMER__CM_FALLINGEDGE 2
+#define BACKOFF__B_TIMER__CM_EITHEREDGE 3
+#define BACKOFF__B_TIMER__CM_SOFTWARE 4
  identifiers
 *  The following are the possible values of the parameter
-*  COLL_GEN_TIMER__B_TIMER__CM_NONE        - Set Capture mode to None
-*  COLL_GEN_TIMER__B_TIMER__CM_RISINGEDGE  - Rising edge of Capture input
-*  COLL_GEN_TIMER__B_TIMER__CM_FALLINGEDGE - Falling edge of Capture input
-*  COLL_GEN_TIMER__B_TIMER__CM_EITHEREDGE  - Either edge of Capture input
+*  BACKOFF__B_TIMER__CM_NONE        - Set Capture mode to None
+*  BACKOFF__B_TIMER__CM_RISINGEDGE  - Rising edge of Capture input
+*  BACKOFF__B_TIMER__CM_FALLINGEDGE - Falling edge of Capture input
+*  BACKOFF__B_TIMER__CM_EITHEREDGE  - Either edge of Capture input
 *
 * Return:
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SetCaptureMode(uint8 captureMode) 
+void BACKOFF_SetCaptureMode(uint8 captureMode) 
 {
     /* This must only set to two bits of the control register associated */
-    captureMode = ((uint8)((uint8)captureMode << COLL_GEN_TIMER_CTRL_CAP_MODE_SHIFT));
-    captureMode &= (COLL_GEN_TIMER_CTRL_CAP_MODE_MASK);
+    captureMode = ((uint8)((uint8)captureMode << BACKOFF_CTRL_CAP_MODE_SHIFT));
+    captureMode &= (BACKOFF_CTRL_CAP_MODE_MASK);
 
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED)
         /* Clear the Current Setting */
-        COLL_GEN_TIMER_CONTROL &= ((uint8)(~COLL_GEN_TIMER_CTRL_CAP_MODE_MASK));
+        BACKOFF_CONTROL &= ((uint8)(~BACKOFF_CTRL_CAP_MODE_MASK));
 
         /* Write The New Setting */
-        COLL_GEN_TIMER_CONTROL |= captureMode;
-    #endif /* (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) */
+        BACKOFF_CONTROL |= captureMode;
+    #endif /* (!BACKOFF_UDB_CONTROL_REG_REMOVED) */
 }
 #endif /* Remove API if Capture Mode is not Software Controlled */
 
 
-#if (COLL_GEN_TIMER_SoftwareTriggerMode)
+#if (BACKOFF_SoftwareTriggerMode)
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SetTriggerMode
+* Function Name: BACKOFF_SetTriggerMode
 ********************************************************************************
 *
 * Summary:
@@ -592,37 +592,37 @@ void COLL_GEN_TIMER_SetCaptureMode(uint8 captureMode)
 *
 * Parameters:
 *  triggerMode: Pass one of the pre-defined Trigger Modes (except Software)
-    #define COLL_GEN_TIMER__B_TIMER__TM_NONE 0x00u
-    #define COLL_GEN_TIMER__B_TIMER__TM_RISINGEDGE 0x04u
-    #define COLL_GEN_TIMER__B_TIMER__TM_FALLINGEDGE 0x08u
-    #define COLL_GEN_TIMER__B_TIMER__TM_EITHEREDGE 0x0Cu
-    #define COLL_GEN_TIMER__B_TIMER__TM_SOFTWARE 0x10u
+    #define BACKOFF__B_TIMER__TM_NONE 0x00u
+    #define BACKOFF__B_TIMER__TM_RISINGEDGE 0x04u
+    #define BACKOFF__B_TIMER__TM_FALLINGEDGE 0x08u
+    #define BACKOFF__B_TIMER__TM_EITHEREDGE 0x0Cu
+    #define BACKOFF__B_TIMER__TM_SOFTWARE 0x10u
 *
 * Return:
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SetTriggerMode(uint8 triggerMode) 
+void BACKOFF_SetTriggerMode(uint8 triggerMode) 
 {
     /* This must only set to two bits of the control register associated */
-    triggerMode &= COLL_GEN_TIMER_CTRL_TRIG_MODE_MASK;
+    triggerMode &= BACKOFF_CTRL_TRIG_MODE_MASK;
 
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
     
         /* Clear the Current Setting */
-        COLL_GEN_TIMER_CONTROL &= ((uint8)(~COLL_GEN_TIMER_CTRL_TRIG_MODE_MASK));
+        BACKOFF_CONTROL &= ((uint8)(~BACKOFF_CTRL_TRIG_MODE_MASK));
 
         /* Write The New Setting */
-        COLL_GEN_TIMER_CONTROL |= (triggerMode | COLL_GEN_TIMER__B_TIMER__TM_SOFTWARE);
+        BACKOFF_CONTROL |= (triggerMode | BACKOFF__B_TIMER__TM_SOFTWARE);
     #endif /* Remove code section if control register is not used */
 }
 #endif /* Remove API if Trigger Mode is not Software Controlled */
 
-#if (COLL_GEN_TIMER_EnableTriggerMode)
+#if (BACKOFF_EnableTriggerMode)
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_EnableTrigger
+* Function Name: BACKOFF_EnableTrigger
 ********************************************************************************
 *
 * Summary:
@@ -635,16 +635,16 @@ void COLL_GEN_TIMER_SetTriggerMode(uint8 triggerMode)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_EnableTrigger(void) 
+void BACKOFF_EnableTrigger(void) 
 {
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
-        COLL_GEN_TIMER_CONTROL |= COLL_GEN_TIMER_CTRL_TRIG_EN;
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
+        BACKOFF_CONTROL |= BACKOFF_CTRL_TRIG_EN;
     #endif /* Remove code section if control register is not used */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_DisableTrigger
+* Function Name: BACKOFF_DisableTrigger
 ********************************************************************************
 *
 * Summary:
@@ -657,19 +657,19 @@ void COLL_GEN_TIMER_EnableTrigger(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_DisableTrigger(void) 
+void BACKOFF_DisableTrigger(void) 
 {
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED )   /* Remove assignment if control register is removed */
-        COLL_GEN_TIMER_CONTROL &= ((uint8)(~COLL_GEN_TIMER_CTRL_TRIG_EN));
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED )   /* Remove assignment if control register is removed */
+        BACKOFF_CONTROL &= ((uint8)(~BACKOFF_CTRL_TRIG_EN));
     #endif /* Remove code section if control register is not used */
 }
 #endif /* Remove API is Trigger Mode is set to None */
 
-#if(COLL_GEN_TIMER_InterruptOnCaptureCount)
+#if(BACKOFF_InterruptOnCaptureCount)
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SetInterruptCount
+* Function Name: BACKOFF_SetInterruptCount
 ********************************************************************************
 *
 * Summary:
@@ -685,26 +685,26 @@ void COLL_GEN_TIMER_DisableTrigger(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SetInterruptCount(uint8 interruptCount) 
+void BACKOFF_SetInterruptCount(uint8 interruptCount) 
 {
     /* This must only set to two bits of the control register associated */
-    interruptCount &= COLL_GEN_TIMER_CTRL_INTCNT_MASK;
+    interruptCount &= BACKOFF_CTRL_INTCNT_MASK;
 
-    #if (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
+    #if (!BACKOFF_UDB_CONTROL_REG_REMOVED)
         /* Clear the Current Setting */
-        COLL_GEN_TIMER_CONTROL &= ((uint8)(~COLL_GEN_TIMER_CTRL_INTCNT_MASK));
+        BACKOFF_CONTROL &= ((uint8)(~BACKOFF_CTRL_INTCNT_MASK));
         /* Write The New Setting */
-        COLL_GEN_TIMER_CONTROL |= interruptCount;
-    #endif /* (!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED) */
+        BACKOFF_CONTROL |= interruptCount;
+    #endif /* (!BACKOFF_UDB_CONTROL_REG_REMOVED) */
 }
-#endif /* COLL_GEN_TIMER_InterruptOnCaptureCount */
+#endif /* BACKOFF_InterruptOnCaptureCount */
 
 
-#if (COLL_GEN_TIMER_UsingHWCaptureCounter)
+#if (BACKOFF_UsingHWCaptureCounter)
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SetCaptureCount
+* Function Name: BACKOFF_SetCaptureCount
 ********************************************************************************
 *
 * Summary:
@@ -719,14 +719,14 @@ void COLL_GEN_TIMER_SetInterruptCount(uint8 interruptCount)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SetCaptureCount(uint8 captureCount) 
+void BACKOFF_SetCaptureCount(uint8 captureCount) 
 {
-    COLL_GEN_TIMER_CAP_COUNT = captureCount;
+    BACKOFF_CAP_COUNT = captureCount;
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ReadCaptureCount
+* Function Name: BACKOFF_ReadCaptureCount
 ********************************************************************************
 *
 * Summary:
@@ -739,15 +739,15 @@ void COLL_GEN_TIMER_SetCaptureCount(uint8 captureCount)
 *  Returns the Capture Count Setting
 *
 *******************************************************************************/
-uint8 COLL_GEN_TIMER_ReadCaptureCount(void) 
+uint8 BACKOFF_ReadCaptureCount(void) 
 {
-    return ((uint8)COLL_GEN_TIMER_CAP_COUNT);
+    return ((uint8)BACKOFF_CAP_COUNT);
 }
-#endif /* COLL_GEN_TIMER_UsingHWCaptureCounter */
+#endif /* BACKOFF_UsingHWCaptureCounter */
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_ClearFIFO
+* Function Name: BACKOFF_ClearFIFO
 ********************************************************************************
 *
 * Summary:
@@ -760,11 +760,11 @@ uint8 COLL_GEN_TIMER_ReadCaptureCount(void)
 *  void
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_ClearFIFO(void) 
+void BACKOFF_ClearFIFO(void) 
 {
-    while(0u != (COLL_GEN_TIMER_ReadStatusRegister() & COLL_GEN_TIMER_STATUS_FIFONEMP))
+    while(0u != (BACKOFF_ReadStatusRegister() & BACKOFF_STATUS_FIFONEMP))
     {
-        (void)COLL_GEN_TIMER_ReadCapture();
+        (void)BACKOFF_ReadCapture();
     }
 }
 

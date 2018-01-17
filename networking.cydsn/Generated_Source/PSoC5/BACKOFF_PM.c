@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: COLL_GEN_TIMER_PM.c
+* File Name: BACKOFF_PM.c
 * Version 2.70
 *
 *  Description:
@@ -16,13 +16,13 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "COLL_GEN_TIMER.h"
+#include "BACKOFF.h"
 
-static COLL_GEN_TIMER_backupStruct COLL_GEN_TIMER_backup;
+static BACKOFF_backupStruct BACKOFF_backup;
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_SaveConfig
+* Function Name: BACKOFF_SaveConfig
 ********************************************************************************
 *
 * Summary:
@@ -35,29 +35,29 @@ static COLL_GEN_TIMER_backupStruct COLL_GEN_TIMER_backup;
 *  void
 *
 * Global variables:
-*  COLL_GEN_TIMER_backup:  Variables of this global structure are modified to
+*  BACKOFF_backup:  Variables of this global structure are modified to
 *  store the values of non retention configuration registers when Sleep() API is
 *  called.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_SaveConfig(void) 
+void BACKOFF_SaveConfig(void) 
 {
-    #if (!COLL_GEN_TIMER_UsingFixedFunction)
-        COLL_GEN_TIMER_backup.TimerUdb = COLL_GEN_TIMER_ReadCounter();
-        COLL_GEN_TIMER_backup.InterruptMaskValue = COLL_GEN_TIMER_STATUS_MASK;
-        #if (COLL_GEN_TIMER_UsingHWCaptureCounter)
-            COLL_GEN_TIMER_backup.TimerCaptureCounter = COLL_GEN_TIMER_ReadCaptureCount();
+    #if (!BACKOFF_UsingFixedFunction)
+        BACKOFF_backup.TimerUdb = BACKOFF_ReadCounter();
+        BACKOFF_backup.InterruptMaskValue = BACKOFF_STATUS_MASK;
+        #if (BACKOFF_UsingHWCaptureCounter)
+            BACKOFF_backup.TimerCaptureCounter = BACKOFF_ReadCaptureCount();
         #endif /* Back Up capture counter register  */
 
-        #if(!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
-            COLL_GEN_TIMER_backup.TimerControlRegister = COLL_GEN_TIMER_ReadControlRegister();
+        #if(!BACKOFF_UDB_CONTROL_REG_REMOVED)
+            BACKOFF_backup.TimerControlRegister = BACKOFF_ReadControlRegister();
         #endif /* Backup the enable state of the Timer component */
     #endif /* Backup non retention registers in UDB implementation. All fixed function registers are retention */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_RestoreConfig
+* Function Name: BACKOFF_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -70,29 +70,29 @@ void COLL_GEN_TIMER_SaveConfig(void)
 *  void
 *
 * Global variables:
-*  COLL_GEN_TIMER_backup:  Variables of this global structure are used to
+*  BACKOFF_backup:  Variables of this global structure are used to
 *  restore the values of non retention registers on wakeup from sleep mode.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_RestoreConfig(void) 
+void BACKOFF_RestoreConfig(void) 
 {   
-    #if (!COLL_GEN_TIMER_UsingFixedFunction)
+    #if (!BACKOFF_UsingFixedFunction)
 
-        COLL_GEN_TIMER_WriteCounter(COLL_GEN_TIMER_backup.TimerUdb);
-        COLL_GEN_TIMER_STATUS_MASK =COLL_GEN_TIMER_backup.InterruptMaskValue;
-        #if (COLL_GEN_TIMER_UsingHWCaptureCounter)
-            COLL_GEN_TIMER_SetCaptureCount(COLL_GEN_TIMER_backup.TimerCaptureCounter);
+        BACKOFF_WriteCounter(BACKOFF_backup.TimerUdb);
+        BACKOFF_STATUS_MASK =BACKOFF_backup.InterruptMaskValue;
+        #if (BACKOFF_UsingHWCaptureCounter)
+            BACKOFF_SetCaptureCount(BACKOFF_backup.TimerCaptureCounter);
         #endif /* Restore Capture counter register*/
 
-        #if(!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
-            COLL_GEN_TIMER_WriteControlRegister(COLL_GEN_TIMER_backup.TimerControlRegister);
+        #if(!BACKOFF_UDB_CONTROL_REG_REMOVED)
+            BACKOFF_WriteControlRegister(BACKOFF_backup.TimerControlRegister);
         #endif /* Restore the enable state of the Timer component */
     #endif /* Restore non retention registers in the UDB implementation only */
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_Sleep
+* Function Name: BACKOFF_Sleep
 ********************************************************************************
 *
 * Summary:
@@ -105,32 +105,32 @@ void COLL_GEN_TIMER_RestoreConfig(void)
 *  void
 *
 * Global variables:
-*  COLL_GEN_TIMER_backup.TimerEnableState:  Is modified depending on the
+*  BACKOFF_backup.TimerEnableState:  Is modified depending on the
 *  enable state of the block before entering sleep mode.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_Sleep(void) 
+void BACKOFF_Sleep(void) 
 {
-    #if(!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
+    #if(!BACKOFF_UDB_CONTROL_REG_REMOVED)
         /* Save Counter's enable state */
-        if(COLL_GEN_TIMER_CTRL_ENABLE == (COLL_GEN_TIMER_CONTROL & COLL_GEN_TIMER_CTRL_ENABLE))
+        if(BACKOFF_CTRL_ENABLE == (BACKOFF_CONTROL & BACKOFF_CTRL_ENABLE))
         {
             /* Timer is enabled */
-            COLL_GEN_TIMER_backup.TimerEnableState = 1u;
+            BACKOFF_backup.TimerEnableState = 1u;
         }
         else
         {
             /* Timer is disabled */
-            COLL_GEN_TIMER_backup.TimerEnableState = 0u;
+            BACKOFF_backup.TimerEnableState = 0u;
         }
     #endif /* Back up enable state from the Timer control register */
-    COLL_GEN_TIMER_Stop();
-    COLL_GEN_TIMER_SaveConfig();
+    BACKOFF_Stop();
+    BACKOFF_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: COLL_GEN_TIMER_Wakeup
+* Function Name: BACKOFF_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -143,17 +143,17 @@ void COLL_GEN_TIMER_Sleep(void)
 *  void
 *
 * Global variables:
-*  COLL_GEN_TIMER_backup.enableState:  Is used to restore the enable state of
+*  BACKOFF_backup.enableState:  Is used to restore the enable state of
 *  block on wakeup from sleep mode.
 *
 *******************************************************************************/
-void COLL_GEN_TIMER_Wakeup(void) 
+void BACKOFF_Wakeup(void) 
 {
-    COLL_GEN_TIMER_RestoreConfig();
-    #if(!COLL_GEN_TIMER_UDB_CONTROL_REG_REMOVED)
-        if(COLL_GEN_TIMER_backup.TimerEnableState == 1u)
+    BACKOFF_RestoreConfig();
+    #if(!BACKOFF_UDB_CONTROL_REG_REMOVED)
+        if(BACKOFF_backup.TimerEnableState == 1u)
         {     /* Enable Timer's operation */
-                COLL_GEN_TIMER_Enable();
+                BACKOFF_Enable();
         } /* Do nothing if Timer was disabled before */
     #endif /* Remove this code section if Control register is removed */
 }
