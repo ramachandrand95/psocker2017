@@ -22,6 +22,9 @@ _Bool lowFlag = 0;
 #define COLL_COUNTER    51
 #define IDLE_PERIOD     830
 #define IDLE_COUNTER    829
+//Receive timer stuff
+#define RX_PERIOD   50
+#define RX_COUNTER  49
 //transmit timer stuff
 #define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
 #define TX_COUNTER    46 //empirically tuned...
@@ -29,7 +32,10 @@ _Bool lowFlag = 0;
 #define SERIAL_BUFFER_SIZE 500
 //serial buffer
 unsigned char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
+unsigned char SERIAL_RX_BUFFER[SERIAL_BUFFER_SIZE];
 int SERIAL_POS = 0;
+int SERIAL_RX_POS = 0;
+int UART_RX_DATA_READ_OUT = 0;
 //flag to determine if the UART is connected
 int uartConnected = 0;
 //data cache for later use
@@ -39,6 +45,35 @@ char currentChar;
 int dataSize;
 int TX_Bit_Counter = 0; //keeps track of what would be a for loop in the ISR
 int count = 0; //keeps track of which bit we're on
+unsigned char RX_DATA[16]; //receieved data buffer
+int RX_Bit_Counter = 0;
+char RX_Char;
+int RX_Lock = 0;
+
+CY_ISR(TIMER_RX_ISR){
+    int bitConCatCount = 15;
+    char characterRX = 0;
+    
+    TIMER_RX_STATUS; //clear stat
+    TIMER_RX_Start();
+    RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
+    ++RX_Bit_Counter;
+    //reset bit counter if
+    if(RX_Bit_Counter >= 16 ){
+        RX_Bit_Counter = 0;
+        TIMER_RX_Stop();
+        RX_Lock = 0;
+        
+        for(int x = 15; x >= 0; x--){
+            if(x % 2 != 0){
+                characterRX = (characterRX | (RX_DATA[x] << bitConCatCount));
+                --bitConCatCount;
+            }
+        }
+        SERIAL_RX_BUFFER[SERIAL_RX_POS] = characterRX;
+        ++SERIAL_RX_POS;
+    }
+}
 
 CY_ISR(Timer_TX_ISR_HANDLER)
 {
@@ -125,6 +160,10 @@ CY_ISR(RISING)
         lowFlag = 1;
         systemState = busyState;
     }
+    //if(RX_Lock == 0){
+    TIMER_RX_Start();
+    //RX_Lock = 1;
+    //}
 }
  
 CY_ISR(FALLING)
@@ -149,6 +188,10 @@ int main(void)
     Timer_TX_WritePeriod(TX_PERIOD);
     Timer_TX_WriteCounter(TX_COUNTER);
     Timer_TX_ISR_StartEx(Timer_TX_ISR_HANDLER);
+    
+    TIMER_RX_WriteCounter(RX_COUNTER);
+    TIMER_RX_WritePeriod(RX_PERIOD);
+    TIMER_RX_ISR_StartEx(TIMER_RX_ISR);
     
     BACKOFF_ISR_StartEx(BACKOFF);
     PRS_Start();
@@ -180,19 +223,21 @@ int main(void)
             SERIAL_POS = 0;
         }
         //write converted data to UART
-
+    /*
         if(UART_CDCIsReady() != 0){
             if(dataConvertedReadOutCount < dataSize && SERIAL_POS == dataSize){
                 for(int y = 0; y < 16; y++){
                  while(!UART_CDCIsReady());
-                 UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount][y]); 
+                 //UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount][y]); 
+                UART_PutChar(RX_DATA[y]);
                 }
                 ++dataConvertedReadOutCount;
                 while(!UART_CDCIsReady());
                 UART_PutCRLF();
             }
         }
-        
+    */
+
         switch(systemState){
             //idle state
             case idleState :;

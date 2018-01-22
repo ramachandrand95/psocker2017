@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
   28:Generated_Source\PSoC5/UART.c **** * Global data allocation
   29:Generated_Source\PSoC5/UART.c **** ***************************************/
   30:Generated_Source\PSoC5/UART.c **** 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 2
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 2
 
 
   31:Generated_Source\PSoC5/UART.c **** /** Indicates whether the USBFS has been initialized. The variable is
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
   85:Generated_Source\PSoC5/UART.c ****         UART_ep2_dma__TR_OUTPUT,
   86:Generated_Source\PSoC5/UART.c ****         UART_ep3_dma__TR_OUTPUT,
   87:Generated_Source\PSoC5/UART.c ****         0u,
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 3
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 3
 
 
   88:Generated_Source\PSoC5/UART.c ****         0u,
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  142:Generated_Source\PSoC5/UART.c **** *   Note that global interrupts have to be enabled because interrupts are
  143:Generated_Source\PSoC5/UART.c **** *   required for USBFS component operation.
  144:Generated_Source\PSoC5/UART.c **** *
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 4
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 4
 
 
  145:Generated_Source\PSoC5/UART.c **** *   PSoC 4200L devices: when USBFS component configured to DMA with Automatic
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  199:Generated_Source\PSoC5/UART.c **** * Function Name: UART_Init
  200:Generated_Source\PSoC5/UART.c **** ****************************************************************************//**
  201:Generated_Source\PSoC5/UART.c **** *
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 5
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 5
 
 
  202:Generated_Source\PSoC5/UART.c **** * This function initializes or restores the component according to the
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  244:Generated_Source\PSoC5/UART.c ****     UART_INTR_LVL_SEL_REG = UART_DEFAULT_INTR_LVL_SEL;
  245:Generated_Source\PSoC5/UART.c **** 
  246:Generated_Source\PSoC5/UART.c ****     /* Configure interrupt sources from: SOF, Bus Reset and EP0. */
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 6
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 6
 
 
  247:Generated_Source\PSoC5/UART.c ****     UART_INTR_SIE_MASK_REG = UART_DEFAULT_INTR_SIE_MASK;
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
   71 0038 FFF7FEFF 		bl	CyDelayUs
   72              	.LVL2:
  270:Generated_Source\PSoC5/UART.c ****     /* Disable USBIO by asserting PM.USB_CR0.fsusbio_pd_n(Inverted.
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 7
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 7
 
 
  271:Generated_Source\PSoC5/UART.c ****     *  high. These bits will be set low by the power manager out-of-reset.
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  106 0076 3343     		orrs	r3, r3, r6
  107 0078 2370     		strb	r3, [r4]
  292:Generated_Source\PSoC5/UART.c ****     CyDelayUs(UART_WAIT_PD_PULLUP_N_ENABLE);
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 8
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 8
 
 
  108              		.loc 1 292 0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  328:Generated_Source\PSoC5/UART.c **** 
  329:Generated_Source\PSoC5/UART.c **** #else
  330:Generated_Source\PSoC5/UART.c ****     /* Set bus reset interrupt. */
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 9
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 9
 
 
  331:Generated_Source\PSoC5/UART.c ****     CyIntSetPriority(UART_BUS_RESET_VECT_NUM, UART_BUS_RESET_PRIOR);
@@ -529,16 +529,16 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  346:Generated_Source\PSoC5/UART.c ****         CyIntSetPriority     (UART_EP_1_VECT_NUM,  UART_EP_1_PRIOR);
  157              		.loc 1 346 0
  158 00c8 0721     		movs	r1, #7
- 159 00ca 0520     		movs	r0, #5
+ 159 00ca 0620     		movs	r0, #6
  160 00cc FFF7FEFF 		bl	CyIntSetPriority
  161              	.LVL13:
  347:Generated_Source\PSoC5/UART.c ****         (void) CyIntSetVector(UART_EP_1_VECT_NUM,  &UART_EP_1_ISR);
  162              		.loc 1 347 0
  163 00d0 1749     		ldr	r1, .L3+36
- 164 00d2 0520     		movs	r0, #5
+ 164 00d2 0620     		movs	r0, #6
  165 00d4 FFF7FEFF 		bl	CyIntSetVector
  166              	.LVL14:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 10
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 10
 
 
  348:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP1_ISR_ACTIVE) */
@@ -548,13 +548,13 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  352:Generated_Source\PSoC5/UART.c ****         CyIntSetPriority     (UART_EP_2_VECT_NUM,  UART_EP_2_PRIOR);
  167              		.loc 1 352 0
  168 00d8 0721     		movs	r1, #7
- 169 00da 0620     		movs	r0, #6
+ 169 00da 0846     		mov	r0, r1
  170 00dc FFF7FEFF 		bl	CyIntSetPriority
  171              	.LVL15:
  353:Generated_Source\PSoC5/UART.c ****         (void) CyIntSetVector(UART_EP_2_VECT_NUM, &UART_EP_2_ISR);
  172              		.loc 1 353 0
  173 00e0 1449     		ldr	r1, .L3+40
- 174 00e2 0620     		movs	r0, #6
+ 174 00e2 0720     		movs	r0, #7
  175 00e4 FFF7FEFF 		bl	CyIntSetVector
  176              	.LVL16:
  354:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP2_ISR_ACTIVE) */
@@ -564,13 +564,13 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  358:Generated_Source\PSoC5/UART.c ****         CyIntSetPriority     (UART_EP_3_VECT_NUM,  UART_EP_3_PRIOR);
  177              		.loc 1 358 0
  178 00e8 0721     		movs	r1, #7
- 179 00ea 0846     		mov	r0, r1
+ 179 00ea 0820     		movs	r0, #8
  180 00ec FFF7FEFF 		bl	CyIntSetPriority
  181              	.LVL17:
  359:Generated_Source\PSoC5/UART.c ****         (void) CyIntSetVector(UART_EP_3_VECT_NUM, &UART_EP_3_ISR);
  182              		.loc 1 359 0
  183 00f0 1149     		ldr	r1, .L3+44
- 184 00f2 0720     		movs	r0, #7
+ 184 00f2 0820     		movs	r0, #8
  185 00f4 FFF7FEFF 		bl	CyIntSetVector
  186              	.LVL18:
  360:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP3_ISR_ACTIVE) */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  382:Generated_Source\PSoC5/UART.c ****         CyIntSetPriority     (UART_EP_7_VECT_NUM,  UART_EP_7_PRIOR);
  383:Generated_Source\PSoC5/UART.c ****         (void) CyIntSetVector(UART_EP_7_VECT_NUM, &UART_EP_7_ISR);
  384:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP7_ISR_ACTIVE) */
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 11
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 11
 
 
  385:Generated_Source\PSoC5/UART.c **** 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  223              		.type	UART_InitComponent, %function
  224              	UART_InitComponent:
  225              	.LFB2:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 12
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 12
 
 
  403:Generated_Source\PSoC5/UART.c **** #endif /* (UART_DP_ISR_ACTIVE) */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  457:Generated_Source\PSoC5/UART.c **** *  No.
  458:Generated_Source\PSoC5/UART.c **** *
  459:Generated_Source\PSoC5/UART.c **** *******************************************************************************/
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 13
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 13
 
 
  460:Generated_Source\PSoC5/UART.c **** void UART_InitComponent(uint8 device, uint8 mode) 
@@ -748,41 +748,41 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  475:Generated_Source\PSoC5/UART.c ****     /* Store device number to access descriptor. */
  476:Generated_Source\PSoC5/UART.c ****     UART_device = device;
  235              		.loc 1 476 0
- 236 0002 214B     		ldr	r3, .L12
+ 236 0002 224B     		ldr	r3, .L12
  237 0004 1870     		strb	r0, [r3]
  477:Generated_Source\PSoC5/UART.c **** 
  478:Generated_Source\PSoC5/UART.c ****     /* Reset component internal variables. */
  479:Generated_Source\PSoC5/UART.c ****     UART_transferState   = UART_TRANS_STATE_IDLE;
  238              		.loc 1 479 0
  239 0006 0023     		movs	r3, #0
- 240 0008 204A     		ldr	r2, .L12+4
+ 240 0008 214A     		ldr	r2, .L12+4
  241 000a 1370     		strb	r3, [r2]
  480:Generated_Source\PSoC5/UART.c ****     UART_configurationChanged = 0u;
  242              		.loc 1 480 0
- 243 000c 204A     		ldr	r2, .L12+8
+ 243 000c 214A     		ldr	r2, .L12+8
  244 000e 1370     		strb	r3, [r2]
  481:Generated_Source\PSoC5/UART.c ****     UART_configuration   = 0u;
  245              		.loc 1 481 0
- 246 0010 204A     		ldr	r2, .L12+12
+ 246 0010 214A     		ldr	r2, .L12+12
  247 0012 1370     		strb	r3, [r2]
  482:Generated_Source\PSoC5/UART.c ****     UART_interfaceNumber = 0u;
  248              		.loc 1 482 0
- 249 0014 204A     		ldr	r2, .L12+16
+ 249 0014 214A     		ldr	r2, .L12+16
  250 0016 1370     		strb	r3, [r2]
  483:Generated_Source\PSoC5/UART.c ****     UART_deviceAddress   = 0u;
  251              		.loc 1 483 0
- 252 0018 204A     		ldr	r2, .L12+20
+ 252 0018 214A     		ldr	r2, .L12+20
  253 001a 1370     		strb	r3, [r2]
  484:Generated_Source\PSoC5/UART.c ****     UART_deviceStatus    = 0u;
  254              		.loc 1 484 0
- 255 001c 204A     		ldr	r2, .L12+24
+ 255 001c 214A     		ldr	r2, .L12+24
  256 001e 1370     		strb	r3, [r2]
  485:Generated_Source\PSoC5/UART.c ****     UART_lastPacketSize  = 0u;
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 14
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 14
 
 
  257              		.loc 1 485 0
- 258 0020 204A     		ldr	r2, .L12+28
+ 258 0020 214A     		ldr	r2, .L12+28
  259 0022 1370     		strb	r3, [r2]
  486:Generated_Source\PSoC5/UART.c **** 
  487:Generated_Source\PSoC5/UART.c ****     /* Enable component interrupts. */
@@ -793,7 +793,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  492:Generated_Source\PSoC5/UART.c **** #else
  493:Generated_Source\PSoC5/UART.c ****     CyIntEnable(UART_BUS_RESET_VECT_NUM);
  260              		.loc 1 493 0
- 261 0024 204B     		ldr	r3, .L12+32
+ 261 0024 214B     		ldr	r3, .L12+32
  262 0026 4FF40002 		mov	r2, #8388608
  263 002a 1A60     		str	r2, [r3]
  494:Generated_Source\PSoC5/UART.c ****     CyIntEnable(UART_EP_0_VECT_NUM);
@@ -811,22 +811,22 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  500:Generated_Source\PSoC5/UART.c ****     #if (UART_EP1_ISR_ACTIVE)
  501:Generated_Source\PSoC5/UART.c ****         CyIntEnable(UART_EP_1_VECT_NUM);
  270              		.loc 1 501 0
- 271 0038 2022     		movs	r2, #32
+ 271 0038 4022     		movs	r2, #64
  272 003a 1A60     		str	r2, [r3]
  502:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP1_ISR_ACTIVE) */
  503:Generated_Source\PSoC5/UART.c **** 
  504:Generated_Source\PSoC5/UART.c ****     #if (UART_EP2_ISR_ACTIVE)
  505:Generated_Source\PSoC5/UART.c ****         CyIntEnable(UART_EP_2_VECT_NUM);
  273              		.loc 1 505 0
- 274 003c 4022     		movs	r2, #64
+ 274 003c 8022     		movs	r2, #128
  275 003e 1A60     		str	r2, [r3]
  506:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP5_ISR_ACTIVE) */
  507:Generated_Source\PSoC5/UART.c **** 
  508:Generated_Source\PSoC5/UART.c ****     #if (UART_EP3_ISR_ACTIVE)
  509:Generated_Source\PSoC5/UART.c ****         CyIntEnable(UART_EP_3_VECT_NUM);
  276              		.loc 1 509 0
- 277 0040 8022     		movs	r2, #128
- 278 0042 1A60     		str	r2, [r3]
+ 277 0040 4FF48072 		mov	r2, #256
+ 278 0044 1A60     		str	r2, [r3]
  510:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP5_ISR_ACTIVE) */
  511:Generated_Source\PSoC5/UART.c **** 
  512:Generated_Source\PSoC5/UART.c ****     #if (UART_EP4_ISR_ACTIVE)
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  518:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP5_ISR_ACTIVE) */
  519:Generated_Source\PSoC5/UART.c **** 
  520:Generated_Source\PSoC5/UART.c ****     #if (UART_EP6_ISR_ACTIVE)
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 15
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 15
 
 
  521:Generated_Source\PSoC5/UART.c ****         CyIntEnable(UART_EP_6_VECT_NUM);
@@ -895,39 +895,39 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  572:Generated_Source\PSoC5/UART.c ****     /* Enable USB regulator depends on operation voltage. IMO Locking is enabled in Init(). */
  573:Generated_Source\PSoC5/UART.c ****     switch(mode)
  279              		.loc 1 573 0
- 280 0044 11B1     		cbz	r1, .L7
- 281 0046 0129     		cmp	r1, #1
- 282 0048 06D0     		beq	.L8
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 16
+ 280 0046 11B1     		cbz	r1, .L7
+ 281 0048 0129     		cmp	r1, #1
+ 282 004a 06D0     		beq	.L8
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 16
 
 
- 283 004a 0BE0     		b	.L10
+ 283 004c 0BE0     		b	.L10
  284              	.L7:
  574:Generated_Source\PSoC5/UART.c ****     {
  575:Generated_Source\PSoC5/UART.c ****     case UART_3V_OPERATION:
  576:Generated_Source\PSoC5/UART.c ****         /* Disable regulator for 3V operation. */
  577:Generated_Source\PSoC5/UART.c ****         UART_CR1_REG &= (uint8) ~UART_CR1_REG_ENABLE;
  285              		.loc 1 577 0
- 286 004c 174A     		ldr	r2, .L12+36
- 287 004e 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 288 0050 03F0FE03 		and	r3, r3, #254
- 289 0054 1370     		strb	r3, [r2]
+ 286 004e 184A     		ldr	r2, .L12+36
+ 287 0050 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 288 0052 03F0FE03 		and	r3, r3, #254
+ 289 0056 1370     		strb	r3, [r2]
  578:Generated_Source\PSoC5/UART.c ****         break;
  290              		.loc 1 578 0
- 291 0056 0AE0     		b	.L9
+ 291 0058 0AE0     		b	.L9
  292              	.L8:
  579:Generated_Source\PSoC5/UART.c **** 
  580:Generated_Source\PSoC5/UART.c ****     case UART_5V_OPERATION:
  581:Generated_Source\PSoC5/UART.c ****         /* Enable regulator for 5V operation. */
  582:Generated_Source\PSoC5/UART.c ****         UART_CR1_REG |= (uint8)  UART_CR1_REG_ENABLE;
  293              		.loc 1 582 0
- 294 0058 144A     		ldr	r2, .L12+36
- 295 005a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 296 005c 43F00103 		orr	r3, r3, #1
- 297 0060 1370     		strb	r3, [r2]
+ 294 005a 154A     		ldr	r2, .L12+36
+ 295 005c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 296 005e 43F00103 		orr	r3, r3, #1
+ 297 0062 1370     		strb	r3, [r2]
  583:Generated_Source\PSoC5/UART.c ****         break;
  298              		.loc 1 583 0
- 299 0062 04E0     		b	.L9
+ 299 0064 04E0     		b	.L9
  300              	.L10:
  584:Generated_Source\PSoC5/UART.c **** 
  585:Generated_Source\PSoC5/UART.c ****     default: /* Check DWR settings of USB power supply. */
@@ -938,10 +938,10 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  590:Generated_Source\PSoC5/UART.c ****         /* Enable regulator for 5V operation. */
  591:Generated_Source\PSoC5/UART.c ****         UART_CR1_REG |= (uint8)  UART_CR1_REG_ENABLE;
  301              		.loc 1 591 0
- 302 0064 114A     		ldr	r2, .L12+36
- 303 0066 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 304 0068 43F00103 		orr	r3, r3, #1
- 305 006c 1370     		strb	r3, [r2]
+ 302 0066 124A     		ldr	r2, .L12+36
+ 303 0068 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 304 006a 43F00103 		orr	r3, r3, #1
+ 305 006e 1370     		strb	r3, [r2]
  306              	.L9:
  592:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_VDDD_MV < UART_3500MV) */
  593:Generated_Source\PSoC5/UART.c ****         break;
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  604:Generated_Source\PSoC5/UART.c ****     UART_EP0_CR_REG = UART_MODE_NAK_IN_OUT;
  605:Generated_Source\PSoC5/UART.c **** 
  606:Generated_Source\PSoC5/UART.c ****     #if (UART_LPM_ACTIVE)
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 17
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 17
 
 
  607:Generated_Source\PSoC5/UART.c ****         if (NULL != UART_GetBOSPtr())
@@ -983,49 +983,49 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  626:Generated_Source\PSoC5/UART.c ****     /* Set EP0.CR: ACK Setup, STALL IN/OUT. */
  627:Generated_Source\PSoC5/UART.c ****     UART_EP0_CR_REG = UART_MODE_STALL_IN_OUT;
  307              		.loc 1 627 0
- 308 006e 0322     		movs	r2, #3
- 309 0070 0F4B     		ldr	r3, .L12+40
- 310 0072 1A70     		strb	r2, [r3]
+ 308 0070 0322     		movs	r2, #3
+ 309 0072 104B     		ldr	r3, .L12+40
+ 310 0074 1A70     		strb	r2, [r3]
  628:Generated_Source\PSoC5/UART.c **** 
  629:Generated_Source\PSoC5/UART.c ****     /* Enable device to respond to USB traffic with address 0. */
  630:Generated_Source\PSoC5/UART.c ****     UART_CR0_REG = UART_DEFUALT_CR0;
  311              		.loc 1 630 0
- 312 0074 8022     		movs	r2, #128
- 313 0076 203B     		subs	r3, r3, #32
- 314 0078 1A70     		strb	r2, [r3]
+ 312 0076 8022     		movs	r2, #128
+ 313 0078 203B     		subs	r3, r3, #32
+ 314 007a 1A70     		strb	r2, [r3]
  631:Generated_Source\PSoC5/UART.c ****     CyDelayCycles(UART_WAIT_CR0_REG_STABILITY);
  315              		.loc 1 631 0
- 316 007a 0120     		movs	r0, #1
+ 316 007c 0120     		movs	r0, #1
  317              	.LVL23:
- 318 007c FFF7FEFF 		bl	CyDelayCycles
+ 318 007e FFF7FEFF 		bl	CyDelayCycles
  319              	.LVL24:
  632:Generated_Source\PSoC5/UART.c **** #endif /* (CY_PSOC4) */
  633:Generated_Source\PSoC5/UART.c **** 
  634:Generated_Source\PSoC5/UART.c ****     /* Enable D+ pull-up and keep USB control on IO. */
  635:Generated_Source\PSoC5/UART.c ****     UART_USBIO_CR1_REG = UART_USBIO_CR1_USBPUEN;
  320              		.loc 1 635 0
- 321 0080 0422     		movs	r2, #4
- 322 0082 0C4B     		ldr	r3, .L12+44
- 323 0084 1A70     		strb	r2, [r3]
- 324 0086 08BD     		pop	{r3, pc}
+ 321 0082 0422     		movs	r2, #4
+ 322 0084 0C4B     		ldr	r3, .L12+44
+ 323 0086 1A70     		strb	r2, [r3]
+ 324 0088 08BD     		pop	{r3, pc}
  325              	.L13:
- 326              		.align	2
+ 326 008a 00BF     		.align	2
  327              	.L12:
- 328 0088 00000000 		.word	UART_device
- 329 008c 00000000 		.word	UART_transferState
- 330 0090 00000000 		.word	UART_configurationChanged
- 331 0094 00000000 		.word	UART_configuration
- 332 0098 00000000 		.word	UART_interfaceNumber
- 333 009c 00000000 		.word	UART_deviceAddress
- 334 00a0 00000000 		.word	UART_deviceStatus
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 18
+ 328 008c 00000000 		.word	UART_device
+ 329 0090 00000000 		.word	UART_transferState
+ 330 0094 00000000 		.word	UART_configurationChanged
+ 331 0098 00000000 		.word	UART_configuration
+ 332 009c 00000000 		.word	UART_interfaceNumber
+ 333 00a0 00000000 		.word	UART_deviceAddress
+ 334 00a4 00000000 		.word	UART_deviceStatus
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 18
 
 
- 335 00a4 00000000 		.word	UART_lastPacketSize
- 336 00a8 00E100E0 		.word	-536813312
- 337 00ac 09600040 		.word	1073766409
- 338 00b0 28600040 		.word	1073766440
- 339 00b4 12600040 		.word	1073766418
+ 335 00a8 00000000 		.word	UART_lastPacketSize
+ 336 00ac 00E100E0 		.word	-536813312
+ 337 00b0 09600040 		.word	1073766409
+ 338 00b4 28600040 		.word	1073766440
+ 339 00b8 12600040 		.word	1073766418
  340              		.cfi_endproc
  341              	.LFE2:
  342              		.size	UART_InitComponent, .-UART_InitComponent
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  384              	.L17:
  385 0020 00000000 		.word	.LANCHOR0
  386              		.cfi_endproc
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 19
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 19
 
 
  387              	.LFE0:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  675:Generated_Source\PSoC5/UART.c ****     */
  676:Generated_Source\PSoC5/UART.c **** #if defined(UART_ENABLE_HID_CLASS)
  677:Generated_Source\PSoC5/UART.c ****     uint8 i;
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 20
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 20
 
 
  678:Generated_Source\PSoC5/UART.c **** 
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  430 0026 203B     		subs	r3, r3, #32
  431 0028 1A70     		strb	r2, [r3]
  432 002a 7047     		bx	lr
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 21
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 21
 
 
  433              	.L21:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  460              		.cfi_def_cfa_offset 8
  461              		.cfi_offset 3, -8
  462              		.cfi_offset 14, -4
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 22
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 22
 
 
  731:Generated_Source\PSoC5/UART.c ****     uint8 enableInterrupts;
@@ -1276,7 +1276,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  740:Generated_Source\PSoC5/UART.c ****     /* Disable USB IP to respond to USB traffic. */
  741:Generated_Source\PSoC5/UART.c ****     UART_CR0_REG &= (uint8) ~UART_CR0_ENABLE;
  466              		.loc 1 741 0
- 467 0006 224A     		ldr	r2, .L24
+ 467 0006 234A     		ldr	r2, .L24
  468 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
  469 000a 03F07F03 		and	r3, r3, #127
  470 000e 1370     		strb	r3, [r2]
@@ -1312,13 +1312,13 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  755:Generated_Source\PSoC5/UART.c ****      * (input receiver disabled). */
  756:Generated_Source\PSoC5/UART.c ****     UART_DM_INP_DIS_REG |= (uint8) UART_DM_MASK;
  487              		.loc 1 756 0
- 488 0032 184B     		ldr	r3, .L24+4
+ 488 0032 194B     		ldr	r3, .L24+4
  489 0034 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
  490 0036 42F08002 		orr	r2, r2, #128
  491 003a 1A70     		strb	r2, [r3]
  757:Generated_Source\PSoC5/UART.c ****     UART_DP_INP_DIS_REG |= (uint8) UART_DP_MASK;
  492              		.loc 1 757 0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 23
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 23
 
 
  493 003c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
@@ -1341,7 +1341,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  769:Generated_Source\PSoC5/UART.c **** 
  770:Generated_Source\PSoC5/UART.c ****     CyIntDisable(UART_BUS_RESET_VECT_NUM);
  499              		.loc 1 770 0
- 500 0048 134B     		ldr	r3, .L24+8
+ 500 0048 144B     		ldr	r3, .L24+8
  501 004a 4FF40002 		mov	r2, #8388608
  502 004e 1A60     		str	r2, [r3]
  771:Generated_Source\PSoC5/UART.c ****     CyIntDisable(UART_EP_0_VECT_NUM);
@@ -1359,26 +1359,26 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  777:Generated_Source\PSoC5/UART.c ****     #if (UART_EP1_ISR_ACTIVE)
  778:Generated_Source\PSoC5/UART.c ****         CyIntDisable(UART_EP_1_VECT_NUM);
  509              		.loc 1 778 0
- 510 005c 2022     		movs	r2, #32
+ 510 005c 4022     		movs	r2, #64
  511 005e 1A60     		str	r2, [r3]
  779:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP1_ISR_ACTIVE) */
  780:Generated_Source\PSoC5/UART.c **** 
  781:Generated_Source\PSoC5/UART.c ****     #if (UART_EP2_ISR_ACTIVE)
  782:Generated_Source\PSoC5/UART.c ****         CyIntDisable(UART_EP_2_VECT_NUM);
  512              		.loc 1 782 0
- 513 0060 4022     		movs	r2, #64
+ 513 0060 8022     		movs	r2, #128
  514 0062 1A60     		str	r2, [r3]
  783:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP2_ISR_ACTIVE) */
  784:Generated_Source\PSoC5/UART.c **** 
  785:Generated_Source\PSoC5/UART.c ****     #if (UART_EP3_ISR_ACTIVE)
  786:Generated_Source\PSoC5/UART.c ****         CyIntDisable(UART_EP_3_VECT_NUM);
  515              		.loc 1 786 0
- 516 0064 8022     		movs	r2, #128
- 517 0066 1A60     		str	r2, [r3]
+ 516 0064 4FF48072 		mov	r2, #256
+ 517 0068 1A60     		str	r2, [r3]
  787:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_EP3_ISR_ACTIVE) */
  788:Generated_Source\PSoC5/UART.c **** 
  789:Generated_Source\PSoC5/UART.c ****     #if (UART_EP4_ISR_ACTIVE)
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 24
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 24
 
 
  790:Generated_Source\PSoC5/UART.c ****         CyIntDisable(UART_EP_4_VECT_NUM);
@@ -1404,13 +1404,13 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  810:Generated_Source\PSoC5/UART.c ****         /* Clear active mode Dp interrupt source history. */
  811:Generated_Source\PSoC5/UART.c ****         (void) UART_Dp_ClearInterrupt();
  518              		.loc 1 811 0
- 519 0068 FFF7FEFF 		bl	UART_Dp_ClearInterrupt
+ 519 006a FFF7FEFF 		bl	UART_Dp_ClearInterrupt
  520              	.LVL30:
  812:Generated_Source\PSoC5/UART.c ****         CyIntClearPending(UART_DP_INTC_VECT_NUM);
  521              		.loc 1 812 0
- 522 006c 4FF48052 		mov	r2, #4096
- 523 0070 0A4B     		ldr	r3, .L24+12
- 524 0072 1A60     		str	r2, [r3]
+ 522 006e 4FF48052 		mov	r2, #4096
+ 523 0072 0B4B     		ldr	r3, .L24+12
+ 524 0074 1A60     		str	r2, [r3]
  813:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_DP_ISR_ACTIVE). */
  814:Generated_Source\PSoC5/UART.c **** 
  815:Generated_Source\PSoC5/UART.c **** #endif /* (CY_PSOC4) */
@@ -1418,48 +1418,48 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  817:Generated_Source\PSoC5/UART.c ****     /* Reset component internal variables. */
  818:Generated_Source\PSoC5/UART.c ****     UART_configurationChanged = 0u;
  525              		.loc 1 818 0
- 526 0074 0023     		movs	r3, #0
- 527 0076 0A4A     		ldr	r2, .L24+16
- 528 0078 1370     		strb	r3, [r2]
+ 526 0076 0023     		movs	r3, #0
+ 527 0078 0A4A     		ldr	r2, .L24+16
+ 528 007a 1370     		strb	r3, [r2]
  819:Generated_Source\PSoC5/UART.c ****     UART_configuration   = 0u;
  529              		.loc 1 819 0
- 530 007a 0A4A     		ldr	r2, .L24+20
- 531 007c 1370     		strb	r3, [r2]
+ 530 007c 0A4A     		ldr	r2, .L24+20
+ 531 007e 1370     		strb	r3, [r2]
  820:Generated_Source\PSoC5/UART.c ****     UART_interfaceNumber = 0u;
  532              		.loc 1 820 0
- 533 007e 0A4A     		ldr	r2, .L24+24
- 534 0080 1370     		strb	r3, [r2]
+ 533 0080 0A4A     		ldr	r2, .L24+24
+ 534 0082 1370     		strb	r3, [r2]
  821:Generated_Source\PSoC5/UART.c ****     UART_deviceAddress   = 0u;
  535              		.loc 1 821 0
- 536 0082 0A4A     		ldr	r2, .L24+28
- 537 0084 1370     		strb	r3, [r2]
+ 536 0084 0A4A     		ldr	r2, .L24+28
+ 537 0086 1370     		strb	r3, [r2]
  822:Generated_Source\PSoC5/UART.c ****     UART_deviceStatus    = 0u;
  538              		.loc 1 822 0
- 539 0086 0A4A     		ldr	r2, .L24+32
- 540 0088 1370     		strb	r3, [r2]
+ 539 0088 0A4A     		ldr	r2, .L24+32
+ 540 008a 1370     		strb	r3, [r2]
  823:Generated_Source\PSoC5/UART.c **** 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 25
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 25
 
 
  824:Generated_Source\PSoC5/UART.c ****     /* It is mandatory for correct device startup. */
  825:Generated_Source\PSoC5/UART.c ****     UART_initVar = 0u;
  541              		.loc 1 825 0
- 542 008a 0A4A     		ldr	r2, .L24+36
- 543 008c 1370     		strb	r3, [r2]
- 544 008e 08BD     		pop	{r3, pc}
+ 542 008c 0A4A     		ldr	r2, .L24+36
+ 543 008e 1370     		strb	r3, [r2]
+ 544 0090 08BD     		pop	{r3, pc}
  545              	.L25:
- 546              		.align	2
+ 546 0092 00BF     		.align	2
  547              	.L24:
- 548 0090 08600040 		.word	1073766408
- 549 0094 F8510040 		.word	1073762808
- 550 0098 80E100E0 		.word	-536813184
- 551 009c 80E200E0 		.word	-536812928
- 552 00a0 00000000 		.word	UART_configurationChanged
- 553 00a4 00000000 		.word	UART_configuration
- 554 00a8 00000000 		.word	UART_interfaceNumber
- 555 00ac 00000000 		.word	UART_deviceAddress
- 556 00b0 00000000 		.word	UART_deviceStatus
- 557 00b4 00000000 		.word	.LANCHOR0
+ 548 0094 08600040 		.word	1073766408
+ 549 0098 F8510040 		.word	1073762808
+ 550 009c 80E100E0 		.word	-536813184
+ 551 00a0 80E200E0 		.word	-536812928
+ 552 00a4 00000000 		.word	UART_configurationChanged
+ 553 00a8 00000000 		.word	UART_configuration
+ 554 00ac 00000000 		.word	UART_interfaceNumber
+ 555 00b0 00000000 		.word	UART_deviceAddress
+ 556 00b4 00000000 		.word	UART_deviceStatus
+ 557 00b8 00000000 		.word	.LANCHOR0
  558              		.cfi_endproc
  559              	.LFE4:
  560              		.size	UART_Stop, .-UART_Stop
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  850:Generated_Source\PSoC5/UART.c **** {
  569              		.loc 1 850 0
  570              		.cfi_startproc
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 26
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 26
 
 
  571              		@ args = 0, pretend = 0, frame = 0
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  870:Generated_Source\PSoC5/UART.c **** *
  871:Generated_Source\PSoC5/UART.c **** *******************************************************************************/
  872:Generated_Source\PSoC5/UART.c **** uint8 UART_GetConfiguration(void) 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 27
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 27
 
 
  873:Generated_Source\PSoC5/UART.c **** {
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  633              		@ args = 0, pretend = 0, frame = 0
  634              		@ frame_needed = 0, uses_anonymous_args = 0
  635              		@ link register save eliminated.
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 28
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 28
 
 
  636              	.LVL33:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  916:Generated_Source\PSoC5/UART.c **** *  This function gets the current alternate setting for the specified interface.
  917:Generated_Source\PSoC5/UART.c **** *  It is useful to identify which alternate settings are active in the specified 
  918:Generated_Source\PSoC5/UART.c **** *  interface.
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 29
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 29
 
 
  919:Generated_Source\PSoC5/UART.c **** *
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  946:Generated_Source\PSoC5/UART.c **** *  code, to handle data sent or received.
  947:Generated_Source\PSoC5/UART.c **** *
  948:Generated_Source\PSoC5/UART.c **** *  Return Value           | Description
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 30
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 30
 
 
  949:Generated_Source\PSoC5/UART.c **** *  -----------------------|-----------------------------------------------------
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  973:Generated_Source\PSoC5/UART.c **** *
  974:Generated_Source\PSoC5/UART.c **** *  \param epNumber Data Endpoint Number.
  975:Generated_Source\PSoC5/UART.c **** *                   Valid values are between 1 and 8.
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 31
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 31
 
 
  976:Generated_Source\PSoC5/UART.c **** *
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  995:Generated_Source\PSoC5/UART.c **** }
  764              		.loc 1 995 0
  765 0022 7047     		bx	lr
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 32
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 32
 
 
  766              	.L48:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1035:Generated_Source\PSoC5/UART.c ****         CYDMA_CH_CTL_BASE.ctl[UART_ep7_dma_CHANNEL] = UART_ep7_dma_CHANNEL_CFG;
 1036:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_DMA7_ACTIVE) */
 1037:Generated_Source\PSoC5/UART.c **** 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 33
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 33
 
 
 1038:Generated_Source\PSoC5/UART.c ****     #if (UART_DMA8_ACTIVE)
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1092:Generated_Source\PSoC5/UART.c ****     *            Valid values are between 1 and 8.
 1093:Generated_Source\PSoC5/UART.c ****     *  \param *pData Pointer to a data array that is related to the EP transfers.
 1094:Generated_Source\PSoC5/UART.c ****     *
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 34
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 34
 
 
 1095:Generated_Source\PSoC5/UART.c ****     * \reentrant No.
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1149:Generated_Source\PSoC5/UART.c ****                                                                                         UART_DMA_RE
 1150:Generated_Source\PSoC5/UART.c ****             break;
 1151:Generated_Source\PSoC5/UART.c ****     #endif /* (UART_DMA4_ACTIVE) */
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 35
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 35
 
 
 1152:Generated_Source\PSoC5/UART.c **** 
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1206:Generated_Source\PSoC5/UART.c ****     *  
 1207:Generated_Source\PSoC5/UART.c ****     *  \param epNumber: The data endpoint number for which associated DMA 
 1208:Generated_Source\PSoC5/UART.c ****     *  channel is stopped. The range of valid values is between 1 and 8. To stop 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 36
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 36
 
 
 1209:Generated_Source\PSoC5/UART.c ****     *  all DMAs associated with endpoints call this function with 
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1263:Generated_Source\PSoC5/UART.c ****     * Parameters:
 1264:Generated_Source\PSoC5/UART.c ****     *  epNumber: Contains the data endpoint number.
 1265:Generated_Source\PSoC5/UART.c ****     *  mode:   0 - Configure DMA to send the the rest of data.
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 37
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 37
 
 
 1266:Generated_Source\PSoC5/UART.c ****     *          1 - Configure DMA to repeat 2 last bytes of the first burst.
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1320:Generated_Source\PSoC5/UART.c **** *  Generates request for a transfer.
 1321:Generated_Source\PSoC5/UART.c **** *
 1322:Generated_Source\PSoC5/UART.c **** *  *DMA with Automatic Buffer Management:*
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 38
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 38
 
 
 1323:Generated_Source\PSoC5/UART.c **** *  Configures DMA. This is required only once, so it is done only when parameter
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  807 001a C3F50073 		rsb	r3, r3, #512
  808 001e 9A42     		cmp	r2, r3
  809 0020 08D9     		bls	.L51
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 39
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 39
 
 
 1350:Generated_Source\PSoC5/UART.c ****         {
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  846              		.loc 1 1364 0 discriminator 3
  847 005c 0133     		adds	r3, r3, #1
  848              	.LVL53:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 40
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 40
 
 
  849 005e 9BB2     		uxth	r3, r3
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1388:Generated_Source\PSoC5/UART.c ****             UART_EP[epNumber].apiEpState = UART_NO_EVENT_PENDING;
 1389:Generated_Source\PSoC5/UART.c **** 
 1390:Generated_Source\PSoC5/UART.c ****             if ((pData != NULL) && (length > 0u))
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 41
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 41
 
 
 1391:Generated_Source\PSoC5/UART.c ****             {
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1445:Generated_Source\PSoC5/UART.c ****                 /* Disable DMA channel: start configuration. */
 1446:Generated_Source\PSoC5/UART.c ****                 UART_CyDmaChDisable(channelNum);
 1447:Generated_Source\PSoC5/UART.c **** 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 42
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 42
 
 
 1448:Generated_Source\PSoC5/UART.c ****                 /* Set destination address. */
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1502:Generated_Source\PSoC5/UART.c ****                 /* Enable DMA. */
 1503:Generated_Source\PSoC5/UART.c ****                 (void) CyDmaChSetInitialTd(UART_DmaChan[epNumber], UART_DmaTd[epNumber]);
 1504:Generated_Source\PSoC5/UART.c ****                 (void) CyDmaChEnable(UART_DmaChan[epNumber], 1u);
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 43
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 43
 
 
 1505:Generated_Source\PSoC5/UART.c ****             #endif /* (CY_PSOC4) */
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1559:Generated_Source\PSoC5/UART.c ****                     {
 1560:Generated_Source\PSoC5/UART.c ****                         UART_CyDmaValidateDescriptor(channelNum, UART_DMA_DESCR1); 
 1561:Generated_Source\PSoC5/UART.c ****                     }                   
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 44
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 44
 
 
 1562:Generated_Source\PSoC5/UART.c **** 
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  892              	.L59:
  893 0084 00000000 		.word	UART_EP
  894 0088 FC5F0040 		.word	1073766396
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 45
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 45
 
 
  895 008c 78600040 		.word	1073766520
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1646:Generated_Source\PSoC5/UART.c **** * \return
 1647:Generated_Source\PSoC5/UART.c **** *  Number of bytes received, 0 for an invalid endpoint.
 1648:Generated_Source\PSoC5/UART.c **** *
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 46
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 46
 
 
 1649:Generated_Source\PSoC5/UART.c **** * \reentrant
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1703:Generated_Source\PSoC5/UART.c **** 
 1704:Generated_Source\PSoC5/UART.c ****             /* Enable DMA channel: configuration complete. */
 1705:Generated_Source\PSoC5/UART.c ****             UART_CyDmaChEnable(channelNum);
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 47
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 47
 
 
 1706:Generated_Source\PSoC5/UART.c ****         }
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1760:Generated_Source\PSoC5/UART.c ****             UART_DmaEpBufferAddrBackup[epNumber] = (uint32) pData;
 1761:Generated_Source\PSoC5/UART.c ****             UART_DmaEpBurstCntBackup[epNumber]   = UART_DmaEpBurstCnt[epNumber];
 1762:Generated_Source\PSoC5/UART.c **** 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 48
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 48
 
 
 1763:Generated_Source\PSoC5/UART.c ****             /* Adjust burst counter taking to account: 2 valid descriptors and interrupt trigger af
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1817:Generated_Source\PSoC5/UART.c ****     }
 1818:Generated_Source\PSoC5/UART.c ****     else
 1819:Generated_Source\PSoC5/UART.c ****     {
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 49
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 49
 
 
 1820:Generated_Source\PSoC5/UART.c ****         length = 0u;
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1874:Generated_Source\PSoC5/UART.c ****         if (length > (UART_EPX_DATA_BUF_MAX - UART_EP[epNumber].buffOffset))
 1875:Generated_Source\PSoC5/UART.c ****         {
 1876:Generated_Source\PSoC5/UART.c ****             length = UART_EPX_DATA_BUF_MAX - UART_EP[epNumber].buffOffset;
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 50
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 50
 
 
 1877:Generated_Source\PSoC5/UART.c ****         }
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1931:Generated_Source\PSoC5/UART.c **** 
 1932:Generated_Source\PSoC5/UART.c ****                 /* Enable DMA channel: configuration complete. */
 1933:Generated_Source\PSoC5/UART.c ****                 UART_CyDmaChEnable(channelNum);
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 51
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 51
 
 
 1934:Generated_Source\PSoC5/UART.c **** 
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1988:Generated_Source\PSoC5/UART.c ****                     UART_DmaEpBurstCnt[epNumber] = (uint8) (length / UART_DMA_BYTES_PER_BURST);
 1989:Generated_Source\PSoC5/UART.c **** 
 1990:Generated_Source\PSoC5/UART.c ****                     /* Get number of elements in the last burst. */
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 52
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 52
 
 
 1991:Generated_Source\PSoC5/UART.c ****                     UART_DmaEpLastBurstEl[epNumber] = (uint8) (length % UART_DMA_BYTES_PER_BURST);
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2045:Generated_Source\PSoC5/UART.c ****                 {
 2046:Generated_Source\PSoC5/UART.c ****                     /* When zero-length packet: arm IN endpoint directly. */
 2047:Generated_Source\PSoC5/UART.c ****                     UART_SIE_EP_BASE.sieEp[epNumber].epCr0 = UART_EP[epNumber].epMode;
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 53
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 53
 
 
 2048:Generated_Source\PSoC5/UART.c ****                 }
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2102:Generated_Source\PSoC5/UART.c **** *
 2103:Generated_Source\PSoC5/UART.c **** *******************************************************************************/
 2104:Generated_Source\PSoC5/UART.c **** uint16 UART_ReadOutEP16(uint8 epNumber, uint8 pData[], uint16 length)
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 54
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 54
 
 
 2105:Generated_Source\PSoC5/UART.c **** {
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2159:Generated_Source\PSoC5/UART.c ****             /* Generate DMA request. */
 2160:Generated_Source\PSoC5/UART.c ****             UART_ARB_EP_BASE.arbEp[epNumber].epCfg |=  (uint32)  UART_ARB_EPX_CFG_DMA_REQ;
 2161:Generated_Source\PSoC5/UART.c ****             UART_ARB_EP_BASE.arbEp[epNumber].epCfg &=  (uint32) ~UART_ARB_EPX_CFG_DMA_REQ;
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 55
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 55
 
 
 2162:Generated_Source\PSoC5/UART.c **** 
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2216:Generated_Source\PSoC5/UART.c ****             UART_CyDmaSetDstAddress(channelNum, UART_DMA_DESCR0, (void*) ((uint32) pData));
 2217:Generated_Source\PSoC5/UART.c ****             UART_CyDmaSetDstAddress(channelNum, UART_DMA_DESCR1, (void*) ((uint32) pData + UART_DMA
 2218:Generated_Source\PSoC5/UART.c **** 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 56
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 56
 
 
 2219:Generated_Source\PSoC5/UART.c ****             /* Configure DMA descriptor 0. */
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2273:Generated_Source\PSoC5/UART.c **** *  No.
 2274:Generated_Source\PSoC5/UART.c **** *
 2275:Generated_Source\PSoC5/UART.c **** *******************************************************************************/
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 57
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 57
 
 
 2276:Generated_Source\PSoC5/UART.c **** void UART_EnableOutEP(uint8 epNumber) 
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  953              		.cfi_startproc
  954              		@ args = 0, pretend = 0, frame = 0
  955              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 58
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 58
 
 
  956              	.LVL62:
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 1667:Generated_Source\PSoC5/UART.c ****             {
  1002              		.loc 1 1667 0 is_stmt 0 discriminator 1
  1003 0030 A342     		cmp	r3, r4
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 59
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 59
 
 
  1004 0032 F7D3     		bcc	.L69
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2297:Generated_Source\PSoC5/UART.c **** *            Valid values are between 1 and 8.
 2298:Generated_Source\PSoC5/UART.c **** *
 2299:Generated_Source\PSoC5/UART.c **** *******************************************************************************/
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 60
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 60
 
 
 2300:Generated_Source\PSoC5/UART.c **** void UART_DisableOutEP(uint8 epNumber) 
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2320:Generated_Source\PSoC5/UART.c **** *        Symbolic names  and their associated values are listed here:
 2321:Generated_Source\PSoC5/UART.c **** *    State                      |Description
 2322:Generated_Source\PSoC5/UART.c **** *    ---------------------------|----------------------------------------------
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 61
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 61
 
 
 2323:Generated_Source\PSoC5/UART.c **** *    UART_FORCE_J   | Force a J State onto the D+/D– lines
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2352:Generated_Source\PSoC5/UART.c **** *  Otherwise, it returns zero.
 2353:Generated_Source\PSoC5/UART.c **** *
 2354:Generated_Source\PSoC5/UART.c **** *******************************************************************************/
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 62
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 62
 
 
 2355:Generated_Source\PSoC5/UART.c **** uint8 UART_GetEPAckState(uint8 epNumber) 
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2366:Generated_Source\PSoC5/UART.c **** 
 2367:Generated_Source\PSoC5/UART.c **** 
 2368:Generated_Source\PSoC5/UART.c **** /*******************************************************************************
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 63
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 63
 
 
 2369:Generated_Source\PSoC5/UART.c **** * Function Name: UART_SetPowerStatus
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1161 0012 03F0FE03 		and	r3, r3, #254
  1162 0016 1370     		strb	r3, [r2]
  1163 0018 7047     		bx	lr
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 64
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 64
 
 
  1164              	.L92:
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2444:Generated_Source\PSoC5/UART.c **** *
 2445:Generated_Source\PSoC5/UART.c **** *
 2446:Generated_Source\PSoC5/UART.c **** * \return
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 65
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 65
 
 
 2447:Generated_Source\PSoC5/UART.c **** *  Returns non-zero value if remote wakeup is enabled and zero otherwise.
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
 2465:Generated_Source\PSoC5/UART.c **** 
 2466:Generated_Source\PSoC5/UART.c **** /*******************************************************************************
 2467:Generated_Source\PSoC5/UART.c **** * Function Name: UART_GetDeviceAddress
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 66
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 66
 
 
 2468:Generated_Source\PSoC5/UART.c **** ****************************************************************************//**
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1243              		@ frame_needed = 0, uses_anonymous_args = 0
  1244              		@ link register save eliminated.
 2493:Generated_Source\PSoC5/UART.c **** #if (CY_PSOC4)
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 67
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 67
 
 
 2494:Generated_Source\PSoC5/UART.c ****     /* Enable SOF interrupt interrupt source. */
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1271 0000 4FF40012 		mov	r2, #2097152
  1272 0004 014B     		ldr	r3, .L105
  1273 0006 1A60     		str	r2, [r3]
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 68
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 68
 
 
  1274 0008 7047     		bx	lr
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1328 0043 05       		.byte	0x5
  1329 0044 F9010000 		.4byte	.LASF4
  1330 0048 02       		.uleb128 0x2
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 69
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 69
 
 
  1331 0049 04       		.byte	0x4
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1385 00b6 F3020000 		.4byte	.LASF16
  1386 00ba 02       		.byte	0x2
  1387 00bb 3E02     		.2byte	0x23e
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 70
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 70
 
 
  1388 00bd C1000000 		.4byte	0xc1
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1442 0129 03       		.byte	0x3
  1443 012a 95       		.byte	0x95
  1444 012b 77000000 		.4byte	0x77
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 71
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 71
 
 
  1445 012f 06       		.byte	0x6
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1499 019b 0C       		.byte	0xc
  1500 019c 00       		.byte	0
  1501 019d 08       		.uleb128 0x8
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 72
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 72
 
 
  1502 019e FD050000 		.4byte	.LASF32
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1556 020a EF       		.byte	0xef
  1557 020b 6B000000 		.4byte	0x6b
  1558 020f 07       		.byte	0x7
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 73
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 73
 
 
  1559 0210 07       		.uleb128 0x7
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1613 0280 0D       		.uleb128 0xd
  1614 0281 51010000 		.4byte	.LASF45
  1615 0285 03       		.byte	0x3
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 74
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 74
 
 
  1616 0286 1601     		.2byte	0x116
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1670 02fd 00       		.byte	0
  1671 02fe 11       		.uleb128 0x11
  1672 02ff 62000000 		.4byte	.LVL4
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 75
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 75
 
 
  1673 0303 4C090000 		.4byte	0x94c
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1727 0363 47       		.byte	0x47
  1728 0364 00       		.byte	0
  1729 0365 11       		.uleb128 0x11
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 76
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 76
 
 
  1730 0366 B0000000 		.4byte	.LVL9
@@ -4558,10 +4558,10 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1784 03c9 01       		.uleb128 0x1
  1785 03ca 50       		.byte	0x50
  1786 03cb 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 77
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 77
 
 
- 1787 03cc 35       		.byte	0x35
+ 1787 03cc 36       		.byte	0x36
  1788 03cd 12       		.uleb128 0x12
  1789 03ce 01       		.uleb128 0x1
  1790 03cf 51       		.byte	0x51
@@ -4576,7 +4576,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1799 03e1 01       		.uleb128 0x1
  1800 03e2 50       		.byte	0x50
  1801 03e3 01       		.uleb128 0x1
- 1802 03e4 35       		.byte	0x35
+ 1802 03e4 36       		.byte	0x36
  1803 03e5 00       		.byte	0
  1804 03e6 11       		.uleb128 0x11
  1805 03e7 E0000000 		.4byte	.LVL15
@@ -4586,7 +4586,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1809 03f4 01       		.uleb128 0x1
  1810 03f5 50       		.byte	0x50
  1811 03f6 01       		.uleb128 0x1
- 1812 03f7 36       		.byte	0x36
+ 1812 03f7 37       		.byte	0x37
  1813 03f8 12       		.uleb128 0x12
  1814 03f9 01       		.uleb128 0x1
  1815 03fa 51       		.byte	0x51
@@ -4601,7 +4601,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1824 040c 01       		.uleb128 0x1
  1825 040d 50       		.byte	0x50
  1826 040e 01       		.uleb128 0x1
- 1827 040f 36       		.byte	0x36
+ 1827 040f 37       		.byte	0x37
  1828 0410 00       		.byte	0
  1829 0411 11       		.uleb128 0x11
  1830 0412 F0000000 		.4byte	.LVL17
@@ -4611,14 +4611,14 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1834 041f 01       		.uleb128 0x1
  1835 0420 50       		.byte	0x50
  1836 0421 01       		.uleb128 0x1
- 1837 0422 37       		.byte	0x37
+ 1837 0422 38       		.byte	0x38
  1838 0423 12       		.uleb128 0x12
  1839 0424 01       		.uleb128 0x1
  1840 0425 51       		.byte	0x51
  1841 0426 01       		.uleb128 0x1
  1842 0427 37       		.byte	0x37
  1843 0428 00       		.byte	0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 78
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 78
 
 
  1844 0429 11       		.uleb128 0x11
@@ -4629,7 +4629,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1849 0437 01       		.uleb128 0x1
  1850 0438 50       		.byte	0x50
  1851 0439 01       		.uleb128 0x1
- 1852 043a 37       		.byte	0x37
+ 1852 043a 38       		.byte	0x38
  1853 043b 00       		.byte	0
  1854 043c 11       		.uleb128 0x11
  1855 043d 00010000 		.4byte	.LVL19
@@ -4661,7 +4661,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1881 0469 01       		.byte	0x1
  1882 046a CC01     		.2byte	0x1cc
  1883 046c 00000000 		.4byte	.LFB2
- 1884 0470 B8000000 		.4byte	.LFE2-.LFB2
+ 1884 0470 BC000000 		.4byte	.LFE2-.LFB2
  1885 0474 01       		.uleb128 0x1
  1886 0475 9C       		.byte	0x9c
  1887 0476 AA040000 		.4byte	0x4aa
@@ -4678,10 +4678,10 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1898 0492 6B000000 		.4byte	0x6b
  1899 0496 34000000 		.4byte	.LLST2
  1900 049a 13       		.uleb128 0x13
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 79
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 79
 
 
- 1901 049b 80000000 		.4byte	.LVL24
+ 1901 049b 82000000 		.4byte	.LVL24
  1902 049f 78090000 		.4byte	0x978
  1903 04a3 12       		.uleb128 0x12
  1904 04a4 01       		.uleb128 0x1
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1955 0505 00000000 		.4byte	.LFB3
  1956 0509 4C000000 		.4byte	.LFE3-.LFB3
  1957 050d 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 80
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 80
 
 
  1958 050e 9C       		.byte	0x9c
@@ -4747,7 +4747,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1961 0514 01       		.byte	0x1
  1962 0515 D902     		.2byte	0x2d9
  1963 0517 00000000 		.4byte	.LFB4
- 1964 051b B8000000 		.4byte	.LFE4-.LFB4
+ 1964 051b BC000000 		.4byte	.LFE4-.LFB4
  1965 051f 01       		.uleb128 0x1
  1966 0520 9C       		.byte	0x9c
  1967 0521 51050000 		.4byte	0x551
@@ -4764,7 +4764,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  1978 053f 48000000 		.4byte	.LVL29
  1979 0543 57090000 		.4byte	0x957
  1980 0547 10       		.uleb128 0x10
- 1981 0548 6C000000 		.4byte	.LVL30
+ 1981 0548 6E000000 		.4byte	.LVL30
  1982 054c 83090000 		.4byte	0x983
  1983 0550 00       		.byte	0
  1984 0551 19       		.uleb128 0x19
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2012 0597 01       		.byte	0x1
  2013 0598 8203     		.2byte	0x382
  2014 059a 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 81
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 81
 
 
  2015 059e 00000000 		.4byte	.LFB7
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2069 0628 9C       		.byte	0x9c
  2070 0629 4E060000 		.4byte	0x64e
  2071 062d 15       		.uleb128 0x15
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 82
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 82
 
 
  2072 062e 2B030000 		.4byte	.LASF60
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2126 06ae 6B000000 		.4byte	0x6b
  2127 06b2 14       		.uleb128 0x14
  2128 06b3 50020000 		.4byte	.LASF66
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 83
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 83
 
 
  2129 06b7 01       		.byte	0x1
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2183 0740 14000000 		.4byte	.LVL63
  2184 0744 13060000 		.4byte	0x613
  2185 0748 53070000 		.4byte	0x753
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 84
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 84
 
 
  2186 074c 12       		.uleb128 0x12
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2240 07b5 01       		.uleb128 0x1
  2241 07b6 9C       		.byte	0x9c
  2242 07b7 CA070000 		.4byte	0x7ca
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 85
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 85
 
 
  2243 07bb 1C       		.uleb128 0x1c
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2297 0839 18000000 		.4byte	.LFE18-.LFB18
  2298 083d 01       		.uleb128 0x1
  2299 083e 9C       		.byte	0x9c
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 86
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 86
 
 
  2300 083f 54080000 		.4byte	0x854
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2354 08bd D402     		.2byte	0x2d4
  2355 08bf B0000000 		.4byte	0xb0
  2356 08c3 22       		.uleb128 0x22
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 87
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 87
 
 
  2357 08c4 5E040000 		.4byte	.LASF85
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2411 0941 24       		.uleb128 0x24
  2412 0942 34030000 		.4byte	.LASF92
  2413 0946 34030000 		.4byte	.LASF92
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 88
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 88
 
 
  2414 094a 05       		.byte	0x5
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2468 0013 02       		.uleb128 0x2
  2469 0014 24       		.uleb128 0x24
  2470 0015 00       		.byte	0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 89
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 89
 
 
  2471 0016 0B       		.uleb128 0xb
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2525 004c 00       		.byte	0
  2526 004d 03       		.uleb128 0x3
  2527 004e 0E       		.uleb128 0xe
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 90
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 90
 
 
  2528 004f 3A       		.uleb128 0x3a
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2582 0085 00       		.byte	0
  2583 0086 00       		.byte	0
  2584 0087 0C       		.uleb128 0xc
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 91
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 91
 
 
  2585 0088 13       		.uleb128 0x13
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2639 00bf 00       		.byte	0
  2640 00c0 03       		.uleb128 0x3
  2641 00c1 0E       		.uleb128 0xe
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 92
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 92
 
 
  2642 00c2 3A       		.uleb128 0x3a
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2696 0101 0E       		.uleb128 0xe
  2697 0102 3A       		.uleb128 0x3a
  2698 0103 0B       		.uleb128 0xb
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 93
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 93
 
 
  2699 0104 3B       		.uleb128 0x3b
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2753 013b 0B       		.uleb128 0xb
  2754 013c 3B       		.uleb128 0x3b
  2755 013d 05       		.uleb128 0x5
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 94
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 94
 
 
  2756 013e 27       		.uleb128 0x27
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2810 0176 1A       		.uleb128 0x1a
  2811 0177 2E       		.uleb128 0x2e
  2812 0178 00       		.byte	0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 95
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 95
 
 
  2813 0179 3F       		.uleb128 0x3f
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2867 01b0 01       		.byte	0x1
  2868 01b1 55       		.uleb128 0x55
  2869 01b2 17       		.uleb128 0x17
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 96
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 96
 
 
  2870 01b3 00       		.byte	0
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2924 01e9 05       		.uleb128 0x5
  2925 01ea 49       		.uleb128 0x49
  2926 01eb 13       		.uleb128 0x13
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 97
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 97
 
 
  2927 01ec 3F       		.uleb128 0x3f
@@ -5813,12 +5813,12 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2976 000f 00000000 		.4byte	0
  2977              	.LLST1:
  2978 0013 00000000 		.4byte	.LVL22
- 2979 0017 7C000000 		.4byte	.LVL23
+ 2979 0017 7E000000 		.4byte	.LVL23
  2980 001b 0100     		.2byte	0x1
  2981 001d 50       		.byte	0x50
- 2982 001e 7C000000 		.4byte	.LVL23
- 2983 0022 B8000000 		.4byte	.LFE2
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 98
+ 2982 001e 7E000000 		.4byte	.LVL23
+ 2983 0022 BC000000 		.4byte	.LFE2
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 98
 
 
  2984 0026 0400     		.2byte	0x4
@@ -5830,11 +5830,11 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  2990 0030 00000000 		.4byte	0
  2991              	.LLST2:
  2992 0034 00000000 		.4byte	.LVL22
- 2993 0038 7F000000 		.4byte	.LVL24-1
+ 2993 0038 81000000 		.4byte	.LVL24-1
  2994 003c 0100     		.2byte	0x1
  2995 003e 51       		.byte	0x51
- 2996 003f 7F000000 		.4byte	.LVL24-1
- 2997 0043 B8000000 		.4byte	.LFE2
+ 2996 003f 81000000 		.4byte	.LVL24-1
+ 2997 0043 BC000000 		.4byte	.LFE2
  2998 0047 0400     		.2byte	0x4
  2999 0049 F3       		.byte	0xf3
  3000 004a 01       		.uleb128 0x1
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3038 00a2 00000000 		.4byte	0
  3039 00a6 00000000 		.4byte	0
  3040              	.LLST6:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 99
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 99
 
 
  3041 00aa 06000000 		.4byte	.LVL31
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3095 0131 00000000 		.4byte	0
  3096              	.LLST10:
  3097 0135 00000000 		.4byte	.LVL41
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 100
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 100
 
 
  3098 0139 0C000000 		.4byte	.LVL42
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3152              	.LLST12:
  3153 01bd 00000000 		.4byte	.LVL49
  3154 01c1 7C000000 		.4byte	.LVL59
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 101
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 101
 
 
  3155 01c5 0100     		.2byte	0x1
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3209 024a 50       		.byte	0x50
  3210 024b 9F       		.byte	0x9f
  3211 024c 00000000 		.4byte	0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 102
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 102
 
 
  3212 0250 00000000 		.4byte	0
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3266 02d4 20000000 		.4byte	.LVL65
  3267 02d8 0400     		.2byte	0x4
  3268 02da F3       		.byte	0xf3
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 103
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 103
 
 
  3269 02db 01       		.uleb128 0x1
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3323 0365 0400     		.2byte	0x4
  3324 0367 F3       		.byte	0xf3
  3325 0368 01       		.uleb128 0x1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 104
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 104
 
 
  3326 0369 50       		.byte	0x50
@@ -6238,18 +6238,18 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3380 000c 0000     		.2byte	0
  3381 000e 0000     		.2byte	0
  3382 0010 00000000 		.4byte	.LFB1
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 105
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 105
 
 
  3383 0014 40010000 		.4byte	.LFE1-.LFB1
  3384 0018 00000000 		.4byte	.LFB2
- 3385 001c B8000000 		.4byte	.LFE2-.LFB2
+ 3385 001c BC000000 		.4byte	.LFE2-.LFB2
  3386 0020 00000000 		.4byte	.LFB0
  3387 0024 24000000 		.4byte	.LFE0-.LFB0
  3388 0028 00000000 		.4byte	.LFB3
  3389 002c 4C000000 		.4byte	.LFE3-.LFB3
  3390 0030 00000000 		.4byte	.LFB4
- 3391 0034 B8000000 		.4byte	.LFE4-.LFB4
+ 3391 0034 BC000000 		.4byte	.LFE4-.LFB4
  3392 0038 00000000 		.4byte	.LFB5
  3393 003c 20000000 		.4byte	.LFE5-.LFB5
  3394 0040 00000000 		.4byte	.LFB6
@@ -6297,8 +6297,8 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3436 0018 00000000 		.4byte	.LFB1
  3437 001c 40010000 		.4byte	.LFE1
  3438 0020 00000000 		.4byte	.LFB2
- 3439 0024 B8000000 		.4byte	.LFE2
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 106
+ 3439 0024 BC000000 		.4byte	.LFE2
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 106
 
 
  3440 0028 00000000 		.4byte	.LFB0
@@ -6306,7 +6306,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3442 0030 00000000 		.4byte	.LFB3
  3443 0034 4C000000 		.4byte	.LFE3
  3444 0038 00000000 		.4byte	.LFB4
- 3445 003c B8000000 		.4byte	.LFE4
+ 3445 003c BC000000 		.4byte	.LFE4
  3446 0040 00000000 		.4byte	.LFB5
  3447 0044 20000000 		.4byte	.LFE5
  3448 0048 00000000 		.4byte	.LFB6
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3486      65727275 
  3487              	.LASF22:
  3488 0017 6570546F 		.ascii	"epToggle\000"
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 107
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 107
 
 
  3488      67676C65 
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3510      4C5F424C 
  3510      4F434B00 
  3511              	.LASF18:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 108
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 108
 
 
  3512 00be 73697A65 		.ascii	"sizetype\000"
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3536      72697479 
  3536      00
  3537              	.LASF46:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 109
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 109
 
 
  3538 0168 55415254 		.ascii	"UART_arb_eps_struct\000"
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3562      00
  3563              	.LASF20:
  3564 0202 61706945 		.ascii	"apiEpState\000"
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 110
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 110
 
 
  3564      70537461 
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3590      5F696E69 
  3590      74566172 
  3590      00
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 111
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 111
 
 
  3591              	.LASF0:
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3618      6D626572 
  3618      00
  3619              	.LASF92:
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 112
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 112
 
 
  3620 0334 4379456E 		.ascii	"CyEnterCriticalSection\000"
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3642      697A6500 
  3643              	.LASF15:
  3644 03e9 72656738 		.ascii	"reg8\000"
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 113
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 113
 
 
  3644      00
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3664              	.LASF96:
  3665 04e3 4379496E 		.ascii	"CyIntSetVector\000"
  3665      74536574 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 114
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 114
 
 
  3665      56656374 
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 1
  3686              	.LASF63:
  3687 05e4 55415254 		.ascii	"UART_LoadInEP\000"
  3687      5F4C6F61 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccowS1Hh.s 			page 115
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccv8aBpz.s 			page 115
 
 
  3687      64496E45 
