@@ -165,6 +165,12 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TIMER_RX_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TIMER_RX_ISR.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TIMER_RX_ISR.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RX_SMPL_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RX_SMPL.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RX_SMPL.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RS_EDG_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RS_EDG.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RS_EDG.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\marlowea\Desktop\psocker2017-98b319e88c1b3c79a4cb1f80342ea31114e18cd6\networking.cydsn\Export\ARM_GCC_Generic">

@@ -340,6 +340,7 @@
       <Data key="fe156beb-b138-4cc9-a22f-f96197a52f5f" value="Timer_TX_ISR" />
     </Group>
     <Group key="Pin">
+      <Data key="92dd287a-6298-4399-8545-59223e5a10d3" value="TP_RX_SMPL" />
       <Data key="264be2d3-9481-494b-8d9c-c1905a45e9cc" value="Rx" />
       <Data key="284a59ed-5866-4630-9eec-41db5954099e" value="COLLISION" />
       <Data key="50137ab5-3bdc-4f10-bb11-a8bb7aa7c876/ed092b9b-d398-4703-be89-cebf998501f6" value="LCD_LCDPort" />
@@ -347,6 +348,7 @@
       <Data key="beca5e2d-f70f-4900-a4db-7eca1ed3126e/8b77a6c4-10a0-4390-971c-672353e2a49c" value="UART_Dm" />
       <Data key="beca5e2d-f70f-4900-a4db-7eca1ed3126e/618a72fc-5ddd-4df5-958f-a3d55102db42" value="UART_Dp" />
       <Data key="c410c235-0c3b-4b5f-8fd4-ca573cf7b595" value="TX" />
+      <Data key="c7205184-884b-414a-a267-34694b1e0a1d" value="TP_RS_EDG" />
       <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="IDLE" />
     </Group>
   </Group>
@@ -3471,6 +3473,11 @@
     </Group>
   </Group>
   <Group key="Pin2">
+    <Group key="92dd287a-6298-4399-8545-59223e5a10d3">
+      <Group key="0">
+        <Data key="Port Format" value="0,7" />
+      </Group>
+    </Group>
     <Group key="264be2d3-9481-494b-8d9c-c1905a45e9cc">
       <Group key="0">
         <Data key="Port Format" value="12,4" />
@@ -3522,6 +3529,11 @@
     <Group key="c410c235-0c3b-4b5f-8fd4-ca573cf7b595">
       <Group key="0">
         <Data key="Port Format" value="3,6" />
+      </Group>
+    </Group>
+    <Group key="c7205184-884b-414a-a267-34694b1e0a1d">
+      <Group key="0">
+        <Data key="Port Format" value="0,6" />
       </Group>
     </Group>
     <Group key="ed092b9b-d398-4703-be89-cebf998501f6">

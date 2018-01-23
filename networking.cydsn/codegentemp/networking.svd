@@ -7,6 +7,45 @@
   <width>32</width>
   <peripherals>
     <peripheral>
+      <name>PRS</name>
+      <description>No description available</description>
+      <baseAddress>0x4000640D</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x0</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>SINGLE_CYCLE_SEED</name>
+          <description>Current seed value</description>
+          <addressOffset>0x0</addressOffset>
+          <size>7</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>SINGLE_CYCLE_POLYNOMIAL</name>
+          <description>Current polynomial value</description>
+          <addressOffset>0x20</addressOffset>
+          <size>7</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>SINGLE_CYCLE_COPY</name>
+          <description>Copy seed value</description>
+          <addressOffset>0x40</addressOffset>
+          <size>7</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>BACKOFF</name>
       <description>No description available</description>
       <baseAddress>0x0</baseAddress>
@@ -2341,45 +2380,6 @@
               </enumeratedValues>
             </field>
           </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>PRS</name>
-      <description>No description available</description>
-      <baseAddress>0x4000640C</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x0</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>SINGLE_CYCLE_SEED</name>
-          <description>Current seed value</description>
-          <addressOffset>0x0</addressOffset>
-          <size>7</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>SINGLE_CYCLE_POLYNOMIAL</name>
-          <description>Current polynomial value</description>
-          <addressOffset>0x20</addressOffset>
-          <size>7</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>SINGLE_CYCLE_COPY</name>
-          <description>Copy seed value</description>
-          <addressOffset>0x40</addressOffset>
-          <size>7</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
         </register>
       </registers>
     </peripheral>

@@ -1,5 +1,5 @@
 # networking
-# 2018-01-22 18:56:15Z
+# 2018-01-23 18:48:26Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -14,4 +14,6 @@ set_io "BUSY(0)" iocell 3 1
 set_io "TX(0)" iocell 3 6
 set_io "\UART:Dm(0)\" iocell 15 7
 set_io "\UART:Dp(0)\" iocell 15 6
+set_io "TP_RX_SMPL(0)" iocell 0 7
+set_io "TP_RS_EDG(0)" iocell 0 6
 set_location "\UART:USB\" usbcell -1 -1 0

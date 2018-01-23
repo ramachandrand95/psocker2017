@@ -23,8 +23,8 @@ _Bool lowFlag = 0;
 #define IDLE_PERIOD     830
 #define IDLE_COUNTER    829
 //Receive timer stuff
-#define RX_PERIOD   50
-#define RX_COUNTER  49
+#define RX_PERIOD   52
+#define RX_COUNTER  51
 //transmit timer stuff
 #define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
 #define TX_COUNTER    46 //empirically tuned...
@@ -51,7 +51,7 @@ char RX_Char;
 int RX_Lock = 0;
 
 CY_ISR(TIMER_RX_ISR){
-    int bitConCatCount = 15;
+    int bitConCatCount = 7;
     char characterRX = 0;
     
     TIMER_RX_STATUS; //clear stat
@@ -59,19 +59,25 @@ CY_ISR(TIMER_RX_ISR){
     RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
     ++RX_Bit_Counter;
     //reset bit counter if
-    if(RX_Bit_Counter >= 16 ){
+    if(RX_Bit_Counter >= 15 ){
         RX_Bit_Counter = 0;
         TIMER_RX_Stop();
         RX_Lock = 0;
+        TP_RX_SMPL_Write(0); //turn off test point, so we can measure time 
         
         for(int x = 15; x >= 0; x--){
+            if(x == 15){
+             characterRX = 0x80; //account for start bit   
+            }
             if(x % 2 != 0){
                 characterRX = (characterRX | (RX_DATA[x] << bitConCatCount));
+                //UART_PutChar((RX_DATA[x])+0x30);
                 --bitConCatCount;
             }
         }
         SERIAL_RX_BUFFER[SERIAL_RX_POS] = characterRX;
         ++SERIAL_RX_POS;
+       
     }
 }
 
@@ -160,10 +166,11 @@ CY_ISR(RISING)
         lowFlag = 1;
         systemState = busyState;
     }
-    //if(RX_Lock == 0){
-    TIMER_RX_Start();
-    //RX_Lock = 1;
-    //}
+    if(RX_Lock == 0){
+        TIMER_RX_Start();
+        RX_Lock = 1;
+        TP_RX_SMPL_Write(1); //needed for test point sampling
+    }
 }
  
 CY_ISR(FALLING)
@@ -237,6 +244,25 @@ int main(void)
             }
         }
     */
+        
+        if(UART_CDCIsReady() != 0){
+            
+            if(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
+                for(int y = 0; y < SERIAL_RX_POS; y++){
+                    while(!UART_CDCIsReady());
+                    UART_PutChar(SERIAL_RX_BUFFER[y]);
+                    ++UART_RX_DATA_READ_OUT;
+                    //while(!UART_CDCIsReady());
+                    //UART_PutCRLF();
+                }
+            }
+                SERIAL_RX_POS = 0;
+                UART_RX_DATA_READ_OUT = 0;
+            
+            
+            
+        }
+        
 
         switch(systemState){
             //idle state

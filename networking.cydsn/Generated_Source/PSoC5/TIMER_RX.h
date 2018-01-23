@@ -168,7 +168,7 @@ void TIMER_RX_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define TIMER_RX_INIT_PERIOD             49u
+#define TIMER_RX_INIT_PERIOD             51u
 #define TIMER_RX_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << TIMER_RX_CTRL_CAP_MODE_SHIFT))
 #define TIMER_RX_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << TIMER_RX_CTRL_TRIG_MODE_SHIFT))
 #if (TIMER_RX_UsingFixedFunction)
