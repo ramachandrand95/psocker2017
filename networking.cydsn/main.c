@@ -51,14 +51,25 @@ char RX_Char;
 int RX_Lock = 0;
 
 CY_ISR(TIMER_RX_ISR){
-    int bitConCatCount = 7;
+    int bitConCatCount = 0;
     char characterRX = 0;
     
     TIMER_RX_STATUS; //clear stat
-    TIMER_RX_Start();
-    RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
-    ++RX_Bit_Counter;
-    //reset bit counter if
+    //only receive data in c
+    if(systemState != collisionState){
+        TIMER_RX_Start();
+        RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
+        ++RX_Bit_Counter;
+        
+    }else{
+        //reset buffers when in collision 
+        RX_Bit_Counter = 0;   
+        SERIAL_RX_POS = 0;
+        UART_RX_DATA_READ_OUT = 0;
+        TIMER_RX_Stop();
+        RX_Lock = 0;
+    }
+    //reset bit counter if we intook all the bits
     if(RX_Bit_Counter >= 15 ){
         RX_Bit_Counter = 0;
         TIMER_RX_Stop();
@@ -67,12 +78,12 @@ CY_ISR(TIMER_RX_ISR){
         
         for(int x = 15; x >= 0; x--){
             if(x == 15){
-             characterRX = 0x80; //account for start bit   
+             characterRX = 0x00; //account for start bit   
             }
             if(x % 2 != 0){
-                characterRX = (characterRX | (RX_DATA[x] << bitConCatCount));
+                characterRX = (characterRX | (RX_DATA[x] << (bitConCatCount-1)));
                 //UART_PutChar((RX_DATA[x])+0x30);
-                --bitConCatCount;
+                ++bitConCatCount;
             }
         }
         SERIAL_RX_BUFFER[SERIAL_RX_POS] = characterRX;
@@ -258,9 +269,7 @@ int main(void)
             }
                 SERIAL_RX_POS = 0;
                 UART_RX_DATA_READ_OUT = 0;
-            
-            
-            
+                        
         }
         
 
