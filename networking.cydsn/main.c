@@ -24,6 +24,10 @@ _Bool lowFlag = 0;
 #define BROADCAST 0
 #define PROTOCOL_VERSION 0x01
 
+//CRC constants
+#define CRC_USE 128 //crcs not used
+#define HEADER_CRC 0b1110111 
+
 //period and counter for timer
 #define COLL_PERIOD     52
 #define COLL_COUNTER    51
@@ -56,9 +60,11 @@ unsigned char RX_DATA[16]; //receieved data buffer
 int RX_Bit_Counter = 0;
 char RX_Char;
 int RX_Lock = 0;
+int bitConCatCount = 0;
+unsigned char TX_Addr = 0; //transmit dest address
+unsigned char TX_length = 0; //transmit length
 
 CY_ISR(TIMER_RX_ISR){
-    int bitConCatCount = 0;
     char characterRX = 0;
     
     TIMER_RX_STATUS; //clear stat
@@ -204,6 +210,8 @@ CY_ISR(FALLING)
 
 int main(void)
 {
+    int printPrompt = 0;
+    char input_buffer[SERIAL_BUFFER_SIZE];
     CyGlobalIntEnable;
     TimerISR_StartEx(TIMER);
     INT_RISING_StartEx(RISING);
@@ -238,7 +246,68 @@ int main(void)
 				UART_CDC_Init();
 			}
 		}
-                
+        
+        //get address
+        if(printPrompt == 0 && uartConnected){
+            int count = 0;
+            TX_Addr = 0;
+            printPrompt = 1;
+            char input = 0;
+            while(!UART_CDCIsReady());
+            UART_PutString("Enter Address (3 digits): ");
+            while(count < 3){
+                while(UART_DataIsReady() == 0); //wait for digits
+                //why minus 0x30? because these are ASCII chars from the keyboard...
+                input = UART_GetChar();
+                if(count == 0){
+                    TX_Addr  += 100*(input - (0x30));
+                    UART_PutChar(input);
+                }else if(count == 1){
+                    TX_Addr  += 10*(input - (0x30));
+                    UART_PutChar(input);
+                }else if (count == 2){
+                    TX_Addr  += input - (0x30);   
+                    UART_PutChar(input);
+                }
+                ++count;
+            } 
+            //Display print newline and prompt for message
+            while(!UART_CDCIsReady());
+            UART_PutCRLF();
+            while(!UART_CDCIsReady());
+            UART_PutString("Enter message: ");
+            count = 6; //reset counter, accounting for header
+            input = 0; //reset input
+            //encode header
+            
+            SERIAL_BUFFER[0] = 0x00; //does not take into account starting bit
+            SERIAL_BUFFER[1] = PROTOCOL_VERSION;
+            SERIAL_BUFFER[2] = ADDR1_Start;
+            SERIAL_BUFFER[3] = TX_Addr;
+            SERIAL_BUFFER[4] = 0x00; //padding for now, will be replaced with actual length after user input
+            SERIAL_BUFFER[5] = CRC_USE;
+            SERIAL_BUFFER[6] = HEADER_CRC;
+            
+            //OD is the 'enter' key
+            while(input != 0x0D){
+                while(UART_DataIsReady() == 0); //wait for message data
+                input = UART_GetChar();
+                if(input != 0x0D){
+                    SERIAL_BUFFER[count] = input;
+                    while(!UART_CDCIsReady());
+                    UART_PutChar(SERIAL_BUFFER[count]);
+                    ++count;
+                }
+            }
+            SERIAL_BUFFER[4] = count; //replace padding with actual message length
+        }
+        while(!UART_CDCIsReady());
+        UART_PutCRLF();       
+        
+        //send data by setting variable
+        SERIAL_POS = 0;
+        printPrompt = 0;
+        /*
         //check if the UART has data, then place in buffer
         if(UART_DataIsReady() != 0){
             dataSize = UART_GetAll(SERIAL_BUFFER);
@@ -246,7 +315,9 @@ int main(void)
             UART_PutCRLF();
             dataConvertedReadOutCount = 0;            
             SERIAL_POS = 0;
+            printPrompt = 0;
         }
+        */
         //write converted data to UART
     /*
         if(UART_CDCIsReady() != 0){
