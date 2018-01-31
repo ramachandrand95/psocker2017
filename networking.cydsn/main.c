@@ -211,7 +211,6 @@ CY_ISR(FALLING)
 int main(void)
 {
     int printPrompt = 0;
-    char input_buffer[SERIAL_BUFFER_SIZE];
     CyGlobalIntEnable;
     TimerISR_StartEx(TIMER);
     INT_RISING_StartEx(RISING);
@@ -300,13 +299,16 @@ int main(void)
                 }
             }
             SERIAL_BUFFER[4] = count; //replace padding with actual message length
-        }
-        while(!UART_CDCIsReady());
-        UART_PutCRLF();       
-        
         //send data by setting variable
+        dataSize = SERIAL_BUFFER[4]+7;
         SERIAL_POS = 0;
         printPrompt = 0;
+        while(!UART_CDCIsReady());
+        UART_PutCRLF();       
+        }
+        
+        
+
         /*
         //check if the UART has data, then place in buffer
         if(UART_DataIsReady() != 0){
