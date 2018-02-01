@@ -66,15 +66,26 @@ int bitConCatCount = 0;
 unsigned char TX_Addr = 0; //transmit dest address
 unsigned char TX_length = 0; //transmit length
 
+int startHeaderReceieved = 0;
+int verNumMatch = 0;
+char sourceAddr = 0x00;
+char destAddr = 0x00;
+int dataLength = 0;
+char CRCused = 0x00;
+char HeaderCRC = 0x00;
+int addrDataPrinted = 0;
+int dataPrintedOut = 0;
+
 void checkNewBytes(); //gets new messages
 void checkState(); //gets current system state
+void getHeader(); //gets the header
 
 CY_ISR(TIMER_RX_ISR){
     int bitConCatCount = 0;
     char characterRX = 0;
     
     TIMER_RX_STATUS; //clear stat
-    //only receive data in c
+    //only receive data in not collision
     if(systemState != collisionState){
         TIMER_RX_Start();
         RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
@@ -261,7 +272,7 @@ int main(void)
             while(!UART_CDCIsReady());
             UART_PutString("Enter Address (3 digits): ");
             while(inCount < 3){
-                while(UART_DataIsReady() == 0){ //wait for digits
+                while(UART_DataIsReady() == 0){ //wait for digits, perform other tasks here
                     checkNewBytes();
                     checkState();
                 }
@@ -316,130 +327,6 @@ int main(void)
         UART_PutCRLF();       
         }
         
-        
-
-        /*
-        //check if the UART has data, then place in buffer
-        if(UART_DataIsReady() != 0){
-            dataSize = UART_GetAll(SERIAL_BUFFER);
-            while(!UART_CDCIsReady());
-            UART_PutCRLF();
-            dataConvertedReadOutCount = 0;            
-            SERIAL_POS = 0;
-            printPrompt = 0;
-        }
-        */
-        //write converted data to UART
-    /*
-        if(UART_CDCIsReady() != 0){
-            if(dataConvertedReadOutCount < dataSize && SERIAL_POS == dataSize){
-                for(int y = 0; y < 16; y++){
-                 while(!UART_CDCIsReady());
-                 //UART_PutChar(CONVERTED_DATA[dataConvertedReadOutCount][y]); 
-                UART_PutChar(RX_DATA[y]);
-                }
-                ++dataConvertedReadOutCount;
-                while(!UART_CDCIsReady());
-                UART_PutCRLF();
-            }
-        }
-    */
-        /*
-        if(UART_CDCIsReady() != 0){
-            
-            if(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
-                for(int y = 0; y < SERIAL_RX_POS; y++){
-                    int startHeaderReceieved = 0;
-                    int verNumMatch = 0;
-                    char sourceAddr = 0x00;
-                    char destAddr = 0x00;
-                    int dataLength = 0;
-                    char CRCused = 0x00;
-                    char HeaderCRC = 0x00;
-                    int addrDataPrinted = 0;
-                    int dataPrintedOut = 0;
-                    
-                    UART_PutChar(SERIAL_RX_BUFFER[y]); //send data to UART
-                    ++UART_RX_DATA_READ_OUT;
-                                                           
-                    while(!UART_CDCIsReady());
-                    //check for start bit
-                    if(y == 0){
-                        if(SERIAL_RX_BUFFER[y] == 0x00){
-                            startHeaderReceieved = 1;
-                        }
-                    }
-                    //check for version number
-                    else if(y == 1){
-                        if(SERIAL_RX_BUFFER[y] == 0x01){
-                            verNumMatch = 1;
-                        }
-                    }
-                    //get source address
-                    else if(y == 2){
-                        sourceAddr = SERIAL_RX_BUFFER[y];
-                    }
-                    //get destination address
-                    else if(y == 3){
-                        destAddr = SERIAL_RX_BUFFER[y];
-                    //get datalegnth     
-                    }else if(y == 4){
-                        dataLength = SERIAL_RX_BUFFER[y];
-                    //get CRC related data
-                    }else if(y == 5){
-                        CRCused = SERIAL_RX_BUFFER[y];
-                    } else if(y == 6){
-                        HeaderCRC = SERIAL_RX_BUFFER[y];   
-                    }
-                    
-                    //check version numbers and start bit
-                    else if((startHeaderReceieved)&&(verNumMatch)){
-                        //check that the destination address is this terminal 
-                        if(destAddr == BROADCAST || 
-                            ((destAddr >= ADDR1_Start) && (destAddr <= ADDR1_Start+ADDR_length)) ||
-                            ((destAddr >= ADDR2_Start) && (destAddr <= ADDR2_Start+ADDR_length)) ||
-                            ((destAddr >= ADDR3_Start) && (destAddr <= ADDR3_Start+ADDR_length))){
-                            
-                            if(addrDataPrinted == 0){
-                                addrDataPrinted = 1; 
-                                while(!UART_CDCIsReady());
-                                UART_PutString("Source Address: ");
-                                while(!UART_CDCIsReady());
-                                UART_PutChar(sourceAddr);
-                                while(!UART_CDCIsReady());
-                                UART_PutCRLF();
-                                while(!UART_CDCIsReady());
-                                UART_PutString("Destination Address: ");
-                                while(!UART_CDCIsReady());
-                                UART_PutChar(destAddr);
-                                while(!UART_CDCIsReady());
-                                UART_PutCRLF();
-                            }
-                            //print out data
-                            if(dataPrintedOut < dataLength){
-                                while(!UART_CDCIsReady());
-                                UART_PutChar(SERIAL_RX_BUFFER[y]);
-                                ++dataPrintedOut;
-                            }else{
-                            //we are out of data here
-                            while(!UART_CDCIsReady());
-                            UART_PutCRLF();
-                            }
-                                
-                        }
-                    }
-                    //UART_PutChar(SERIAL_RX_BUFFER[y]); //send data to UART
-                    //++UART_RX_DATA_READ_OUT;
-                    //while(!UART_CDCIsReady());
-                    //UART_PutCRLF();
-                }
-            }
-                SERIAL_RX_POS = 0;
-                UART_RX_DATA_READ_OUT = 0;
-                TX_Lock = 1;
-                        
-        }
-        */
 
         
     }
@@ -447,36 +334,133 @@ int main(void)
 
 void checkState(){
  switch(systemState){
-            //idle state
-            case idleState :;
-                IDLE_Write(1);
-                BUSY_Write(!IDLE_Read());
-                COLLISION_Write(!IDLE_Read());
-            break;
-            //busy state
-            case busyState:
-                BUSY_Write(1);
-                IDLE_Write(!BUSY_Read());
-                COLLISION_Write(!BUSY_Read());
-            break;
-            //collision state
-            case collisionState:;
-                COLLISION_Write(1);
-                IDLE_Write(!COLLISION_Read());
-                BUSY_Write(!COLLISION_Read());
-            break;
-        }   
+        //idle state
+        case idleState :;
+            IDLE_Write(1);
+            BUSY_Write(!IDLE_Read());
+            COLLISION_Write(!IDLE_Read());
+            //since nothing happens in IDLE this is a safe bet...
+            UART_RX_DATA_READ_OUT = 0;
+            SERIAL_RX_POS = 0;
+            addrDataPrinted = 0;
+        break;
+        //busy state
+        case busyState:
+            BUSY_Write(1);
+            IDLE_Write(!BUSY_Read());
+            COLLISION_Write(!BUSY_Read());
+        break;
+        //collision state
+        case collisionState:;
+            COLLISION_Write(1);
+            IDLE_Write(!COLLISION_Read());
+            BUSY_Write(!COLLISION_Read());
+        break;
+    }   
 }
 
 void checkNewBytes(){
  if(UART_CDCIsReady() != 0){
-    if(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
-            UART_PutChar(SERIAL_RX_BUFFER[UART_RX_DATA_READ_OUT]);
-            ++UART_RX_DATA_READ_OUT;
-    }else{
-            //SERIAL_RX_POS = 0;
-            //UART_RX_DATA_READ_OUT = 0;
+    while(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
+        if(UART_RX_DATA_READ_OUT == 0){
+            getHeader();
         }
-    }  
+        if(destAddr == BROADCAST || 
+        ((destAddr >= ADDR1_Start) && (destAddr <= ADDR1_Start+ADDR_length)) ||
+        ((destAddr >= ADDR2_Start) && (destAddr <= ADDR2_Start+ADDR_length)) ||
+        ((destAddr >= ADDR3_Start) && (destAddr <= ADDR3_Start+ADDR_length))){
+            if(addrDataPrinted == 0){
+            while(!UART_CDCIsReady());
+            UART_PutCRLF();
+            while(!UART_CDCIsReady());
+            UART_PutCRLF();
+            while(!UART_CDCIsReady());
+            UART_PutCRLF(); 
+            while(!UART_CDCIsReady());
+            UART_PutString("Message From: ");
+            while(!UART_CDCIsReady());
+            //convert numbers to ascii
+            //hundreds
+            UART_PutChar(((sourceAddr)/100)+0x30);
+            //tens
+            while(!UART_CDCIsReady());
+            UART_PutChar(((sourceAddr/10)%10)+0x30);
+            while(!UART_CDCIsReady());
+            //ones
+            UART_PutChar(((sourceAddr%10)%10)+0x30);
+            while(!UART_CDCIsReady());
+            UART_PutCRLF();
+            while(!UART_CDCIsReady());
+            UART_PutString("Sent To: ");
+            if(destAddr == BROADCAST){
+                while(!UART_CDCIsReady());
+                UART_PutString("BCST ");
+                while(!UART_CDCIsReady());
+                UART_PutCRLF();
+            }else{
+                while(!UART_CDCIsReady());
+                //hundreds
+                UART_PutChar(((destAddr)/100)+0x30);
+                //tens
+                while(!UART_CDCIsReady());
+                UART_PutChar(((destAddr/10)%10)+0x30);
+                while(!UART_CDCIsReady());
+                //ones
+                UART_PutChar(((destAddr%10)%10)+0x30);
+                UART_PutCRLF();
+                while(!UART_CDCIsReady());
+            }
+            while(!UART_CDCIsReady());
+            UART_PutString("Size: ");
+            while(!UART_CDCIsReady());
+            //hundreds
+            UART_PutChar(((dataLength)/100)+0x30);
+            //tens
+            while(!UART_CDCIsReady());
+            UART_PutChar(((dataLength/10)%10)+0x30);
+            while(!UART_CDCIsReady());
+            //ones
+            UART_PutChar(((dataLength%10)%10)+0x30);
+            while(!UART_CDCIsReady());
+            UART_PutCRLF();
+            while(!UART_CDCIsReady());
+            UART_PutString("Message: ");
+            while(!UART_CDCIsReady());
+            addrDataPrinted = 1;
+            }
+            if(UART_RX_DATA_READ_OUT > 6){
+            UART_PutChar(SERIAL_RX_BUFFER[UART_RX_DATA_READ_OUT]);
+            }
+            
+        }
+        ++UART_RX_DATA_READ_OUT;
+    }
+     
+   }
+}
+
+void getHeader(){
+    //if there is at least enough data in the buffer to hold the header, fetch it
+    if(SERIAL_RX_BUFFER[0] == 0x00){
+        startHeaderReceieved = 1;
+    
+    }
+    //check for version number
+    if(SERIAL_RX_BUFFER[1] == 0x01){
+            verNumMatch = 1;
+   }
+   //get source address
+    sourceAddr = SERIAL_RX_BUFFER[2];
+    //get destination address
+    destAddr = SERIAL_RX_BUFFER[3];
+  
+    //get datalegnth     
+    dataLength = SERIAL_RX_BUFFER[4];
+
+    //get CRC related data
+    CRCused = SERIAL_RX_BUFFER[5];
+
+    HeaderCRC = SERIAL_RX_BUFFER[6];
+ 
 }
 /* [] END OF FILE */
