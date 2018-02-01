@@ -39,6 +39,7 @@ _Bool lowFlag = 0;
 //transmit timer stuff
 #define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
 #define TX_COUNTER    46 //empirically tuned...
+#define RANDON_BACKOFF_MAX_RETRY 10
 //serial buffer size
 #define SERIAL_BUFFER_SIZE 500
 //serial buffer
@@ -60,11 +61,16 @@ unsigned char RX_DATA[16]; //receieved data buffer
 int RX_Bit_Counter = 0;
 char RX_Char;
 int RX_Lock = 0;
+int TX_Lock = 0; //allows us to transmit when in busy if we are transmitting
 int bitConCatCount = 0;
 unsigned char TX_Addr = 0; //transmit dest address
 unsigned char TX_length = 0; //transmit length
 
+void checkNewBytes(); //gets new messages
+void checkState(); //gets current system state
+
 CY_ISR(TIMER_RX_ISR){
+    int bitConCatCount = 0;
     char characterRX = 0;
     
     TIMER_RX_STATUS; //clear stat
@@ -111,7 +117,7 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 	//get data
 	currentChar = SERIAL_BUFFER[SERIAL_POS];
 
-	if((SERIAL_POS < dataSize) && systemState == idleState){ 
+	if(((SERIAL_POS < dataSize) && (systemState == idleState)) || ((TX_Lock) && (systemState == busyState))){ 
 	//encode into Unipolar-RZ
 	
 	//Data to be transmitted. This represents one byte of data and will
@@ -141,21 +147,20 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 		    ++SERIAL_POS;
 		    count = 0;
 		    TX_Bit_Counter = 0;
+            TX_Lock = 0;
             TX_Write(0);
         }
  
     }else if(systemState == collisionState){
-    
-       
-    
+      
     }
 	
-
 }
 
 CY_ISR(BACKOFF){
     BACKOFF_STATUS;
     BACKOFF_Stop();
+    TX_Lock = 1;
     systemState = idleState;
 }
 
@@ -169,6 +174,7 @@ CY_ISR(TIMER)
         systemState = collisionState;
         TX_Write(0);
         TX_Bit_Counter = 0;    
+        TX_Lock = 0;
         count = 0;
         int backoff = 0;
 	    //reset current byte transmission 
@@ -229,6 +235,7 @@ int main(void)
     PRS_Start();
     UART_Start(UART_device,UART_5V_OPERATION);
 
+
     while(1){
          //check if UART is connected, then set flag
 		if(UART_GetDTERate() == 57600){
@@ -248,34 +255,36 @@ int main(void)
         
         //get address
         if(printPrompt == 0 && uartConnected){
-            int count = 0;
+            int inCount = 0;
             TX_Addr = 0;
-            printPrompt = 1;
             char input = 0;
             while(!UART_CDCIsReady());
             UART_PutString("Enter Address (3 digits): ");
-            while(count < 3){
-                while(UART_DataIsReady() == 0); //wait for digits
+            while(inCount < 3){
+                while(UART_DataIsReady() == 0){ //wait for digits
+                    checkNewBytes();
+                    checkState();
+                }
                 //why minus 0x30? because these are ASCII chars from the keyboard...
                 input = UART_GetChar();
-                if(count == 0){
+                if(inCount == 0){
                     TX_Addr  += 100*(input - (0x30));
                     UART_PutChar(input);
-                }else if(count == 1){
+                }else if(inCount == 1){
                     TX_Addr  += 10*(input - (0x30));
                     UART_PutChar(input);
-                }else if (count == 2){
+                }else if (inCount == 2){
                     TX_Addr  += input - (0x30);   
                     UART_PutChar(input);
                 }
-                ++count;
+                ++inCount;
             } 
             //Display print newline and prompt for message
             while(!UART_CDCIsReady());
             UART_PutCRLF();
             while(!UART_CDCIsReady());
             UART_PutString("Enter message: ");
-            count = 6; //reset counter, accounting for header
+            inCount = 6; //reset counter, accounting for header
             input = 0; //reset input
             //encode header
             
@@ -292,15 +301,15 @@ int main(void)
                 while(UART_DataIsReady() == 0); //wait for message data
                 input = UART_GetChar();
                 if(input != 0x0D){
-                    SERIAL_BUFFER[count] = input;
+                    SERIAL_BUFFER[inCount] = input;
                     while(!UART_CDCIsReady());
-                    UART_PutChar(SERIAL_BUFFER[count]);
-                    ++count;
+                    UART_PutChar(SERIAL_BUFFER[inCount]);
+                    ++inCount;
                 }
             }
-            SERIAL_BUFFER[4] = count; //replace padding with actual message length
+            SERIAL_BUFFER[4] = inCount; //replace padding with actual message length
         //send data by setting variable
-        dataSize = SERIAL_BUFFER[4]+7;
+        dataSize = SERIAL_BUFFER[4];
         SERIAL_POS = 0;
         printPrompt = 0;
         while(!UART_CDCIsReady());
@@ -335,7 +344,7 @@ int main(void)
             }
         }
     */
-        
+        /*
         if(UART_CDCIsReady() != 0){
             
             if(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
@@ -349,7 +358,10 @@ int main(void)
                     char HeaderCRC = 0x00;
                     int addrDataPrinted = 0;
                     int dataPrintedOut = 0;
-                                        
+                    
+                    UART_PutChar(SERIAL_RX_BUFFER[y]); //send data to UART
+                    ++UART_RX_DATA_READ_OUT;
+                                                           
                     while(!UART_CDCIsReady());
                     //check for start bit
                     if(y == 0){
@@ -416,19 +428,25 @@ int main(void)
                                 
                         }
                     }
-                    UART_PutChar(SERIAL_RX_BUFFER[y]); //send data to UART
-                    ++UART_RX_DATA_READ_OUT;
+                    //UART_PutChar(SERIAL_RX_BUFFER[y]); //send data to UART
+                    //++UART_RX_DATA_READ_OUT;
                     //while(!UART_CDCIsReady());
                     //UART_PutCRLF();
                 }
             }
                 SERIAL_RX_POS = 0;
                 UART_RX_DATA_READ_OUT = 0;
+                TX_Lock = 1;
                         
         }
-        
+        */
 
-        switch(systemState){
+        
+    }
+}
+
+void checkState(){
+ switch(systemState){
             //idle state
             case idleState :;
                 IDLE_Write(1);
@@ -447,8 +465,18 @@ int main(void)
                 IDLE_Write(!COLLISION_Read());
                 BUSY_Write(!COLLISION_Read());
             break;
-        }
-    }
+        }   
 }
 
+void checkNewBytes(){
+ if(UART_CDCIsReady() != 0){
+    if(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
+            UART_PutChar(SERIAL_RX_BUFFER[UART_RX_DATA_READ_OUT]);
+            ++UART_RX_DATA_READ_OUT;
+    }else{
+            //SERIAL_RX_POS = 0;
+            //UART_RX_DATA_READ_OUT = 0;
+        }
+    }  
+}
 /* [] END OF FILE */

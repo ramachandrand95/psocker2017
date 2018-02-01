@@ -340,6 +340,7 @@
       <Data key="fe156beb-b138-4cc9-a22f-f96197a52f5f" value="Timer_TX_ISR" />
     </Group>
     <Group key="Pin">
+      <Data key="3bd93f99-c891-4300-b125-b9035ddc0e22" value="TP_OXFF" />
       <Data key="92dd287a-6298-4399-8545-59223e5a10d3" value="TP_RX_SMPL" />
       <Data key="264be2d3-9481-494b-8d9c-c1905a45e9cc" value="Rx" />
       <Data key="284a59ed-5866-4630-9eec-41db5954099e" value="COLLISION" />
@@ -3473,6 +3474,11 @@
     </Group>
   </Group>
   <Group key="Pin2">
+    <Group key="3bd93f99-c891-4300-b125-b9035ddc0e22">
+      <Group key="0">
+        <Data key="Port Format" value="0,0" />
+      </Group>
+    </Group>
     <Group key="92dd287a-6298-4399-8545-59223e5a10d3">
       <Group key="0">
         <Data key="Port Format" value="0,7" />

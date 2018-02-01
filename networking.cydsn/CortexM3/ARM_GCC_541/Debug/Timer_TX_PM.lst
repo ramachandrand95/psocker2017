@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
   28:Generated_Source\PSoC5/Timer_TX_PM.c **** * Summary:
   29:Generated_Source\PSoC5/Timer_TX_PM.c **** *     Save the current user configuration
   30:Generated_Source\PSoC5/Timer_TX_PM.c **** *
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 2
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 2
 
 
   31:Generated_Source\PSoC5/Timer_TX_PM.c **** * Parameters:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
   59              		.align	2
   60              		.global	Timer_TX_RestoreConfig
   61              		.thumb
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 3
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 3
 
 
   62              		.thumb_func
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
   87:Generated_Source\PSoC5/Timer_TX_PM.c ****         #if(!Timer_TX_UDB_CONTROL_REG_REMOVED)
   88:Generated_Source\PSoC5/Timer_TX_PM.c ****             Timer_TX_WriteControlRegister(Timer_TX_backup.TimerControlRegister);
   83              		.loc 1 88 0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 4
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 4
 
 
   84 0010 6079     		ldrb	r0, [r4, #5]	@ zero_extendqisi2
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  115:Generated_Source\PSoC5/Timer_TX_PM.c ****         /* Save Counter's enable state */
  116:Generated_Source\PSoC5/Timer_TX_PM.c ****         if(Timer_TX_CTRL_ENABLE == (Timer_TX_CONTROL & Timer_TX_CTRL_ENABLE))
  112              		.loc 1 116 0
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 5
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 5
 
 
  113 0002 084B     		ldr	r3, .L13
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  133:Generated_Source\PSoC5/Timer_TX_PM.c **** * Function Name: Timer_TX_Wakeup
  134:Generated_Source\PSoC5/Timer_TX_PM.c **** ********************************************************************************
  135:Generated_Source\PSoC5/Timer_TX_PM.c **** *
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 6
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 6
 
 
  136:Generated_Source\PSoC5/Timer_TX_PM.c **** * Summary:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  184              	Timer_TX_backup:
  185 0000 00000000 		.space	6
  185      0000
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 7
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 7
 
 
  186              		.text
@@ -372,25 +372,25 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  194 0006 00000000 		.4byte	.Ldebug_abbrev0
  195 000a 04       		.byte	0x4
  196 000b 01       		.uleb128 0x1
- 197 000c F9010000 		.4byte	.LASF32
+ 197 000c 04020000 		.4byte	.LASF32
  198 0010 0C       		.byte	0xc
  199 0011 53000000 		.4byte	.LASF33
- 200 0015 8B000000 		.4byte	.LASF34
+ 200 0015 85010000 		.4byte	.LASF34
  201 0019 00000000 		.4byte	.Ldebug_ranges0+0
  202 001d 00000000 		.4byte	0
  203 0021 00000000 		.4byte	.Ldebug_line0
  204 0025 02       		.uleb128 0x2
  205 0026 01       		.byte	0x1
  206 0027 06       		.byte	0x6
- 207 0028 D2020000 		.4byte	.LASF0
+ 207 0028 DD020000 		.4byte	.LASF0
  208 002c 02       		.uleb128 0x2
  209 002d 01       		.byte	0x1
  210 002e 08       		.byte	0x8
- 211 002f 2F010000 		.4byte	.LASF1
+ 211 002f CF000000 		.4byte	.LASF1
  212 0033 02       		.uleb128 0x2
  213 0034 02       		.byte	0x2
  214 0035 05       		.byte	0x5
- 215 0036 A3020000 		.4byte	.LASF2
+ 215 0036 AE020000 		.4byte	.LASF2
  216 003a 02       		.uleb128 0x2
  217 003b 02       		.byte	0x2
  218 003c 07       		.byte	0x7
@@ -398,19 +398,19 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  220 0041 02       		.uleb128 0x2
  221 0042 04       		.byte	0x4
  222 0043 05       		.byte	0x5
- 223 0044 AD020000 		.4byte	.LASF4
+ 223 0044 B8020000 		.4byte	.LASF4
  224 0048 02       		.uleb128 0x2
  225 0049 04       		.byte	0x4
  226 004a 07       		.byte	0x7
- 227 004b 67010000 		.4byte	.LASF5
+ 227 004b 07010000 		.4byte	.LASF5
  228 004f 02       		.uleb128 0x2
  229 0050 08       		.byte	0x8
  230 0051 05       		.byte	0x5
- 231 0052 90020000 		.4byte	.LASF6
+ 231 0052 9B020000 		.4byte	.LASF6
  232 0056 02       		.uleb128 0x2
  233 0057 08       		.byte	0x8
  234 0058 07       		.byte	0x7
- 235 0059 B0010000 		.4byte	.LASF7
+ 235 0059 50010000 		.4byte	.LASF7
  236 005d 03       		.uleb128 0x3
  237 005e 04       		.byte	0x4
  238 005f 05       		.byte	0x5
@@ -418,34 +418,34 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  240 0064 02       		.uleb128 0x2
  241 0065 04       		.byte	0x4
  242 0066 07       		.byte	0x7
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 8
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 8
 
 
- 243 0067 A3010000 		.4byte	.LASF8
+ 243 0067 43010000 		.4byte	.LASF8
  244 006b 04       		.uleb128 0x4
- 245 006c 79010000 		.4byte	.LASF9
+ 245 006c 19010000 		.4byte	.LASF9
  246 0070 02       		.byte	0x2
  247 0071 9201     		.2byte	0x192
  248 0073 2C000000 		.4byte	0x2c
  249 0077 04       		.uleb128 0x4
- 250 0078 9C010000 		.4byte	.LASF10
+ 250 0078 3C010000 		.4byte	.LASF10
  251 007c 02       		.byte	0x2
  252 007d 9301     		.2byte	0x193
  253 007f 3A000000 		.4byte	0x3a
  254 0083 02       		.uleb128 0x2
  255 0084 04       		.byte	0x4
  256 0085 04       		.byte	0x4
- 257 0086 1B010000 		.4byte	.LASF11
+ 257 0086 BB000000 		.4byte	.LASF11
  258 008a 02       		.uleb128 0x2
  259 008b 08       		.byte	0x8
  260 008c 04       		.byte	0x4
- 261 008d 7F010000 		.4byte	.LASF12
+ 261 008d 1F010000 		.4byte	.LASF12
  262 0091 02       		.uleb128 0x2
  263 0092 01       		.byte	0x1
  264 0093 08       		.byte	0x8
- 265 0094 9E020000 		.4byte	.LASF13
+ 265 0094 A9020000 		.4byte	.LASF13
  266 0098 04       		.uleb128 0x4
- 267 0099 52010000 		.4byte	.LASF14
+ 267 0099 F2000000 		.4byte	.LASF14
  268 009d 02       		.byte	0x2
  269 009e 3C02     		.2byte	0x23c
  270 00a0 A4000000 		.4byte	0xa4
@@ -454,11 +454,11 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  273 00a9 02       		.uleb128 0x2
  274 00aa 08       		.byte	0x8
  275 00ab 04       		.byte	0x4
- 276 00ac C6020000 		.4byte	.LASF15
+ 276 00ac D1020000 		.4byte	.LASF15
  277 00b0 02       		.uleb128 0x2
  278 00b1 04       		.byte	0x4
  279 00b2 07       		.byte	0x7
- 280 00b3 87020000 		.4byte	.LASF16
+ 280 00b3 92020000 		.4byte	.LASF16
  281 00b7 06       		.uleb128 0x6
  282 00b8 06       		.byte	0x6
  283 00b9 03       		.byte	0x3
@@ -471,14 +471,14 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  290 00c6 6B000000 		.4byte	0x6b
  291 00ca 00       		.byte	0
  292 00cb 07       		.uleb128 0x7
- 293 00cc 02010000 		.4byte	.LASF18
+ 293 00cc A2000000 		.4byte	.LASF18
  294 00d0 03       		.byte	0x3
  295 00d1 48       		.byte	0x48
  296 00d2 77000000 		.4byte	0x77
  297 00d6 02       		.byte	0x2
  298 00d7 07       		.uleb128 0x7
- 299 00d8 DE020000 		.4byte	.LASF19
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 9
+ 299 00d8 E9020000 		.4byte	.LASF19
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 9
 
 
  300 00dc 03       		.byte	0x3
@@ -486,19 +486,19 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  302 00de 6B000000 		.4byte	0x6b
  303 00e2 04       		.byte	0x4
  304 00e3 07       		.uleb128 0x7
- 305 00e4 F1020000 		.4byte	.LASF20
+ 305 00e4 FC020000 		.4byte	.LASF20
  306 00e8 03       		.byte	0x3
  307 00e9 4F       		.byte	0x4f
  308 00ea 6B000000 		.4byte	0x6b
  309 00ee 05       		.byte	0x5
  310 00ef 00       		.byte	0
  311 00f0 08       		.uleb128 0x8
- 312 00f1 86010000 		.4byte	.LASF21
+ 312 00f1 26010000 		.4byte	.LASF21
  313 00f5 03       		.byte	0x3
  314 00f6 53       		.byte	0x53
  315 00f7 B7000000 		.4byte	0xb7
  316 00fb 09       		.uleb128 0x9
- 317 00fc E5010000 		.4byte	.LASF22
+ 317 00fc F0010000 		.4byte	.LASF22
  318 0100 01       		.byte	0x1
  319 0101 2B       		.byte	0x2b
  320 0102 00000000 		.4byte	.LFB0
@@ -514,7 +514,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  330 011e B7010000 		.4byte	0x1b7
  331 0122 00       		.byte	0
  332 0123 09       		.uleb128 0x9
- 333 0124 EB000000 		.4byte	.LASF23
+ 333 0124 8B000000 		.4byte	.LASF23
  334 0128 01       		.byte	0x1
  335 0129 4D       		.byte	0x4d
  336 012a 00000000 		.4byte	.LFB1
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  354 015a 01       		.uleb128 0x1
  355 015b 9C       		.byte	0x9c
  356 015c 73010000 		.4byte	0x173
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 10
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 10
 
 
  357 0160 0A       		.uleb128 0xa
@@ -549,7 +549,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  362 016e FB000000 		.4byte	0xfb
  363 0172 00       		.byte	0
  364 0173 09       		.uleb128 0x9
- 365 0174 57010000 		.4byte	.LASF25
+ 365 0174 F7000000 		.4byte	.LASF25
  366 0178 01       		.byte	0x1
  367 0179 96       		.byte	0x96
  368 017a 00000000 		.4byte	.LFB3
@@ -565,7 +565,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  378 0196 E3010000 		.4byte	0x1e3
  379 019a 00       		.byte	0
  380 019b 0B       		.uleb128 0xb
- 381 019c 0B010000 		.4byte	.LASF35
+ 381 019c AB000000 		.4byte	.LASF35
  382 01a0 01       		.byte	0x1
  383 01a1 15       		.byte	0x15
  384 01a2 F0000000 		.4byte	0xf0
@@ -573,8 +573,8 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  386 01a7 03       		.byte	0x3
  387 01a8 00000000 		.4byte	Timer_TX_backup
  388 01ac 0C       		.uleb128 0xc
- 389 01ad 3D010000 		.4byte	.LASF26
- 390 01b1 3D010000 		.4byte	.LASF26
+ 389 01ad DD000000 		.4byte	.LASF26
+ 390 01b1 DD000000 		.4byte	.LASF26
  391 01b5 03       		.byte	0x3
  392 01b6 69       		.byte	0x69
  393 01b7 0C       		.uleb128 0xc
@@ -588,21 +588,21 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  401 01cb 03       		.byte	0x3
  402 01cc 6A       		.byte	0x6a
  403 01cd 0C       		.uleb128 0xc
- 404 01ce C7010000 		.4byte	.LASF29
- 405 01d2 C7010000 		.4byte	.LASF29
+ 404 01ce 67010000 		.4byte	.LASF29
+ 405 01d2 67010000 		.4byte	.LASF29
  406 01d6 03       		.byte	0x3
  407 01d7 64       		.byte	0x64
  408 01d8 0C       		.uleb128 0xc
- 409 01d9 21010000 		.4byte	.LASF30
- 410 01dd 21010000 		.4byte	.LASF30
+ 409 01d9 C1000000 		.4byte	.LASF30
+ 410 01dd C1000000 		.4byte	.LASF30
  411 01e1 03       		.byte	0x3
  412 01e2 5B       		.byte	0x5b
  413 01e3 0C       		.uleb128 0xc
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 11
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 11
 
 
- 414 01e4 B6020000 		.4byte	.LASF31
- 415 01e8 B6020000 		.4byte	.LASF31
+ 414 01e4 C1020000 		.4byte	.LASF31
+ 415 01e8 C1020000 		.4byte	.LASF31
  416 01ec 03       		.byte	0x3
  417 01ed 8B       		.byte	0x8b
  418 01ee 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  468 002f 0B       		.uleb128 0xb
  469 0030 3B       		.uleb128 0x3b
  470 0031 05       		.uleb128 0x5
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 12
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 12
 
 
  471 0032 49       		.uleb128 0x49
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  525 0068 01       		.byte	0x1
  526 0069 3F       		.uleb128 0x3f
  527 006a 19       		.uleb128 0x19
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 13
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 13
 
 
  528 006b 03       		.uleb128 0x3
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  582 00a4 0E       		.uleb128 0xe
  583 00a5 3A       		.uleb128 0x3a
  584 00a6 0B       		.uleb128 0xb
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 14
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 14
 
 
  585 00a7 3B       		.uleb128 0x3b
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  628 0020 54696D65 		.ascii	"Timer_TX_WriteCounter\000"
  628      725F5458 
  628      5F577269 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 15
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 15
 
 
  628      7465436F 
@@ -861,171 +861,175 @@ ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 1
  634      7369676E 
  634      65642069 
  634      6E7400
- 635              	.LASF34:
- 636 008b 433A5C55 		.ascii	"C:\\Users\\marlowea\\Desktop\\psocker2017-98b319e88"
- 636      73657273 
- 636      5C6D6172 
- 636      6C6F7765 
- 636      615C4465 
- 637 00ba 63316233 		.ascii	"c1b3c79a4cb1f80342ea31114e18cd6\\networking.cydsn\000"
- 637      63373961 
- 637      34636231 
- 637      66383033 
- 637      34326561 
- 638              	.LASF23:
- 639 00eb 54696D65 		.ascii	"Timer_TX_RestoreConfig\000"
- 639      725F5458 
- 639      5F526573 
- 639      746F7265 
- 639      436F6E66 
- 640              	.LASF18:
- 641 0102 54696D65 		.ascii	"TimerUdb\000"
- 641      72556462 
- 641      00
- 642              	.LASF35:
- 643 010b 54696D65 		.ascii	"Timer_TX_backup\000"
- 643      725F5458 
- 643      5F626163 
- 643      6B757000 
- 644              	.LASF11:
- 645 011b 666C6F61 		.ascii	"float\000"
- 645      7400
- 646              	.LASF30:
- 647 0121 54696D65 		.ascii	"Timer_TX_Stop\000"
- 647      725F5458 
- 647      5F53746F 
- 647      7000
- 648              	.LASF1:
- 649 012f 756E7369 		.ascii	"unsigned char\000"
- 649      676E6564 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 16
+ 635              	.LASF23:
+ 636 008b 54696D65 		.ascii	"Timer_TX_RestoreConfig\000"
+ 636      725F5458 
+ 636      5F526573 
+ 636      746F7265 
+ 636      436F6E66 
+ 637              	.LASF18:
+ 638 00a2 54696D65 		.ascii	"TimerUdb\000"
+ 638      72556462 
+ 638      00
+ 639              	.LASF35:
+ 640 00ab 54696D65 		.ascii	"Timer_TX_backup\000"
+ 640      725F5458 
+ 640      5F626163 
+ 640      6B757000 
+ 641              	.LASF11:
+ 642 00bb 666C6F61 		.ascii	"float\000"
+ 642      7400
+ 643              	.LASF30:
+ 644 00c1 54696D65 		.ascii	"Timer_TX_Stop\000"
+ 644      725F5458 
+ 644      5F53746F 
+ 644      7000
+ 645              	.LASF1:
+ 646 00cf 756E7369 		.ascii	"unsigned char\000"
+ 646      676E6564 
+ 646      20636861 
+ 646      7200
+ 647              	.LASF26:
+ 648 00dd 54696D65 		.ascii	"Timer_TX_ReadCounter\000"
+ 648      725F5458 
+ 648      5F526561 
+ 648      64436F75 
+ 648      6E746572 
+ 649              	.LASF14:
+ 650 00f2 72656738 		.ascii	"reg8\000"
+ 650      00
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 16
 
 
- 649      20636861 
- 649      7200
- 650              	.LASF26:
- 651 013d 54696D65 		.ascii	"Timer_TX_ReadCounter\000"
- 651      725F5458 
- 651      5F526561 
- 651      64436F75 
- 651      6E746572 
- 652              	.LASF14:
- 653 0152 72656738 		.ascii	"reg8\000"
- 653      00
- 654              	.LASF25:
- 655 0157 54696D65 		.ascii	"Timer_TX_Wakeup\000"
- 655      725F5458 
- 655      5F57616B 
- 655      65757000 
- 656              	.LASF5:
- 657 0167 6C6F6E67 		.ascii	"long unsigned int\000"
- 657      20756E73 
- 657      69676E65 
- 657      6420696E 
- 657      7400
- 658              	.LASF9:
- 659 0179 75696E74 		.ascii	"uint8\000"
- 659      3800
- 660              	.LASF12:
- 661 017f 646F7562 		.ascii	"double\000"
- 661      6C6500
- 662              	.LASF21:
- 663 0186 54696D65 		.ascii	"Timer_TX_backupStruct\000"
- 663      725F5458 
- 663      5F626163 
- 663      6B757053 
- 663      74727563 
- 664              	.LASF10:
- 665 019c 75696E74 		.ascii	"uint16\000"
- 665      313600
- 666              	.LASF8:
- 667 01a3 756E7369 		.ascii	"unsigned int\000"
- 667      676E6564 
- 667      20696E74 
- 667      00
- 668              	.LASF7:
- 669 01b0 6C6F6E67 		.ascii	"long long unsigned int\000"
- 669      206C6F6E 
- 669      6720756E 
- 669      7369676E 
- 669      65642069 
- 670              	.LASF29:
- 671 01c7 54696D65 		.ascii	"Timer_TX_WriteControlRegister\000"
- 671      725F5458 
- 671      5F577269 
- 671      7465436F 
- 671      6E74726F 
- 672              	.LASF22:
- 673 01e5 54696D65 		.ascii	"Timer_TX_SaveConfig\000"
- 673      725F5458 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 17
+ 651              	.LASF25:
+ 652 00f7 54696D65 		.ascii	"Timer_TX_Wakeup\000"
+ 652      725F5458 
+ 652      5F57616B 
+ 652      65757000 
+ 653              	.LASF5:
+ 654 0107 6C6F6E67 		.ascii	"long unsigned int\000"
+ 654      20756E73 
+ 654      69676E65 
+ 654      6420696E 
+ 654      7400
+ 655              	.LASF9:
+ 656 0119 75696E74 		.ascii	"uint8\000"
+ 656      3800
+ 657              	.LASF12:
+ 658 011f 646F7562 		.ascii	"double\000"
+ 658      6C6500
+ 659              	.LASF21:
+ 660 0126 54696D65 		.ascii	"Timer_TX_backupStruct\000"
+ 660      725F5458 
+ 660      5F626163 
+ 660      6B757053 
+ 660      74727563 
+ 661              	.LASF10:
+ 662 013c 75696E74 		.ascii	"uint16\000"
+ 662      313600
+ 663              	.LASF8:
+ 664 0143 756E7369 		.ascii	"unsigned int\000"
+ 664      676E6564 
+ 664      20696E74 
+ 664      00
+ 665              	.LASF7:
+ 666 0150 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 666      206C6F6E 
+ 666      6720756E 
+ 666      7369676E 
+ 666      65642069 
+ 667              	.LASF29:
+ 668 0167 54696D65 		.ascii	"Timer_TX_WriteControlRegister\000"
+ 668      725F5458 
+ 668      5F577269 
+ 668      7465436F 
+ 668      6E74726F 
+ 669              	.LASF34:
+ 670 0185 433A5C55 		.ascii	"C:\\Users\\marlowea\\Google Drive\\BACKUP\\docs\\20"
+ 670      73657273 
+ 670      5C6D6172 
+ 670      6C6F7765 
+ 670      615C476F 
+ 671 01b2 31372D32 		.ascii	"17-2018\\sem2year4\\CE4950\\Project\\psocker2017\\n"
+ 671      3031385C 
+ 671      73656D32 
+ 671      79656172 
+ 671      345C4345 
+ 672 01e0 6574776F 		.ascii	"etworking.cydsn\000"
+ 672      726B696E 
+ 672      672E6379 
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 17
 
 
- 673      5F536176 
- 673      65436F6E 
- 673      66696700 
- 674              	.LASF32:
- 675 01f9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 675      43313120 
- 675      352E342E 
- 675      31203230 
- 675      31363036 
- 676 022c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 676      20726576 
- 676      6973696F 
- 676      6E203233 
- 676      37373135 
- 677 025f 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 677      66756E63 
- 677      74696F6E 
- 677      2D736563 
- 677      74696F6E 
- 678              	.LASF16:
- 679 0287 73697A65 		.ascii	"sizetype\000"
- 679      74797065 
- 679      00
- 680              	.LASF6:
- 681 0290 6C6F6E67 		.ascii	"long long int\000"
- 681      206C6F6E 
- 681      6720696E 
- 681      7400
- 682              	.LASF13:
- 683 029e 63686172 		.ascii	"char\000"
- 683      00
- 684              	.LASF2:
- 685 02a3 73686F72 		.ascii	"short int\000"
- 685      7420696E 
- 685      7400
- 686              	.LASF4:
- 687 02ad 6C6F6E67 		.ascii	"long int\000"
- 687      20696E74 
- 687      00
- 688              	.LASF31:
- 689 02b6 54696D65 		.ascii	"Timer_TX_Enable\000"
- 689      725F5458 
- 689      5F456E61 
- 689      626C6500 
- 690              	.LASF15:
- 691 02c6 6C6F6E67 		.ascii	"long double\000"
- 691      20646F75 
- 691      626C6500 
- 692              	.LASF0:
- 693 02d2 7369676E 		.ascii	"signed char\000"
- 693      65642063 
- 693      68617200 
- 694              	.LASF19:
- 695 02de 496E7465 		.ascii	"InterruptMaskValue\000"
- 695      72727570 
- 695      744D6173 
- 695      6B56616C 
-ARM GAS  C:\Users\marlowea\AppData\Local\Temp\cc2pfyQb.s 			page 18
+ 672      64736E00 
+ 673              	.LASF22:
+ 674 01f0 54696D65 		.ascii	"Timer_TX_SaveConfig\000"
+ 674      725F5458 
+ 674      5F536176 
+ 674      65436F6E 
+ 674      66696700 
+ 675              	.LASF32:
+ 676 0204 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 676      43313120 
+ 676      352E342E 
+ 676      31203230 
+ 676      31363036 
+ 677 0237 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 677      20726576 
+ 677      6973696F 
+ 677      6E203233 
+ 677      37373135 
+ 678 026a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 678      66756E63 
+ 678      74696F6E 
+ 678      2D736563 
+ 678      74696F6E 
+ 679              	.LASF16:
+ 680 0292 73697A65 		.ascii	"sizetype\000"
+ 680      74797065 
+ 680      00
+ 681              	.LASF6:
+ 682 029b 6C6F6E67 		.ascii	"long long int\000"
+ 682      206C6F6E 
+ 682      6720696E 
+ 682      7400
+ 683              	.LASF13:
+ 684 02a9 63686172 		.ascii	"char\000"
+ 684      00
+ 685              	.LASF2:
+ 686 02ae 73686F72 		.ascii	"short int\000"
+ 686      7420696E 
+ 686      7400
+ 687              	.LASF4:
+ 688 02b8 6C6F6E67 		.ascii	"long int\000"
+ 688      20696E74 
+ 688      00
+ 689              	.LASF31:
+ 690 02c1 54696D65 		.ascii	"Timer_TX_Enable\000"
+ 690      725F5458 
+ 690      5F456E61 
+ 690      626C6500 
+ 691              	.LASF15:
+ 692 02d1 6C6F6E67 		.ascii	"long double\000"
+ 692      20646F75 
+ 692      626C6500 
+ 693              	.LASF0:
+ 694 02dd 7369676E 		.ascii	"signed char\000"
+ 694      65642063 
+ 694      68617200 
+ 695              	.LASF19:
+ARM GAS  C:\Users\marlowea\AppData\Local\Temp\ccwUeUrt.s 			page 18
 
 
- 695      756500
- 696              	.LASF20:
- 697 02f1 54696D65 		.ascii	"TimerControlRegister\000"
- 697      72436F6E 
- 697      74726F6C 
- 697      52656769 
- 697      73746572 
- 698              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 696 02e9 496E7465 		.ascii	"InterruptMaskValue\000"
+ 696      72727570 
+ 696      744D6173 
+ 696      6B56616C 
+ 696      756500
+ 697              	.LASF20:
+ 698 02fc 54696D65 		.ascii	"TimerControlRegister\000"
+ 698      72436F6E 
+ 698      74726F6C 
+ 698      52656769 
+ 698      73746572 
+ 699              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
