@@ -55,6 +55,8 @@
 #include "TP_RX_SMPL.h"
 #include "TP_RS_EDG_aliases.h"
 #include "TP_RS_EDG.h"
+#include "TX_BIT_SMPL_aliases.h"
+#include "TX_BIT_SMPL.h"
 #include "UART_Dm_aliases.h"
 #include "UART_Dm.h"
 #include "UART_Dp_aliases.h"

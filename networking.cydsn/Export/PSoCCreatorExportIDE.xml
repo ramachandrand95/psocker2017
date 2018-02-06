@@ -171,6 +171,9 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RS_EDG_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RS_EDG.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TP_RS_EDG.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TX_BIT_SMPL_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TX_BIT_SMPL.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TX_BIT_SMPL.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\marlowea\Google Drive\BACKUP\docs\2017-2018\sem2year4\CE4950\Project\psocker2017\networking.cydsn\Export\ARM_GCC_Generic">

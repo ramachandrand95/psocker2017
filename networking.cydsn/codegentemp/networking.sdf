@@ -1,6 +1,6 @@
 (DELAYFILE
  (SDFVERSION "IEEE 1497 4.0")
- (DATE "2018-02-01T01:49:38Z")
+ (DATE "2018-02-01T18:06:26Z")
  (DESIGN "networking")
  (VENDOR "Cypress Semiconductor")
  (PROGRAM "PSoC Creator")
@@ -179,6 +179,7 @@
     (INTERCONNECT TP_RX_SMPL\(0\)_PAD TP_RX_SMPL\(0\).pad_in (0.000:0.000:0.000))
     (INTERCONNECT TP_RS_EDG\(0\).pad_out TP_RS_EDG\(0\)_PAD (0.000:0.000:0.000))
     (INTERCONNECT TP_RS_EDG\(0\)_PAD TP_RS_EDG\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT TX_BIT_SMPL\(0\)_PAD TX_BIT_SMPL\(0\).pad_in (0.000:0.000:0.000))
    )
   )
  )

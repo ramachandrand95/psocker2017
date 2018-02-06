@@ -345,6 +345,7 @@
       <Data key="264be2d3-9481-494b-8d9c-c1905a45e9cc" value="Rx" />
       <Data key="284a59ed-5866-4630-9eec-41db5954099e" value="COLLISION" />
       <Data key="50137ab5-3bdc-4f10-bb11-a8bb7aa7c876/ed092b9b-d398-4703-be89-cebf998501f6" value="LCD_LCDPort" />
+      <Data key="845886c4-987d-466c-9e09-a9bc050ba030" value="TX_BIT_SMPL" />
       <Data key="be4791a6-794a-4365-b257-187e77b7f19a" value="BUSY" />
       <Data key="beca5e2d-f70f-4900-a4db-7eca1ed3126e/8b77a6c4-10a0-4390-971c-672353e2a49c" value="UART_Dm" />
       <Data key="beca5e2d-f70f-4900-a4db-7eca1ed3126e/618a72fc-5ddd-4df5-958f-a3d55102db42" value="UART_Dp" />
@@ -3515,6 +3516,11 @@
       </Group>
       <Group key="6">
         <Data key="Port Format" value="2,6" />
+      </Group>
+    </Group>
+    <Group key="845886c4-987d-466c-9e09-a9bc050ba030">
+      <Group key="0">
+        <Data key="Port Format" value="0,5" />
       </Group>
     </Group>
     <Group key="be4791a6-794a-4365-b257-187e77b7f19a">

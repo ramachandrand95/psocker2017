@@ -55,3 +55,4 @@ set_io "TX(0)" iocell 3 6
 # Note: port 15 is the logical name for port 8
 set_io "\UART:Dm(0)\" iocell 15 7
 set_io "TP_RX_SMPL(0)" iocell 0 7
+set_io "TX_BIT_SMPL(0)" iocell 0 5

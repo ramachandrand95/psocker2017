@@ -1,5 +1,5 @@
 # networking
-# 2018-02-01 01:49:36Z
+# 2018-02-01 18:06:23Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -18,6 +18,7 @@ set_location "\UART:Dp\" logicalport -1 -1 15
 set_io "\UART:Dp(0)\" iocell 15 6
 set_io "TP_RX_SMPL(0)" iocell 0 7
 set_io "TP_RS_EDG(0)" iocell 0 6
+set_io "TX_BIT_SMPL(0)" iocell 0 5
 set_location "\Timer_1:TimerUDB:status_tc\" 2 2 0 0
 set_location "Net_66" 1 4 0 2
 set_location "Net_71" 1 4 0 0

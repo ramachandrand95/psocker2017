@@ -25,8 +25,8 @@ _Bool lowFlag = 0;
 #define PROTOCOL_VERSION 0x01
 
 //CRC constants
-#define CRC_USE 128 //crcs not used
-#define HEADER_CRC 0b1110111 
+#define CRC_USE 128 //crcs not used, taking into account starting bit
+#define HEADER_CRC 119
 
 //period and counter for timer
 #define COLL_PERIOD     52
@@ -86,7 +86,7 @@ CY_ISR(TIMER_RX_ISR){
     
     TIMER_RX_STATUS; //clear stat
     //only receive data in not collision
-    if(systemState != collisionState){
+    if((systemState != collisionState)){
         TIMER_RX_Start();
         RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
         ++RX_Bit_Counter;
@@ -137,6 +137,7 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 		if(TX_Bit_Counter == 0){
 			TX_Write(1);
 			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+            TX_BIT_SMPL_Write(1); 
 		}else if(TX_Bit_Counter%2 != 0){
 			TX_Write(0);
 			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;
@@ -152,7 +153,10 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 			}
 				++count;
 		}
-        CyDelayUs(495);
+
+           CyDelayUs(495);
+        
+
         ++TX_Bit_Counter;
         if(TX_Bit_Counter >= 16){
 		    ++SERIAL_POS;
@@ -160,11 +164,13 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 		    TX_Bit_Counter = 0;
             TX_Lock = 0;
             TX_Write(0);
+            TX_BIT_SMPL_Write(0); 
         }
  
     }else if(systemState == collisionState){
       
     }
+    TX_BIT_SMPL_Write(0); 
 	
 }
 
@@ -188,6 +194,7 @@ CY_ISR(TIMER)
         TX_Lock = 0;
         count = 0;
         int backoff = 0;
+        TX_BIT_SMPL_Write(0); 
 	    //reset current byte transmission 
 	    //generate sudo-random backoff, normally distributed between backoff/128 seconds, where N is an int between 0 and 128
 	    backoff = (PRS_Read()+1);
@@ -273,6 +280,7 @@ int main(void)
             UART_PutString("Enter Address (3 digits): ");
             while(inCount < 3){
                 while(UART_DataIsReady() == 0){ //wait for digits, perform other tasks here
+                    
                     checkNewBytes();
                     checkState();
                 }
@@ -343,6 +351,7 @@ void checkState(){
             UART_RX_DATA_READ_OUT = 0;
             SERIAL_RX_POS = 0;
             addrDataPrinted = 0;
+            destAddr = 0xFF;
         break;
         //busy state
         case busyState:
@@ -361,14 +370,14 @@ void checkState(){
 
 void checkNewBytes(){
  if(UART_CDCIsReady() != 0){
-    while(UART_RX_DATA_READ_OUT != SERIAL_RX_POS){
+    while((UART_RX_DATA_READ_OUT != SERIAL_RX_POS)){
         if(UART_RX_DATA_READ_OUT == 0){
             getHeader();
         }
-        if(destAddr == BROADCAST || 
+        if((destAddr == BROADCAST || 
         ((destAddr >= ADDR1_Start) && (destAddr <= ADDR1_Start+ADDR_length)) ||
         ((destAddr >= ADDR2_Start) && (destAddr <= ADDR2_Start+ADDR_length)) ||
-        ((destAddr >= ADDR3_Start) && (destAddr <= ADDR3_Start+ADDR_length))){
+        ((destAddr >= ADDR3_Start) && (destAddr <= ADDR3_Start+ADDR_length))) && verNumMatch){
             if(addrDataPrinted == 0){
             while(!UART_CDCIsReady());
             UART_PutCRLF();
@@ -428,7 +437,7 @@ void checkNewBytes(){
             while(!UART_CDCIsReady());
             addrDataPrinted = 1;
             }
-            if(UART_RX_DATA_READ_OUT > 6){
+            if((UART_RX_DATA_READ_OUT > 6) && (UART_RX_DATA_READ_OUT <= dataLength+6)){
             UART_PutChar(SERIAL_RX_BUFFER[UART_RX_DATA_READ_OUT]);
             }
             
@@ -448,8 +457,10 @@ void getHeader(){
     //check for version number
     if(SERIAL_RX_BUFFER[1] == 0x01){
             verNumMatch = 1;
-   }
-   //get source address
+   }else{
+            verNumMatch = 0;
+    }
+    //get source address
     sourceAddr = SERIAL_RX_BUFFER[2];
     //get destination address
     destAddr = SERIAL_RX_BUFFER[3];
