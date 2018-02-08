@@ -11321,7 +11321,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
   24              	.set BACKOFF_ISR__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
   25              	.set BACKOFF_ISR__INTC_MASK, 0x01
   26              	.set BACKOFF_ISR__INTC_NUMBER, 0
-  27              	.set BACKOFF_ISR__INTC_PRIOR_NUM, 0
+  27              	.set BACKOFF_ISR__INTC_PRIOR_NUM, 3
   28              	.set BACKOFF_ISR__INTC_PRIOR_REG, CYREG_NVIC_PRI_0
   29              	.set BACKOFF_ISR__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
   30              	.set BACKOFF_ISR__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
