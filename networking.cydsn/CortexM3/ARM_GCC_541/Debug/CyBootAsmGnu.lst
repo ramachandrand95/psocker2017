@@ -11609,7 +11609,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  297              	.set TIMER_RX_ISR__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  298              	.set TIMER_RX_ISR__INTC_MASK, 0x08
  299              	.set TIMER_RX_ISR__INTC_NUMBER, 3
- 300              	.set TIMER_RX_ISR__INTC_PRIOR_NUM, 7
+ 300              	.set TIMER_RX_ISR__INTC_PRIOR_NUM, 2
  301              	.set TIMER_RX_ISR__INTC_PRIOR_REG, CYREG_NVIC_PRI_3
  302              	.set TIMER_RX_ISR__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  303              	.set TIMER_RX_ISR__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0

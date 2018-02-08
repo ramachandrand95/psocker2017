@@ -86,12 +86,12 @@ CY_ISR(TIMER_RX_ISR){
     
     TIMER_RX_STATUS; //clear stat
     //only receive data in not collision
-    if((systemState != collisionState)){
+    if((systemState != collisionState) && (TX_Lock == 0)){
         TIMER_RX_Start();
         RX_DATA[RX_Bit_Counter] = Rx_Read(); //read bit
         ++RX_Bit_Counter;
         
-    }else{
+    }else if(systemState == collisionState){
         //reset buffers when in collision 
         RX_Bit_Counter = 0;   
         SERIAL_RX_POS = 0;
@@ -119,16 +119,18 @@ CY_ISR(TIMER_RX_ISR){
         SERIAL_RX_BUFFER[SERIAL_RX_POS] = characterRX;
         ++SERIAL_RX_POS;
        
+    
     }
 }
 
 CY_ISR(Timer_TX_ISR_HANDLER)
 {
 	Timer_TX_STATUS; //clear TX timer
+    checkState();
 	//get data
 	currentChar = SERIAL_BUFFER[SERIAL_POS];
 
-	if(((SERIAL_POS < dataSize) && (systemState == idleState)) || ((TX_Lock) && (systemState == busyState))){ 
+	if(((SERIAL_POS < dataSize) && (systemState == idleState)) || ((SERIAL_POS < dataSize) && (TX_Lock) && (systemState == busyState))){ 
 	//encode into Unipolar-RZ
 	
 	//Data to be transmitted. This represents one byte of data and will
@@ -162,13 +164,16 @@ CY_ISR(Timer_TX_ISR_HANDLER)
 		    ++SERIAL_POS;
 		    count = 0;
 		    TX_Bit_Counter = 0;
-            TX_Lock = 0;
             TX_Write(0);
             TX_BIT_SMPL_Write(0); 
         }
  
     }else if(systemState == collisionState){
       
+    }else if(SERIAL_POS >= dataSize){
+    TX_Lock = 0;
+    dataSize = 0;
+    SERIAL_POS = 0;
     }
     TX_BIT_SMPL_Write(0); 
 	
@@ -214,7 +219,7 @@ CY_ISR(RISING)
         lowFlag = 1;
         systemState = busyState;
     }
-    if(RX_Lock == 0){
+    if((RX_Lock == 0) && (TX_Lock == 0)){
         TIMER_RX_Start();
         RX_Lock = 1;
         TP_RX_SMPL_Write(1); //needed for test point sampling
@@ -280,9 +285,7 @@ int main(void)
             UART_PutString("Enter Address (3 digits): ");
             while(inCount < 3){
                 while(UART_DataIsReady() == 0){ //wait for digits, perform other tasks here
-                    
                     checkNewBytes();
-                    checkState();
                 }
                 //why minus 0x30? because these are ASCII chars from the keyboard...
                 input = UART_GetChar();
@@ -303,7 +306,7 @@ int main(void)
             UART_PutCRLF();
             while(!UART_CDCIsReady());
             UART_PutString("Enter message: ");
-            inCount = 6; //reset counter, accounting for header
+            inCount = 7; //reset counter, accounting for header
             input = 0; //reset input
             //encode header
             
@@ -331,12 +334,10 @@ int main(void)
         dataSize = SERIAL_BUFFER[4];
         SERIAL_POS = 0;
         printPrompt = 0;
+        TX_Lock = 1;
         while(!UART_CDCIsReady());
         UART_PutCRLF();       
         }
-        
-
-        
     }
 }
 
@@ -370,14 +371,14 @@ void checkState(){
 
 void checkNewBytes(){
  if(UART_CDCIsReady() != 0){
-    while((UART_RX_DATA_READ_OUT != SERIAL_RX_POS)){
+    while((UART_RX_DATA_READ_OUT != SERIAL_RX_POS) && (SERIAL_RX_POS > 6)){
         if(UART_RX_DATA_READ_OUT == 0){
             getHeader();
         }
         if((destAddr == BROADCAST || 
         ((destAddr >= ADDR1_Start) && (destAddr <= ADDR1_Start+ADDR_length)) ||
         ((destAddr >= ADDR2_Start) && (destAddr <= ADDR2_Start+ADDR_length)) ||
-        ((destAddr >= ADDR3_Start) && (destAddr <= ADDR3_Start+ADDR_length))) && verNumMatch){
+        ((destAddr >= ADDR3_Start) && (destAddr <= ADDR3_Start+ADDR_length))) ){
             if(addrDataPrinted == 0){
             while(!UART_CDCIsReady());
             UART_PutCRLF();

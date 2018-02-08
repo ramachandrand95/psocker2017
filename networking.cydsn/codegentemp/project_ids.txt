@@ -4,3 +4,4 @@ C:\Users\marlowea\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8b70957f-a3e6-4b62-baa0-8eca11a1cea4
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|80e87e11-7b3a-46c3-ba2c-09a90973dcd3
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|dcb966ca-396a-4902-819d-379ffbd4b7eb
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\dev\psoc3\AnalogDevice\PSoC35AnalogDevice.cylib\PSoC35AnalogDevice.cyprj|948fe04a-bf4f-4e76-9448-23743931d1e5
