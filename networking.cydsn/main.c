@@ -81,6 +81,7 @@ void checkState(); //gets current system state
 void getHeader(); //gets the header
 
 CY_ISR(TIMER_RX_ISR){
+    checkState();
     int bitConCatCount = 0;
     char characterRX = 0;
     
@@ -125,8 +126,9 @@ CY_ISR(TIMER_RX_ISR){
 
 CY_ISR(Timer_TX_ISR_HANDLER)
 {
+    
 	Timer_TX_STATUS; //clear TX timer
-    checkState();
+    
 	//get data
 	currentChar = SERIAL_BUFFER[SERIAL_POS];
 
@@ -212,6 +214,7 @@ CY_ISR(TIMER)
 
 CY_ISR(RISING)
 {
+    
     if ((!lowFlag)){
         Timer_1_WritePeriod(COLL_PERIOD);
         Timer_1_WriteCounter(COLL_COUNTER);
@@ -258,6 +261,7 @@ int main(void)
     PRS_Start();
     UART_Start(UART_device,UART_5V_OPERATION);
 
+    //TX_Write(1); //fixes issue starting the board into the collision state
 
     while(1){
          //check if UART is connected, then set flag
@@ -286,6 +290,7 @@ int main(void)
             while(inCount < 3){
                 while(UART_DataIsReady() == 0){ //wait for digits, perform other tasks here
                     checkNewBytes();
+                    checkState();
                 }
                 //why minus 0x30? because these are ASCII chars from the keyboard...
                 input = UART_GetChar();
@@ -329,9 +334,10 @@ int main(void)
                     ++inCount;
                 }
             }
-            SERIAL_BUFFER[4] = inCount; //replace padding with actual message length
+            SERIAL_BUFFER[4] = inCount-7; //replace padding with actual message length
         //send data by setting variable
-        dataSize = SERIAL_BUFFER[4];
+        dataSize = inCount+1;
+        SERIAL_BUFFER[inCount] = 0xF7;
         SERIAL_POS = 0;
         printPrompt = 0;
         TX_Lock = 1;
@@ -424,13 +430,13 @@ void checkNewBytes(){
             UART_PutString("Size: ");
             while(!UART_CDCIsReady());
             //hundreds
-            UART_PutChar(((dataLength)/100)+0x30);
+            UART_PutChar(((dataLength-6)/100)+0x30);
             //tens
             while(!UART_CDCIsReady());
-            UART_PutChar(((dataLength/10)%10)+0x30);
+            UART_PutChar((((dataLength-6)/10)%10)+0x30);
             while(!UART_CDCIsReady());
             //ones
-            UART_PutChar(((dataLength%10)%10)+0x30);
+            UART_PutChar((((dataLength-6)%10)%10)+0x30);
             while(!UART_CDCIsReady());
             UART_PutCRLF();
             while(!UART_CDCIsReady());
@@ -438,7 +444,7 @@ void checkNewBytes(){
             while(!UART_CDCIsReady());
             addrDataPrinted = 1;
             }
-            if((UART_RX_DATA_READ_OUT > 6) && (UART_RX_DATA_READ_OUT <= dataLength+6)){
+            if((UART_RX_DATA_READ_OUT > 6) && (UART_RX_DATA_READ_OUT <= (dataLength))){
             UART_PutChar(SERIAL_RX_BUFFER[UART_RX_DATA_READ_OUT]);
             }
             
@@ -467,7 +473,7 @@ void getHeader(){
     destAddr = SERIAL_RX_BUFFER[3];
   
     //get datalegnth     
-    dataLength = SERIAL_RX_BUFFER[4];
+    dataLength = SERIAL_RX_BUFFER[4]+6; //ignore CRC
 
     //get CRC related data
     CRCused = SERIAL_RX_BUFFER[5];

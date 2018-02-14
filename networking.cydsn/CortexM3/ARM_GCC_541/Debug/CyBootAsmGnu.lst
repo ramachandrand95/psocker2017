@@ -11509,7 +11509,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  203              	.set INT_FALLING__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  204              	.set INT_FALLING__INTC_MASK, 0x02
  205              	.set INT_FALLING__INTC_NUMBER, 1
- 206              	.set INT_FALLING__INTC_PRIOR_NUM, 0
+ 206              	.set INT_FALLING__INTC_PRIOR_NUM, 1
  207              	.set INT_FALLING__INTC_PRIOR_REG, CYREG_NVIC_PRI_1
  208              	.set INT_FALLING__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  209              	.set INT_FALLING__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
@@ -11522,7 +11522,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
 
 
  215              	.set INT_RISING__INTC_NUMBER, 2
- 216              	.set INT_RISING__INTC_PRIOR_NUM, 0
+ 216              	.set INT_RISING__INTC_PRIOR_NUM, 1
  217              	.set INT_RISING__INTC_PRIOR_REG, CYREG_NVIC_PRI_2
  218              	.set INT_RISING__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  219              	.set INT_RISING__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
@@ -11609,7 +11609,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  297              	.set TIMER_RX_ISR__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  298              	.set TIMER_RX_ISR__INTC_MASK, 0x08
  299              	.set TIMER_RX_ISR__INTC_NUMBER, 3
- 300              	.set TIMER_RX_ISR__INTC_PRIOR_NUM, 2
+ 300              	.set TIMER_RX_ISR__INTC_PRIOR_NUM, 0
  301              	.set TIMER_RX_ISR__INTC_PRIOR_REG, CYREG_NVIC_PRI_3
  302              	.set TIMER_RX_ISR__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  303              	.set TIMER_RX_ISR__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
@@ -11839,7 +11839,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  515              	.set TimerISR__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  516              	.set TimerISR__INTC_MASK, 0x10
  517              	.set TimerISR__INTC_NUMBER, 4
- 518              	.set TimerISR__INTC_PRIOR_NUM, 1
+ 518              	.set TimerISR__INTC_PRIOR_NUM, 2
  519              	.set TimerISR__INTC_PRIOR_REG, CYREG_NVIC_PRI_4
  520              	.set TimerISR__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  521              	.set TimerISR__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
@@ -11926,7 +11926,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  599              	.set Timer_TX_ISR__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  600              	.set Timer_TX_ISR__INTC_MASK, 0x20
  601              	.set Timer_TX_ISR__INTC_NUMBER, 5
- 602              	.set Timer_TX_ISR__INTC_PRIOR_NUM, 2
+ 602              	.set Timer_TX_ISR__INTC_PRIOR_NUM, 1
  603              	.set Timer_TX_ISR__INTC_PRIOR_REG, CYREG_NVIC_PRI_5
  604              	.set Timer_TX_ISR__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  605              	.set Timer_TX_ISR__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0

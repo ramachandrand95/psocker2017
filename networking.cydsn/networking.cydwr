@@ -3442,21 +3442,21 @@
     <Group key="0ae45a04-8604-4eb2-b352-3299adf6aeb0">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="0" />
+        <Data key="Priority" value="1" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>
     <Group key="98f4b95a-6558-4327-b20e-444f38ead931">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="0" />
+        <Data key="Priority" value="1" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>
     <Group key="5535f0e6-5b0f-424f-8dcb-b52d5792f654">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="1" />
+        <Data key="Priority" value="2" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>
@@ -3470,14 +3470,14 @@
     <Group key="38161540-fcbb-4b84-bfe7-fa708a6a629e">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="2" />
+        <Data key="Priority" value="0" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>
     <Group key="fe156beb-b138-4cc9-a22f-f96197a52f5f">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="2" />
+        <Data key="Priority" value="1" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>
